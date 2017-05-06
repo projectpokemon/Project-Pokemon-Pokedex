@@ -328,7 +328,7 @@ namespace MysteryDungeon_RawDB
             BuildView("Views/Pokemon/Index.cshtml", Path.Combine(outputPath, "pokemon." + extension), data.Pokemon);
             foreach (var item in data.Pokemon)
             {
-                BuildView("Views/Pokemon/Details.cshtml", Path.Combine(outputPath, "Pokemon", item.ID.ToString() + "." + extension), new PokemonDetailsViewModel(item, data));
+                BuildView("Views/Pokemon/Details.cshtml", Path.Combine(outputPath, "pokemon", item.ID.ToString() + "." + extension), new PokemonDetailsViewModel(item, data));
             }
         }
     }
