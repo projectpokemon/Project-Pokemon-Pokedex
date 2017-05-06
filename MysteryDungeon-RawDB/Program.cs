@@ -306,8 +306,16 @@ namespace MysteryDungeon_RawDB
 
         static void Main(string[] args)
         {
+            // Cleanup old execution
+            foreach (var item in Directory.GetFiles(".", "Temp_*.dll"))
+            {
+                File.Delete(item);
+            }
+
+            // Current
             var romPath = args[0]; // Directory, not ROM. Not yet.
             var outputPath = args[1];
+            var extension = args[2];
 
             if (!Directory.Exists(outputPath))
             {
@@ -317,10 +325,10 @@ namespace MysteryDungeon_RawDB
             var data = LoadPsmdData(romPath).Result;
 
             // Generate HTML
-            BuildView("Views/Pokemon/Index.cshtml", Path.Combine(outputPath, "pokemon.htm"), data.Pokemon);
+            BuildView("Views/Pokemon/Index.cshtml", Path.Combine(outputPath, "pokemon." + extension), data.Pokemon);
             foreach (var item in data.Pokemon)
             {
-                BuildView("Views/Pokemon/Details.cshtml", Path.Combine(outputPath, "Pokemon", item.ID.ToString() + ".htm"), new PokemonDetailsViewModel(item, data));
+                BuildView("Views/Pokemon/Details.cshtml", Path.Combine(outputPath, "Pokemon", item.ID.ToString() + "." + extension), new PokemonDetailsViewModel(item, data));
             }
         }
     }
