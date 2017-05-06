@@ -1,11 +1,15 @@
-﻿using MysteryDungeon_RawDB.Models.PSMD;
+﻿using Microsoft.CSharp;
+using MysteryDungeon_RawDB.Models.PSMD;
 using SkyEditor.Core.IO;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Razor;
 
 namespace MysteryDungeon_RawDB
 {
@@ -208,14 +212,116 @@ namespace MysteryDungeon_RawDB
             return data;
         }
 
+        static void BuildView(string viewPath, string outputPath, object model)
+        {
+            // Set up the hosting environment
+
+            // a. Use the C# language (you could detect this based on the file extension if you want to)
+            RazorEngineHost host = new RazorEngineHost(new CSharpRazorCodeLanguage());
+
+            // b. Set the base class
+            host.DefaultBaseClass = typeof(TemplateBase).FullName;
+
+            // c. Set the output namespace and type name
+            host.DefaultNamespace = "RazorOutput";
+            host.DefaultClassName = "Template";
+
+            // d. Add default imports
+            host.NamespaceImports.Add("System");
+            host.NamespaceImports.Add("System.Collections.Generic");
+            host.NamespaceImports.Add("MysteryDungeon_RawDB.Models.PSMD");
+            var engine = new RazorTemplateEngine(host);
+            var codeProvider = new CSharpCodeProvider();
+
+            // To-Do: generate using more templates
+            GeneratorResults razorResult = null;
+            using (TextReader rdr = new StringReader(File.ReadAllText(viewPath)))
+            {
+                razorResult = engine.GenerateCode(rdr);
+            }
+
+            using (StringWriter sw = new StringWriter())
+            {
+                codeProvider.GenerateCodeFromCompileUnit(razorResult.GeneratedCode, sw, new CodeGeneratorOptions());
+                File.WriteAllText("current.cs", sw.ToString());
+            }
+
+            // Compile the generated code into an assembly
+            string outputAssemblyName = String.Format("Temp_{0}.dll", Guid.NewGuid().ToString("N"));
+            CompilerResults results = codeProvider.CompileAssemblyFromDom(
+                new CompilerParameters(new string[] {
+                    typeof(Program).Assembly.CodeBase.Replace("file:///", "").Replace("/", "\\")
+                }, outputAssemblyName),
+                razorResult.GeneratedCode);
+
+            if (results.Errors.HasErrors)
+            {
+                CompilerError err = results.Errors
+                                           .OfType<CompilerError>()
+                                           .Where(ce => !ce.IsWarning)
+                                           .First();
+                Console.WriteLine(String.Format("Error Compiling Template: ({0}, {1}) {2}",
+                                              err.Line, err.Column, err.ErrorText));
+            }
+            else
+            {
+                // Load the assembly
+                Assembly asm = Assembly.LoadFrom(outputAssemblyName);
+                if (asm == null)
+                {
+                    Console.WriteLine("Error loading template assembly");
+                }
+                else
+                {
+                    // Get the template type
+                    Type typ = asm.GetType("RazorOutput.Template");
+                    if (typ == null)
+                    {
+                        Console.WriteLine("Could not find type RazorOutput.Template in assembly {0}", asm.FullName);
+                    }
+                    else
+                    {
+                        TemplateBase newTemplate = Activator.CreateInstance(typ) as TemplateBase;
+                        if (newTemplate == null)
+                        {
+                            Console.WriteLine("Could not construct RazorOutput.Template or it does not inherit from TemplateBase");
+                        }
+                        else
+                        {
+                            // Run the compiled view
+                            newTemplate.GetType().GetProperty("Model").SetValue(newTemplate, model);
+                            newTemplate.Execute();
+
+                            // Save the output
+                            if (!Directory.Exists(Path.GetDirectoryName(outputPath)))
+                            {
+                                Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+                            }
+                            File.WriteAllText(Path.Combine(outputPath), newTemplate.Buffer.ToString());
+                        }
+                    }
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
             var romPath = args[0]; // Directory, not ROM. Not yet.
             var outputPath = args[1];
 
+            if (!Directory.Exists(outputPath))
+            {
+                Directory.CreateDirectory(outputPath);
+            }
+
             var data = LoadPsmdData(romPath).Result;
 
-            // To-Do: Generate HTML
+            // Generate HTML
+            BuildView("Views/Pokemon/Index.cshtml", Path.Combine(outputPath, "pokemon.htm"), data.Pokemon);
+            foreach (var item in data.Pokemon)
+            {
+                BuildView("Views/Pokemon/Details.cshtml", Path.Combine(outputPath, "Pokemon", item.ID.ToString() + ".htm"), new PokemonDetailsViewModel(item, data));
+            }
         }
     }
 }
