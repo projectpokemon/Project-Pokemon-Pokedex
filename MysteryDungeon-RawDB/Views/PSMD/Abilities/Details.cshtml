@@ -4,7 +4,7 @@
 
 <?php
     $title = @Model.Name;
-    $cssFiles = array("../style.css");
+    $cssFiles = array("../../style.css");
 ?>
 
 <h2>@Model.Name</h2>
@@ -66,7 +66,7 @@
                     @item.IDHexLittleEndian
                 </td>
                 <td>
-                    @string.Format("<a href=\"../pokemon/{0}\">{1}</a>", item.ID, item.Name)
+                    @string.Format("<a href=\"../../pokemon/{0}\">{1}</a>", item.ID, item.Name)
                 </td>
             </tr>
         }
@@ -102,7 +102,7 @@
                     @item.IDHexLittleEndian
                 </td>
                 <td>
-                    @string.Format("<a href=\"../pokemon/{0}\">{1}</a>", item.ID, item.Name)
+                    @string.Format("<a href=\"../../pokemon/{0}\">{1}</a>", item.ID, item.Name)
                 </td>
             </tr>
         }
@@ -138,12 +138,12 @@
                     @item.IDHexLittleEndian
                 </td>
                 <td>
-                    @string.Format("<a href=\"../pokemon/{0}\">{1}</a>", item.ID, item.Name)
+                    @string.Format("<a href=\"../../pokemon/{0}\">{1}</a>", item.ID, item.Name)
                 </td>
             </tr>
         }
     </table>
 </div>
 <p>
-    <a href="index">Back to List</a>
+    <a href="..">Back to List</a>
 </p>
