@@ -165,7 +165,9 @@
     <None Include="Views\PSMD\Abilities\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Views\PSMD\Index.cshtml" />
+    <None Include="Views\PSMD\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Views\PSMD\Moves\Details.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -207,7 +209,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\PSMD\style.css" />
+    <None Include="Views\PSMD\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
