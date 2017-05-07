@@ -1,6 +1,5 @@
 ﻿@functions {
     public AbilityDetailsViewModel Model { get; set; }
-    private IEnumerable<BasicPokemonListItem> CurrentItem { get; set; }
 }
 
 <?php
@@ -38,7 +37,6 @@
     </dl>
 </div>
 <div>
-    @CurrentItem = Model.PokemonWithAbility1
     <h4>Pokemon with Ability 1</h4>
     <table class="table">
         <tr>
@@ -55,7 +53,7 @@
                 Pokémon
             </th>
         </tr>
-        @foreach (var item in CurrentItem)
+        @foreach (var item in Model.PokemonWithAbility1)
         {
             <tr>
                 <td>
@@ -75,7 +73,6 @@
     </table>
 </div>
 <div>
-    @CurrentItem = Model.PokemonWithAbility2
     <h4>Pokemon with Ability 2</h4>
     <table class="table">
         <tr>
@@ -92,7 +89,7 @@
                 Pokémon
             </th>
         </tr>
-        @foreach (var item in CurrentItem)
+        @foreach (var item in Model.PokemonWithAbility2)
         {
             <tr>
                 <td>
@@ -112,7 +109,6 @@
     </table>
 </div>
 <div>
-    @CurrentItem = Model.PokemonWithAbilityHIdden
     <h4>Pokemon with Hidden Ability</h4>
     <table class="table">
         <tr>
@@ -129,7 +125,7 @@
                 Pokémon
             </th>
         </tr>
-        @foreach (var item in CurrentItem)
+        @foreach (var item in Model.PokemonWithAbilityHidden)
         {
             <tr>
                 <td>
