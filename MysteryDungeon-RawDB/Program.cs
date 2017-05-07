@@ -387,6 +387,13 @@ namespace MysteryDungeon_RawDB
             {
                 BuildView("Views/PSMD/Types/Details.cshtml", Path.Combine(outputPath, "psmd", "types", item.ID.ToString() + ".php"), new TypeDetailsViewModel(item, data));
             }
+
+            // Add breadcrumb titles
+            File.WriteAllText(Path.Combine(outputPath, "psmd", "__nav.php"), "Pokemon Super Mystery Dungeon");
+            File.WriteAllText(Path.Combine(outputPath, "psmd", "pokemon", "__nav.php"), "Pokédex");
+            File.WriteAllText(Path.Combine(outputPath, "psmd", "moves", "__nav.php"), "Movedex");
+            File.WriteAllText(Path.Combine(outputPath, "psmd", "abilities", "__nav.php"), "Abilitydex");
+            File.WriteAllText(Path.Combine(outputPath, "psmd", "types", "__nav.php"), "Typedex");
         }
     }
 }
