@@ -1,5 +1,5 @@
 ﻿@functions {
-    public MoveDetailsViewModel Ability { get; set; }
+    public AbilityDetailsViewModel Model { get; set; }
     private IEnumerable<BasicPokemonListItem> CurrentItem { get; set; }
 }
 
@@ -148,5 +148,5 @@
     </table>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="index">Back to List</a>
 </p>

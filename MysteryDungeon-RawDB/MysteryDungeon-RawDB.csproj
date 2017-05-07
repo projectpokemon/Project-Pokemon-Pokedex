@@ -140,6 +140,7 @@
   <ItemGroup>
     <Compile Include="Models\PSMD\Ability.cs" />
     <Compile Include="Models\PSMD\AbilityDetailsViewModel.cs" />
+    <Compile Include="Models\PSMD\BasicMoveListItem.cs" />
     <Compile Include="Models\PSMD\BasicPokemonListItem.cs" />
     <Compile Include="Models\PSMD\ExperienceLevel.cs" />
     <Compile Include="Models\PSMD\Move.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Models\PSMD\PokemonDetailsViewModel.cs" />
     <Compile Include="Models\PSMD\PokemonLevelUp.cs" />
     <Compile Include="Models\PSMD\PsmdDataCollection.cs" />
+    <Compile Include="Models\PSMD\TypeDetailsViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateBase.cs" />
@@ -173,6 +175,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Views\PSMD\Pokemon\Details.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\PSMD\Types\Details.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\PSMD\Types\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

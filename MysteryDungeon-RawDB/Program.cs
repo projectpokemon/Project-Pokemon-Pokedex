@@ -378,6 +378,12 @@ namespace MysteryDungeon_RawDB
             {
                 BuildView("Views/PSMD/Abilities/Details.cshtml", Path.Combine(outputPath, "psmd", "abilities", item.ID.ToString() + "." + extension), new AbilityDetailsViewModel(item, data));
             }
+            // - Types
+            BuildView("Views/PSMD/Types/Index.cshtml", Path.Combine(outputPath, "psmd", "types", "index." + extension), data.Types);
+            foreach (var item in data.Types)
+            {
+                BuildView("Views/PSMD/Types/Details.cshtml", Path.Combine(outputPath, "psmd", "types", item.ID.ToString() + "." + extension), new TypeDetailsViewModel(item, data));
+            }
         }
     }
 }
