@@ -361,17 +361,17 @@ namespace MysteryDungeon_RawDB
 
             // Generate HTML
             // - Pokemon
-            BuildView("Views/Pokemon/Index.cshtml", Path.Combine(outputPath, "pokemon." + extension), data.Pokemon);
+            BuildView("Views/Pokemon/Index.cshtml", Path.Combine(outputPath, "pokemon", "index." + extension), data.Pokemon);
             foreach (var item in data.Pokemon)
             {
                 BuildView("Views/Pokemon/Details.cshtml", Path.Combine(outputPath, "pokemon", item.ID.ToString() + "." + extension), new PokemonDetailsViewModel(item, data));
             }
             // - Moves
-            BuildView("Views/Moves/Index.cshtml", Path.Combine(outputPath, "moves." + extension), data.Moves);
-            foreach (var item in data.Moves)
-            {
-                BuildView("Views/Moves/Details.cshtml", Path.Combine(outputPath, "moves", item.ID.ToString() + "." + extension), new MoveDetailsViewModel(item, data));
-            }
+            BuildView("Views/Moves/Index.cshtml", Path.Combine(outputPath, "moves", "index." + extension), data.Moves);
+            //foreach (var item in data.Moves)
+            //{
+            //    BuildView("Views/Moves/Details.cshtml", Path.Combine(outputPath, "moves", item.ID.ToString() + "." + extension), new MoveDetailsViewModel(item, data));
+            //}
         }
     }
 }
