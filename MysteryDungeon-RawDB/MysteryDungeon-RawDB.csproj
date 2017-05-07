@@ -141,6 +141,7 @@
     <Compile Include="Models\PSMD\Ability.cs" />
     <Compile Include="Models\PSMD\ExperienceLevel.cs" />
     <Compile Include="Models\PSMD\Move.cs" />
+    <Compile Include="Models\PSMD\MoveDetailsViewModel.cs" />
     <Compile Include="Models\PSMD\MoveMultiHit.cs" />
     <Compile Include="Models\PSMD\PkmType.cs" />
     <Compile Include="Models\PSMD\Pokemon.cs" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Views\Moves\Index.cshtml" />
     <None Include="Views\Pokemon\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -162,20 +164,25 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="mlist.txt">
+    <Content Include="mlist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="tlist.txt">
+    </Content>
+    <Content Include="tlist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="alist.txt">
+    </Content>
+    <Content Include="alist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="plist.txt">
+    <Content Include="plist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="3dstool.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

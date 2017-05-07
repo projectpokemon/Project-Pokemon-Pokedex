@@ -4,6 +4,7 @@ using SkyEditor.Core.IO;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,6 +16,20 @@ namespace MysteryDungeon_RawDB
 {
     class Program
     {
+
+        public static void RunProgram(string program, string args)
+        {
+            var p = new Process();
+            p.StartInfo.FileName = program;
+            p.StartInfo.WorkingDirectory = Path.GetDirectoryName(program);
+            p.StartInfo.Arguments = args;
+            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            p.StartInfo.CreateNoWindow = true;
+
+            p.Start();
+
+            p.WaitForExit();
+        }
 
         public static async Task<PsmdDataCollection> LoadPsmdData(string rawFilesDir)
         {
@@ -214,6 +229,8 @@ namespace MysteryDungeon_RawDB
 
         static void BuildView(string viewPath, string outputPath, object model)
         {
+            Console.WriteLine("Building " + outputPath);
+
             // Set up the hosting environment
 
             // a. Use the C# language (you could detect this based on the file extension if you want to)
@@ -311,12 +328,30 @@ namespace MysteryDungeon_RawDB
             {
                 File.Delete(item);
             }
-
-            // Current
+                        
             var romPath = args[0]; // Directory, not ROM. Not yet.
             var outputPath = args[1];
-            var extension = args[2];
+            var extension = "php";
 
+            // Extract ROM if needed
+            var tempDir = "theROM";
+            if (File.Exists(romPath))
+            {
+                // It's needed
+                if (!Directory.Exists(tempDir))
+                {
+                    Directory.CreateDirectory(tempDir);
+                }
+                RunProgram("3dstool.exe", $"-xtf 3ds \"{romPath}\" -0 Partition0.bin");
+                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin");
+                RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
+                File.Delete("Partition0.bin");
+                File.Delete("RomFS.bin");
+
+                romPath = tempDir;
+            }
+
+            // Create output directory
             if (!Directory.Exists(outputPath))
             {
                 Directory.CreateDirectory(outputPath);
@@ -325,10 +360,17 @@ namespace MysteryDungeon_RawDB
             var data = LoadPsmdData(romPath).Result;
 
             // Generate HTML
+            // - Pokemon
             BuildView("Views/Pokemon/Index.cshtml", Path.Combine(outputPath, "pokemon." + extension), data.Pokemon);
             foreach (var item in data.Pokemon)
             {
                 BuildView("Views/Pokemon/Details.cshtml", Path.Combine(outputPath, "pokemon", item.ID.ToString() + "." + extension), new PokemonDetailsViewModel(item, data));
+            }
+            // - Moves
+            BuildView("Views/Moves/Index.cshtml", Path.Combine(outputPath, "moves." + extension), data.Pokemon);
+            foreach (var item in data.Moves)
+            {
+                BuildView("Views/Moves/Details.cshtml", Path.Combine(outputPath, "moves", item.ID.ToString() + "." + extension), new MoveDetailsViewModel(item, data));
             }
         }
     }
