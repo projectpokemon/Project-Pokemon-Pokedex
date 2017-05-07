@@ -358,9 +358,11 @@ namespace MysteryDungeon_RawDB
             }
 
             var data = LoadPsmdData(romPath).Result;
-
+            
             // Generate HTML
             BuildView("Views/PSMD/Index.cshtml", Path.Combine(outputPath, "psmd", "index.php"), null);
+            // - Copy style
+            File.Copy("Views/PSMD/style.css", Path.Combine(outputPath, "psmd", "style.css"), true);
             // - Pokemon
             BuildView("Views/PSMD/Pokemon/Index.cshtml", Path.Combine(outputPath, "psmd", "pokemon", "index.php"), data.Pokemon);
             foreach (var item in data.Pokemon)
