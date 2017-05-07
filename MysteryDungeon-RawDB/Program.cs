@@ -360,29 +360,30 @@ namespace MysteryDungeon_RawDB
             var data = LoadPsmdData(romPath).Result;
 
             // Generate HTML
+            BuildView("Views/PSMD/Index.cshtml", Path.Combine(outputPath, "psmd", "index.php"), data.Pokemon);
             // - Pokemon
-            BuildView("Views/PSMD/Pokemon/Index.cshtml", Path.Combine(outputPath, "psmd", "pokemon", "index." + extension), data.Pokemon);
+            BuildView("Views/PSMD/Pokemon/Index.cshtml", Path.Combine(outputPath, "psmd", "pokemon", "index.php"), data.Pokemon);
             foreach (var item in data.Pokemon)
             {
-                BuildView("Views/PSMD/Pokemon/Details.cshtml", Path.Combine(outputPath, "psmd", "pokemon", item.ID.ToString() + "." + extension), new PokemonDetailsViewModel(item, data));
+                BuildView("Views/PSMD/Pokemon/Details.cshtml", Path.Combine(outputPath, "psmd", "pokemon", item.ID.ToString() + ".php"), new PokemonDetailsViewModel(item, data));
             }
             // - Moves
-            BuildView("Views/PSMD/Moves/Index.cshtml", Path.Combine(outputPath, "psmd", "moves", "index." + extension), data.Moves);
+            BuildView("Views/PSMD/Moves/Index.cshtml", Path.Combine(outputPath, "psmd", "moves", "index.php"), data.Moves);
             foreach (var item in data.Moves)
             {
-                BuildView("Views/PSMD/Moves/Details.cshtml", Path.Combine(outputPath, "psmd", "moves", item.ID.ToString() + "." + extension), new MoveDetailsViewModel(item, data));
+                BuildView("Views/PSMD/Moves/Details.cshtml", Path.Combine(outputPath, "psmd", "moves", item.ID.ToString() + ".php"), new MoveDetailsViewModel(item, data));
             }
             // - Abilities
-            BuildView("Views/PSMD/Abilities/Index.cshtml", Path.Combine(outputPath, "psmd", "abilities", "index." + extension), data.Abilities);
+            BuildView("Views/PSMD/Abilities/Index.cshtml", Path.Combine(outputPath, "psmd", "abilities", "index.php"), data.Abilities);
             foreach (var item in data.Abilities)
             {
-                BuildView("Views/PSMD/Abilities/Details.cshtml", Path.Combine(outputPath, "psmd", "abilities", item.ID.ToString() + "." + extension), new AbilityDetailsViewModel(item, data));
+                BuildView("Views/PSMD/Abilities/Details.cshtml", Path.Combine(outputPath, "psmd", "abilities", item.ID.ToString() + ".php"), new AbilityDetailsViewModel(item, data));
             }
             // - Types
-            BuildView("Views/PSMD/Types/Index.cshtml", Path.Combine(outputPath, "psmd", "types", "index." + extension), data.Types);
+            BuildView("Views/PSMD/Types/Index.cshtml", Path.Combine(outputPath, "psmd", "types", "index.php"), data.Types);
             foreach (var item in data.Types)
             {
-                BuildView("Views/PSMD/Types/Details.cshtml", Path.Combine(outputPath, "psmd", "types", item.ID.ToString() + "." + extension), new TypeDetailsViewModel(item, data));
+                BuildView("Views/PSMD/Types/Details.cshtml", Path.Combine(outputPath, "psmd", "types", item.ID.ToString() + ".php"), new TypeDetailsViewModel(item, data));
             }
         }
     }
