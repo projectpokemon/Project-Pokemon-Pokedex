@@ -368,10 +368,10 @@ namespace MysteryDungeon_RawDB
             }
             // - Moves
             BuildView("Views/Moves/Index.cshtml", Path.Combine(outputPath, "moves", "index." + extension), data.Moves);
-            //foreach (var item in data.Moves)
-            //{
-            //    BuildView("Views/Moves/Details.cshtml", Path.Combine(outputPath, "moves", item.ID.ToString() + "." + extension), new MoveDetailsViewModel(item, data));
-            //}
+            foreach (var item in data.Moves)
+            {
+                BuildView("Views/Moves/Details.cshtml", Path.Combine(outputPath, "moves", item.ID.ToString() + "." + extension), new MoveDetailsViewModel(item, data));
+            }
         }
     }
 }
