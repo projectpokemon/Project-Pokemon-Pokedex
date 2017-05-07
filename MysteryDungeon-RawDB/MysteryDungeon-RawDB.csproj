@@ -157,22 +157,22 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Views\Abilities\Details.cshtml">
+    <None Include="Views\PSMD\Abilities\Details.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Views\Abilities\Index.cshtml">
+    <None Include="Views\PSMD\Abilities\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Views\Moves\Details.cshtml">
+    <None Include="Views\PSMD\Moves\Details.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Views\Moves\Index.cshtml">
+    <None Include="Views\PSMD\Moves\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Views\Pokemon\Index.cshtml">
+    <None Include="Views\PSMD\Pokemon\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Views\Pokemon\Details.cshtml">
+    <None Include="Views\PSMD\Pokemon\Details.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

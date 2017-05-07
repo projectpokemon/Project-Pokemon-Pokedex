@@ -361,22 +361,22 @@ namespace MysteryDungeon_RawDB
 
             // Generate HTML
             // - Pokemon
-            BuildView("Views/Pokemon/Index.cshtml", Path.Combine(outputPath, "pokemon", "index." + extension), data.Pokemon);
+            BuildView("Views/PSMD/Pokemon/Index.cshtml", Path.Combine(outputPath, "psmd", "pokemon", "index." + extension), data.Pokemon);
             foreach (var item in data.Pokemon)
             {
-                BuildView("Views/Pokemon/Details.cshtml", Path.Combine(outputPath, "pokemon", item.ID.ToString() + "." + extension), new PokemonDetailsViewModel(item, data));
+                BuildView("Views/PSMD/Pokemon/Details.cshtml", Path.Combine(outputPath, "psmd", "pokemon", item.ID.ToString() + "." + extension), new PokemonDetailsViewModel(item, data));
             }
             // - Moves
-            BuildView("Views/Moves/Index.cshtml", Path.Combine(outputPath, "moves", "index." + extension), data.Moves);
+            BuildView("Views/PSMD/Moves/Index.cshtml", Path.Combine(outputPath, "psmd", "moves", "index." + extension), data.Moves);
             foreach (var item in data.Moves)
             {
-                BuildView("Views/Moves/Details.cshtml", Path.Combine(outputPath, "moves", item.ID.ToString() + "." + extension), new MoveDetailsViewModel(item, data));
+                BuildView("Views/PSMD/Moves/Details.cshtml", Path.Combine(outputPath, "psmd", "moves", item.ID.ToString() + "." + extension), new MoveDetailsViewModel(item, data));
             }
             // - Abilities
-            BuildView("Views/Abilities/Index.cshtml", Path.Combine(outputPath, "abilities", "index." + extension), data.Abilities);
+            BuildView("Views/PSMD/Abilities/Index.cshtml", Path.Combine(outputPath, "psmd", "abilities", "index." + extension), data.Abilities);
             foreach (var item in data.Abilities)
             {
-                BuildView("Views/Abilities/Details.cshtml", Path.Combine(outputPath, "abilities", item.ID.ToString() + "." + extension), new AbilityDetailsViewModel(item, data));
+                BuildView("Views/PSMD/Abilities/Details.cshtml", Path.Combine(outputPath, "psmd", "abilities", item.ID.ToString() + "." + extension), new AbilityDetailsViewModel(item, data));
             }
         }
     }
