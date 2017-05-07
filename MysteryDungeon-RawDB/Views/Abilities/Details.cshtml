@@ -1,0 +1,152 @@
+﻿@functions {
+    public MoveDetailsViewModel Ability { get; set; }
+    private IEnumerable<BasicPokemonListItem> CurrentItem { get; set; }
+}
+
+<?php
+    $title = @Model.Name;
+    ?>
+
+    <h2>@Model.Name</h2>
+
+<div>
+    <h4>Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            ID (Decimal)
+        </dt>
+        <dd>
+            @Model.ID
+        </dd>
+
+        <dt>
+            ID (Hex, Big Endian)
+        </dt>
+        <dd>
+            @Model.IDHexBigEndian
+        </dd>
+
+        <dt>
+            ID (Hex, Little Endian)
+        </dt>
+        <dd>
+            @Model.IDHexLittleEndian
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @CurrentItem = Model.PokemonWithAbility1
+    <h4>Pokemon with Ability 1</h4>
+    <table class="table">
+        <tr>
+            <th width="10%">
+                ID (Decimal)
+            </th>
+            <th width="10%">
+                ID (Hex, Big Endian)
+            </th>
+            <th width="10%">
+                ID (Hex, Little Endian)
+            </th>
+            <th>
+                Pokémon
+            </th>
+        </tr>
+        @foreach (var item in CurrentItem)
+        {
+            <tr>
+                <td>
+                    @item.ID
+                </td>
+                <td>
+                    @item.IDHexBigEndian
+                </td>
+                <td>
+                    @item.IDHexLittleEndian
+                </td>
+                <td>
+                    @string.Format("<a href=\"../pokemon/{0}\">{1}</a>", item.ID, item.Name)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    @CurrentItem = Model.PokemonWithAbility2
+    <h4>Pokemon with Ability 2</h4>
+    <table class="table">
+        <tr>
+            <th width="10%">
+                ID (Decimal)
+            </th>
+            <th width="10%">
+                ID (Hex, Big Endian)
+            </th>
+            <th width="10%">
+                ID (Hex, Little Endian)
+            </th>
+            <th>
+                Pokémon
+            </th>
+        </tr>
+        @foreach (var item in CurrentItem)
+        {
+            <tr>
+                <td>
+                    @item.ID
+                </td>
+                <td>
+                    @item.IDHexBigEndian
+                </td>
+                <td>
+                    @item.IDHexLittleEndian
+                </td>
+                <td>
+                    @string.Format("<a href=\"../pokemon/{0}\">{1}</a>", item.ID, item.Name)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    @CurrentItem = Model.PokemonWithAbilityHIdden
+    <h4>Pokemon with Hidden Ability</h4>
+    <table class="table">
+        <tr>
+            <th width="10%">
+                ID (Decimal)
+            </th>
+            <th width="10%">
+                ID (Hex, Big Endian)
+            </th>
+            <th width="10%">
+                ID (Hex, Little Endian)
+            </th>
+            <th>
+                Pokémon
+            </th>
+        </tr>
+        @foreach (var item in CurrentItem)
+        {
+            <tr>
+                <td>
+                    @item.ID
+                </td>
+                <td>
+                    @item.IDHexBigEndian
+                </td>
+                <td>
+                    @item.IDHexLittleEndian
+                </td>
+                <td>
+                    @string.Format("<a href=\"../pokemon/{0}\">{1}</a>", item.ID, item.Name)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

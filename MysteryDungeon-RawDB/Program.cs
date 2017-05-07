@@ -372,6 +372,12 @@ namespace MysteryDungeon_RawDB
             {
                 BuildView("Views/Moves/Details.cshtml", Path.Combine(outputPath, "moves", item.ID.ToString() + "." + extension), new MoveDetailsViewModel(item, data));
             }
+            // - Abilities
+            BuildView("Views/Abilities/Index.cshtml", Path.Combine(outputPath, "abilities", "index." + extension), data.Abilities);
+            foreach (var item in data.Abilities)
+            {
+                BuildView("Views/Abilities/Details.cshtml", Path.Combine(outputPath, "abilities", item.ID.ToString() + "." + extension), new AbilityDetailsViewModel(item, data));
+            }
         }
     }
 }

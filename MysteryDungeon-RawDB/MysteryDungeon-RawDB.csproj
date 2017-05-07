@@ -139,6 +139,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\PSMD\Ability.cs" />
+    <Compile Include="Models\PSMD\AbilityDetailsViewModel.cs" />
+    <Compile Include="Models\PSMD\BasicPokemonListItem.cs" />
     <Compile Include="Models\PSMD\ExperienceLevel.cs" />
     <Compile Include="Models\PSMD\Move.cs" />
     <Compile Include="Models\PSMD\MoveDetailsViewModel.cs" />
@@ -155,7 +157,15 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Views\Moves\Details.cshtml" />
+    <None Include="Views\Abilities\Details.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\Abilities\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\Moves\Details.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Views\Moves\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
