@@ -45,7 +45,7 @@ namespace MysteryDungeon_RawDB
             await monsterFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "monster.md"), provider);
 
             var pkms = new List<Models.EOS.Pokemon>();
-            for (int i = 0; i < monsterFile.Entries.Count / 2; i++)
+            for (int i = 0; i < monsterFile.Entries.Count / 2; i += 2)
             {
                 var maleEntry = monsterFile.Entries[i];
                 var femaleEntry = monsterFile.Entries[i + 600];
