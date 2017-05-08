@@ -49,7 +49,7 @@
       <HintPath>..\packages\Portable.Text.Encoding.0.8.3.0\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Text.Encoding.dll</HintPath>
     </Reference>
     <Reference Include="SkyEditor.Core, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI125\lib\netstandard1.5\SkyEditor.Core.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI133\lib\netstandard1.5\SkyEditor.Core.dll</HintPath>
     </Reference>
     <Reference Include="SkyEditor.Core.FrameworkCompatibility, Version=4.1.0.127, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SkyEditor.Core.FrameworkCompatibility.4.1.0-CI127\lib\net462\SkyEditor.Core.FrameworkCompatibility.dll</HintPath>
