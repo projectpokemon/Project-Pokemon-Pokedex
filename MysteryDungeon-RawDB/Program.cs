@@ -48,11 +48,12 @@ namespace MysteryDungeon_RawDB
             foreach (MonsterMDEntry item in monsterFile.Entries)
             {
                 var newEntry = new Models.EOS.Pokemon();
-                newEntry.ID = item.EntryID;
+                newEntry.ID = item.EntityID;
                 newEntry.Name = languageFile.GetPokemonName(newEntry.ID % 600);
                 pkms.Add(newEntry);
             }
             data.Pokemon = pkms;
+            return data;
         }
 
         public static async Task<PsmdDataCollection> LoadPsmdData(string rawFilesDir)
