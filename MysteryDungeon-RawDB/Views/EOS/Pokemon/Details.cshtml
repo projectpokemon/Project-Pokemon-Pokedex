@@ -21,134 +21,140 @@
 <?php
     $title = "@Model.Name";
     $cssFiles = array("../../style.css");
-?>
+    ?>
 
-<h2>@Model.Name</h2>
+    <h2>@Model.Name</h2>
 
-<div>
-    <h3>Details (Male)</h3>
-    <dl class="dl-horizontal">
-        <dt>
-            ID (Decimal)
-        </dt>
-
-        <dd>
-            @Model.ID
-        </dd>
-
-        <dt>
-            ID (Hex, Big Endian)
-        </dt>
-
-        <dd>
-            @IDHexBigEndian
-        </dd>
-
-        <dt>
-            ID (Hex, Little Endian)
-        </dt>
-
-        <dd>
-            @IDHexLittleEndian
-        </dd>
-
-        <dt>
-            Dex Number
-        </dt>
-
-        <dd>
-            @Model.DexNumber
-        </dd>
-    </dl>
-</div>
-
-<div class="row">
-    @if (Model.Male != null)
-    {
-        var gender = Model.Male;
-        <div class="col-md-6">
+    <div>
+        <h3>Details</h3>
+        <dl class="dl-horizontal">
             <dt>
-                Base HP
+                ID (Decimal)
             </dt>
 
             <dd>
-                @gender.BaseHP
+                @Model.ID
             </dd>
 
             <dt>
-                Base Attack
+                ID (Hex, Big Endian)
             </dt>
 
             <dd>
-                @gender.BaseATK
+                @IDHexBigEndian
             </dd>
 
             <dt>
-                Base Defense
+                ID (Hex, Little Endian)
             </dt>
 
             <dd>
-                @gender.BaseDEF
+                @IDHexLittleEndian
             </dd>
 
             <dt>
-                Base Sp. Attack
+                Dex Number
             </dt>
 
             <dd>
-                @gender.BaseSPATK
+                @Model.DexNumber
             </dd>
-            <dt>
-                Base Sp. Defense
-            </dt>
+        </dl>
+    </div>
 
-            <dd>
-                @gender.BaseSPDEF
-            </dd>
-        </div>
-    }
-    @if (Model.Female != null)
-    {
-        var gender = Model.Female;
-        <div class="col-md-6">
-            <dt>
-                Base HP
-            </dt>
+    <div class="row">
+        @if (Model.Male != null)
+        {
+            var gender = Model.Male;
+            <div class="col-md-6">
+                <h3>Male</h3>
+                <dl class="dl-horizontal">
+                    <dt>
+                        Base HP
+                    </dt>
 
-            <dd>
-                @gender.BaseHP
-            </dd>
+                    <dd>
+                        @gender.BaseHP
+                    </dd>
 
-            <dt>
-                Base Attack
-            </dt>
+                    <dt>
+                        Base Attack
+                    </dt>
 
-            <dd>
-                @gender.BaseATK
-            </dd>
+                    <dd>
+                        @gender.BaseATK
+                    </dd>
 
-            <dt>
-                Base Defense
-            </dt>
+                    <dt>
+                        Base Defense
+                    </dt>
 
-            <dd>
-                @gender.BaseDEF
-            </dd>
+                    <dd>
+                        @gender.BaseDEF
+                    </dd>
 
-            <dt>
-                Base Sp. Attack
-            </dt>
+                    <dt>
+                        Base Sp. Attack
+                    </dt>
 
-            <dd>
-                @gender.BaseSPATK
-            </dd>
-            <dt>
-                Base Sp. Defense
-            </dt>
+                    <dd>
+                        @gender.BaseSPATK
+                    </dd>
+                    <dt>
+                        Base Sp. Defense
+                    </dt>
 
-            <dd>
-                @gender.BaseSPDEF
-            </dd>
-        </div>
-    }
-</div>
+                    <dd>
+                        @gender.BaseSPDEF
+                    </dd>
+                </dl>
+            </div>
+        }
+        @if (Model.Female != null)
+        {
+            var gender = Model.Female;
+            <div class="col-md-6">
+                <h3>Female</h3>
+                <dl class="dl-horizontal">
+                    <dt>
+                        Base HP
+                    </dt>
+
+                    <dd>
+                        @gender.BaseHP
+                    </dd>
+
+                    <dt>
+                        Base Attack
+                    </dt>
+
+                    <dd>
+                        @gender.BaseATK
+                    </dd>
+
+                    <dt>
+                        Base Defense
+                    </dt>
+
+                    <dd>
+                        @gender.BaseDEF
+                    </dd>
+
+                    <dt>
+                        Base Sp. Attack
+                    </dt>
+
+                    <dd>
+                        @gender.BaseSPATK
+                    </dd>
+                    <dt>
+                        Base Sp. Defense
+                    </dt>
+
+                    <dd>
+                        @gender.BaseSPDEF
+                    </dd>
+                </dl>
+            </div>
+        }
+    </div>
