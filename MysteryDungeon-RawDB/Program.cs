@@ -52,7 +52,7 @@ namespace MysteryDungeon_RawDB
                 newEntry.Name = languageFile.GetPokemonName(newEntry.ID % 600);
                 pkms.Add(newEntry);
             }
-            data.Pokemon = pkms;
+            data.Pokemon = pkms.OrderBy(x => x.ID).ToList();
             return data;
         }
 
