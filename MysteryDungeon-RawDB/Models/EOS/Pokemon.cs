@@ -12,10 +12,6 @@ namespace MysteryDungeon_RawDB.Models.EOS
             public int EntityID { get; set; }
             public int Unk_02 { get; set; }
             public int Unk_06 { get; set; }
-            public int EvolveFrom { get; set; }
-            public int EvolveMethod { get; set; }
-            public int EvolveParam { get; set; }
-            public string EvolveItemName { get; set; }
             public int SpriteIndex { get; set; }
             public string GenderName { get; set; }
             public int BodySize { get; set; }
@@ -51,6 +47,9 @@ namespace MysteryDungeon_RawDB.Models.EOS
         public int ID { get; set; }
         public string Name { get; set; }
         public int DexNumber { get; set; }
+        public int EvolveFromID { get; set; }
+        public string EvolveFromName { get; set; }
+        public string EvolveCriteria { get; set; }
 
         public GenderInfo Male { get; set; }
         public GenderInfo Female { get; set; }

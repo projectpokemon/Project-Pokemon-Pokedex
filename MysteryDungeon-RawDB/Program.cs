@@ -53,7 +53,55 @@ namespace MysteryDungeon_RawDB
                 var entry = new Models.EOS.Pokemon();
                 entry.ID = i;// monsterFile.Entries[i].EntityID;
                 entry.Name = languageFile.GetPokemonName(entry.ID % 600);
-                entry.DexNumber = monsterFile.Entries[i].DexNumber;
+                entry.DexNumber = maleEntry.DexNumber;
+                entry.EvolveFromID = maleEntry.EvolveFrom;
+                entry.EvolveFromName = languageFile.GetPokemonName(entry.EvolveFromID);
+                switch (maleEntry.EvolveMethod)
+                {
+                    case MonsterMDEntry.PokemonEvolutionMethod.None:
+                        entry.EvolveCriteria = "N/A";
+                        break;
+                    case MonsterMDEntry.PokemonEvolutionMethod.Level:
+                        entry.EvolveCriteria = "Level " + maleEntry.EvolveParam.ToString();
+                        break;
+                    case MonsterMDEntry.PokemonEvolutionMethod.IQ:
+                        entry.EvolveCriteria = maleEntry.EvolveParam.ToString() + " IQ Points";
+                        break;
+                    case MonsterMDEntry.PokemonEvolutionMethod.Items:
+                        entry.EvolveCriteria = "Item #" + maleEntry.EvolveParam.ToString()
+                        switch (maleEntry.EvolveItem)
+                        {
+                            case MonsterMDEntry.EvolutionaryItem.None:
+                                break;
+                            case MonsterMDEntry.EvolutionaryItem.LinkCable:
+                                entry.EvolveCriteria += " and Link Cable";
+                                break;
+                            case MonsterMDEntry.EvolutionaryItem.Unknown2:
+                                entry.EvolveCriteria += " and unknown (2)";
+                                break;
+                            case MonsterMDEntry.EvolutionaryItem.Unknown3:
+                                entry.EvolveCriteria += " and unknown (3)";
+                                break;
+                            case MonsterMDEntry.EvolutionaryItem.Unknown4:
+                                entry.EvolveCriteria += " and unknown (4)";
+                                break;
+                            case MonsterMDEntry.EvolutionaryItem.SunRibbon:
+                                entry.EvolveCriteria += " and Sun Ribbon";
+                                break;
+                            case MonsterMDEntry.EvolutionaryItem.LunarRibbon:
+                                entry.EvolveCriteria += " and Lunar Ribbon";
+                                break;
+                            case MonsterMDEntry.EvolutionaryItem.BeautyScarf:
+                                entry.EvolveCriteria += " and Beauty Scarf";
+                                break;
+                        }
+                        break;
+                    case MonsterMDEntry.PokemonEvolutionMethod.LinkCable:
+                        entry.EvolveCriteria = "Link Cable";
+                        break;
+                    default:
+                        break;
+                }
                 
                 if (maleEntry != null)
                 {
@@ -421,8 +469,8 @@ namespace MysteryDungeon_RawDB
             //}
 
             //// Add breadcrumb titles
-            //File.WriteAllText(Path.Combine(outputPath, "eos", "__nav.php"), "Pokemon Super Mystery Dungeon");
-            //File.WriteAllText(Path.Combine(outputPath, "eos", "pokemon", "__nav.php"), "Pokédex");
+            File.WriteAllText(Path.Combine(outputPath, "eos", "__nav.php"), "Pokemon Mystery Dungeon: Explorers");
+            File.WriteAllText(Path.Combine(outputPath, "eos", "pokemon", "__nav.php"), "Pokédex");
             //File.WriteAllText(Path.Combine(outputPath, "eos", "moves", "__nav.php"), "Movedex");
             //File.WriteAllText(Path.Combine(outputPath, "eos", "abilities", "__nav.php"), "Abilitydex");
             //File.WriteAllText(Path.Combine(outputPath, "eos", "types", "__nav.php"), "Typedex");

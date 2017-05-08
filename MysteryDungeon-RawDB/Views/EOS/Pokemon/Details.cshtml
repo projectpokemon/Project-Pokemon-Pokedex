@@ -59,6 +59,24 @@
             <dd>
                 @Model.DexNumber
             </dd>
+
+
+            <dt>
+                Evolves From
+            </dt>
+
+            <dd>
+                @string.Format("<a href=\"../{0}/\">{1}</a>", Model.EvolveFromID, Model.EvolveFromName)
+            </dd>
+
+
+            <dt>
+                Evolution Criteria
+            </dt>
+
+            <dd>
+                @Model.EvolveCriteria
+            </dd>
         </dl>
     </div>
 
