@@ -54,8 +54,8 @@
     <Reference Include="SkyEditor.Core.FrameworkCompatibility, Version=4.1.0.127, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SkyEditor.Core.FrameworkCompatibility.4.1.0-CI127\lib\net462\SkyEditor.Core.FrameworkCompatibility.dll</HintPath>
     </Reference>
-    <Reference Include="SkyEditor.ROMEditor, Version=4.1.0.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.ROMEditor.4.1.0-CI43\lib\netstandard1.5\SkyEditor.ROMEditor.dll</HintPath>
+    <Reference Include="SkyEditor.ROMEditor, Version=4.1.0.45, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.ROMEditor.4.1.0-CI45\lib\netstandard1.5\SkyEditor.ROMEditor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
