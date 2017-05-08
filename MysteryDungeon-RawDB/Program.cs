@@ -354,6 +354,7 @@ namespace MysteryDungeon_RawDB
             var romDir = "eos-rawfiles";
             using (var eosROM = new GenericNDSRom())
             {
+                await eosROM.OpenFile(eosPath, provider);
                 await eosROM.Unpack(romDir, provider);
             }
 
