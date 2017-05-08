@@ -321,34 +321,24 @@ namespace MysteryDungeon_RawDB
             }
         }
 
-        static void Main(string[] args)
+        static void BuildPSMD(string psmdPath, string outputPath)
         {
-            // Cleanup old execution
-            foreach (var item in Directory.GetFiles(".", "Temp_*.dll"))
-            {
-                File.Delete(item);
-            }
-                        
-            var romPath = args[0]; // Directory, not ROM. Not yet.
-            var outputPath = args[1];
-            var extension = "php";
-
             // Extract ROM if needed
             var tempDir = "theROM";
-            if (File.Exists(romPath))
+            if (File.Exists(psmdPath))
             {
                 // It's needed
                 if (!Directory.Exists(tempDir))
                 {
                     Directory.CreateDirectory(tempDir);
                 }
-                RunProgram("3dstool.exe", $"-xtf 3ds \"{romPath}\" -0 Partition0.bin");
+                RunProgram("3dstool.exe", $"-xtf 3ds \"{psmdPath}\" -0 Partition0.bin");
                 RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin");
                 RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
                 File.Delete("Partition0.bin");
                 File.Delete("RomFS.bin");
 
-                romPath = tempDir;
+                psmdPath = tempDir;
             }
 
             // Create output directory
@@ -357,8 +347,8 @@ namespace MysteryDungeon_RawDB
                 Directory.CreateDirectory(outputPath);
             }
 
-            var data = LoadPsmdData(romPath).Result;
-            
+            var data = LoadPsmdData(psmdPath).Result;
+
             // Generate HTML
             BuildView("Views/PSMD/Index.cshtml", Path.Combine(outputPath, "psmd", "index.php"), null);
             // - Copy style
@@ -394,6 +384,24 @@ namespace MysteryDungeon_RawDB
             File.WriteAllText(Path.Combine(outputPath, "psmd", "moves", "__nav.php"), "Movedex");
             File.WriteAllText(Path.Combine(outputPath, "psmd", "abilities", "__nav.php"), "Abilitydex");
             File.WriteAllText(Path.Combine(outputPath, "psmd", "types", "__nav.php"), "Typedex");
+
+            // Serialize raw data
+            SkyEditor.Core.Utilities.Json.SerializeToFile(Path.Combine(outputPath, "psmd", "data.json"), data, new PhysicalIOProvider());
+        }
+
+        static void Main(string[] args)
+        {
+            // Cleanup old execution
+            foreach (var item in Directory.GetFiles(".", "Temp_*.dll"))
+            {
+                File.Delete(item);
+            }
+
+            //var eosPath = args[0];
+            var psmdPath = args[0];
+            var outputPath = args[1];
+
+            BuildPSMD(psmdPath, outputPath);
         }
     }
 }
