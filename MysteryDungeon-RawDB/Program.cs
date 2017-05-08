@@ -45,14 +45,18 @@ namespace MysteryDungeon_RawDB
             await monsterFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "monster.md"), provider);
 
             var pkms = new List<Models.EOS.Pokemon>();
-            foreach (MonsterMDEntry item in monsterFile.Entries)
+            for (int i = 0; i < monsterFile.Entries.Count / 2; i++)
             {
-                var newEntry = new Models.EOS.Pokemon();
-                newEntry.ID = item.EntityID;
-                newEntry.Name = languageFile.GetPokemonName(newEntry.ID % 600);
-                pkms.Add(newEntry);
+                var maleEntry = monsterFile.Entries[i];
+                var femaleEntry = monsterFile.Entries[i + 600];
+
+                var entry = new Models.EOS.Pokemon();
+                entry.ID = monsterFile.Entries[i].EntityID;
+                entry.Name = languageFile.GetPokemonName(entry.ID % 600);
+                entry.DexNumber = monsterFile.Entries[i].DexNumber;
+                pkms.Add(entry);
             }
-            data.Pokemon = pkms.OrderBy(x => x.ID).ToList();
+            data.Pokemon = pkms;//.OrderBy(x => x.ID).ToList();
             return data;
         }
 
