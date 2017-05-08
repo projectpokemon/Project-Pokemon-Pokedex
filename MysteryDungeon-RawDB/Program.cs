@@ -271,8 +271,8 @@ namespace MysteryDungeon_RawDB
             // d. Add default imports
             host.NamespaceImports.Add("System");
             host.NamespaceImports.Add("System.Collections.Generic");
-            host.NamespaceImports.Add("MysteryDungeon_RawDB.Models");
-            host.NamespaceImports.Add("MysteryDungeon_RawDB.Models.EOS");
+            //host.NamespaceImports.Add("MysteryDungeon_RawDB.Models");
+            //host.NamespaceImports.Add("MysteryDungeon_RawDB.Models.EOS");
             host.NamespaceImports.Add("MysteryDungeon_RawDB.Models.PSMD");
             var engine = new RazorTemplateEngine(host);
             var codeProvider = new CSharpCodeProvider();
@@ -304,7 +304,7 @@ namespace MysteryDungeon_RawDB
                                            .OfType<CompilerError>()
                                            .Where(ce => !ce.IsWarning)
                                            .First();
-                Console.WriteLine(String.Format("Error Compiling Template: ({0}, {1}) {2}",
+                throw new Exception(String.Format("Error Compiling Template: ({0}, {1}) {2}",
                                               err.Line, err.Column, err.ErrorText));
             }
             else
@@ -313,7 +313,7 @@ namespace MysteryDungeon_RawDB
                 Assembly asm = Assembly.LoadFrom(outputAssemblyName);
                 if (asm == null)
                 {
-                    Console.WriteLine("Error loading template assembly");
+                    throw new Exception("Error loading template assembly");
                 }
                 else
                 {
@@ -321,14 +321,14 @@ namespace MysteryDungeon_RawDB
                     Type typ = asm.GetType("RazorOutput.Template");
                     if (typ == null)
                     {
-                        Console.WriteLine("Could not find type RazorOutput.Template in assembly {0}", asm.FullName);
+                        throw new Exception("Could not find type RazorOutput.Template in assembly {0}", asm.FullName);
                     }
                     else
                     {
                         TemplateBase newTemplate = Activator.CreateInstance(typ) as TemplateBase;
                         if (newTemplate == null)
                         {
-                            Console.WriteLine("Could not construct RazorOutput.Template or it does not inherit from TemplateBase");
+                            throw new Exception("Could not construct RazorOutput.Template or it does not inherit from TemplateBase");
                         }
                         else
                         {
