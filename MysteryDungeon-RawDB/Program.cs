@@ -38,12 +38,15 @@ namespace MysteryDungeon_RawDB
         {
             var data = new EosDataCollection();
             var provider = new PhysicalIOProvider();
+
             var languageFile = new LanguageString();
             await languageFile.OpenFile(Path.Combine(rawFilesDir, "data", "MESSAGE", "text_e.str"), provider);
 
+
+
+            // Read Pokemon
             var monsterFile = new MonsterMDFile();
             await monsterFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "monster.md"), provider);
-
             var pkms = new List<Models.EOS.Pokemon>();
             for (int i = 0; i < 600; i += 1)
             {
@@ -68,7 +71,7 @@ namespace MysteryDungeon_RawDB
                         entry.EvolveCriteria = maleEntry.EvolveParam.ToString() + " IQ Points";
                         break;
                     case MonsterMDEntry.PokemonEvolutionMethod.Items:
-                        entry.EvolveCriteria = "Item #" + maleEntry.EvolveParam.ToString()
+                        entry.EvolveCriteria = "Item #" + maleEntry.EvolveParam.ToString();
                         switch (maleEntry.EvolveItem)
                         {
                             case MonsterMDEntry.EvolutionaryItem.None:
@@ -132,6 +135,12 @@ namespace MysteryDungeon_RawDB
                 pkms.Add(entry);
             }
             data.Pokemon = pkms;//.OrderBy(x => x.ID).ToList();
+
+            // Read Moves
+            var moveFile = new waza_p();
+            await moveFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "waza_p.bin"), provider);
+            
+
             return data;
         }
 
