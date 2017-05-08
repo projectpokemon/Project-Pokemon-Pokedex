@@ -136,17 +136,23 @@
 </div>
 <div>
     <h3>Moves (Level Up)</h3>
-    <dl class="dl-horizontal">
+    <table class="table">
+        <tr>
+            <th>Level</th>
+            <th>Move</th>
+        </tr>
         @foreach (var item in Model.MovesLevelUp)
         {
-            <dt>
-                @item.Level.ToString()
-            </dt>
-            <dd>
-                @string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.MoveID, item.MoveName)
-            </dd>
+            <tr>
+                <td>
+                    @item.Level.ToString()
+                </td>
+                <td>
+                    @string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.MoveID, item.MoveName)
+                </td>
+            </tr>            
         }
-    </dl>
+    </table>
 </div>
 <div>
     <h3>Stats</h3>

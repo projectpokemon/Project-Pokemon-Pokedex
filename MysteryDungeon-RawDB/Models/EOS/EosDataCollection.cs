@@ -9,5 +9,6 @@ namespace MysteryDungeon_RawDB.Models.EOS
     public class EosDataCollection
     {
         public List<Pokemon> Pokemon { get; set; }
+        public List<Move> Moves { get; set; }
     }
 }

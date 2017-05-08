@@ -43,6 +43,10 @@ namespace MysteryDungeon_RawDB
             await languageFile.OpenFile(Path.Combine(rawFilesDir, "data", "MESSAGE", "text_e.str"), provider);
 
 
+            var moveFile = new waza_p();
+            await moveFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "waza_p.bin"), provider);
+
+
 
             // Read Pokemon
             var monsterFile = new MonsterMDFile();
@@ -105,7 +109,7 @@ namespace MysteryDungeon_RawDB
                     default:
                         break;
                 }
-                
+
                 if (maleEntry != null)
                 {
                     var e = new Models.EOS.Pokemon.GenderInfo();
@@ -131,15 +135,38 @@ namespace MysteryDungeon_RawDB
 
                     entry.Female = e;
                 }
-                
+
+                // Moves
+                var levelupMoves = new Dictionary<int, Models.EOS.Move>();
+                foreach (var item in moveFile.PokemonLearnsets[i].LevelUpMoves)
+                {
+                    levelupMoves.Add(item.Key, new Models.EOS.Move { ID = item.Value, Name = languageFile.GetMoveName(item.Value), RawData = moveFile.Moves[item.Value] });
+                }
+                entry.LevelupMoves = levelupMoves;
+
+                var tmMoves = new List<Models.EOS.Move>();
+                foreach (var item in moveFile.PokemonLearnsets[i].TMMoves)
+                {
+                    tmMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
+                }
+                entry.TMMoves = tmMoves;
+
+                var eggMoves = new List<Models.EOS.Move>();
+                foreach (var item in moveFile.PokemonLearnsets[i].EggMoves)
+                {
+                    eggMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
+                }
+                entry.EggMoves = eggMoves;
+
                 pkms.Add(entry);
             }
-            data.Pokemon = pkms;//.OrderBy(x => x.ID).ToList();
+            data.Pokemon = pkms;
 
-            // Read Moves
-            var moveFile = new waza_p();
-            await moveFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "waza_p.bin"), provider);
-            
+            // Read Move Data
+            for (int i = 0; i < moveFile.Moves.Count; i++)
+            {
+                data.Moves.Add(new Models.EOS.Move { ID = i, Name = languageFile.GetMoveName(i), RawData = moveFile.Moves[i] });
+            }
 
             return data;
         }
@@ -185,11 +212,11 @@ namespace MysteryDungeon_RawDB
             var actHitFile = new SkyEditor.ROMEditor.MysteryDungeon.PSMD.ActHitCountTableDataInfo();
             await actHitFile.OpenFile(Path.Combine(rawFilesDir, "RomFS", "dungeon", "act_hit_count_table_data_info.bin"), new PhysicalIOProvider());
 
-            var moves = new List<Move>();
+            var moves = new List<Models.PSMD.Move>();
             var moveNames = File.ReadAllLines("mlist.txt");
             for (int i = 0; i < moveNames.Length; i++)
             {
-                var m = new Move();
+                var m = new Models.PSMD.Move();
                 m.ID = i;
                 if (string.IsNullOrEmpty(moveNames[i]))
                 {
