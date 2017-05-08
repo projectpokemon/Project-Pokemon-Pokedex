@@ -1,6 +1,9 @@
-﻿using Microsoft.CSharp;
+﻿using DotNet3dsToolkit;
+using Microsoft.CSharp;
+using MysteryDungeon_RawDB.Models.EOS;
 using MysteryDungeon_RawDB.Models.PSMD;
 using SkyEditor.Core.IO;
+using SkyEditor.ROMEditor.MysteryDungeon.Explorers;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -29,6 +32,27 @@ namespace MysteryDungeon_RawDB
             p.Start();
 
             p.WaitForExit();
+        }
+
+        public static async Task<EosDataCollection> LoadEosData(string rawFilesDir)
+        {
+            var data = new EosDataCollection();
+            var provider = new PhysicalIOProvider();
+            var languageFile = new LanguageString();
+            await languageFile.OpenFile(Path.Combine(rawFilesDir, "data", "MESSAGE", "text_e.str"), provider);
+
+            var monsterFile = new MonsterMDFile();
+            await monsterFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "monster.md"), provider);
+
+            var pkms = new List<Models.EOS.Pokemon>();
+            foreach (MonsterMDEntry item in monsterFile.Entries)
+            {
+                var newEntry = new Models.EOS.Pokemon();
+                newEntry.ID = item.EntryID;
+                newEntry.Name = languageFile.GetPokemonName(newEntry.ID % 600);
+                pkms.Add(newEntry);
+            }
+            data.Pokemon = pkms;
         }
 
         public static async Task<PsmdDataCollection> LoadPsmdData(string rawFilesDir)
@@ -143,11 +167,11 @@ namespace MysteryDungeon_RawDB
             var pokemonFile = new SkyEditor.ROMEditor.MysteryDungeon.PSMD.PokemonDataInfo();
             await pokemonFile.OpenFile(Path.Combine(rawFilesDir, "RomFS", "pokemon", "pokemon_data_info.bin"), new PhysicalIOProvider());
 
-            var pkms = new List<Pokemon>();
+            var pkms = new List<Models.PSMD.Pokemon>();
             var pkmNames = File.ReadAllLines("plist.txt");
             for (int i = 0; i < pkmNames.Length; i++)
             {
-                Pokemon pkm = new Pokemon
+                var pkm = new Models.PSMD.Pokemon
                 {
                     ID = i,
                     Name = pkmNames[i]
@@ -246,6 +270,8 @@ namespace MysteryDungeon_RawDB
             // d. Add default imports
             host.NamespaceImports.Add("System");
             host.NamespaceImports.Add("System.Collections.Generic");
+            host.NamespaceImports.Add("MysteryDungeon_RawDB.Models");
+            host.NamespaceImports.Add("MysteryDungeon_RawDB.Models.EOS");
             host.NamespaceImports.Add("MysteryDungeon_RawDB.Models.PSMD");
             var engine = new RazorTemplateEngine(host);
             var codeProvider = new CSharpCodeProvider();
@@ -319,6 +345,57 @@ namespace MysteryDungeon_RawDB
                     }
                 }
             }
+        }
+
+        static async Task BuildEOS(string eosPath, string outputPath)
+        {
+            var provider = new PhysicalIOProvider();
+            var romDir = "eos-rawfiles";
+            using (var eosROM = new GenericNDSRom())
+            {
+                await eosROM.Unpack(romDir, provider);
+            }
+
+            var data = await LoadEosData(romDir);
+
+            // Generate HTML
+            BuildView("Views/EOS/Index.cshtml", Path.Combine(outputPath, "eos", "index.php"), null);
+            // - Copy style
+            File.Copy("Views/EOS/style.css", Path.Combine(outputPath, "eos", "style.css"), true);
+            // - Pokemon
+            BuildView("Views/EOS/Pokemon/Index.cshtml", Path.Combine(outputPath, "eos", "pokemon", "index.php"), data.Pokemon);
+            //foreach (var item in data.Pokemon)
+            //{
+            //    BuildView("Views/EOS/Pokemon/Details.cshtml", Path.Combine(outputPath, "eos", "pokemon", item.ID.ToString() + ".php"), new PokemonDetailsViewModel(item, data));
+            //}
+            //// - Moves
+            //BuildView("Views/EOS/Moves/Index.cshtml", Path.Combine(outputPath, "eos", "moves", "index.php"), data.Moves);
+            //foreach (var item in data.Moves)
+            //{
+            //    BuildView("Views/EOS/Moves/Details.cshtml", Path.Combine(outputPath, "eos", "moves", item.ID.ToString() + ".php"), new MoveDetailsViewModel(item, data));
+            //}
+            //// - Abilities
+            //BuildView("Views/EOS/Abilities/Index.cshtml", Path.Combine(outputPath, "eos", "abilities", "index.php"), data.Abilities);
+            //foreach (var item in data.Abilities)
+            //{
+            //    BuildView("Views/EOS/Abilities/Details.cshtml", Path.Combine(outputPath, "eos", "abilities", item.ID.ToString() + ".php"), new AbilityDetailsViewModel(item, data));
+            //}
+            //// - Types
+            //BuildView("Views/EOS/Types/Index.cshtml", Path.Combine(outputPath, "eos", "types", "index.php"), data.Types);
+            //foreach (var item in data.Types)
+            //{
+            //    BuildView("Views/EOS/Types/Details.cshtml", Path.Combine(outputPath, "eos", "types", item.ID.ToString() + ".php"), new TypeDetailsViewModel(item, data));
+            //}
+
+            //// Add breadcrumb titles
+            //File.WriteAllText(Path.Combine(outputPath, "eos", "__nav.php"), "Pokemon Super Mystery Dungeon");
+            //File.WriteAllText(Path.Combine(outputPath, "eos", "pokemon", "__nav.php"), "Pokédex");
+            //File.WriteAllText(Path.Combine(outputPath, "eos", "moves", "__nav.php"), "Movedex");
+            //File.WriteAllText(Path.Combine(outputPath, "eos", "abilities", "__nav.php"), "Abilitydex");
+            //File.WriteAllText(Path.Combine(outputPath, "eos", "types", "__nav.php"), "Typedex");
+
+            //// Serialize raw data
+            SkyEditor.Core.Utilities.Json.SerializeToFile(Path.Combine(outputPath, "eos", "data.json"), data, new PhysicalIOProvider());
         }
 
         static void BuildPSMD(string psmdPath, string outputPath)
@@ -397,10 +474,11 @@ namespace MysteryDungeon_RawDB
                 File.Delete(item);
             }
 
-            //var eosPath = args[0];
-            var psmdPath = args[0];
-            var outputPath = args[1];
+            var eosPath = args[0];
+            var psmdPath = args[1];
+            var outputPath = args[2];
 
+            BuildEOS(eosPath, outputPath).Wait();
             BuildPSMD(psmdPath, outputPath);
         }
     }

@@ -138,6 +138,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\EOS\EosDataCollection.cs" />
+    <Compile Include="Models\EOS\Pokemon.cs" />
     <Compile Include="Models\PSMD\Ability.cs" />
     <Compile Include="Models\PSMD\AbilityDetailsViewModel.cs" />
     <Compile Include="Models\PSMD\BasicMoveListItem.cs" />
@@ -159,6 +161,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Views\EOS\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\EOS\Pokemon\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Views\PSMD\Abilities\Details.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -210,6 +218,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\PSMD\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\EOS\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
