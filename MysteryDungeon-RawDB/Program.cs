@@ -321,7 +321,7 @@ namespace MysteryDungeon_RawDB
                     Type typ = asm.GetType("RazorOutput.Template");
                     if (typ == null)
                     {
-                        throw new Exception("Could not find type RazorOutput.Template in assembly {0}", asm.FullName);
+                        throw new Exception(string.Format("Could not find type RazorOutput.Template in assembly {0}", asm.FullName));
                     }
                     else
                     {
