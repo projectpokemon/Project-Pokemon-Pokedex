@@ -45,15 +45,42 @@ namespace MysteryDungeon_RawDB
             await monsterFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "monster.md"), provider);
 
             var pkms = new List<Models.EOS.Pokemon>();
-            for (int i = 0; i < monsterFile.Entries.Count / 2; i += 2)
+            for (int i = 0; i < 600; i += 1)
             {
                 var maleEntry = monsterFile.Entries[i];
-                var femaleEntry = monsterFile.Entries[i + 600];
+                var femaleEntry = monsterFile.Entries.Count > i + 600 ? monsterFile.Entries[i + 600] : null;
 
                 var entry = new Models.EOS.Pokemon();
-                entry.ID = monsterFile.Entries[i].EntityID;
+                entry.ID = i;// monsterFile.Entries[i].EntityID;
                 entry.Name = languageFile.GetPokemonName(entry.ID % 600);
                 entry.DexNumber = monsterFile.Entries[i].DexNumber;
+                
+                if (maleEntry != null)
+                {
+                    var e = new Models.EOS.Pokemon.GenderInfo();
+
+                    e.BaseATK = maleEntry.BaseATK;
+                    e.BaseDEF = maleEntry.BaseDEF;
+                    e.BaseSPATK = maleEntry.BaseSPATK;
+                    e.BaseSPDEF = maleEntry.BaseSPDEF;
+                    e.BaseHP = maleEntry.BaseHP;
+
+                    entry.Male = e;
+                }
+
+                if (femaleEntry != null)
+                {
+                    var e = new Models.EOS.Pokemon.GenderInfo();
+
+                    e.BaseATK = maleEntry.BaseATK;
+                    e.BaseDEF = maleEntry.BaseDEF;
+                    e.BaseSPATK = maleEntry.BaseSPATK;
+                    e.BaseSPDEF = maleEntry.BaseSPDEF;
+                    e.BaseHP = maleEntry.BaseHP;
+
+                    entry.Female = e;
+                }
+                
                 pkms.Add(entry);
             }
             data.Pokemon = pkms;//.OrderBy(x => x.ID).ToList();
@@ -370,10 +397,10 @@ namespace MysteryDungeon_RawDB
             File.Copy("Views/EOS/style.css", Path.Combine(outputPath, "eos", "style.css"), true);
             // - Pokemon
             BuildView("Views/EOS/Pokemon/Index.cshtml", Path.Combine(outputPath, "eos", "pokemon", "index.php"), data.Pokemon);
-            //foreach (var item in data.Pokemon)
-            //{
-            //    BuildView("Views/EOS/Pokemon/Details.cshtml", Path.Combine(outputPath, "eos", "pokemon", item.ID.ToString() + ".php"), new PokemonDetailsViewModel(item, data));
-            //}
+            foreach (var item in data.Pokemon)
+            {
+                BuildView("Views/EOS/Pokemon/Details.cshtml", Path.Combine(outputPath, "eos", "pokemon", item.ID.ToString() + ".php"), item);
+            }
             //// - Moves
             //BuildView("Views/EOS/Moves/Index.cshtml", Path.Combine(outputPath, "eos", "moves", "index.php"), data.Moves);
             //foreach (var item in data.Moves)

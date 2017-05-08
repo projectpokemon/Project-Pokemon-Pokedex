@@ -9,6 +9,7 @@ namespace MysteryDungeon_RawDB.Models.EOS
     public class Pokemon
     {
         public class GenderInfo {
+            public int EntityID { get; set; }
             public int Unk_02 { get; set; }
             public int Unk_06 { get; set; }
             public int EvolveFrom { get; set; }

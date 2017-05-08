@@ -1,0 +1,154 @@
+﻿@functions {
+    public MysteryDungeon_RawDB.Models.EOS.Pokemon Model { get; set; }
+    public string IDHexBigEndian
+    {
+        get
+        {
+            return "0x" + Model.ID.ToString("X");
+        }
+    }
+
+    public string IDHexLittleEndian
+    {
+        get
+        {
+            var hex = Model.ID.ToString("X").PadLeft(4, '0');
+            return string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2));
+        }
+    }
+}
+
+<?php
+    $title = "@Model.Name";
+    $cssFiles = array("../../style.css");
+?>
+
+<h2>@Model.Name</h2>
+
+<div>
+    <h3>Details (Male)</h3>
+    <dl class="dl-horizontal">
+        <dt>
+            ID (Decimal)
+        </dt>
+
+        <dd>
+            @Model.ID
+        </dd>
+
+        <dt>
+            ID (Hex, Big Endian)
+        </dt>
+
+        <dd>
+            @IDHexBigEndian
+        </dd>
+
+        <dt>
+            ID (Hex, Little Endian)
+        </dt>
+
+        <dd>
+            @IDHexLittleEndian
+        </dd>
+
+        <dt>
+            Dex Number
+        </dt>
+
+        <dd>
+            @Model.DexNumber
+        </dd>
+    </dl>
+</div>
+
+<div class="row">
+    @if (Model.Male != null)
+    {
+        var gender = Model.Male;
+        <div class="col-md-6">
+            <dt>
+                Base HP
+            </dt>
+
+            <dd>
+                @gender.BaseHP
+            </dd>
+
+            <dt>
+                Base Attack
+            </dt>
+
+            <dd>
+                @gender.BaseATK
+            </dd>
+
+            <dt>
+                Base Defense
+            </dt>
+
+            <dd>
+                @gender.BaseDEF
+            </dd>
+
+            <dt>
+                Base Sp. Attack
+            </dt>
+
+            <dd>
+                @gender.BaseSPATK
+            </dd>
+            <dt>
+                Base Sp. Defense
+            </dt>
+
+            <dd>
+                @gender.BaseSPDEF
+            </dd>
+        </div>
+    }
+    @if (Model.Male != null)
+    {
+        var gender = Model.Female;
+        <div class="col-md-6">
+            <dt>
+                Base HP
+            </dt>
+
+            <dd>
+                @gender.BaseHP
+            </dd>
+
+            <dt>
+                Base Attack
+            </dt>
+
+            <dd>
+                @gender.BaseATK
+            </dd>
+
+            <dt>
+                Base Defense
+            </dt>
+
+            <dd>
+                @gender.BaseDEF
+            </dd>
+
+            <dt>
+                Base Sp. Attack
+            </dt>
+
+            <dd>
+                @gender.BaseSPATK
+            </dd>
+            <dt>
+                Base Sp. Defense
+            </dt>
+
+            <dd>
+                @gender.BaseSPDEF
+            </dd>
+        </div>
+    }
+</div>
