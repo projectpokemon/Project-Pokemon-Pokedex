@@ -46,7 +46,17 @@ namespace MysteryDungeon_RawDB
             var moveFile = new waza_p();
             await moveFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "waza_p.bin"), provider);
 
-
+            // Read Move Data
+            var moves = new List<Models.EOS.Move>();
+            for (int i = 0; i < moveFile.Moves.Count; i++)
+            {
+                var m = new Models.EOS.Move { ID = i, Name = languageFile.GetMoveName(i), RawData = moveFile.Moves[i] };
+                m.PokemonLevelup = new List<Models.EOS.Move.LevelPokemonReference>();
+                m.PokemonTM = new List<Models.EOS.Move.PokemonReference>();
+                m.PokemonEgg = new List<Models.EOS.Move.PokemonReference>();
+                moves.Add(m);
+            }
+            data.Moves = moves;
 
             // Read Pokemon
             var monsterFile = new MonsterMDFile();
@@ -141,9 +151,15 @@ namespace MysteryDungeon_RawDB
                 {
                     var levelupMoves = new Dictionary<int, Models.EOS.Move>();
                     foreach (var item in moveFile.PokemonLearnsets[i].LevelUpMoves)
-                    {
-                        if (moveFile.Moves.Count > item.Value)
-                            levelupMoves.Add(item.Key, new Models.EOS.Move { ID = item.Value, Name = languageFile.GetMoveName(item.Value), RawData = moveFile.Moves[item.Value] });
+                    {                        
+                        if (moveFile.Moves.Count > item.Item2)
+                        {
+                            // Add move to Pokemon
+                            levelupMoves.Add(item.Item1, new Models.EOS.Move { ID = item.Item2, Name = languageFile.GetMoveName(item.Item2), RawData = moveFile.Moves[item.Item2] });
+
+                            // Add Pokemon to move
+                            moves[item.Item2].PokemonLevelup.Add(new Models.EOS.Move.LevelPokemonReference { ID = entry.ID, Name = entry.Name, Level = item.Item1 });
+                        }                            
                     }
                     entry.LevelupMoves = levelupMoves;
 
@@ -151,7 +167,13 @@ namespace MysteryDungeon_RawDB
                     foreach (var item in moveFile.PokemonLearnsets[i].TMMoves)
                     {
                         if (moveFile.Moves.Count > item)
+                        {
+                            // Add move to Pokemon
                             tmMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
+
+                            // Add Pokemon to move
+                            moves[item].PokemonTM.Add(new Models.EOS.Move.LevelPokemonReference { ID = entry.ID, Name = entry.Name });
+                        }                            
                     }
                     entry.TMMoves = tmMoves;
 
@@ -159,7 +181,14 @@ namespace MysteryDungeon_RawDB
                     foreach (var item in moveFile.PokemonLearnsets[i].EggMoves)
                     {
                         if (moveFile.Moves.Count > item)
+                        {
+                            // Add move to Pokemon
                             eggMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
+
+                            // Add Pokemon to move
+                            moves[item].PokemonEgg.Add(new Models.EOS.Move.LevelPokemonReference { ID = entry.ID, Name = entry.Name });
+                        }                       
+
                     }
                     entry.EggMoves = eggMoves;
                 }
@@ -172,15 +201,7 @@ namespace MysteryDungeon_RawDB
 
                 pkms.Add(entry);
             }
-            data.Pokemon = pkms;
-
-            // Read Move Data
-            var moves = new List<Models.EOS.Move>();
-            for (int i = 0; i < moveFile.Moves.Count; i++)
-            {
-                moves.Add(new Models.EOS.Move { ID = i, Name = languageFile.GetMoveName(i), RawData = moveFile.Moves[i] });
-            }
-            data.Moves = moves;
+            data.Pokemon = pkms;            
 
             return data;
         }
