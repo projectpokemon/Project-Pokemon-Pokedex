@@ -73,7 +73,7 @@
                 ID (Hex)
             </th>
             <th>
-                MOve
+                Move
             </th>
         </tr>
         @foreach (var item in Model.Moves)
@@ -83,7 +83,10 @@
                     @item.ID
                 </td>
                 <td>
-                    @item.IDHex
+                    @item.IDHexBigEndian
+                </td>
+                <td>
+                    @item.IDHexLittleEndian
                 </td>
                 <td>
                     @string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name)
