@@ -187,10 +187,10 @@
         {
             <tr>
                 <td>
-                    @item.Key.ToString()
+                    @item.Item1.ToString()
                 </td>
                 <td>
-                    @string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.Value.ID, item.Value.Name)
+                    @string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.Item2.ID, item.Item2.Name)
                 </td>
             </tr>
         }

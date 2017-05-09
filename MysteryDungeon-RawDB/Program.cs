@@ -46,15 +46,37 @@ namespace MysteryDungeon_RawDB
             var moveFile = new waza_p();
             await moveFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "waza_p.bin"), provider);
 
+            // Load Types
+            var types = new List<Models.EOS.PkmType>();
+            for (int i = 0; i < 19; i++)
+            {
+                var t = new Models.EOS.PkmType();
+                t.ID = i;
+                t.Name = languageFile.GetTypeName(i);
+                t.Pokemon = new List<PokemonReference>();
+                t.Moves = new List<MoveReference>();
+                types.Add(t);
+            }
+            data.Types = types;
+
             // Read Move Data
             var moves = new List<Models.EOS.Move>();
             for (int i = 0; i < moveFile.Moves.Count; i++)
             {
                 var m = new Models.EOS.Move { ID = i, Name = languageFile.GetMoveName(i), RawData = moveFile.Moves[i] };
-                m.PokemonLevelup = new List<Models.EOS.Move.LevelPokemonReference>();
-                m.PokemonTM = new List<Models.EOS.Move.PokemonReference>();
-                m.PokemonEgg = new List<Models.EOS.Move.PokemonReference>();
+                m.TypeID = moveFile.Moves[i].Type;
+                m.TypeName = languageFile.GetTypeName(m.TypeID);
+                m.Category = moveFile.Moves[i].Category.ToString();
+                m.BasePower = moveFile.Moves[i].BasePower;
+                m.BasePP = moveFile.Moves[i].BasePP;
+                m.BaseAccuracy = moveFile.Moves[i].MoveAccuracy;
+                m.PokemonLevelUp = new List<Models.EOS.LevelPokemonReference>();
+                m.PokemonTM = new List<Models.EOS.PokemonReference>();
+                m.PokemonEgg = new List<Models.EOS.PokemonReference>();
                 moves.Add(m);
+
+                // Add to types
+                types[m.TypeID].Moves.Add(new MoveReference { ID = m.ID, Name = m.Name });
             }
             data.Moves = moves;
 
@@ -149,17 +171,26 @@ namespace MysteryDungeon_RawDB
                 // Moves
                 if (moveFile.PokemonLearnsets.Count > i)
                 {
-                    var levelupMoves = new Dictionary<int, Models.EOS.Move>();
+                    var levelupMoves = new List<Tuple<int, Models.EOS.Move>>();
                     foreach (var item in moveFile.PokemonLearnsets[i].LevelUpMoves)
-                    {                        
+                    {
                         if (moveFile.Moves.Count > item.Item2)
                         {
                             // Add move to Pokemon
-                            levelupMoves.Add(item.Item1, new Models.EOS.Move { ID = item.Item2, Name = languageFile.GetMoveName(item.Item2), RawData = moveFile.Moves[item.Item2] });
+                            levelupMoves.Add(new Tuple<int, Models.EOS.Move>(item.Item1, new Models.EOS.Move { ID = item.Item2, Name = languageFile.GetMoveName(item.Item2), RawData = moveFile.Moves[item.Item2] }));
 
                             // Add Pokemon to move
-                            moves[item.Item2].PokemonLevelup.Add(new Models.EOS.Move.LevelPokemonReference { ID = entry.ID, Name = entry.Name, Level = item.Item1 });
-                        }                            
+                            var levelUp = moves[item.Item2].PokemonLevelUp.FirstOrDefault(x => x.ID == entry.ID);
+                            if (levelUp == null)
+                            {
+                                moves[item.Item2].PokemonLevelUp.Add(new Models.EOS.LevelPokemonReference { ID = entry.ID, Name = entry.Name, Levels = new List<string> { item.Item1.ToString() } });
+                            }
+                            else
+                            {
+                                levelUp.Levels.Add(item.Item1.ToString());
+                            }
+
+                        }
                     }
                     entry.LevelupMoves = levelupMoves;
 
@@ -172,8 +203,8 @@ namespace MysteryDungeon_RawDB
                             tmMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
 
                             // Add Pokemon to move
-                            moves[item].PokemonTM.Add(new Models.EOS.Move.LevelPokemonReference { ID = entry.ID, Name = entry.Name });
-                        }                            
+                            moves[item].PokemonTM.Add(new Models.EOS.PokemonReference { ID = entry.ID, Name = entry.Name });
+                        }
                     }
                     entry.TMMoves = tmMoves;
 
@@ -186,22 +217,29 @@ namespace MysteryDungeon_RawDB
                             eggMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
 
                             // Add Pokemon to move
-                            moves[item].PokemonEgg.Add(new Models.EOS.Move.LevelPokemonReference { ID = entry.ID, Name = entry.Name });
-                        }                       
+                            moves[item].PokemonEgg.Add(new Models.EOS.PokemonReference { ID = entry.ID, Name = entry.Name });
+                        }
 
                     }
                     entry.EggMoves = eggMoves;
                 }
                 else
                 {
-                    entry.LevelupMoves = new Dictionary<int, Models.EOS.Move>();
+                    entry.LevelupMoves = new List<Tuple<int, Models.EOS.Move>>();
                     entry.TMMoves = new List<Models.EOS.Move>();
                     entry.EggMoves = new List<Models.EOS.Move>();
                 }
 
                 pkms.Add(entry);
+
+                // Add to types
+                types[maleEntry.MainType].Pokemon.Add(new PokemonReference { ID = entry.ID, Name = entry.Name });
+                if (maleEntry.MainType != maleEntry.AltType)
+                {
+                    types[maleEntry.AltType].Pokemon.Add(new PokemonReference { ID = entry.ID, Name = entry.Name });
+                }
             }
-            data.Pokemon = pkms;            
+            data.Pokemon = pkms;
 
             return data;
         }
@@ -224,11 +262,11 @@ namespace MysteryDungeon_RawDB
             data.Abilities = abilities;
 
             // Load types
-            var types = new List<PkmType>();
+            var types = new List<Models.PSMD.PkmType>();
             var typeNames = File.ReadAllLines("tlist.txt");
             for (int i = 0; i < typeNames.Length; i++)
             {
-                types.Add(new PkmType
+                types.Add(new Models.PSMD.PkmType
                 {
                     ID = i,
                     Name = typeNames[i]
@@ -520,33 +558,33 @@ namespace MysteryDungeon_RawDB
             {
                 BuildView("Views/EOS/Pokemon/Details.cshtml", Path.Combine(outputPath, "eos", "pokemon", item.ID.ToString() + ".php"), item);
             }
-            //// - Moves
-            //BuildView("Views/EOS/Moves/Index.cshtml", Path.Combine(outputPath, "eos", "moves", "index.php"), data.Moves);
-            //foreach (var item in data.Moves)
-            //{
-            //    BuildView("Views/EOS/Moves/Details.cshtml", Path.Combine(outputPath, "eos", "moves", item.ID.ToString() + ".php"), new MoveDetailsViewModel(item, data));
-            //}
+            // - Moves
+            BuildView("Views/EOS/Moves/Index.cshtml", Path.Combine(outputPath, "eos", "moves", "index.php"), data.Moves);
+            foreach (var item in data.Moves)
+            {
+                BuildView("Views/EOS/Moves/Details.cshtml", Path.Combine(outputPath, "eos", "moves", item.ID.ToString() + ".php"), item);
+            }
             //// - Abilities
             //BuildView("Views/EOS/Abilities/Index.cshtml", Path.Combine(outputPath, "eos", "abilities", "index.php"), data.Abilities);
             //foreach (var item in data.Abilities)
             //{
             //    BuildView("Views/EOS/Abilities/Details.cshtml", Path.Combine(outputPath, "eos", "abilities", item.ID.ToString() + ".php"), new AbilityDetailsViewModel(item, data));
             //}
-            //// - Types
-            //BuildView("Views/EOS/Types/Index.cshtml", Path.Combine(outputPath, "eos", "types", "index.php"), data.Types);
-            //foreach (var item in data.Types)
-            //{
-            //    BuildView("Views/EOS/Types/Details.cshtml", Path.Combine(outputPath, "eos", "types", item.ID.ToString() + ".php"), new TypeDetailsViewModel(item, data));
-            //}
+            // - Types
+            BuildView("Views/EOS/Types/Index.cshtml", Path.Combine(outputPath, "eos", "types", "index.php"), data.Types);
+            foreach (var item in data.Types)
+            {
+                BuildView("Views/EOS/Types/Details.cshtml", Path.Combine(outputPath, "eos", "types", item.ID.ToString() + ".php"), item);
+            }
 
             //// Add breadcrumb titles
             File.WriteAllText(Path.Combine(outputPath, "eos", "__nav.php"), "Pokemon Mystery Dungeon: Explorers");
             File.WriteAllText(Path.Combine(outputPath, "eos", "pokemon", "__nav.php"), "Pokédex");
-            //File.WriteAllText(Path.Combine(outputPath, "eos", "moves", "__nav.php"), "Movedex");
+            File.WriteAllText(Path.Combine(outputPath, "eos", "moves", "__nav.php"), "Movedex");
             //File.WriteAllText(Path.Combine(outputPath, "eos", "abilities", "__nav.php"), "Abilitydex");
-            //File.WriteAllText(Path.Combine(outputPath, "eos", "types", "__nav.php"), "Typedex");
+            File.WriteAllText(Path.Combine(outputPath, "eos", "types", "__nav.php"), "Typedex");
 
-            //// Serialize raw data
+            // Serialize raw data
             SkyEditor.Core.Utilities.Json.SerializeToFile(Path.Combine(outputPath, "eos", "data.json"), data, new PhysicalIOProvider());
         }
 

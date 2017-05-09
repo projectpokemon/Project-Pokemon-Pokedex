@@ -50,7 +50,7 @@ namespace MysteryDungeon_RawDB.Models.EOS
         public int EvolveFromID { get; set; }
         public string EvolveFromName { get; set; }
         public string EvolveCriteria { get; set; }
-        public Dictionary<int, Move> LevelupMoves { get; set; }
+        public List<Tuple<int, Move>> LevelupMoves { get; set; }
         public List<Move> TMMoves { get; set; }
         public List<Move> EggMoves { get; set; }
 

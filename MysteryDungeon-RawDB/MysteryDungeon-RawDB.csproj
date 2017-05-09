@@ -54,8 +54,8 @@
     <Reference Include="SkyEditor.Core.FrameworkCompatibility, Version=4.1.0.127, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SkyEditor.Core.FrameworkCompatibility.4.1.0-CI127\lib\net462\SkyEditor.Core.FrameworkCompatibility.dll</HintPath>
     </Reference>
-    <Reference Include="SkyEditor.ROMEditor, Version=4.1.0.46, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.ROMEditor.4.1.0-CI46\lib\netstandard1.5\SkyEditor.ROMEditor.dll</HintPath>
+    <Reference Include="SkyEditor.ROMEditor, Version=4.1.0.47, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.ROMEditor.4.1.0-CI47\lib\netstandard1.5\SkyEditor.ROMEditor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -139,8 +139,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\EOS\EosDataCollection.cs" />
+    <Compile Include="Models\EOS\LevelPokemonReference.cs" />
     <Compile Include="Models\EOS\Move.cs" />
+    <Compile Include="Models\EOS\PkmType.cs" />
     <Compile Include="Models\EOS\Pokemon.cs" />
+    <Compile Include="Models\EOS\MoveReference.cs" />
+    <Compile Include="Models\EOS\PokemonReference.cs" />
     <Compile Include="Models\PSMD\Ability.cs" />
     <Compile Include="Models\PSMD\AbilityDetailsViewModel.cs" />
     <Compile Include="Models\PSMD\BasicMoveListItem.cs" />
@@ -165,10 +169,22 @@
     <None Include="Views\EOS\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Views\EOS\Moves\Details.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\EOS\Moves\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Views\EOS\Pokemon\Details.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Views\EOS\Pokemon\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\EOS\Types\Details.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\EOS\Types\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Views\PSMD\Abilities\Details.cshtml">
