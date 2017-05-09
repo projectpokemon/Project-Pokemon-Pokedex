@@ -137,26 +137,32 @@ namespace MysteryDungeon_RawDB
                 }
 
                 // Moves
-                var levelupMoves = new Dictionary<int, Models.EOS.Move>();
-                foreach (var item in moveFile.PokemonLearnsets[i].LevelUpMoves)
+                if (moveFile.PokemonLearnsets.Count > i)
                 {
-                    levelupMoves.Add(item.Key, new Models.EOS.Move { ID = item.Value, Name = languageFile.GetMoveName(item.Value), RawData = moveFile.Moves[item.Value] });
-                }
-                entry.LevelupMoves = levelupMoves;
+                    var levelupMoves = new Dictionary<int, Models.EOS.Move>();
+                    foreach (var item in moveFile.PokemonLearnsets[i].LevelUpMoves)
+                    {
+                        if (moveFile.Moves.Count > item.Value)
+                            levelupMoves.Add(item.Key, new Models.EOS.Move { ID = item.Value, Name = languageFile.GetMoveName(item.Value), RawData = moveFile.Moves[item.Value] });
+                    }
+                    entry.LevelupMoves = levelupMoves;
 
-                var tmMoves = new List<Models.EOS.Move>();
-                foreach (var item in moveFile.PokemonLearnsets[i].TMMoves)
-                {
-                    tmMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
-                }
-                entry.TMMoves = tmMoves;
+                    var tmMoves = new List<Models.EOS.Move>();
+                    foreach (var item in moveFile.PokemonLearnsets[i].TMMoves)
+                    {
+                        if (moveFile.Moves.Count > item)
+                            tmMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
+                    }
+                    entry.TMMoves = tmMoves;
 
-                var eggMoves = new List<Models.EOS.Move>();
-                foreach (var item in moveFile.PokemonLearnsets[i].EggMoves)
-                {
-                    eggMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
+                    var eggMoves = new List<Models.EOS.Move>();
+                    foreach (var item in moveFile.PokemonLearnsets[i].EggMoves)
+                    {
+                        if (moveFile.Moves.Count > item)
+                            eggMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
+                    }
+                    entry.EggMoves = eggMoves;
                 }
-                entry.EggMoves = eggMoves;
 
                 pkms.Add(entry);
             }
