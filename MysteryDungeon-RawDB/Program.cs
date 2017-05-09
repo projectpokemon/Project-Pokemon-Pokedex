@@ -578,7 +578,7 @@ namespace MysteryDungeon_RawDB
             }
 
             //// Add breadcrumb titles
-            File.WriteAllText(Path.Combine(outputPath, "eos", "__nav.php"), "Pokemon Mystery Dungeon: Explorers");
+            File.WriteAllText(Path.Combine(outputPath, "eos", "__nav.php"), "Explorers of Sky");
             File.WriteAllText(Path.Combine(outputPath, "eos", "pokemon", "__nav.php"), "Pokédex");
             File.WriteAllText(Path.Combine(outputPath, "eos", "moves", "__nav.php"), "Movedex");
             //File.WriteAllText(Path.Combine(outputPath, "eos", "abilities", "__nav.php"), "Abilitydex");
@@ -646,7 +646,7 @@ namespace MysteryDungeon_RawDB
             }
 
             // Add breadcrumb titles
-            File.WriteAllText(Path.Combine(outputPath, "psmd", "__nav.php"), "Pokemon Super Mystery Dungeon");
+            File.WriteAllText(Path.Combine(outputPath, "psmd", "__nav.php"), "Super");
             File.WriteAllText(Path.Combine(outputPath, "psmd", "pokemon", "__nav.php"), "Pokédex");
             File.WriteAllText(Path.Combine(outputPath, "psmd", "moves", "__nav.php"), "Movedex");
             File.WriteAllText(Path.Combine(outputPath, "psmd", "abilities", "__nav.php"), "Abilitydex");
@@ -670,6 +670,8 @@ namespace MysteryDungeon_RawDB
 
             BuildEOS(eosPath, outputPath).Wait();
             BuildPSMD(psmdPath, outputPath);
+            File.Copy("Views/Index.php", Path.Combine(outputPath, "index.php"), true);
+            File.WriteAllText(Path.Combine(outputPath, "__nav.php"), "Pokémon Mystery Dungeon");
         }
     }
 }
