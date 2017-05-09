@@ -247,9 +247,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Index.php">
+    <None Include="Views\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
