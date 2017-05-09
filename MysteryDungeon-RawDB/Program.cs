@@ -670,7 +670,7 @@ namespace MysteryDungeon_RawDB
 
             BuildEOS(eosPath, outputPath).Wait();
             BuildPSMD(psmdPath, outputPath);
-            File.Copy("Views/Index.php", Path.Combine(outputPath, "index.php"), true);
+            BuildView("Views/Index.cshtml", Path.Combine(outputPath, "index.php"), null);
             File.WriteAllText(Path.Combine(outputPath, "__nav.php"), "Pokémon Mystery Dungeon");
         }
     }
