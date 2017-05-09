@@ -163,6 +163,12 @@ namespace MysteryDungeon_RawDB
                     }
                     entry.EggMoves = eggMoves;
                 }
+                else
+                {
+                    entry.LevelupMoves = new Dictionary<int, Models.EOS.Move>();
+                    entry.TMMoves = new List<Models.EOS.Move>();
+                    entry.EggMoves = new List<Models.EOS.Move>();
+                }
 
                 pkms.Add(entry);
             }
