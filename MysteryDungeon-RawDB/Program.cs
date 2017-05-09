@@ -169,10 +169,12 @@ namespace MysteryDungeon_RawDB
             data.Pokemon = pkms;
 
             // Read Move Data
+            var moves = new List<Models.EOS.Move>();
             for (int i = 0; i < moveFile.Moves.Count; i++)
             {
-                data.Moves.Add(new Models.EOS.Move { ID = i, Name = languageFile.GetMoveName(i), RawData = moveFile.Moves[i] });
+                moves.Add(new Models.EOS.Move { ID = i, Name = languageFile.GetMoveName(i), RawData = moveFile.Moves[i] });
             }
+            data.Moves = moves;
 
             return data;
         }
