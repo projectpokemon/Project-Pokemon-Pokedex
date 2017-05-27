@@ -22,5 +22,16 @@ namespace MysteryDungeon_RawDB.Models.EOS
         public List<LevelPokemonReference> PokemonLevelUp { get; set; }
         public List<PokemonReference> PokemonTM { get; set; }
         public List<PokemonReference> PokemonEgg { get; set; }
+
+        public string GetIDHexBigEndian()
+        {
+            return "0x" + ID.ToString("X");
+        }
+
+        public string GetIDHexLittleEndian()
+        {
+            var hex = ID.ToString("X").PadLeft(4, '0');
+            return string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2));
+        }
     }
 }

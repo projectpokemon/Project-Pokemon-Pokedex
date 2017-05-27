@@ -1,13 +1,19 @@
-﻿@functions {
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter type="MysteryDungeon_RawDB.Models.EOS.PkmType" name="Model" #>
+@functions {
     public MysteryDungeon_RawDB.Models.EOS.PkmType Model { get; set; }
 }
 
 <?php
-    $title = "@Model.Name";
+    $title = "<#= Model.Name #>";
     $cssFiles = array("../../style.css");
 ?>
 
-<h2>@Model.Name</h2>
+<h2><#= Model.Name #></h2>
 
 <div>
     <h3>Details</h3>
@@ -16,13 +22,13 @@
             ID
         </dt>
         <dd>
-            @Model.ID
+            <#= Model.ID #>
         </dd>
         <dt>
             ID (Hex)
         </dt>
         <dd>
-            @Model.ID.ToString("X")
+            <#= Model.ID.ToString("X") #>
         </dd>
     </dl>
 </div>
@@ -43,23 +49,23 @@
                 Pokémon
             </th>
         </tr>
-        @foreach (var item in Model.Pokemon)
-            {
+        <# foreach (var item in Model.Pokemon)
+            { #>
             <tr>
                 <td>
-                    @item.ID
+                    <#= item.ID #>
                 </td>
                 <td>
-                    @item.IDHexBigEndian
+                    <#= item.IDHexBigEndian #>
                 </td>
                 <td>
-                    @item.IDHexLittleEndian
+                    <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    @string.Format("<a href=\"../../pokemon/{0}/\">{1}</a>", item.ID, item.Name)
+                    <#= string.Format("<a href=\"../../pokemon/{0}/\">{1}</a>", item.ID, item.Name) #>
                 </td>
             </tr>
-        }
+        <# } #>
     </table>
 </div>    
 <div>
@@ -79,23 +85,23 @@
                 Move
             </th>
         </tr>
-        @foreach (var item in Model.Moves)
-        {
+        <# foreach (var item in Model.Moves)
+        { #>
             <tr>
                 <td>
-                    @item.ID
+                    <#= item.ID #>
                 </td>
                 <td>
-                    @item.IDHexBigEndian
+                    <#= item.IDHexBigEndian #>
                 </td>
                 <td>
-                    @item.IDHexLittleEndian
+                    <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    @string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name)
+                    <#= string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name) #>
                 </td>
             </tr>
-        }
+        <# } #>
     </table>
 </div>    
 <p>

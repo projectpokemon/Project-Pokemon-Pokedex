@@ -1,5 +1,6 @@
 ﻿using DotNet3dsToolkit;
 using Microsoft.CSharp;
+using Microsoft.VisualStudio.TextTemplating;
 using MysteryDungeon_RawDB.Models.EOS;
 using MysteryDungeon_RawDB.Models.PSMD;
 using SkyEditor.Core.IO;
@@ -139,6 +140,7 @@ namespace MysteryDungeon_RawDB
                         entry.EvolveCriteria = "Link Cable";
                         break;
                     default:
+                        entry.EvolveCriteria = "Unknown (" + ((int)maleEntry.EvolveMethod).ToString() + ")";
                         break;
                 }
 
@@ -440,100 +442,45 @@ namespace MysteryDungeon_RawDB
             return data;
         }
 
-        static void BuildView(string viewPath, string outputPath, object model)
+        static void BuildTemplate<T>(string outputPath, object model) where T : class
         {
-            Console.WriteLine("Building " + outputPath);
+            // Verify the type is correct
+            var templateType = typeof(T);
+            var sessionProperty = templateType.GetProperty("Session");
+            var initializeMethod = templateType.GetMethod("Initialize", new Type[] { });
+            var transformMethod = templateType.GetMethod("TransformText", new Type[] { });
 
-            // Set up the hosting environment
-
-            // a. Use the C# language (you could detect this based on the file extension if you want to)
-            RazorEngineHost host = new RazorEngineHost(new CSharpRazorCodeLanguage());
-
-            // b. Set the base class
-            host.DefaultBaseClass = typeof(TemplateBase).FullName;
-
-            // c. Set the output namespace and type name
-            host.DefaultNamespace = "RazorOutput";
-            host.DefaultClassName = "Template";
-
-            // d. Add default imports
-            host.NamespaceImports.Add("System");
-            host.NamespaceImports.Add("System.Collections.Generic");
-            //host.NamespaceImports.Add("MysteryDungeon_RawDB.Models");
-            //host.NamespaceImports.Add("MysteryDungeon_RawDB.Models.EOS");
-            host.NamespaceImports.Add("MysteryDungeon_RawDB.Models.PSMD");
-            var engine = new RazorTemplateEngine(host);
-            var codeProvider = new CSharpCodeProvider();
-
-            // To-Do: generate using more templates
-            GeneratorResults razorResult = null;
-            using (TextReader rdr = new StringReader(File.ReadAllText(viewPath)))
+            if (sessionProperty == null || sessionProperty.PropertyType != typeof(IDictionary<string, object>))
             {
-                razorResult = engine.GenerateCode(rdr);
+                throw new ArgumentException("Type parameter must have a Session property of type IDictionary<string, object>.", nameof(T));
+            }
+            if (initializeMethod == null || initializeMethod.GetParameters().Length > 0)
+            {
+                throw new ArgumentException("Type parameter must have a Initialize() method with no parameters.", nameof(T));
+            }
+            if (transformMethod == null || transformMethod.GetParameters().Length > 0)
+            {
+                throw new ArgumentException("Type parameter must have a TransformText() method with no parameters.", nameof(T));
             }
 
-            using (StringWriter sw = new StringWriter())
+            // Set up the template
+            var templateInstance = templateType.GetConstructor(new Type[] { }).Invoke(new object[] { });
+            var session = new TextTemplatingSession();
+            sessionProperty.SetValue(templateInstance, session);
+            session["Model"] = model;
+            initializeMethod.Invoke(templateInstance, new object[] { });
+            
+            // Create output directory if needed
+            if (!Directory.Exists(Path.GetDirectoryName(outputPath)))
             {
-                codeProvider.GenerateCodeFromCompileUnit(razorResult.GeneratedCode, sw, new CodeGeneratorOptions());
-                File.WriteAllText("current.cs", sw.ToString());
+                Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
             }
 
-            // Compile the generated code into an assembly
-            string outputAssemblyName = String.Format("Temp_{0}.dll", Guid.NewGuid().ToString("N"));
-            CompilerResults results = codeProvider.CompileAssemblyFromDom(
-                new CompilerParameters(new string[] {
-                    typeof(Program).Assembly.CodeBase.Replace("file:///", "").Replace("/", "\\")
-                }, outputAssemblyName),
-                razorResult.GeneratedCode);
+            // Run the template
+            var resultText = transformMethod.Invoke(templateInstance, new object[] { }) as string;
 
-            if (results.Errors.HasErrors)
-            {
-                CompilerError err = results.Errors
-                                           .OfType<CompilerError>()
-                                           .Where(ce => !ce.IsWarning)
-                                           .First();
-                throw new Exception(String.Format("Error Compiling Template: ({0}, {1}) {2}",
-                                              err.Line, err.Column, err.ErrorText));
-            }
-            else
-            {
-                // Load the assembly
-                Assembly asm = Assembly.LoadFrom(outputAssemblyName);
-                if (asm == null)
-                {
-                    throw new Exception("Error loading template assembly");
-                }
-                else
-                {
-                    // Get the template type
-                    Type typ = asm.GetType("RazorOutput.Template");
-                    if (typ == null)
-                    {
-                        throw new Exception(string.Format("Could not find type RazorOutput.Template in assembly {0}", asm.FullName));
-                    }
-                    else
-                    {
-                        TemplateBase newTemplate = Activator.CreateInstance(typ) as TemplateBase;
-                        if (newTemplate == null)
-                        {
-                            throw new Exception("Could not construct RazorOutput.Template or it does not inherit from TemplateBase");
-                        }
-                        else
-                        {
-                            // Run the compiled view
-                            newTemplate.GetType().GetProperty("Model").SetValue(newTemplate, model);
-                            newTemplate.Execute();
-
-                            // Save the output
-                            if (!Directory.Exists(Path.GetDirectoryName(outputPath)))
-                            {
-                                Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
-                            }
-                            File.WriteAllText(Path.Combine(outputPath), newTemplate.Buffer.ToString());
-                        }
-                    }
-                }
-            }
+            // Save output to file
+            File.WriteAllText(outputPath, resultText);
         }
 
         static async Task BuildEOS(string eosPath, string outputPath)
@@ -549,39 +496,32 @@ namespace MysteryDungeon_RawDB
             var data = await LoadEosData(romDir);
 
             // Generate HTML
-            BuildView("Views/EOS/Index.cshtml", Path.Combine(outputPath, "eos", "index.php"), null);
+            BuildTemplate<Views.EOS.Index>(Path.Combine(outputPath, "eos", "index.php"), null);
             // - Copy style
             File.Copy("Views/EOS/style.css", Path.Combine(outputPath, "eos", "style.css"), true);
             // - Pokemon
-            BuildView("Views/EOS/Pokemon/Index.cshtml", Path.Combine(outputPath, "eos", "pokemon", "index.php"), data.Pokemon);
+            BuildTemplate<Views.EOS.Pokemon.Index>(Path.Combine(outputPath, "eos", "pokemon", "index.php"), data.Pokemon);
             foreach (var item in data.Pokemon)
             {
-                BuildView("Views/EOS/Pokemon/Details.cshtml", Path.Combine(outputPath, "eos", "pokemon", item.ID.ToString() + ".php"), item);
+                BuildTemplate<Views.EOS.Pokemon.Details>(Path.Combine(outputPath, "eos", "pokemon", item.ID.ToString() + ".php"), item);
             }
             // - Moves
-            BuildView("Views/EOS/Moves/Index.cshtml", Path.Combine(outputPath, "eos", "moves", "index.php"), data.Moves);
+            BuildTemplate<Views.EOS.Moves.Index>(Path.Combine(outputPath, "eos", "moves", "index.php"), data.Moves);
             foreach (var item in data.Moves)
             {
-                BuildView("Views/EOS/Moves/Details.cshtml", Path.Combine(outputPath, "eos", "moves", item.ID.ToString() + ".php"), item);
+                BuildTemplate<Views.EOS.Moves.Details>(Path.Combine(outputPath, "eos", "moves", item.ID.ToString() + ".php"), item);
             }
-            //// - Abilities
-            //BuildView("Views/EOS/Abilities/Index.cshtml", Path.Combine(outputPath, "eos", "abilities", "index.php"), data.Abilities);
-            //foreach (var item in data.Abilities)
-            //{
-            //    BuildView("Views/EOS/Abilities/Details.cshtml", Path.Combine(outputPath, "eos", "abilities", item.ID.ToString() + ".php"), new AbilityDetailsViewModel(item, data));
-            //}
             // - Types
-            BuildView("Views/EOS/Types/Index.cshtml", Path.Combine(outputPath, "eos", "types", "index.php"), data.Types);
+            BuildTemplate<Views.EOS.Types.Index>(Path.Combine(outputPath, "eos", "types", "index.php"), data.Types);
             foreach (var item in data.Types)
             {
-                BuildView("Views/EOS/Types/Details.cshtml", Path.Combine(outputPath, "eos", "types", item.ID.ToString() + ".php"), item);
+                BuildTemplate<Views.EOS.Types.Details>(Path.Combine(outputPath, "eos", "types", item.ID.ToString() + ".php"), item);
             }
 
-            //// Add breadcrumb titles
+            // Add breadcrumb titles
             File.WriteAllText(Path.Combine(outputPath, "eos", "__nav.php"), "Explorers of Sky");
             File.WriteAllText(Path.Combine(outputPath, "eos", "pokemon", "__nav.php"), "Pokédex");
             File.WriteAllText(Path.Combine(outputPath, "eos", "moves", "__nav.php"), "Movedex");
-            //File.WriteAllText(Path.Combine(outputPath, "eos", "abilities", "__nav.php"), "Abilitydex");
             File.WriteAllText(Path.Combine(outputPath, "eos", "types", "__nav.php"), "Typedex");
 
             // Serialize raw data
@@ -617,32 +557,32 @@ namespace MysteryDungeon_RawDB
             var data = LoadPsmdData(psmdPath).Result;
 
             // Generate HTML
-            BuildView("Views/PSMD/Index.cshtml", Path.Combine(outputPath, "psmd", "index.php"), null);
+            BuildTemplate<Views.PSMD.Index>(Path.Combine(outputPath, "psmd", "index.php"), null);
             // - Copy style
             File.Copy("Views/PSMD/style.css", Path.Combine(outputPath, "psmd", "style.css"), true);
             // - Pokemon
-            BuildView("Views/PSMD/Pokemon/Index.cshtml", Path.Combine(outputPath, "psmd", "pokemon", "index.php"), data.Pokemon);
+            BuildTemplate<Views.PSMD.Pokemon.Index>(Path.Combine(outputPath, "psmd", "pokemon", "index.php"), data.Pokemon);
             foreach (var item in data.Pokemon)
             {
-                BuildView("Views/PSMD/Pokemon/Details.cshtml", Path.Combine(outputPath, "psmd", "pokemon", item.ID.ToString() + ".php"), new PokemonDetailsViewModel(item, data));
+                BuildTemplate<Views.PSMD.Pokemon.Details>(Path.Combine(outputPath, "psmd", "pokemon", item.ID.ToString() + ".php"), new PokemonDetailsViewModel(item, data));
             }
             // - Moves
-            BuildView("Views/PSMD/Moves/Index.cshtml", Path.Combine(outputPath, "psmd", "moves", "index.php"), data.Moves);
+            BuildTemplate<Views.PSMD.Moves.Index>(Path.Combine(outputPath, "psmd", "moves", "index.php"), data.Moves);
             foreach (var item in data.Moves)
             {
-                BuildView("Views/PSMD/Moves/Details.cshtml", Path.Combine(outputPath, "psmd", "moves", item.ID.ToString() + ".php"), new MoveDetailsViewModel(item, data));
+                BuildTemplate<Views.PSMD.Moves.Details>(Path.Combine(outputPath, "psmd", "moves", item.ID.ToString() + ".php"), new MoveDetailsViewModel(item, data));
             }
             // - Abilities
-            BuildView("Views/PSMD/Abilities/Index.cshtml", Path.Combine(outputPath, "psmd", "abilities", "index.php"), data.Abilities);
+            BuildTemplate<Views.PSMD.Abilities.Index>(Path.Combine(outputPath, "psmd", "abilities", "index.php"), data.Abilities);
             foreach (var item in data.Abilities)
             {
-                BuildView("Views/PSMD/Abilities/Details.cshtml", Path.Combine(outputPath, "psmd", "abilities", item.ID.ToString() + ".php"), new AbilityDetailsViewModel(item, data));
+                BuildTemplate<Views.PSMD.Abilities.Details>(Path.Combine(outputPath, "psmd", "abilities", item.ID.ToString() + ".php"), new AbilityDetailsViewModel(item, data));
             }
             // - Types
-            BuildView("Views/PSMD/Types/Index.cshtml", Path.Combine(outputPath, "psmd", "types", "index.php"), data.Types);
+            BuildTemplate<Views.PSMD.Types.Index>(Path.Combine(outputPath, "psmd", "types", "index.php"), data.Types);
             foreach (var item in data.Types)
             {
-                BuildView("Views/PSMD/Types/Details.cshtml", Path.Combine(outputPath, "psmd", "types", item.ID.ToString() + ".php"), new TypeDetailsViewModel(item, data));
+                BuildTemplate<Views.PSMD.Types.Details>(Path.Combine(outputPath, "psmd", "types", item.ID.ToString() + ".php"), new TypeDetailsViewModel(item, data));
             }
 
             // Add breadcrumb titles
@@ -658,19 +598,13 @@ namespace MysteryDungeon_RawDB
 
         static void Main(string[] args)
         {
-            // Cleanup old execution
-            foreach (var item in Directory.GetFiles(".", "Temp_*.dll"))
-            {
-                File.Delete(item);
-            }
-
             var eosPath = args[0];
             var psmdPath = args[1];
             var outputPath = args[2];
 
             BuildEOS(eosPath, outputPath).Wait();
             BuildPSMD(psmdPath, outputPath);
-            BuildView("Views/Index.cshtml", Path.Combine(outputPath, "index.php"), null);
+            BuildTemplate<Views.Index>(Path.Combine(outputPath, "index.php"), null);
             File.WriteAllText(Path.Combine(outputPath, "__nav.php"), "Pokémon Mystery Dungeon");
         }
     }

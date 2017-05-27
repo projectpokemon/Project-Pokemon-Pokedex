@@ -1,13 +1,15 @@
-﻿@functions {
-    public AbilityDetailsViewModel Model { get; set; }
-}
-
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter type="MysteryDungeon_RawDB.Models.PSMD.AbilityDetailsViewModel" name="Model" #>
 <?php
-    $title = "@Model.Name";
+    $title = "<#= Model.Name #>";
     $cssFiles = array("../../style.css");
 ?>
 
-<h2>@Model.Name</h2>
+<h2><#= Model.Name #></h2>
 
 <div>
     <h3>Details</h3>
@@ -16,21 +18,21 @@
             ID (Decimal)
         </dt>
         <dd>
-            @Model.ID
+            <#= Model.ID #>
         </dd>
 
         <dt>
             ID (Hex, Big Endian)
         </dt>
         <dd>
-            @Model.IDHexBigEndian
+            <#= Model.IDHexBigEndian #>
         </dd>
 
         <dt>
             ID (Hex, Little Endian)
         </dt>
         <dd>
-            @Model.IDHexLittleEndian
+            <#= Model.IDHexLittleEndian #>
         </dd>
 
     </dl>
@@ -52,23 +54,23 @@
                 Pokémon
             </th>
         </tr>
-        @foreach (var item in Model.PokemonWithAbility1)
-        {
+        <# foreach (var item in Model.PokemonWithAbility1)
+        { #>
             <tr>
                 <td>
-                    @item.ID
+                    <#= item.ID #>
                 </td>
                 <td>
-                    @item.IDHexBigEndian
+                    <#= item.IDHexBigEndian #>
                 </td>
                 <td>
-                    @item.IDHexLittleEndian
+                    <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    @string.Format("<a href=\"../../pokemon/{0}/\">{1}</a>", item.ID, item.Name)
+                    <#= string.Format("<a href=\"../../pokemon/{0}/\">{1}</a>", item.ID, item.Name) #>
                 </td>
             </tr>
-        }
+        <# } #>
     </table>
 </div>
 <div>
@@ -88,23 +90,23 @@
                 Pokémon
             </th>
         </tr>
-        @foreach (var item in Model.PokemonWithAbility2)
-        {
+        <# foreach (var item in Model.PokemonWithAbility2)
+        { #>
             <tr>
                 <td>
-                    @item.ID
+                    <#= item.ID #>
                 </td>
                 <td>
-                    @item.IDHexBigEndian
+                    <#= item.IDHexBigEndian #>
                 </td>
                 <td>
-                    @item.IDHexLittleEndian
+                    <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    @string.Format("<a href=\"../../pokemon/{0}\">{1}</a>", item.ID, item.Name)
+                    <#= string.Format("<a href=\"../../pokemon/{0}\">{1}</a>", item.ID, item.Name) #>
                 </td>
             </tr>
-        }
+        <# } #>
     </table>
 </div>
 <div>
@@ -124,23 +126,23 @@
                 Pokémon
             </th>
         </tr>
-        @foreach (var item in Model.PokemonWithAbilityHidden)
-        {
+        <# foreach (var item in Model.PokemonWithAbilityHidden)
+        { #>
             <tr>
                 <td>
-                    @item.ID
+                    <#= item.ID #>
                 </td>
                 <td>
-                    @item.IDHexBigEndian
+                    <#= item.IDHexBigEndian #>
                 </td>
                 <td>
-                    @item.IDHexLittleEndian
+                    <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    @string.Format("<a href=\"../../pokemon/{0}\">{1}</a>", item.ID, item.Name)
+                    <#= string.Format("<a href=\"../../pokemon/{0}\">{1}</a>", item.ID, item.Name) #>
                 </td>
             </tr>
-        }
+        <# } #>
     </table>
 </div>
 <p>

@@ -57,5 +57,16 @@ namespace MysteryDungeon_RawDB.Models.EOS
         public GenderInfo Male { get; set; }
         public GenderInfo Female { get; set; }
 
+        public string GetIDHexBigEndian()
+        {
+            return "0x" + ID.ToString("X");
+        }
+
+        public string GetIDHexLittleEndian()
+        {
+            var hex = ID.ToString("X").PadLeft(4, '0');
+            return string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2));
+        }
+
     }
 }

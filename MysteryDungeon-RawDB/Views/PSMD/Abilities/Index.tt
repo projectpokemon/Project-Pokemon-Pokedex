@@ -1,0 +1,49 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter type="System.Collections.Generic.List<MysteryDungeon_RawDB.Models.PSMD.Ability>" name="Model" #>
+<?php
+    $title = "Abilitydex";
+    $cssFiles = array("../style.css");
+?>
+
+<h2>Abilities</h2>
+
+<table class="table">
+    <tr>
+        <th width="10%">
+            ID (Decimal)
+        </th>
+        <th width="10%">
+            ID (Hex, Big Endian)
+        </th>
+        <th width="10%">
+            ID (Hex, Little Endian)
+        </th>
+        <th>
+            Name
+        </th>
+    </tr>
+
+    <# foreach (var item in Model)
+    { 
+        var hex = item.ID.ToString("X").PadLeft(4, '0'); #>
+        <tr>
+            <td>
+                <#= item.ID #>
+            </td>
+            <td>
+                <#= string.Format("0x{0}", hex) #>
+            </td>
+            <td>
+                <#= string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2)) #>
+            </td>
+            <td>
+                <#= string.Format("<a href=\"{0}/\">{1}</a>", item.ID, item.Name) #>
+            </td>
+        </tr>
+    <# } #>
+
+</table>

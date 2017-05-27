@@ -1,29 +1,15 @@
-﻿@functions {
-    public MysteryDungeon_RawDB.Models.EOS.Pokemon Model { get; set; }
-    public string IDHexBigEndian
-    {
-        get
-        {
-            return "0x" + Model.ID.ToString("X");
-        }
-    }
-
-    public string IDHexLittleEndian
-    {
-        get
-        {
-            var hex = Model.ID.ToString("X").PadLeft(4, '0');
-            return string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2));
-        }
-    }
-}
-
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter type="MysteryDungeon_RawDB.Models.EOS.Pokemon" name="Model" #>
 <?php
-    $title = "@Model.Name";
+    $title = "<#= Model.Name #>";
     $cssFiles = array("../../style.css");
     ?>
 
-    <h2>@Model.Name</h2>
+    <h2><#= Model.Name #></h2>
 
     <div>
         <h3>Details</h3>
@@ -33,7 +19,7 @@
             </dt>
 
             <dd>
-                @Model.ID
+                <#= Model.ID #>
             </dd>
 
             <dt>
@@ -41,7 +27,7 @@
             </dt>
 
             <dd>
-                @IDHexBigEndian
+                <#= Model.GetIDHexBigEndian() #>
             </dd>
 
             <dt>
@@ -49,7 +35,7 @@
             </dt>
 
             <dd>
-                @IDHexLittleEndian
+                <#= Model.GetIDHexLittleEndian() #>
             </dd>
 
             <dt>
@@ -57,7 +43,7 @@
             </dt>
 
             <dd>
-                @Model.DexNumber
+                <#= Model.DexNumber #>
             </dd>
 
 
@@ -66,7 +52,7 @@
             </dt>
 
             <dd>
-                @string.Format("<a href=\"../{0}/\">{1}</a>", Model.EvolveFromID, Model.EvolveFromName)
+                <#= string.Format("<a href=\"../{0}/\">{1}</a>", Model.EvolveFromID, Model.EvolveFromName) #>
             </dd>
 
 
@@ -75,15 +61,15 @@
             </dt>
 
             <dd>
-                @Model.EvolveCriteria
+                <#= Model.EvolveCriteria #>
             </dd>
         </dl>
     </div>
 
     <div class="row">
-        @if (Model.Male != null)
+        <# if (Model.Male != null)
         {
-            var gender = Model.Male;
+            var gender = Model.Male; #>
             <div class="col-md-6">
                 <h3>Male</h3>
                 <dl class="dl-horizontal">
@@ -92,7 +78,7 @@
                     </dt>
 
                     <dd>
-                        @gender.BaseHP
+                        <#= gender.BaseHP #>
                     </dd>
 
                     <dt>
@@ -100,7 +86,7 @@
                     </dt>
 
                     <dd>
-                        @gender.BaseATK
+                        <#= gender.BaseATK #>
                     </dd>
 
                     <dt>
@@ -108,7 +94,7 @@
                     </dt>
 
                     <dd>
-                        @gender.BaseDEF
+                        <#= gender.BaseDEF #>
                     </dd>
 
                     <dt>
@@ -116,21 +102,21 @@
                     </dt>
 
                     <dd>
-                        @gender.BaseSPATK
+                        <#= gender.BaseSPATK #>
                     </dd>
                     <dt>
                         Base Sp. Defense
                     </dt>
 
                     <dd>
-                        @gender.BaseSPDEF
+                        <#= gender.BaseSPDEF #>
                     </dd>
                 </dl>
             </div>
-        }
-        @if (Model.Female != null)
+        <# }
+        if (Model.Female != null)
         {
-            var gender = Model.Female;
+            var gender = Model.Female; #>
             <div class="col-md-6">
                 <h3>Female</h3>
                 <dl class="dl-horizontal">
@@ -139,7 +125,7 @@
                     </dt>
 
                     <dd>
-                        @gender.BaseHP
+                        <#= gender.BaseHP #>
                     </dd>
 
                     <dt>
@@ -147,7 +133,7 @@
                     </dt>
 
                     <dd>
-                        @gender.BaseATK
+                        <#= gender.BaseATK #>
                     </dd>
 
                     <dt>
@@ -155,7 +141,7 @@
                     </dt>
 
                     <dd>
-                        @gender.BaseDEF
+                        <#= gender.BaseDEF #>
                     </dd>
 
                     <dt>
@@ -163,18 +149,18 @@
                     </dt>
 
                     <dd>
-                        @gender.BaseSPATK
+                        <#= gender.BaseSPATK #>
                     </dd>
                     <dt>
                         Base Sp. Defense
                     </dt>
 
                     <dd>
-                        @gender.BaseSPDEF
+                        <#= gender.BaseSPDEF #>
                     </dd>
                 </dl>
             </div>
-        }
+        <# } #>
     </div>
 <div>
     <h3>Moves (Level Up)</h3>
@@ -183,17 +169,17 @@
             <th>Level</th>
             <th>Move</th>
         </tr>
-        @foreach (var item in Model.LevelupMoves)
-        {
+        <# foreach (var item in Model.LevelupMoves)
+        { #>
             <tr>
                 <td>
-                    @item.Item1.ToString()
+                    <#= item.Item1.ToString() #>
                 </td>
                 <td>
-                    @string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.Item2.ID, item.Item2.Name)
+                    <#= string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.Item2.ID, item.Item2.Name) #>
                 </td>
             </tr>
-        }
+        <# } #>
     </table>
 </div>
 <div>
@@ -202,14 +188,14 @@
         <tr>
             <th>Move</th>
         </tr>
-        @foreach (var item in Model.TMMoves)
-        {
+        <# foreach (var item in Model.TMMoves)
+        { #>
             <tr>
                 <td>
-                    @string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name)
+                    <#= string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name) #>
                 </td>
             </tr>
-        }
+        <# } #>
     </table>
 </div>
 <div>
@@ -218,13 +204,13 @@
         <tr>            
             <th>Move</th>
         </tr>
-        @foreach (var item in Model.EggMoves)
-        {
+        <# foreach (var item in Model.EggMoves)
+        { #>
             <tr>
                 <td>
-                    @string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name)
+                    <#= string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name) #>
                 </td>
             </tr>
-        }
+        <# } #>
     </table>
 </div>
