@@ -1,9 +1,11 @@
 ﻿using DotNet3dsToolkit;
+using IPS_Pages_Publisher.Interfaces;
 using Microsoft.CSharp;
 using Microsoft.VisualStudio.TextTemplating;
 using MysteryDungeon_RawDB.Models.EOS;
 using MysteryDungeon_RawDB.Models.Gen7;
 using MysteryDungeon_RawDB.Models.PSMD;
+using Newtonsoft.Json;
 using pk3DS.Core;
 using pk3DS.Core.Structures;
 using pk3DS.Core.Structures.Gen6;
@@ -965,6 +967,39 @@ namespace MysteryDungeon_RawDB
             File.WriteAllText(outputPath, resultText);
         }
 
+        static string BuildAndReturnTemplate<T>(object model) where T : class
+        {
+            // Verify the type is correct
+            var templateType = typeof(T);
+            var sessionProperty = templateType.GetProperty("Session");
+            var initializeMethod = templateType.GetMethod("Initialize", new Type[] { });
+            var transformMethod = templateType.GetMethod("TransformText", new Type[] { });
+
+            if (sessionProperty == null || sessionProperty.PropertyType != typeof(IDictionary<string, object>))
+            {
+                throw new ArgumentException("Type parameter must have a Session property of type IDictionary<string, object>.", nameof(T));
+            }
+            if (initializeMethod == null || initializeMethod.GetParameters().Length > 0)
+            {
+                throw new ArgumentException("Type parameter must have a Initialize() method with no parameters.", nameof(T));
+            }
+            if (transformMethod == null || transformMethod.GetParameters().Length > 0)
+            {
+                throw new ArgumentException("Type parameter must have a TransformText() method with no parameters.", nameof(T));
+            }
+
+            // Set up the template
+            var templateInstance = templateType.GetConstructor(new Type[] { }).Invoke(new object[] { });
+            var session = new TextTemplatingSession();
+            sessionProperty.SetValue(templateInstance, session);
+            session["Model"] = model;
+            initializeMethod.Invoke(templateInstance, new object[] { });
+
+            // Run the template
+            var resultText = transformMethod.Invoke(templateInstance, new object[] { }) as string;
+            return resultText;
+        }
+
         static async Task BuildEOS(string eosPath, string outputPath)
         {
             var provider = new PhysicalIOProvider();
@@ -1109,6 +1144,47 @@ namespace MysteryDungeon_RawDB
             // To-Do: Build views
         }
 
+        static async Task BuildPSMDCategories(string psmdPath, string outputFilename)
+        {
+            // Extract ROM if needed
+            var tempDir = "theROM";
+            if (File.Exists(psmdPath))
+            {
+                // It's needed
+                if (!Directory.Exists(tempDir))
+                {
+                    Directory.CreateDirectory(tempDir);
+                }
+                RunProgram("3dstool.exe", $"-xtf 3ds \"{psmdPath}\" -0 Partition0.bin");
+                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin");
+                RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
+                File.Delete("Partition0.bin");
+                File.Delete("RomFS.bin");
+
+                psmdPath = tempDir;
+            }            
+
+            var data = await LoadPsmdData(psmdPath);
+
+            var output = new List<Category>();
+
+            var catPkm = new Category();
+            catPkm.Name = "Pokémon";
+            catPkm.Records = new List<Record>();
+
+            foreach (var item in data.Pokemon)
+            {
+                var record = new Record();
+                record.Title = item.Name;
+                record.Content = BuildAndReturnTemplate<Views.PSMD.Pokemon.Details>(new PokemonDetailsViewModel(item, data));
+                record.InternalName = $"pkm-" + item.ID;
+                catPkm.Records.Add(record);
+            }
+            output.Add(catPkm);
+
+            File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
+        }
+
         static void Main(string[] args)
         {
             var eosPath = args[0];
@@ -1116,11 +1192,19 @@ namespace MysteryDungeon_RawDB
             var smPath = args[2];
             var outputPath = args[3];
 
-            BuildSM(smPath, outputPath);
-            BuildEOS(eosPath, outputPath).Wait();
-            BuildPSMD(psmdPath, outputPath);
-            BuildTemplate<Views.Index>(Path.Combine(outputPath, "index.php"), null);
-            File.WriteAllText(Path.Combine(outputPath, "__nav.php"), "Pokémon Mystery Dungeon");
+            // Create output directory
+            if (!Directory.Exists(outputPath))
+            {
+                Directory.CreateDirectory(outputPath);
+            }
+
+            BuildPSMDCategories(psmdPath, Path.Combine(outputPath, "psmd.ipsdb")).Wait();
+
+            //BuildSM(smPath, outputPath);
+            //BuildEOS(eosPath, outputPath).Wait();
+            //BuildPSMD(psmdPath, outputPath);
+            //BuildTemplate<Views.Index>(Path.Combine(outputPath, "index.php"), null);
+            //File.WriteAllText(Path.Combine(outputPath, "__nav.php"), "Pokémon Mystery Dungeon");
         }
     }
 }

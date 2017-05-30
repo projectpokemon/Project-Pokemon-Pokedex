@@ -28,16 +28,9 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<?php\r\n    $title = \"");
+            this.Write("<h2>");
             
-            #line 8 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\";\r\n    $cssFiles = array(\"../../style.css\");\r\n?>\r\n\r\n<h2>");
-            
-            #line 12 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 7 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -45,7 +38,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("</h2>\r\n\r\n<div>\r\n    <h3>Details</h3>\r\n    <dl class=\"dl-horizontal\">\r\n        <dt" +
                     ">\r\n            ID (Decimal)\r\n        </dt>\r\n\r\n        <dd>\r\n            ");
             
-            #line 22 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 17 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID));
             
             #line default
@@ -53,7 +46,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            ID (Hex, Big Endian)\r\n        </dt>\r" +
                     "\n\r\n        <dd>\r\n            ");
             
-            #line 30 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 25 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.IDHexBigEndian));
             
             #line default
@@ -61,7 +54,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            ID (Hex, Little Endian)\r\n        </d" +
                     "t>\r\n\r\n        <dd>\r\n            ");
             
-            #line 38 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 33 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.IDHexLittleEndian));
             
             #line default
@@ -69,7 +62,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n           Dex Number\r\n        </dt>\r\n\r\n        " +
                     "<dd>\r\n            ");
             
-            #line 46 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 41 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.DexNumber));
             
             #line default
@@ -77,7 +70,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Category\r\n        </dt>\r\n\r\n        <" +
                     "dd>\r\n            ");
             
-            #line 54 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 49 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Category));
             
             #line default
@@ -85,7 +78,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            List Number 1\r\n        </dt>\r\n\r\n    " +
                     "    <dd>\r\n            ");
             
-            #line 62 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 57 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ListNumber1));
             
             #line default
@@ -93,23 +86,30 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            List Number 2\r\n        </dt>\r\n\r\n    " +
                     "    <dd>\r\n            ");
             
-            #line 70 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 65 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ListNumber2));
             
             #line default
             #line hidden
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Evolves From\r\n        </dt>\r\n\r\n     " +
-                    "   <dd>\r\n            ");
+                    "   <dd>\r\n\t\t\t<a href=\'{page=\"pkm-");
             
-            #line 78 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../{0}/\">{1}</a>", Model.EvolvesFromEntryID, Model.EvolvesFromName)));
+            #line 73 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.EvolvesFromEntryID));
             
             #line default
             #line hidden
-            this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Ability 1\r\n        </dt>\r\n\r\n        " +
-                    "<dd>\r\n            ");
+            this.Write("\"}\'>");
             
-            #line 86 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 73 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.EvolvesFromName));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n        </dd>\r\n\r\n        <dt>\r\n            Ability 1\r\n        </dt>\r\n\r\n    " +
+                    "    <dd>\r\n            ");
+            
+            #line 81 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../../abilities/{0}/\">{1}</a>", Model.Ability1ID, Model.Ability1)));
             
             #line default
@@ -117,7 +117,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Ability 2\r\n        </dt>\r\n\r\n        " +
                     "<dd>\r\n            ");
             
-            #line 94 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 89 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../../abilities/{0}/\">{1}</a>", Model.Ability2ID, Model.Ability2)));
             
             #line default
@@ -125,7 +125,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Hidden Ability\r\n        </dt>\r\n\r\n   " +
                     "     <dd>\r\n            ");
             
-            #line 102 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 97 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../../abilities/{0}/\">{1}</a>", Model.AbilityHiddenID, Model.AbilityHidden)));
             
             #line default
@@ -133,7 +133,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Type 1\r\n        </dt>\r\n\r\n        <dd" +
                     ">\r\n            ");
             
-            #line 110 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 105 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Type1));
             
             #line default
@@ -141,7 +141,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Type 2\r\n        </dt>\r\n\r\n        <dd" +
                     ">\r\n            ");
             
-            #line 118 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 113 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Type2));
             
             #line default
@@ -149,7 +149,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Is Mega Evolution\r\n        </dt>\r\n\r\n" +
                     "        <dd>\r\n            ");
             
-            #line 126 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 121 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.IsMegaEvolution));
             
             #line default
@@ -157,7 +157,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Min Evolve Level\r\n        </dt>\r\n\r\n " +
                     "       <dd>\r\n            ");
             
-            #line 134 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 129 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MinEvolveLevel));
             
             #line default
@@ -166,7 +166,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
                     "table class=\"table\">\r\n        <tr>\r\n            <th>Level</th>\r\n            <th>" +
                     "Move</th>\r\n        </tr>\r\n        ");
             
-            #line 146 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 141 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
  foreach (var item in Model.MovesLevelUp)
         { 
             
@@ -174,21 +174,21 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             #line hidden
             this.Write("            <tr>\r\n                <td>\r\n                    ");
             
-            #line 150 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 145 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Level.ToString()));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 153 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 148 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.MoveID, item.MoveName)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n            </tr>            \r\n        ");
             
-            #line 156 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 151 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
  } 
             
             #line default
@@ -210,7 +210,7 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
         </tr>
         ");
             
-            #line 172 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 167 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
  foreach (var item in Model.StatLevelUp)
         { 
             
@@ -218,63 +218,63 @@ namespace MysteryDungeon_RawDB.Views.PSMD.Pokemon
             #line hidden
             this.Write("            <tr>\r\n                <td>\r\n                    ");
             
-            #line 176 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 171 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((item.Level + 1)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 179 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 174 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Exp));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 182 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 177 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalHP, item.AddedHP)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 185 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 180 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalAttack, item.AddedAttack)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 188 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 183 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalSpAttack, item.AddedSpAttack)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 191 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 186 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalDefense, item.AddedDefense)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 194 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 189 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalSpDefense, item.AddedSpDefense)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 197 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 192 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalSpeed, item.AddedSpeed)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n            </tr>\r\n        ");
             
-            #line 200 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
+            #line 195 "C:\Users\evanl\Git\MysteryDungeon-RawDB\MysteryDungeon-RawDB\Views\PSMD\Pokemon\Details.tt"
  } 
             
             #line default

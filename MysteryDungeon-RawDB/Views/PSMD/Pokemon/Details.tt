@@ -4,11 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="MysteryDungeon_RawDB.Models.PSMD.PokemonDetailsViewModel" name="Model" #>
-<?php
-    $title = "<#= Model.Name #>";
-    $cssFiles = array("../../style.css");
-?>
-
 <h2><#= Model.Name #></h2>
 
 <div>
@@ -75,7 +70,7 @@
         </dt>
 
         <dd>
-            <#= string.Format("<a href=\"../{0}/\">{1}</a>", Model.EvolvesFromEntryID, Model.EvolvesFromName) #>
+			<a href='{page="pkm-<#=Model.EvolvesFromEntryID #>"}'><#=Model.EvolvesFromName #></a>
         </dd>
 
         <dt>
