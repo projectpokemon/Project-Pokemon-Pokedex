@@ -465,7 +465,7 @@ namespace MysteryDungeon_RawDB
             TMs = tms.ToArray();
         }
 
-        public static async Task<SMDataCollection> LoadSunMoonData(string rawFilesDir)
+        public static SMDataCollection LoadSunMoonData(string rawFilesDir)
         {
             var data = new SMDataCollection();
             var config = new GameConfig(GameVersion.SM);
@@ -926,47 +926,6 @@ namespace MysteryDungeon_RawDB
             return data;
         }
 
-        static void BuildTemplate<T>(string outputPath, object model) where T : class
-        {
-            // Verify the type is correct
-            var templateType = typeof(T);
-            var sessionProperty = templateType.GetProperty("Session");
-            var initializeMethod = templateType.GetMethod("Initialize", new Type[] { });
-            var transformMethod = templateType.GetMethod("TransformText", new Type[] { });
-
-            if (sessionProperty == null || sessionProperty.PropertyType != typeof(IDictionary<string, object>))
-            {
-                throw new ArgumentException("Type parameter must have a Session property of type IDictionary<string, object>.", nameof(T));
-            }
-            if (initializeMethod == null || initializeMethod.GetParameters().Length > 0)
-            {
-                throw new ArgumentException("Type parameter must have a Initialize() method with no parameters.", nameof(T));
-            }
-            if (transformMethod == null || transformMethod.GetParameters().Length > 0)
-            {
-                throw new ArgumentException("Type parameter must have a TransformText() method with no parameters.", nameof(T));
-            }
-
-            // Set up the template
-            var templateInstance = templateType.GetConstructor(new Type[] { }).Invoke(new object[] { });
-            var session = new TextTemplatingSession();
-            sessionProperty.SetValue(templateInstance, session);
-            session["Model"] = model;
-            initializeMethod.Invoke(templateInstance, new object[] { });
-
-            // Create output directory if needed
-            if (!Directory.Exists(Path.GetDirectoryName(outputPath)))
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
-            }
-
-            // Run the template
-            var resultText = transformMethod.Invoke(templateInstance, new object[] { }) as string;
-
-            // Save output to file
-            File.WriteAllText(outputPath, resultText);
-        }
-
         static string BuildAndReturnTemplate<T>(object model) where T : class
         {
             // Verify the type is correct
@@ -1000,119 +959,6 @@ namespace MysteryDungeon_RawDB
             return resultText;
         }
 
-        static async Task BuildEOS(string eosPath, string outputPath)
-        {
-            var provider = new PhysicalIOProvider();
-            var romDir = "eos-rawfiles";
-            using (var eosROM = new GenericNDSRom())
-            {
-                await eosROM.OpenFile(eosPath, provider);
-                await eosROM.Unpack(romDir, provider);
-            }
-
-            var data = await LoadEosData(romDir);
-
-            // Generate HTML
-            BuildTemplate<Views.EOS.Index>(Path.Combine(outputPath, "eos", "index.php"), null);
-            // - Copy style
-            File.Copy("Views/EOS/style.css", Path.Combine(outputPath, "eos", "style.css"), true);
-            // - Pokemon
-            BuildTemplate<Views.EOS.Pokemon.Index>(Path.Combine(outputPath, "eos", "pokemon", "index.php"), data.Pokemon);
-            foreach (var item in data.Pokemon)
-            {
-                BuildTemplate<Views.EOS.Pokemon.Details>(Path.Combine(outputPath, "eos", "pokemon", item.ID.ToString() + ".php"), item);
-            }
-            // - Moves
-            BuildTemplate<Views.EOS.Moves.Index>(Path.Combine(outputPath, "eos", "moves", "index.php"), data.Moves);
-            foreach (var item in data.Moves)
-            {
-                BuildTemplate<Views.EOS.Moves.Details>(Path.Combine(outputPath, "eos", "moves", item.ID.ToString() + ".php"), item);
-            }
-            // - Types
-            BuildTemplate<Views.EOS.Types.Index>(Path.Combine(outputPath, "eos", "types", "index.php"), data.Types);
-            foreach (var item in data.Types)
-            {
-                BuildTemplate<Views.EOS.Types.Details>(Path.Combine(outputPath, "eos", "types", item.ID.ToString() + ".php"), item);
-            }
-
-            // Add breadcrumb titles
-            File.WriteAllText(Path.Combine(outputPath, "eos", "__nav.php"), "Explorers of Sky");
-            File.WriteAllText(Path.Combine(outputPath, "eos", "pokemon", "__nav.php"), "Pokédex");
-            File.WriteAllText(Path.Combine(outputPath, "eos", "moves", "__nav.php"), "Movedex");
-            File.WriteAllText(Path.Combine(outputPath, "eos", "types", "__nav.php"), "Typedex");
-
-            // Serialize raw data
-            SkyEditor.Core.Utilities.Json.SerializeToFile(Path.Combine(outputPath, "eos", "data.json"), data, new PhysicalIOProvider());
-        }
-
-        static void BuildPSMD(string psmdPath, string outputPath)
-        {
-            // Extract ROM if needed
-            var tempDir = "theROM";
-            if (File.Exists(psmdPath))
-            {
-                // It's needed
-                if (!Directory.Exists(tempDir))
-                {
-                    Directory.CreateDirectory(tempDir);
-                }
-                RunProgram("3dstool.exe", $"-xtf 3ds \"{psmdPath}\" -0 Partition0.bin");
-                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin");
-                RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
-                File.Delete("Partition0.bin");
-                File.Delete("RomFS.bin");
-
-                psmdPath = tempDir;
-            }
-
-            // Create output directory
-            if (!Directory.Exists(outputPath))
-            {
-                Directory.CreateDirectory(outputPath);
-            }
-
-            var data = LoadPsmdData(psmdPath).Result;
-
-            // Generate HTML
-            BuildTemplate<Views.PSMD.Index>(Path.Combine(outputPath, "psmd", "index.php"), null);
-            // - Copy style
-            File.Copy("Views/PSMD/style.css", Path.Combine(outputPath, "psmd", "style.css"), true);
-            // - Pokemon
-            BuildTemplate<Views.PSMD.Pokemon.Index>(Path.Combine(outputPath, "psmd", "pokemon", "index.php"), data.Pokemon);
-            foreach (var item in data.Pokemon)
-            {
-                BuildTemplate<Views.PSMD.Pokemon.Details>(Path.Combine(outputPath, "psmd", "pokemon", item.ID.ToString() + ".php"), new PokemonDetailsViewModel(item, data));
-            }
-            // - Moves
-            BuildTemplate<Views.PSMD.Moves.Index>(Path.Combine(outputPath, "psmd", "moves", "index.php"), data.Moves);
-            foreach (var item in data.Moves)
-            {
-                BuildTemplate<Views.PSMD.Moves.Details>(Path.Combine(outputPath, "psmd", "moves", item.ID.ToString() + ".php"), new MoveDetailsViewModel(item, data));
-            }
-            // - Abilities
-            BuildTemplate<Views.PSMD.Abilities.Index>(Path.Combine(outputPath, "psmd", "abilities", "index.php"), data.Abilities);
-            foreach (var item in data.Abilities)
-            {
-                BuildTemplate<Views.PSMD.Abilities.Details>(Path.Combine(outputPath, "psmd", "abilities", item.ID.ToString() + ".php"), new AbilityDetailsViewModel(item, data));
-            }
-            // - Types
-            BuildTemplate<Views.PSMD.Types.Index>(Path.Combine(outputPath, "psmd", "types", "index.php"), data.Types);
-            foreach (var item in data.Types)
-            {
-                BuildTemplate<Views.PSMD.Types.Details>(Path.Combine(outputPath, "psmd", "types", item.ID.ToString() + ".php"), new TypeDetailsViewModel(item, data));
-            }
-
-            // Add breadcrumb titles
-            File.WriteAllText(Path.Combine(outputPath, "psmd", "__nav.php"), "Super");
-            File.WriteAllText(Path.Combine(outputPath, "psmd", "pokemon", "__nav.php"), "Pokédex");
-            File.WriteAllText(Path.Combine(outputPath, "psmd", "moves", "__nav.php"), "Movedex");
-            File.WriteAllText(Path.Combine(outputPath, "psmd", "abilities", "__nav.php"), "Abilitydex");
-            File.WriteAllText(Path.Combine(outputPath, "psmd", "types", "__nav.php"), "Typedex");
-
-            // Serialize raw data
-            SkyEditor.Core.Utilities.Json.SerializeToFile(Path.Combine(outputPath, "psmd", "data.json"), data, new PhysicalIOProvider());
-        }
-
         static void BuildSM(string smPath, string outputPath)
         {
             // Extract ROM if needed
@@ -1139,12 +985,28 @@ namespace MysteryDungeon_RawDB
                 Directory.CreateDirectory(outputPath);
             }
 
-            var data = LoadSunMoonData(smPath).Result;
+            var data = LoadSunMoonData(smPath);
 
             // To-Do: Build views
+            throw new NotImplementedException();
         }
 
-        static async Task BuildPSMDCategories(string psmdPath, string outputFilename)
+        static async Task BuildEOS(string eosPath, string outputPath)
+        {
+            var provider = new PhysicalIOProvider();
+            var romDir = "eos-rawfiles";
+            using (var eosROM = new GenericNDSRom())
+            {
+                await eosROM.OpenFile(eosPath, provider);
+                await eosROM.Unpack(romDir, provider);
+            }
+
+            var data = await LoadEosData(romDir);
+
+            throw new NotImplementedException();
+        }
+
+        static async Task BuildPSMD(string psmdPath, string outputFilename)
         {
             // Extract ROM if needed
             var tempDir = "theROM";
@@ -1198,13 +1060,7 @@ namespace MysteryDungeon_RawDB
                 Directory.CreateDirectory(outputPath);
             }
 
-            BuildPSMDCategories(psmdPath, Path.Combine(outputPath, "psmd.ipsdb")).Wait();
-
-            //BuildSM(smPath, outputPath);
-            //BuildEOS(eosPath, outputPath).Wait();
-            //BuildPSMD(psmdPath, outputPath);
-            //BuildTemplate<Views.Index>(Path.Combine(outputPath, "index.php"), null);
-            //File.WriteAllText(Path.Combine(outputPath, "__nav.php"), "Pokémon Mystery Dungeon");
+            BuildPSMD(psmdPath, Path.Combine(outputPath, "psmd.ipsdb")).Wait();
         }
     }
 }
