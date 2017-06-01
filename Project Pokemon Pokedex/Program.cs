@@ -1008,7 +1008,7 @@ namespace ProjectPokemon.Pokedex
 
             // Pokemon
             var catPkm = new Category();
-            catPkm.Name = "Pokémon";
+            catPkm.Name = "Pokemon";
             catPkm.Records = new List<Record>();
             catPkm.Records.Add(new Record
             {
@@ -1031,7 +1031,7 @@ namespace ProjectPokemon.Pokedex
             var catMoves = new Category();
             catMoves.Name = "Moves";
             catMoves.Records = new List<Record>();
-            catPkm.Records.Add(new Record
+            catMoves.Records.Add(new Record
             {
                 Title = "Index",
                 Content = BuildAndReturnTemplate<Views.EOS.Moves.Index>(data.Moves),
@@ -1039,7 +1039,7 @@ namespace ProjectPokemon.Pokedex
             });
             foreach (var item in data.Moves)
             {
-                catPkm.Records.Add(new Record
+                catMoves.Records.Add(new Record
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.EOS.Moves.Details>(item),
@@ -1052,7 +1052,7 @@ namespace ProjectPokemon.Pokedex
             var catTypes = new Category();
             catTypes.Name = "Types";
             catTypes.Records = new List<Record>();
-            catPkm.Records.Add(new Record
+            catTypes.Records.Add(new Record
             {
                 Title = "Index",
                 Content = BuildAndReturnTemplate<Views.EOS.Types.Index>(data.Types),
@@ -1060,7 +1060,7 @@ namespace ProjectPokemon.Pokedex
             });
             foreach (var item in data.Types)
             {
-                catPkm.Records.Add(new Record
+                catTypes.Records.Add(new Record
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.EOS.Types.Details>(item),
@@ -1105,7 +1105,7 @@ namespace ProjectPokemon.Pokedex
 
             // Pokemon
             var catPkm = new Category();
-            catPkm.Name = "Pokémon";
+            catPkm.Name = "Pokemon";
             catPkm.Records = new List<Record>();
             catPkm.Records.Add(new Record
             {
@@ -1128,7 +1128,7 @@ namespace ProjectPokemon.Pokedex
             var catMoves = new Category();
             catMoves.Name = "Moves";
             catMoves.Records = new List<Record>();
-            catPkm.Records.Add(new Record
+            catMoves.Records.Add(new Record
             {
                 Title = "Index",
                 Content = BuildAndReturnTemplate<Views.PSMD.Moves.Index>(data.Moves),
@@ -1136,7 +1136,7 @@ namespace ProjectPokemon.Pokedex
             });
             foreach (var item in data.Moves)
             {
-                catPkm.Records.Add(new Record
+                catMoves.Records.Add(new Record
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.PSMD.Moves.Details>(new MoveDetailsViewModel(item, data)),
@@ -1149,7 +1149,7 @@ namespace ProjectPokemon.Pokedex
             var catAbilities = new Category();
             catAbilities.Name = "Abilities";
             catAbilities.Records = new List<Record>();
-            catPkm.Records.Add(new Record
+            catAbilities.Records.Add(new Record
             {
                 Title = "Index",
                 Content = BuildAndReturnTemplate<Views.PSMD.Abilities.Index>(data.Abilities),
@@ -1157,7 +1157,7 @@ namespace ProjectPokemon.Pokedex
             });
             foreach (var item in data.Abilities)
             {
-                catPkm.Records.Add(new Record
+                catAbilities.Records.Add(new Record
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.PSMD.Abilities.Details>(new AbilityDetailsViewModel(item, data)),
@@ -1170,7 +1170,7 @@ namespace ProjectPokemon.Pokedex
             var catTypes = new Category();
             catTypes.Name = "Types";
             catTypes.Records = new List<Record>();
-            catPkm.Records.Add(new Record
+            catTypes.Records.Add(new Record
             {
                 Title = "Index",
                 Content = BuildAndReturnTemplate<Views.PSMD.Types.Index>(data.Types),
@@ -1178,7 +1178,7 @@ namespace ProjectPokemon.Pokedex
             });
             foreach (var item in data.Types)
             {
-                catPkm.Records.Add(new Record
+                catTypes.Records.Add(new Record
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.PSMD.Types.Details>(new TypeDetailsViewModel(item, data)),
