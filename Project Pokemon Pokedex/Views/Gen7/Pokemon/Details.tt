@@ -1,0 +1,389 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Pokemon" name="Model" #>
+<h2><#= Model.Name #></h2>
+<h3>Details</h3>
+<dl class="dl-horizontal">
+    <dt>
+        ID
+    </dt>
+    <dd>
+        <#= Model.ID #>
+    </dd>
+
+	<dt>
+        Name
+    </dt>
+    <dd>
+        <#= Model.Name #>
+    </dd>
+
+	<dt>
+        Base HP
+    </dt>
+    <dd>
+        <#= Model.BaseHP #>
+    </dd>
+
+	<dt>
+        Base Attack
+    </dt>
+    <dd>
+        <#= Model.BaseAttack #>
+    </dd>
+
+	<dt>
+        Base Defense
+    </dt>
+    <dd>
+        <#= Model.BaseDefense #>
+    </dd>
+
+	<dt>
+        Base Speed
+    </dt>
+    <dd>
+        <#= Model.BaseSpeed #>
+    </dd>
+
+	<dt>
+        Base Sp. Attack
+    </dt>
+    <dd>
+        <#= Model.BaseSpAttack #>
+    </dd>
+
+	<dt>
+        Base Sp. Defense
+    </dt>
+    <dd>
+        <#= Model.BaseSpDefense #>
+    </dd>
+
+	<dt>
+        HP EV Yield
+    </dt>
+    <dd>
+        <#= Model.HPEVYield #>
+    </dd>
+
+	<dt>
+        Attack EV Yield
+    </dt>
+    <dd>
+        <#= Model.AttackEVYield #>
+    </dd>
+
+	<dt>
+        Defense EV Yield
+    </dt>
+    <dd>
+        <#= Model.DefenseEVYield #>
+    </dd>
+
+	<dt>
+        Speed EV Yield
+    </dt>
+    <dd>
+        <#= Model.SpeedEVYield #>
+    </dd>
+
+	<dt>
+        Sp. Attack EV Yield
+    </dt>
+    <dd>
+        <#= Model.SpAttackEVYield #>
+    </dd>
+
+	<dt>
+        Sp. Defense EV Yield
+    </dt>
+    <dd>
+        <#= Model.SpDefenseEVYield #>
+    </dd>
+
+	<dt>
+		<# if (Model.Type2.ID > 0) { #>
+        Type
+		<# } else { #>
+		Types
+		<# } #>
+    </dt>
+    <dd>
+		<a href="{page="type-<#=Model.Type1.ID #>"}"><#= Model.Type1.Name #></a>
+		<# if (Model.Type2.ID > 0) { #>
+		<a href="{page="type-<#=Model.Type2.ID #>"}"><#= Model.Type2.Name #></a>
+		<# } #>
+    </dd>	
+
+	<dt>
+        Catch Rate
+    </dt>
+    <dd>
+        <#= Model.CatchRate #>
+    </dd>
+
+	<dt>
+        Evo Stage
+    </dt>
+    <dd>
+        <#= Model.EvoStage #>
+    </dd>
+
+	<# if (Model.HeldItem1.ID > 0) { #>
+	<dt>
+        Held Item 1
+    </dt>
+    <dd>
+        <a href="{page="item-<#=Model.HeldItem1.ID #>"}"><#= Model.HeldItem1.Name #></a> (50%)
+    </dd>
+	<# } #>
+
+	<# if (Model.HeldItem2.ID > 0) { #>
+	<dt>
+        Held Item 2
+    </dt>
+    <dd>
+        <a href="{page="item-<#=Model.HeldItem2.ID #>"}"><#= Model.HeldItem2.Name #></a> (5%)
+    </dd>
+	<# } #>
+
+	<# if (Model.HeldItem3.ID > 0) { #>
+	<dt>
+        Held Item 3
+    </dt>
+    <dd>
+        <a href="{page="item-<#=Model.HeldItem3.ID #>"}"><#= Model.HeldItem3.Name #></a> (1%)
+    </dd>
+	<# } #>
+
+	<dt>
+        Gender
+    </dt>
+    <dd>
+        <#= Model.Gender #>
+    </dd>
+
+	<dt>
+        Hatch Cycles
+    </dt>
+    <dd>
+        <#= Model.HatchCycles #>
+    </dd>
+
+	<dt>
+        Base Friendship
+    </dt>
+    <dd>
+        <#= Model.BaseFriendship #>
+    </dd>
+
+	<dt>
+        Exp Growth
+    </dt>
+    <dd>
+        <#= Model.ExpGrowth #>
+    </dd>
+
+	<dt>
+        Egg Group 1
+    </dt>
+    <dd>
+        <#= Model.EggGroup1 #>
+    </dd>
+
+	<dt>
+        Egg Group 2
+    </dt>
+    <dd>
+        <#= Model.EggGroup2 #>
+    </dd>
+
+	<dt>
+        Ability 1
+    </dt>
+    <dd>
+        <a href="{page="ability-<#=Model.Ability1.ID #>"}"><#= Model.Ability1.Name #></a>
+    </dd>
+
+	<dt>
+        Ability 2
+    </dt>
+    <dd>
+        <a href="{page="ability-<#=Model.Ability2.ID #>"}"><#= Model.Ability2.Name #></a>
+    </dd>
+
+	<dt>
+        Hidden Ability
+    </dt>
+    <dd>
+        <a href="{page="ability-<#=Model.AbilityHidden.ID #>"}"><#= Model.AbilityHidden.Name #></a>
+    </dd>
+
+	<dt>
+        Forme Count
+    </dt>
+    <dd>
+        <#= Model.FormeCount #>
+    </dd>
+
+	<dt>
+        Forme Sprite
+    </dt>
+    <dd>
+        <#= Model.FormeSprite #>
+    </dd>
+
+	<dt>
+        Color
+    </dt>
+    <dd>
+        <#= Model.Color #>
+    </dd>
+
+	<dt>
+        Base Exp
+    </dt>
+    <dd>
+        <#= Model.BaseExp #>
+    </dd>
+
+	<dt>
+        BST
+    </dt>
+    <dd>
+        <#= Model.BST #>
+    </dd>
+
+	<dt>
+        ID
+    </dt>
+    <dd>
+        <#= Model.ID #>
+    </dd>
+
+	<dt>
+        Height
+    </dt>
+    <dd>
+        <#= Model.Height #>
+    </dd>
+
+	<dt>
+        Weight
+    </dt>
+    <dd>
+        <#= Model.Weight #>
+    </dd>
+
+	<dt>
+        Escape Rate
+    </dt>
+    <dd>
+        <#= Model.EscapeRate #>
+    </dd>
+
+	<dt>
+        Local Variant
+    </dt>
+    <dd>
+        <#= Model.LocalVariant #>
+    </dd>
+
+	<dt>
+        Z Item
+    </dt>
+    <dd>
+        <a href="{page="item-<#=Model.ZItem.ID #>"}"><#= Model.ZItem.Name #></a>
+    </dd>
+
+	<dt>
+        Z Base Move
+    </dt>
+    <dd>
+        <a href="{page="move-<#=Model.ZBaseMove.ID #>"}"><#= Model.ZBaseMove.Name #></a>
+    </dd>
+
+	<dt>
+        Z Move
+    </dt>
+    <dd>
+        <a href="{page="move-<#=Model.ZMove.ID #>"}"><#= Model.ZMove.Name #></a>
+    </dd>
+
+</dl>
+
+<# if (Model.MoveLevelUp.Count > 0) { #>
+<h3>Moves (Level Up)</h3>
+<table class="table">
+    <tr>
+        <th>Level</th>
+        <th>Move</th>
+    </tr>
+    <# foreach (var item in Model.MoveLevelUp)
+    { #>
+        <tr>
+            <td>
+                <#= item.Level #>
+            </td>
+            <td>
+				<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+</table>
+<# } #>
+
+<# if (Model.MoveTMs.Count > 0) { #>
+<h3>Moves (TM)</h3>
+<table class="table">
+    <tr>
+        <th>Move</th>
+    </tr>
+    <# foreach (var item in Model.MoveTMs)
+    { #>
+        <tr>
+            <td>
+				<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+</table>
+<# } #>
+
+<# if (Model.MoveEgg.Count > 0) { #>
+<h3>Moves (Egg)</h3>
+<table class="table">
+    <tr>
+        <th>Move</th>
+    </tr>
+    <# foreach (var item in Model.MoveEgg)
+    { #>
+        <tr>
+            <td>
+				<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+</table>
+<# } #>
+
+<# if (Model.MoveTutors.Count > 0) { #>
+<h3>Moves (Tutor)</h3>
+<table class="table">
+    <tr>
+        <th>Move</th>
+    </tr>
+    <# foreach (var item in Model.MoveTutors)
+    { #>
+        <tr>
+            <td>
+				<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+</table>
+<# } #>

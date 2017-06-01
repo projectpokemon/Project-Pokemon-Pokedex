@@ -610,9 +610,9 @@ namespace ProjectPokemon.Pokedex
                 pkm.EggGroup1 = eggGroups[item.EggGroups[0]];
                 pkm.EggGroup2 = eggGroups[item.EggGroups[1]];
 
-                pkm.Ability1 = abilities[item.Abilities[0]];
-                pkm.Ability2 = abilities[item.Abilities[1]];
-                pkm.Ability3 = abilities[item.Abilities[2]];
+                pkm.Ability1 = new AbilityReference { ID = item.Abilities[0], Name = abilities[item.Abilities[0]] };
+                pkm.Ability2 = new AbilityReference { ID = item.Abilities[1], Name = abilities[item.Abilities[1]] };
+                pkm.AbilityHidden = new AbilityReference { ID = item.Abilities[2], Name = abilities[item.Abilities[2]] };
 
                 pkm.FormeCount = item.FormeCount;
                 pkm.FormeSprite = item.FormeSprite;
@@ -983,6 +983,22 @@ namespace ProjectPokemon.Pokedex
             var data = LoadSunMoonData(smPath);
 
             var output = new List<Category>();
+
+            // Pokemon
+            var catPkm = new Category();
+            catPkm.Name = "Pokemon";
+            catPkm.Records = new List<Record>();
+            foreach (var item in data.Pokemon)
+            {
+                catPkm.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.Gen7.Pokemon.Details>(item),
+                    InternalName = $"pkm-" + item.ID
+                });
+            }
+            output.Add(catPkm);
+
             File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
 
             // Cleanup

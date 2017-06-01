@@ -54,9 +54,9 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         public string EggGroup1 { get; set; }
         public string EggGroup2 { get; set; }
         
-        public string Ability1 { get; set; }
-        public string Ability2 { get; set; }
-        public string Ability3 { get; set; }
+        public AbilityReference Ability1 { get; set; }
+        public AbilityReference Ability2 { get; set; }
+        public AbilityReference AbilityHidden { get; set; }
 
         public int FormeCount { get; set; }
         public int FormeSprite { get; set; }
