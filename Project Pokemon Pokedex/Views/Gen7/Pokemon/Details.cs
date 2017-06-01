@@ -142,14 +142,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("        Type\r\n\t\t");
+            this.Write("        Types\r\n\t\t");
             
             #line 111 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("\t\tTypes\r\n\t\t");
+            this.Write("\t\tType\r\n\t\t");
             
             #line 113 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 

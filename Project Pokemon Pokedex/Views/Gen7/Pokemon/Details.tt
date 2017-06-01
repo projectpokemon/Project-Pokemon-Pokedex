@@ -107,9 +107,9 @@
 
 	<dt>
 		<# if (Model.Type2.ID > 0) { #>
-        Type
+        Types
 		<# } else { #>
-		Types
+		Type
 		<# } #>
     </dt>
     <dd>
