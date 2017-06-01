@@ -574,6 +574,10 @@ namespace ProjectPokemon.Pokedex
                 {
                     pkm.Name = species[pkm.ID];
                 }
+                else
+                {
+                    pkm.Name = "Unknown";
+                }
 
                 // Stats
                 pkm.BaseHP = item.HP;

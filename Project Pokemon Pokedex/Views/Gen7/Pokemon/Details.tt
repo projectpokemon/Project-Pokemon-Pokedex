@@ -316,6 +316,54 @@
 
 </dl>
 
+<# if (Model.Evolutions.Count > 0) { #>
+<h3>Evolutions</h3>
+<table class="table">
+    <tr>
+        <th>Target</th>
+        <th>Level</th>
+		<th>Form</th>
+		<th>Method</th>
+    </tr>
+    <# foreach (var item in Model.Evolutions) { 
+		string methodString;
+		if (item.ParameterReference == null) {
+			methodString = item.Method;
+		}
+		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.PokemonReference) {
+			methodString = string.Format(item.Method, "<a href='{page=\"pkm-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+		}
+		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.MoveReference) {
+			methodString = string.Format(item.Method, "<a href='{page=\"move-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+		}
+		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.ItemReference) {
+			methodString = string.Format(item.Method, "<a href='{page=\"item-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+		}
+		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.TypeReference) {
+			methodString = string.Format(item.Method, "<a href='{page=\"type-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+		}
+		else {
+			methodString = item.Method;
+		} #>
+	
+        <tr>
+            <td>
+                <a href='{page="pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
+            </td>
+			<td>
+                <#= item.Level #>
+            </td>
+			<td>
+                <#= item.Form #>
+            </td>
+			<td>
+                <#= methodString #>
+            </td>
+        </tr>
+    <# } #>
+</table>
+<# } #>
+
 <# if (Model.MoveLevelUp.Count > 0) { #>
 <h3>Moves (Level Up)</h3>
 <table class="table">
