@@ -1010,12 +1010,12 @@ namespace ProjectPokemon.Pokedex
             var catPkm = new Category();
             catPkm.Name = "Pokemon";
             catPkm.Records = new List<Record>();
-            //catPkm.Records.Add(new Record
-            //{
-            //    Title = "Index",
-            //    Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Index>(data.Pokemon),
-            //    InternalName = $"pkm-index"
-            //});
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Index>(data.Pokemon),
+                InternalName = $"pkm-index"
+            });
             foreach (var item in data.Pokemon)
             {
                 catPkm.Records.Add(new Record
@@ -1031,12 +1031,12 @@ namespace ProjectPokemon.Pokedex
             var catMoves = new Category();
             catMoves.Name = "Moves";
             catMoves.Records = new List<Record>();
-            //catMoves.Records.Add(new Record
-            //{
-            //    Title = "Index",
-            //    Content = BuildAndReturnTemplate<Views.EOS.Moves.Index>(data.Moves),
-            //    InternalName = $"move-index"
-            //});
+            catMoves.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.EOS.Moves.Index>(data.Moves),
+                InternalName = $"move-index"
+            });
             foreach (var item in data.Moves)
             {
                 catMoves.Records.Add(new Record
@@ -1052,12 +1052,12 @@ namespace ProjectPokemon.Pokedex
             var catTypes = new Category();
             catTypes.Name = "Types";
             catTypes.Records = new List<Record>();
-            //catTypes.Records.Add(new Record
-            //{
-            //    Title = "Index",
-            //    Content = BuildAndReturnTemplate<Views.EOS.Types.Index>(data.Types),
-            //    InternalName = $"type-index"
-            //});
+            catTypes.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.EOS.Types.Index>(data.Types),
+                InternalName = $"type-index"
+            });
             foreach (var item in data.Types)
             {
                 catTypes.Records.Add(new Record
@@ -1107,12 +1107,12 @@ namespace ProjectPokemon.Pokedex
             var catPkm = new Category();
             catPkm.Name = "Pokemon";
             catPkm.Records = new List<Record>();
-            //catPkm.Records.Add(new Record
-            //{
-            //    Title = "Index",
-            //    Content = BuildAndReturnTemplate<Views.PSMD.Pokemon.Index>(data.Pokemon),
-            //    InternalName = "pkm-index"
-            //});
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.PSMD.Pokemon.Index>(data.Pokemon),
+                InternalName = "pkm-index"
+            });
             foreach (var item in data.Pokemon)
             {
                 catPkm.Records.Add(new Record
@@ -1128,12 +1128,12 @@ namespace ProjectPokemon.Pokedex
             var catMoves = new Category();
             catMoves.Name = "Moves";
             catMoves.Records = new List<Record>();
-            //catMoves.Records.Add(new Record
-            //{
-            //    Title = "Index",
-            //    Content = BuildAndReturnTemplate<Views.PSMD.Moves.Index>(data.Moves),
-            //    InternalName = "move-index"
-            //});
+            catMoves.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.PSMD.Moves.Index>(data.Moves),
+                InternalName = "move-index"
+            });
             foreach (var item in data.Moves)
             {
                 catMoves.Records.Add(new Record
@@ -1149,12 +1149,12 @@ namespace ProjectPokemon.Pokedex
             var catAbilities = new Category();
             catAbilities.Name = "Abilities";
             catAbilities.Records = new List<Record>();
-            //catAbilities.Records.Add(new Record
-            //{
-            //    Title = "Index",
-            //    Content = BuildAndReturnTemplate<Views.PSMD.Abilities.Index>(data.Abilities),
-            //    InternalName = "ability-index"
-            //});
+            catAbilities.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.PSMD.Abilities.Index>(data.Abilities),
+                InternalName = "ability-index"
+            });
             foreach (var item in data.Abilities)
             {
                 catAbilities.Records.Add(new Record
@@ -1170,12 +1170,12 @@ namespace ProjectPokemon.Pokedex
             var catTypes = new Category();
             catTypes.Name = "Types";
             catTypes.Records = new List<Record>();
-            //catTypes.Records.Add(new Record
-            //{
-            //    Title = "Index",
-            //    Content = BuildAndReturnTemplate<Views.PSMD.Types.Index>(data.Types),
-            //    InternalName = "type-index"
-            //});
+            catTypes.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.PSMD.Types.Index>(data.Types),
+                InternalName = "type-index"
+            });
             foreach (var item in data.Types)
             {
                 catTypes.Records.Add(new Record
