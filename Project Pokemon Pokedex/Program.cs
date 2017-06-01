@@ -996,7 +996,7 @@ namespace ProjectPokemon.Pokedex
             {
                 catPkm.Records.Add(new Record
                 {
-                    Title = item.Name,
+                    Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
                     Content = BuildAndReturnTemplate<Views.Gen7.Pokemon.Details>(item),
                     InternalName = $"pkm-" + item.ID
                 });
