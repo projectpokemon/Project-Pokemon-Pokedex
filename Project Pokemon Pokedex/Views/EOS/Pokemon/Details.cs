@@ -18,7 +18,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+    #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class Details : DetailsBase
     {
@@ -28,270 +28,278 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<?php\r\n    $title = \"");
+            this.Write("<h2>");
             
-            #line 8 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 7 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\";\r\n    $cssFiles = array(\"../../style.css\");\r\n    ?>\r\n\r\n    <h2>");
+            this.Write("</h2>\r\n\r\n<div>\r\n    <h3>Details</h3>\r\n    <dl class=\"dl-horizontal\">\r\n        <dt" +
+                    ">\r\n            ID (Decimal)\r\n        </dt>\r\n\r\n        <dd>\r\n            ");
             
-            #line 12 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</h2>\r\n\r\n    <div>\r\n        <h3>Details</h3>\r\n        <dl class=\"dl-horizontal\">\r" +
-                    "\n            <dt>\r\n                ID (Decimal)\r\n            </dt>\r\n\r\n          " +
-                    "  <dd>\r\n                ");
-            
-            #line 22 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 17 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID));
             
             #line default
             #line hidden
-            this.Write("\r\n            </dd>\r\n\r\n            <dt>\r\n                ID (Hex, Big Endian)\r\n  " +
-                    "          </dt>\r\n\r\n            <dd>\r\n                ");
+            this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            ID (Hex, Big Endian)\r\n        </dt>\r" +
+                    "\n\r\n        <dd>\r\n            ");
             
-            #line 30 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 25 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.GetIDHexBigEndian()));
             
             #line default
             #line hidden
-            this.Write("\r\n            </dd>\r\n\r\n            <dt>\r\n                ID (Hex, Little Endian)\r" +
-                    "\n            </dt>\r\n\r\n            <dd>\r\n                ");
+            this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            ID (Hex, Little Endian)\r\n        </d" +
+                    "t>\r\n\r\n        <dd>\r\n            ");
             
-            #line 38 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 33 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.GetIDHexLittleEndian()));
             
             #line default
             #line hidden
-            this.Write("\r\n            </dd>\r\n\r\n            <dt>\r\n                Dex Number\r\n            " +
-                    "</dt>\r\n\r\n            <dd>\r\n                ");
+            this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Dex Number\r\n        </dt>\r\n\r\n       " +
+                    " <dd>\r\n            ");
             
-            #line 46 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 41 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.DexNumber));
             
             #line default
             #line hidden
-            this.Write("\r\n            </dd>\r\n\r\n\r\n            <dt>\r\n                Evolves From\r\n        " +
-                    "    </dt>\r\n\r\n            <dd>\r\n                ");
+            this.Write("\r\n        </dd>\r\n\r\n\r\n        <dt>\r\n            Evolves From\r\n        </dt>\r\n\r\n   " +
+                    "     <dd>\r\n\t\t\t<a href=\'{page=\"pkm-");
             
-            #line 55 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../{0}/\">{1}</a>", Model.EvolveFromID, Model.EvolveFromName)));
+            #line 50 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.EvolveFromID));
             
             #line default
             #line hidden
-            this.Write("\r\n            </dd>\r\n\r\n\r\n            <dt>\r\n                Evolution Criteria\r\n  " +
-                    "          </dt>\r\n\r\n            <dd>\r\n                ");
+            this.Write("\"}\'>");
             
-            #line 64 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 50 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.EvolveFromName));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n        </dd>\r\n\r\n\r\n        <dt>\r\n            Evolution Criteria\r\n        </" +
+                    "dt>\r\n\r\n        <dd>\r\n            ");
+            
+            #line 59 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.EvolveCriteria));
             
             #line default
             #line hidden
-            this.Write("\r\n            </dd>\r\n        </dl>\r\n    </div>\r\n\r\n    <div class=\"row\">\r\n        " +
-                    "");
+            this.Write("\r\n        </dd>\r\n    </dl>\r\n</div>\r\n\r\n<div class=\"row\">\r\n    ");
             
-            #line 70 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 65 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  if (Model.Male != null)
-        {
-            var gender = Model.Male; 
+    {
+        var gender = Model.Male; 
             
             #line default
             #line hidden
-            this.Write("            <div class=\"col-md-6\">\r\n                <h3>Male</h3>\r\n              " +
-                    "  <dl class=\"dl-horizontal\">\r\n                    <dt>\r\n                        " +
-                    "Base HP\r\n                    </dt>\r\n\r\n                    <dd>\r\n                " +
-                    "        ");
+            this.Write("        <div class=\"col-md-6\">\r\n            <h3>Male</h3>\r\n            <dl class=" +
+                    "\"dl-horizontal\">\r\n                <dt>\r\n                    Base HP\r\n           " +
+                    "     </dt>\r\n\r\n                <dd>\r\n                    ");
             
-            #line 81 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 76 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(gender.BaseHP));
             
             #line default
             #line hidden
-            this.Write("\r\n                    </dd>\r\n\r\n                    <dt>\r\n                        " +
-                    "Base Attack\r\n                    </dt>\r\n\r\n                    <dd>\r\n            " +
-                    "            ");
+            this.Write("\r\n                </dd>\r\n\r\n                <dt>\r\n                    Base Attack\r" +
+                    "\n                </dt>\r\n\r\n                <dd>\r\n                    ");
             
-            #line 89 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 84 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(gender.BaseATK));
             
             #line default
             #line hidden
-            this.Write("\r\n                    </dd>\r\n\r\n                    <dt>\r\n                        " +
-                    "Base Defense\r\n                    </dt>\r\n\r\n                    <dd>\r\n           " +
-                    "             ");
+            this.Write("\r\n                </dd>\r\n\r\n                <dt>\r\n                    Base Defense" +
+                    "\r\n                </dt>\r\n\r\n                <dd>\r\n                    ");
             
-            #line 97 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 92 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(gender.BaseDEF));
             
             #line default
             #line hidden
-            this.Write("\r\n                    </dd>\r\n\r\n                    <dt>\r\n                        " +
-                    "Base Sp. Attack\r\n                    </dt>\r\n\r\n                    <dd>\r\n        " +
-                    "                ");
+            this.Write("\r\n                </dd>\r\n\r\n                <dt>\r\n                    Base Sp. Att" +
+                    "ack\r\n                </dt>\r\n\r\n                <dd>\r\n                    ");
             
-            #line 105 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 100 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(gender.BaseSPATK));
             
             #line default
             #line hidden
-            this.Write("\r\n                    </dd>\r\n                    <dt>\r\n                        Ba" +
-                    "se Sp. Defense\r\n                    </dt>\r\n\r\n                    <dd>\r\n         " +
-                    "               ");
+            this.Write("\r\n                </dd>\r\n                <dt>\r\n                    Base Sp. Defen" +
+                    "se\r\n                </dt>\r\n\r\n                <dd>\r\n                    ");
             
-            #line 112 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 107 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(gender.BaseSPDEF));
             
             #line default
             #line hidden
-            this.Write("\r\n                    </dd>\r\n                </dl>\r\n            </div>\r\n        ");
+            this.Write("\r\n                </dd>\r\n            </dl>\r\n        </div>\r\n    ");
             
-            #line 116 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 111 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  }
-        if (Model.Female != null)
-        {
-            var gender = Model.Female; 
+    if (Model.Female != null)
+    {
+        var gender = Model.Female; 
             
             #line default
             #line hidden
-            this.Write("            <div class=\"col-md-6\">\r\n                <h3>Female</h3>\r\n            " +
-                    "    <dl class=\"dl-horizontal\">\r\n                    <dt>\r\n                      " +
-                    "  Base HP\r\n                    </dt>\r\n\r\n                    <dd>\r\n              " +
-                    "          ");
+            this.Write("        <div class=\"col-md-6\">\r\n            <h3>Female</h3>\r\n            <dl clas" +
+                    "s=\"dl-horizontal\">\r\n                <dt>\r\n                    Base HP\r\n         " +
+                    "       </dt>\r\n\r\n                <dd>\r\n                    ");
             
-            #line 128 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 123 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(gender.BaseHP));
             
             #line default
             #line hidden
-            this.Write("\r\n                    </dd>\r\n\r\n                    <dt>\r\n                        " +
-                    "Base Attack\r\n                    </dt>\r\n\r\n                    <dd>\r\n            " +
-                    "            ");
+            this.Write("\r\n                </dd>\r\n\r\n                <dt>\r\n                    Base Attack\r" +
+                    "\n                </dt>\r\n\r\n                <dd>\r\n                    ");
             
-            #line 136 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 131 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(gender.BaseATK));
             
             #line default
             #line hidden
-            this.Write("\r\n                    </dd>\r\n\r\n                    <dt>\r\n                        " +
-                    "Base Defense\r\n                    </dt>\r\n\r\n                    <dd>\r\n           " +
-                    "             ");
+            this.Write("\r\n                </dd>\r\n\r\n                <dt>\r\n                    Base Defense" +
+                    "\r\n                </dt>\r\n\r\n                <dd>\r\n                    ");
             
-            #line 144 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 139 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(gender.BaseDEF));
             
             #line default
             #line hidden
-            this.Write("\r\n                    </dd>\r\n\r\n                    <dt>\r\n                        " +
-                    "Base Sp. Attack\r\n                    </dt>\r\n\r\n                    <dd>\r\n        " +
-                    "                ");
+            this.Write("\r\n                </dd>\r\n\r\n                <dt>\r\n                    Base Sp. Att" +
+                    "ack\r\n                </dt>\r\n\r\n                <dd>\r\n                    ");
             
-            #line 152 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 147 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(gender.BaseSPATK));
             
             #line default
             #line hidden
-            this.Write("\r\n                    </dd>\r\n                    <dt>\r\n                        Ba" +
-                    "se Sp. Defense\r\n                    </dt>\r\n\r\n                    <dd>\r\n         " +
-                    "               ");
+            this.Write("\r\n                </dd>\r\n                <dt>\r\n                    Base Sp. Defen" +
+                    "se\r\n                </dt>\r\n\r\n                <dd>\r\n                    ");
             
-            #line 159 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 154 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(gender.BaseSPDEF));
             
             #line default
             #line hidden
-            this.Write("\r\n                    </dd>\r\n                </dl>\r\n            </div>\r\n        ");
+            this.Write("\r\n                </dd>\r\n            </dl>\r\n        </div>\r\n    ");
             
-            #line 163 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 158 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("    </div>\r\n<div>\r\n    <h3>Moves (Level Up)</h3>\r\n    <table class=\"table\">\r\n    " +
-                    "    <tr>\r\n            <th>Level</th>\r\n            <th>Move</th>\r\n        </tr>\r\n" +
-                    "        ");
+            this.Write("</div>\r\n<div>\r\n<h3>Moves (Level Up)</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n      " +
+                    "  <th>Level</th>\r\n        <th>Move</th>\r\n    </tr>\r\n    ");
             
-            #line 172 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 167 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  foreach (var item in Model.LevelupMoves)
-        { 
+    { 
             
             #line default
             #line hidden
-            this.Write("            <tr>\r\n                <td>\r\n                    ");
+            this.Write("        <tr>\r\n            <td>\r\n                ");
             
-            #line 176 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 171 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Item1.ToString()));
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
             
-            #line 179 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.Item2.ID, item.Item2.Name)));
+            #line 174 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Item2.ID));
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n            </tr>\r\n        ");
+            this.Write("\"}\'>");
             
-            #line 182 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 174 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Item2.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n            </td>\r\n        </tr>\r\n    ");
+            
+            #line 177 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("    </table>\r\n</div>\r\n<div>\r\n    <h3>Moves (TM)</h3>\r\n    <table class=\"table\">\r\n" +
-                    "        <tr>\r\n            <th>Move</th>\r\n        </tr>\r\n        ");
+            this.Write("</table>\r\n</div>\r\n<div>\r\n<h3>Moves (TM)</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n  " +
+                    "      <th>Move</th>\r\n    </tr>\r\n    ");
             
-            #line 191 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 186 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  foreach (var item in Model.TMMoves)
-        { 
+    { 
             
             #line default
             #line hidden
-            this.Write("            <tr>\r\n                <td>\r\n                    ");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
             
-            #line 195 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name)));
+            #line 190 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n            </tr>\r\n        ");
+            this.Write("\"}\'>");
             
-            #line 198 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 190 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n            </td>\r\n        </tr>\r\n    ");
+            
+            #line 193 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("    </table>\r\n</div>\r\n<div>\r\n    <h3>Moves (Egg)</h3>\r\n    <table class=\"table\">\r" +
-                    "\n        <tr>            \r\n            <th>Move</th>\r\n        </tr>\r\n        ");
+            this.Write("</table>\r\n</div>\r\n<div>\r\n<h3>Moves (Egg)</h3>\r\n<table class=\"table\">\r\n    <tr>   " +
+                    "         \r\n        <th>Move</th>\r\n    </tr>\r\n    ");
             
-            #line 207 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 202 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  foreach (var item in Model.EggMoves)
-        { 
+    { 
             
             #line default
             #line hidden
-            this.Write("            <tr>\r\n                <td>\r\n                    ");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
             
-            #line 211 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name)));
+            #line 206 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n            </tr>\r\n        ");
+            this.Write("\"}\'>");
             
-            #line 214 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            #line 206 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n            </td>\r\n        </tr>\r\n    ");
+            
+            #line 209 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("    </table>\r\n</div>");
+            this.Write("</table>\r\n</div>");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+        #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
 
 private global::ProjectPokemon.Pokedex.Models.EOS.Pokemon _ModelField;
 

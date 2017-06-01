@@ -18,7 +18,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
+    #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class Index : IndexBase
     {
@@ -28,12 +28,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"<?php
-    $title = ""Movedex"";
-    $cssFiles = array(""../style.css"");
-?>
-
-<h2>Moves</h2>
+            this.Write(@"<h2>Moves</h2>
 
 <table class=""table"">
     <tr>
@@ -53,7 +48,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
 
     ");
             
-            #line 30 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
+            #line 25 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
  foreach (var item in Model)
     {
         var hex = item.ID.ToString("X").PadLeft(4, '0'); 
@@ -62,35 +57,42 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             #line hidden
             this.Write("        <tr>\r\n            <td>\r\n                ");
             
-            #line 35 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
+            #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
             this.Write("\r\n            </td>\r\n            <td>\r\n                ");
             
-            #line 38 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
+            #line 33 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("0x{0}", hex)));
             
             #line default
             #line hidden
             this.Write("\r\n            </td>\r\n            <td>\r\n                ");
             
-            #line 41 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
+            #line 36 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2))));
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n                ");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
             
-            #line 44 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"{0}/\">{1}</a>", item.ID, item.Name)));
+            #line 39 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n        </tr>\r\n    ");
+            this.Write("\"}\'>");
             
-            #line 47 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
+            #line 39 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n            </td>\r\n        </tr>\r\n    ");
+            
+            #line 42 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
  } 
             
             #line default
@@ -99,7 +101,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
+        #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
 
 private global::System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.PSMD.Move> _ModelField;
 

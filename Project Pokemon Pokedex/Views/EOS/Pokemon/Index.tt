@@ -43,7 +43,7 @@
                 <#= string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2)) #>
             </td>
             <td>
-                <#= string.Format("<a href=\"{0}/\">{1}</a>", item.ID, item.Name) #>
+				<a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
             <td>
                 <#= item.DexNumber.ToString() #>

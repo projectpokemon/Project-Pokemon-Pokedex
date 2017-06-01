@@ -4,11 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.PSMD.Pokemon>" name="Model" #>
-<?php
-    $title = "Pokédex";
-    $cssFiles = array("../style.css");
-?>
-
 <h2>Pokémon</h2>
 
 <table class="table">
@@ -43,7 +38,7 @@
                 <#= string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2)) #>
             </td>
             <td>
-                <#= string.Format("<a href=\"{0}/\">{1}</a>", item.ID, item.Name) #>
+				<a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
             <td>
                 <#= item.DexNumber.ToString() #>

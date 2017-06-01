@@ -18,7 +18,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+    #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class Details : DetailsBase
     {
@@ -28,16 +28,9 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<?php\r\n    $title = \"");
+            this.Write("<h2>");
             
-            #line 8 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\";\r\n    $cssFiles = array(\"../../style.css\");\r\n?>\r\n\r\n<h2>");
-            
-            #line 12 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 7 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -45,7 +38,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("</h2>\r\n\r\n<div>\r\n    <h3>Details</h3>\r\n    <dl class=\"dl-horizontal\">\r\n        <dt" +
                     ">\r\n            ID (Decimal)\r\n        </dt>\r\n        <dd>\r\n            ");
             
-            #line 21 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 16 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID));
             
             #line default
@@ -53,7 +46,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            ID (Hex, Big Endian)\r\n        </dt>\r" +
                     "\n        <dd>\r\n            ");
             
-            #line 28 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 23 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.IDHexBigEndian));
             
             #line default
@@ -61,7 +54,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            ID (Hex, Little Endian)\r\n        </d" +
                     "t>\r\n        <dd>\r\n            ");
             
-            #line 35 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.IDHexLittleEndian));
             
             #line default
@@ -69,7 +62,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n        \r\n        <dt>\r\n            Type\r\n        </dt>\r\n       " +
                     " <dd>\r\n            ");
             
-            #line 42 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 37 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.TypeName));
             
             #line default
@@ -77,7 +70,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Range (Tiles)\r\n        </dt>\r\n      " +
                     "  <dd>\r\n            ");
             
-            #line 49 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 44 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.TilesCount));
             
             #line default
@@ -85,7 +78,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Cuts Corners\r\n        </dt>\r\n       " +
                     " <dd>\r\n            ");
             
-            #line 56 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 51 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.CutsCorners));
             
             #line default
@@ -93,7 +86,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Base Damage\r\n        </dt>\r\n        " +
                     "<dd>\r\n            ");
             
-            #line 63 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 58 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.BaseDamage));
             
             #line default
@@ -101,7 +94,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Max Damage\r\n        </dt>\r\n        <" +
                     "dd>\r\n            ");
             
-            #line 70 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 65 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MaxDamage));
             
             #line default
@@ -109,7 +102,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Base PP\r\n        </dt>\r\n        <dd>" +
                     "\r\n            ");
             
-            #line 77 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 72 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.BasePP));
             
             #line default
@@ -117,7 +110,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Max PP\r\n        </dt>\r\n        <dd>\r" +
                     "\n            ");
             
-            #line 84 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 79 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MaxPP));
             
             #line default
@@ -125,7 +118,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Base Accuracy\r\n        </dt>\r\n      " +
                     "  <dd>\r\n            ");
             
-            #line 91 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 86 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.BaseAccuracy));
             
             #line default
@@ -133,14 +126,14 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Max Accuracy\r\n        </dt>\r\n       " +
                     " <dd>\r\n            ");
             
-            #line 98 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 93 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MaxAccuracy));
             
             #line default
             #line hidden
             this.Write("\r\n        </dd>\r\n\r\n\r\n    </dl>\r\n</div>\r\n<br />\r\n<br />\r\n");
             
-            #line 106 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 101 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  if (Model.MultiHitData.HitCountMinimum > 1) { 
             
             #line default
@@ -149,7 +142,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
                     "\r\n            <dt>\r\n                Repeat Until First Miss\r\n            </dt>\r\n" +
                     "\r\n            <dd>\r\n                ");
             
-            #line 115 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 110 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MultiHitData.RepeatUntilMiss));
             
             #line default
@@ -157,7 +150,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n            </dd>\r\n\r\n            <dt>\r\n                Minimum Hits\r\n          " +
                     "  </dt>\r\n\r\n            <dd>\r\n                ");
             
-            #line 123 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 118 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MultiHitData.HitCountMinimum));
             
             #line default
@@ -165,14 +158,14 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("\r\n            </dd>\r\n\r\n            <dt>\r\n                Maximum Hits\r\n          " +
                     "  </dt>\r\n\r\n            <dd>\r\n                ");
             
-            #line 131 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 126 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MultiHitData.HitCountMaximum));
             
             #line default
             #line hidden
             this.Write("\r\n            </dd>\r\n\r\n            ");
             
-            #line 134 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 129 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  if (Model.MultiHitData.HitChance2 > 0) { 
             
             #line default
@@ -180,21 +173,21 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("                <dt>\r\n                    2nd Hit Chance\r\n                </dt>\r\n" +
                     "                <dd>\r\n                    ");
             
-            #line 139 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 134 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MultiHitData.HitChance2));
             
             #line default
             #line hidden
             this.Write("%\r\n                </dd>\r\n            ");
             
-            #line 141 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 136 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n            ");
             
-            #line 143 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 138 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  if (Model.MultiHitData.HitChance3 > 0)
             { 
             
@@ -203,21 +196,21 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("                <dt>\r\n                    3rd Hit Chance\r\n                </dt>\r\n" +
                     "                <dd>\r\n                    ");
             
-            #line 149 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 144 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MultiHitData.HitChance3));
             
             #line default
             #line hidden
             this.Write("%\r\n                </dd>\r\n            ");
             
-            #line 151 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 146 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n            ");
             
-            #line 153 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 148 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  if (Model.MultiHitData.HitChance4 > 0)
             { 
             
@@ -226,21 +219,21 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("                <dt>\r\n                    4th Hit Chance\r\n                </dt>\r\n" +
                     "                <dd>\r\n                    ");
             
-            #line 159 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 154 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MultiHitData.HitChance4));
             
             #line default
             #line hidden
             this.Write("%\r\n                </dd>\r\n            ");
             
-            #line 161 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 156 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n            ");
             
-            #line 163 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 158 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  if (Model.MultiHitData.HitChance5 > 0)
             { 
             
@@ -249,21 +242,21 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             this.Write("                <dt>\r\n                    5th Hit Chance\r\n                </dt>\r\n" +
                     "                <dd>\r\n                    ");
             
-            #line 169 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 164 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MultiHitData.HitChance5));
             
             #line default
             #line hidden
             this.Write("%\r\n                </dd>\r\n            ");
             
-            #line 171 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 166 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("        </dl>\r\n    </div>\r\n");
             
-            #line 174 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 169 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  } 
             
             #line default
@@ -290,7 +283,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
         </tr>
         ");
             
-            #line 195 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 190 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  foreach (var item in Model.PokemonLevelUp)
         { 
             
@@ -298,51 +291,58 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             #line hidden
             this.Write("            <tr>\r\n                <td>\r\n                    ");
             
-            #line 199 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 194 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 202 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 197 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.IDHexBigEndian));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 205 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 200 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.IDHexLittleEndian));
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
+            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"pkm-");
             
-            #line 208 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../../pokemon/{0}/\">{1}</a>", item.ID, item.Name)));
+            #line 203 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
+            this.Write("\"}\'>");
             
-            #line 211 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 203 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n                </td>\r\n                <td>\r\n                    ");
+            
+            #line 206 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", item.Levels)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n            </tr>\r\n        ");
             
-            #line 214 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+            #line 209 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("    </Table>\r\n\r\n</div>\r\n<p>\r\n    <a href=\"..\">Back to List</a>\r\n</p>");
+            this.Write("    </Table>\r\n\r\n</div>");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
+        #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
 
 private global::ProjectPokemon.Pokedex.Models.PSMD.MoveDetailsViewModel _ModelField;
 

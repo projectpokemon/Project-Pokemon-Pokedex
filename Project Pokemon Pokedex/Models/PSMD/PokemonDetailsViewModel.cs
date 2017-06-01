@@ -59,6 +59,8 @@ namespace ProjectPokemon.Pokedex.Models.PSMD
             AbilityHiddenID = Pkm.AbilityHidden;
             Type1 = context.Types.First(x => Pkm.Type1 == x.ID).Name;
             Type2 = context.Types.First(x => Pkm.Type2 == x.ID).Name;
+            Type1ID = Pkm.Type1;
+            Type2ID = Pkm.Type2;
             IsMegaEvolution = (Pkm.IsMegaEvolution > 0);
             MinEvolveLevel = Pkm.MinEvolveLevel;
 
@@ -134,6 +136,8 @@ namespace ProjectPokemon.Pokedex.Models.PSMD
         public string AbilityHidden { get; set; }
         public string Type1 { get; set; }
         public string Type2 { get; set; }
+        public int Type1ID { get; set; }
+        public int Type2ID { get; set; }
         public bool IsMegaEvolution { get; set; }
         public byte MinEvolveLevel { get; set; }
         public List<MoveLevelUp> MovesLevelUp { get; set; }
