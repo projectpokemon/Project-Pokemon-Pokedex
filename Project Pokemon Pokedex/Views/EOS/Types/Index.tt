@@ -4,11 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.EOS.PkmType>" name="Model" #>
-<?php
-    $title = "Typedex";
-    $cssFiles = array("../style.css");
-?>
-
 <h2>Types</h2>
 
 <table class="table">
@@ -35,6 +30,7 @@
             </td>
             <td>
                 <#= string.Format("<a href=\"{0}/\">{1}</a>", item.ID, item.Name) #>
+				<a href='{page="type-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>

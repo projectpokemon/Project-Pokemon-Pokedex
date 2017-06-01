@@ -959,7 +959,7 @@ namespace ProjectPokemon.Pokedex
             return resultText;
         }
 
-        static void BuildSM(string smPath, string outputPath)
+        static void BuildSM(string smPath, string outputFilename)
         {
             // Extract ROM if needed
             var tempDir = "smROM";
@@ -971,27 +971,28 @@ namespace ProjectPokemon.Pokedex
                     Directory.CreateDirectory(tempDir);
                 }
                 RunProgram("3dstool.exe", $"-xtf 3ds \"{smPath}\" -0 Partition0.bin");
-                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin");
+                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin --exefs ExeFS.bin");
                 RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
+                RunProgram("3dstool.exe", $"-xutf exefs ExeFS.bin --exefs-dir \"{tempDir}/ExeFS\"");
                 File.Delete("Partition0.bin");
                 File.Delete("RomFS.bin");
-
+                File.Delete("ExeFS.bin");
                 smPath = tempDir;
-            }
-
-            // Create output directory
-            if (!Directory.Exists(outputPath))
-            {
-                Directory.CreateDirectory(outputPath);
             }
 
             var data = LoadSunMoonData(smPath);
 
-            // To-Do: Build views
-            throw new NotImplementedException();
+            var output = new List<Category>();
+            File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
+
+            // Cleanup
+            if (Directory.Exists(tempDir))
+            {
+                Directory.Delete(tempDir, true);
+            }
         }
 
-        static async Task BuildEOS(string eosPath, string outputPath)
+        static async Task BuildEOS(string eosPath, string outputFilename)
         {
             var provider = new PhysicalIOProvider();
             var romDir = "eos-rawfiles";
@@ -1003,7 +1004,78 @@ namespace ProjectPokemon.Pokedex
 
             var data = await LoadEosData(romDir);
 
-            throw new NotImplementedException();
+            var output = new List<Category>();
+
+            // Pokemon
+            var catPkm = new Category();
+            catPkm.Name = "Pokémon";
+            catPkm.Records = new List<Record>();
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Index>(data.Pokemon),
+                InternalName = $"pkm-index"
+            });
+            foreach (var item in data.Pokemon)
+            {
+                catPkm.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Details>(item),
+                    InternalName = $"pkm-" + item.ID
+                });
+            }
+            output.Add(catPkm);
+
+            // Moves
+            var catMoves = new Category();
+            catMoves.Name = "Moves";
+            catMoves.Records = new List<Record>();
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.EOS.Moves.Index>(data.Moves),
+                InternalName = $"move-index"
+            });
+            foreach (var item in data.Moves)
+            {
+                catPkm.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.EOS.Moves.Details>(item),
+                    InternalName = $"move-" + item.ID
+                });
+            }
+            output.Add(catMoves);
+
+            // Types
+            var catTypes = new Category();
+            catTypes.Name = "Types";
+            catTypes.Records = new List<Record>();
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.EOS.Types.Index>(data.Types),
+                InternalName = $"type-index"
+            });
+            foreach (var item in data.Types)
+            {
+                catPkm.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.EOS.Types.Details>(item),
+                    InternalName = $"type-" + item.ID
+                });
+            }
+            output.Add(catTypes);
+
+            File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
+
+            // Cleanup
+            if (Directory.Exists(romDir))
+            {
+                Directory.Delete(romDir, true);
+            }
         }
 
         static async Task BuildPSMD(string psmdPath, string outputFilename)
@@ -1018,11 +1090,12 @@ namespace ProjectPokemon.Pokedex
                     Directory.CreateDirectory(tempDir);
                 }
                 RunProgram("3dstool.exe", $"-xtf 3ds \"{psmdPath}\" -0 Partition0.bin");
-                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin");
+                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin --exefs ExeFS.bin");
                 RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
+                RunProgram("3dstool.exe", $"-xutf exefs ExeFS.bin --exefs-dir=\"{tempDir}/ExeFS\"");
                 File.Delete("Partition0.bin");
                 File.Delete("RomFS.bin");
-
+                File.Delete("ExeFS.bin");
                 psmdPath = tempDir;
             }            
 
@@ -1030,37 +1103,120 @@ namespace ProjectPokemon.Pokedex
 
             var output = new List<Category>();
 
+            // Pokemon
             var catPkm = new Category();
             catPkm.Name = "Pokémon";
             catPkm.Records = new List<Record>();
-
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.PSMD.Pokemon.Index>(data.Pokemon),
+                InternalName = "pkm-index"
+            });
             foreach (var item in data.Pokemon)
             {
-                var record = new Record();
-                record.Title = item.Name;
-                record.Content = BuildAndReturnTemplate<Views.PSMD.Pokemon.Details>(new PokemonDetailsViewModel(item, data));
-                record.InternalName = $"pkm-" + item.ID;
-                catPkm.Records.Add(record);
+                catPkm.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.PSMD.Pokemon.Details>(new PokemonDetailsViewModel(item, data)),
+                    InternalName = $"pkm-" + item.ID
+                });
             }
             output.Add(catPkm);
 
+            // Moves
+            var catMoves = new Category();
+            catMoves.Name = "Moves";
+            catMoves.Records = new List<Record>();
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.PSMD.Moves.Index>(data.Moves),
+                InternalName = "move-index"
+            });
+            foreach (var item in data.Moves)
+            {
+                catPkm.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.PSMD.Moves.Details>(new MoveDetailsViewModel(item, data)),
+                    InternalName = $"move-" + item.ID,
+                });
+            }
+            output.Add(catMoves);
+
+            // Abilities
+            var catAbilities = new Category();
+            catAbilities.Name = "Abilities";
+            catAbilities.Records = new List<Record>();
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.PSMD.Abilities.Index>(data.Abilities),
+                InternalName = "ability-index"
+            });
+            foreach (var item in data.Abilities)
+            {
+                catPkm.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.PSMD.Abilities.Details>(new AbilityDetailsViewModel(item, data)),
+                    InternalName = $"ability-" + item.ID,
+                });
+            }
+            output.Add(catAbilities);
+
+            // Types
+            var catTypes = new Category();
+            catTypes.Name = "Types";
+            catTypes.Records = new List<Record>();
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.PSMD.Types.Index>(data.Types),
+                InternalName = "type-index"
+            });
+            foreach (var item in data.Types)
+            {
+                catPkm.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.PSMD.Types.Details>(new TypeDetailsViewModel(item, data)),
+                    InternalName = $"type-" + item.ID
+                });
+            }
+            output.Add(catTypes);
+
             File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
+
+            // Cleanup
+            if (Directory.Exists(tempDir))
+            {
+                Directory.Delete(tempDir, true);
+            }
         }
 
         static void Main(string[] args)
         {
-            var eosPath = args[0];
-            var psmdPath = args[1];
-            var smPath = args[2];
-            var outputPath = args[3];
+            var name = args[0];
+            var filename = args[1];
+            var outputFilename = args[2];
 
-            // Create output directory
-            if (!Directory.Exists(outputPath))
+            switch (name.ToLower())
             {
-                Directory.CreateDirectory(outputPath);
-            }
-
-            BuildPSMD(psmdPath, Path.Combine(outputPath, "psmd.ipsdb")).Wait();
+                case "moon":
+                    BuildSM(filename, outputFilename);
+                    break;
+                case "psmd":
+                    BuildPSMD(filename, outputFilename).Wait();
+                    break;
+                case "eos":
+                    BuildEOS(filename, outputFilename).Wait();
+                    break;
+                default:
+                    Console.WriteLine("Usage: ProjectPokemonPokedex.exe <eos|psmd|moon> <RomFilename> <OutputFilename>");
+                    break;
+            }            
         }
     }
 }

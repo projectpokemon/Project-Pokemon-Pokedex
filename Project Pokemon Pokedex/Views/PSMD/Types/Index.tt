@@ -4,11 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.PSMD.PkmType>" name="Model" #>
-<?php
-    $title = "Typedex";
-    $cssFiles = array("../style.css");
-?>
-
 <h2>Types</h2>
 
 <table class="table">
@@ -34,7 +29,7 @@
                 <#= string.Format("0x{0}", hex) #>
             </td>
             <td>
-                <#= string.Format("<a href=\"{0}/\">{1}</a>", item.ID, item.Name) #>
+				<a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>

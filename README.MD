@@ -38,9 +38,7 @@ https://www.myget.org/F/skyeditor/api/v3/index.json
 Current usage is as follows:
 
 ```
-ProjectPokemonPokedex.exe <Eos Rom Path> <PSMD Rom Path> <Sun/Moon Rom Path> <Output Directory>
+ProjectPokemonPokedex.exe <eos|psmd|moon> <RomFilename> <OutputFilename>
 ```
-
-The above usage _will_ change in the near future.
 
 The output of this program is a JSON text file that will be used by a closed-source program to publish to Project Pokémon.

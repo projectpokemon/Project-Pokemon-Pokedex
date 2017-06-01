@@ -4,11 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.EOS.Move>" name="Model" #>
-<?php
-    $title = "Movedex";
-    $cssFiles = array("../style.css");
-?>
-
 <h2>Moves</h2>
 
 <table class="table">
@@ -41,7 +36,7 @@
                 <#= string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2)) #>
             </td>
             <td>
-                <#= string.Format("<a href=\"{0}/\">{1}</a>", item.ID, item.Name) #>
+                <a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>

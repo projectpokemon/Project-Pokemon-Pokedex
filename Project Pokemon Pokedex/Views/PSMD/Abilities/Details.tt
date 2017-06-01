@@ -4,11 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.PSMD.AbilityDetailsViewModel" name="Model" #>
-<?php
-    $title = "<#= Model.Name #>";
-    $cssFiles = array("../../style.css");
-?>
-
 <h2><#= Model.Name #></h2>
 
 <div>
@@ -67,7 +62,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    <#= string.Format("<a href=\"../../pokemon/{0}/\">{1}</a>", item.ID, item.Name) #>
+					<a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>
@@ -103,7 +98,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    <#= string.Format("<a href=\"../../pokemon/{0}\">{1}</a>", item.ID, item.Name) #>
+                    <a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>
@@ -139,12 +134,9 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    <#= string.Format("<a href=\"../../pokemon/{0}\">{1}</a>", item.ID, item.Name) #>
+                    <a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>
     </table>
 </div>
-<p>
-    <a href="..">Back to List</a>
-</p>

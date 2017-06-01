@@ -78,7 +78,7 @@
         </dt>
 
         <dd>
-            <#= string.Format("<a href=\"../../abilities/{0}/\">{1}</a>", Model.Ability1ID, Model.Ability1) #>
+			<a href='{page="ability-<#=Model.Ability1ID #>"}'><#=Model.Ability1 #></a>
         </dd>
 
         <dt>
@@ -86,7 +86,7 @@
         </dt>
 
         <dd>
-            <#= string.Format("<a href=\"../../abilities/{0}/\">{1}</a>", Model.Ability2ID, Model.Ability2) #>
+            <a href='{page="ability-<#=Model.Ability2ID #>"}'><#=Model.Ability2 #></a>
         </dd>
 
         <dt>
@@ -94,7 +94,7 @@
         </dt>
 
         <dd>
-            <#= string.Format("<a href=\"../../abilities/{0}/\">{1}</a>", Model.AbilityHiddenID, Model.AbilityHidden) #>
+            <a href='{page="ability-<#=Model.AbilityHiddenID #>"}'><#=Model.AbilityHidden #></a>
         </dd>
 
         <dt>
@@ -102,7 +102,7 @@
         </dt>
 
         <dd>
-            <#= Model.Type1 #>
+			<a href='{page="type-<#=Model.Type1ID #>"}'><#=Model.Type1 #></a>
         </dd>
 
         <dt>
@@ -110,7 +110,7 @@
         </dt>
 
         <dd>
-            <#= Model.Type2 #>
+            <a href='{page="type-<#=Model.Type2ID #>"}'><#=Model.Type2 #></a>
         </dd>
 
         <dt>
@@ -145,7 +145,7 @@
                     <#= item.Level.ToString() #>
                 </td>
                 <td>
-                    <#= string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.MoveID, item.MoveName) #>
+					<a href='{page="move-<#=item.MoveID #>"}'><#=item.MoveName #></a>
                 </td>
             </tr>            
         <# } #>
@@ -195,6 +195,3 @@
         <# } #>
     </table>
 </div>
-<p>
-    <a href="..">Back to List</a>
-</p>

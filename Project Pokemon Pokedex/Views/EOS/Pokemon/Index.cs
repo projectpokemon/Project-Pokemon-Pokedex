@@ -18,7 +18,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
+    #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class Index : IndexBase
     {
@@ -56,7 +56,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
 
     ");
             
-            #line 33 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
+            #line 33 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
  foreach (var item in Model) {
         var hex = item.ID.ToString("X").PadLeft(4, '0');
         
@@ -65,42 +65,49 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             #line hidden
             this.Write("<tr>\r\n            <td>\r\n                ");
             
-            #line 37 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
+            #line 37 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID.ToString()));
             
             #line default
             #line hidden
             this.Write("\r\n            </td>\r\n            <td>\r\n                ");
             
-            #line 40 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
+            #line 40 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("0x{0}", hex)));
             
             #line default
             #line hidden
             this.Write("\r\n            </td>\r\n            <td>\r\n                ");
             
-            #line 43 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
+            #line 43 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2))));
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n                ");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"pkm-");
             
-            #line 46 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"{0}/\">{1}</a>", item.ID, item.Name)));
+            #line 46 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n                ");
+            this.Write("\"}\'>");
             
-            #line 49 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
+            #line 46 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n            </td>\r\n            <td>\r\n                ");
+            
+            #line 49 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.DexNumber.ToString()));
             
             #line default
             #line hidden
             this.Write("\r\n            </td>\r\n        </tr>\r\n    ");
             
-            #line 52 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
+            #line 52 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
  } 
             
             #line default
@@ -109,7 +116,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\Users\evanl\Git\MysteryDungeon-RawDB\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
+        #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
 
 private global::System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.EOS.Pokemon> _ModelField;
 

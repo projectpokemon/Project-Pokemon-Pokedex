@@ -4,11 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.PSMD.Ability>" name="Model" #>
-<?php
-    $title = "Abilitydex";
-    $cssFiles = array("../style.css");
-?>
-
 <h2>Abilities</h2>
 
 <table class="table">
@@ -41,7 +36,7 @@
                 <#= string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2)) #>
             </td>
             <td>
-                <#= string.Format("<a href=\"{0}/\">{1}</a>", item.ID, item.Name) #>
+				<a href='{page="ability-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>
