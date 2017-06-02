@@ -106,7 +106,7 @@
     </dd>
 
 	<dt>
-		<# if (Model.Type2.ID > 0) { #>
+		<# if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID) { #>
         Types
 		<# } else { #>
 		Type
@@ -114,7 +114,7 @@
     </dt>
     <dd>
 		<a href="{page="type-<#=Model.Type1.ID #>"}"><#= Model.Type1.Name #></a>
-		<# if (Model.Type2.ID > 0) { #>
+		<# if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID) { #>
 		<a href="{page="type-<#=Model.Type2.ID #>"}"><#= Model.Type2.Name #></a>
 		<# } #>
     </dd>	
@@ -203,6 +203,20 @@
     </dd>
 
 	<dt>
+		<# if (Model.EggGroup1 != Model.EggGroup2) { #>
+        Egg Groups
+		<# } else { #>
+		Egg Group
+		<# } #>
+    </dt>
+    <dd>
+		<#= Model.EggGroup1 #> 
+		<# if (Model.EggGroup1 != Model.EggGroup2) { #>
+		<#= Model.EggGroup2 #>
+		<# } #>
+    </dd>
+
+	<dt>
         Ability 1
     </dt>
     <dd>
@@ -259,13 +273,6 @@
     </dd>
 
 	<dt>
-        ID
-    </dt>
-    <dd>
-        <#= Model.ID #>
-    </dd>
-
-	<dt>
         Height
     </dt>
     <dd>
@@ -293,26 +300,32 @@
         <#= Model.LocalVariant #>
     </dd>
 
+	<# if (Model.ZItem.ID > 0) { #>
 	<dt>
         Z Item
     </dt>
     <dd>
         <a href="{page="item-<#=Model.ZItem.ID #>"}"><#= Model.ZItem.Name #></a>
     </dd>
+	<# } #>
 
+	<# if (Model.ZBaseMove.ID > 0) { #>
 	<dt>
         Z Base Move
     </dt>
     <dd>
         <a href="{page="move-<#=Model.ZBaseMove.ID #>"}"><#= Model.ZBaseMove.Name #></a>
     </dd>
+	<# } #>
 
+	<# if (Model.ZItem.ID > 0) { #>
 	<dt>
         Z Move
     </dt>
     <dd>
         <a href="{page="move-<#=Model.ZMove.ID #>"}"><#= Model.ZMove.Name #></a>
     </dd>
+	<# } #>
 
 </dl>
 

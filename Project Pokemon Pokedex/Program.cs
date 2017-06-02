@@ -576,7 +576,7 @@ namespace ProjectPokemon.Pokedex
                 }
                 else
                 {
-                    pkm.Name = "Unknown";
+                    pkm.Name = "(Unnamed)";
                 }
 
                 // Stats
@@ -681,6 +681,12 @@ namespace ProjectPokemon.Pokedex
                 var currentEvolutionMethods = new List<Models.Gen7.EvolutionMethod>();
                 for (int i = 0; i < evo.PossibleEvolutions.Length; i++)
                 {
+                    if (evo.PossibleEvolutions[i].Argument == 0 && evo.PossibleEvolutions[i].Form == 0 && evo.PossibleEvolutions[i].Level == 0 && evo.PossibleEvolutions[i].Method == 0 && evo.PossibleEvolutions[i].Species == 0)
+                    {
+                        // Method is null
+                        continue;
+                    }
+
                     var evoMethod = new Models.Gen7.EvolutionMethod();
                     evoMethod.Form = evo.PossibleEvolutions[i].Form;
                     evoMethod.Level = evo.PossibleEvolutions[i].Level;
