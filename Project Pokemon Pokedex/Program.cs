@@ -1047,7 +1047,7 @@ namespace ProjectPokemon.Pokedex
             {
                 catPkm.Records.Add(new Record
                 {
-                    Title = item.Name,
+                    Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
                     Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Details>(item),
                     InternalName = $"pkm-" + item.ID
                 });
@@ -1144,7 +1144,7 @@ namespace ProjectPokemon.Pokedex
             {
                 catPkm.Records.Add(new Record
                 {
-                    Title = item.Name,
+                    Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
                     Content = BuildAndReturnTemplate<Views.PSMD.Pokemon.Details>(new PokemonDetailsViewModel(item, data)),
                     InternalName = $"pkm-" + item.ID
                 });
