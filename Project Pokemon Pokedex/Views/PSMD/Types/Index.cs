@@ -65,7 +65,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Types
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"pkm-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"psmd-pkm-");
             
             #line 32 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Types\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

@@ -101,7 +101,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Types
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"pkm-");
+            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"psmd-pkm-");
             
             #line 56 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Types\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -135,7 +135,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Types
                 ID (Hex)
             </th>
             <th>
-                MOve
+                Move
             </th>
         </tr>
         ");
@@ -160,7 +160,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Types
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"move-");
+            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"psmd-move-");
             
             #line 86 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Types\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

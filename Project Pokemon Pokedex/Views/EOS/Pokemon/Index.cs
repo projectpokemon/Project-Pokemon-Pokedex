@@ -84,7 +84,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"pkm-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"eos-pkm-");
             
             #line 46 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

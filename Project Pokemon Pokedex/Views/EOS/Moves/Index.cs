@@ -76,7 +76,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Moves
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n                <a href=\'{page=\"move-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n                <a href=\'{page=\"eos-move-");
             
             #line 39 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Moves\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

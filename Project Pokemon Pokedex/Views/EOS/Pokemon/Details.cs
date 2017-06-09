@@ -68,7 +68,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             #line default
             #line hidden
             this.Write("\r\n        </dd>\r\n\r\n\r\n        <dt>\r\n            Evolves From\r\n        </dt>\r\n\r\n   " +
-                    "     <dd>\r\n\t\t\t<a href=\'{page=\"pkm-");
+                    "     <dd>\r\n\t\t\t<a href=\'{page=\"eos-pkm-");
             
             #line 50 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.EvolveFromID));
@@ -214,7 +214,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"eos-move-");
             
             #line 174 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Item2.ID));
@@ -244,7 +244,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             
             #line default
             #line hidden
-            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"eos-move-");
             
             #line 190 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -274,7 +274,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             
             #line default
             #line hidden
-            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"eos-move-");
             
             #line 206 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

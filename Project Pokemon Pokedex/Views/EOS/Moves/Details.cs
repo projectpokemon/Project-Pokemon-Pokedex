@@ -60,7 +60,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Moves
             #line default
             #line hidden
             this.Write("\r\n        </dd>\r\n        \r\n        <dt>\r\n            Type\r\n        </dt>\r\n       " +
-                    " <dd>\r\n\t\t\t<a href=\'{page=\"type-");
+                    " <dd>\r\n\t\t\t<a href=\'{page=\"eos-type-");
             
             #line 37 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.TypeID));
@@ -161,7 +161,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Moves
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    <a href=\'{page" +
-                    "=\"pkm-");
+                    "=\"eos-pkm-");
             
             #line 103 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -238,7 +238,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Moves
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    <a href=\'{page" +
-                    "=\"pkm-");
+                    "=\"eos-pkm-");
             
             #line 142 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -308,7 +308,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Moves
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    <a href=\'{page" +
-                    "=\"pkm-");
+                    "=\"eos-pkm-");
             
             #line 178 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

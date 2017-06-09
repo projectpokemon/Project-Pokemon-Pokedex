@@ -310,7 +310,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"pkm-");
+            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"psmd-pkm-");
             
             #line 203 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

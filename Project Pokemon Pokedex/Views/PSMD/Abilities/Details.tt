@@ -62,7 +62,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-					<a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
+					<a href='{page="psmd-pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>
@@ -98,7 +98,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    <a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
+                    <a href='{page="psmd-pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>
@@ -134,7 +134,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    <a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
+                    <a href='{page="psmd-pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>
