@@ -482,7 +482,7 @@ namespace ProjectPokemon.Pokedex
             var EXPGroups = new string[] { "Medium-Fast", "Erratic", "Fluctuating", "Medium-Slow", "Fast", "Slow" };
             var eggGroups = new string[] { "---", "Monster", "Water 1", "Bug", "Flying", "Field", "Fairy", "Grass", "Human-Like", "Water 3", "Mineral", "Amorphous", "Water 2", "Ditto", "Dragon", "Undiscovered" };
             var colors = new string[] { "Red", "Blue", "Yellow", "Green", "Black", "Brown", "Purple", "Gray", "White", "Pink" };
-            var tutormoves = new ushort[] { 520, 519, 518, 338, 307, 308, 434, 620 };
+            var tutormoves = new ushort[] { 520, 519, 518, 338, 307, 308, 434, 620 };            
 
             // Load TMs
             var TMs = new ushort[0];
@@ -492,8 +492,9 @@ namespace ProjectPokemon.Pokedex
             // - Load Level-up GARC
             var levelupGarcFiles = config.getGARCData("levelup").Files;
             int[] baseForms, formVal;
-            string[][] AltForms = config.Personal.getFormList(species, config.MaxSpeciesID);
-            string[] specieslist = config.Personal.getPersonalEntryList(AltForms, species, config.MaxSpeciesID, out baseForms, out formVal);
+            string[][] altForms = config.Personal.getFormList(species, config.MaxSpeciesID);
+            string[] specieslist = config.Personal.getPersonalEntryList(altForms, species, config.MaxSpeciesID, out baseForms, out formVal);
+            var pokemonEntryNames = config.Personal.getPersonalEntryList(altForms, species, config.MaxSpeciesID, out baseForms, out formVal);
 
             // - Load Egg move GARC
             var eggmoveGarcFiles = config.getGARCData("eggmove").Files;
@@ -570,9 +571,9 @@ namespace ProjectPokemon.Pokedex
                 var pkm = new Models.Gen7.Pokemon();
 
                 pkm.ID = pkms.Count;
-                if (species.Length > pkm.ID)
+                if (pokemonEntryNames.Length > pkm.ID)
                 {
-                    pkm.Name = species[pkm.ID];
+                    pkm.Name = pokemonEntryNames[pkm.ID];
                 }
                 else
                 {
@@ -1046,7 +1047,7 @@ namespace ProjectPokemon.Pokedex
             {
                 catPkm.Records.Add(new Record
                 {
-                    Title = item.Name,
+                    Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
                     Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Details>(item),
                     InternalName = $"pkm-" + item.ID
                 });
@@ -1143,7 +1144,7 @@ namespace ProjectPokemon.Pokedex
             {
                 catPkm.Records.Add(new Record
                 {
-                    Title = item.Name,
+                    Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
                     Content = BuildAndReturnTemplate<Views.PSMD.Pokemon.Details>(new PokemonDetailsViewModel(item, data)),
                     InternalName = $"pkm-" + item.ID
                 });
