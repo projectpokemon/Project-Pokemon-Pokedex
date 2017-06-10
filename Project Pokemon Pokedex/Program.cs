@@ -1008,6 +1008,12 @@ namespace ProjectPokemon.Pokedex
                     InternalName = $"gen7-pkm-" + item.ID
                 });
             }
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.Gen7.Pokemon.Index>(data.Pokemon),
+                InternalName = "gen7-pkm-index"
+            });
             output.Add(catPkm);
 
             var catMove = new Category();
@@ -1021,6 +1027,12 @@ namespace ProjectPokemon.Pokedex
                     InternalName = "gen7-move-" + item.ID
                 });
             }
+            catMove.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.Gen7.Moves.Index>(data.Moves),
+                InternalName = "gen7-move-index"
+            });
             output.Add(catMove);
 
             File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
