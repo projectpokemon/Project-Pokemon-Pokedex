@@ -1,0 +1,288 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Move" name="Model" #>
+<h2><#= Model.Name #></h2>
+<h3>Details</h3>
+<dl class="dl-horizontal">
+    <dt>
+        ID
+    </dt>
+    <dd>
+        <#= Model.ID #>
+    </dd>
+
+	<dt>
+        Name
+    </dt>
+    <dd>
+        <#= Model.Name #>
+    </dd>
+
+	<dt>
+        Description
+    </dt>
+    <dd>
+        <#= Model.Description #>
+    </dd>
+
+	<dt>
+        Type
+    </dt>
+    <dd>
+        <#= Model.Type #>
+    </dd>
+
+	<dt>
+        Qualities
+    </dt>
+    <dd>
+        <#= Model.Qualities #>
+    </dd>
+
+	<dt>
+        Category
+    </dt>
+    <dd>
+        <#= Model.Category #>
+    </dd>
+
+	<dt>
+        Power
+    </dt>
+    <dd>
+        <#= Model.Power #>
+    </dd>
+
+	<dt>
+        Accuracy
+    </dt>
+    <dd>
+        <#= Model.Accuracy #>
+    </dd>
+
+	<dt>
+        PP
+    </dt>
+    <dd>
+        <#= Model.PP #>
+    </dd>
+
+	<dt>
+        Priority
+    </dt>
+    <dd>
+        <#= Model.Priority #>
+    </dd>
+
+	<dt>
+        HitMin
+    </dt>
+    <dd>
+        <#= Model.HitMin #>
+    </dd>
+
+	<dt>
+        HitMax
+    </dt>
+    <dd>
+        <#= Model.HitMax #>
+    </dd>
+
+	<dt>
+        Inflict
+    </dt>
+    <dd>
+        <#= Model.Inflict #>
+    </dd>
+
+	<dt>
+        InflictChance
+    </dt>
+    <dd>
+        <#= Model.InflictChance #>
+    </dd>
+
+	<dt>
+        TurnMin
+    </dt>
+    <dd>
+        <#= Model.TurnMin #>
+    </dd>
+
+	<dt>
+        TurnMax
+    </dt>
+    <dd>
+        <#= Model.TurnMax #>
+    </dd>
+
+	<dt>
+        CritStage
+    </dt>
+    <dd>
+        <#= Model.CritStage #>
+    </dd>
+
+	<dt>
+        Flinch
+    </dt>
+    <dd>
+        <#= Model.Flinch #>
+    </dd>
+
+	<dt>
+        Effect
+    </dt>
+    <dd>
+        <#= Model.Effect #>
+    </dd>
+
+	<dt>
+        Recoil
+    </dt>
+    <dd>
+        <#= Model.Recoil #>
+    </dd>
+
+	<dt>
+        Heal
+    </dt>
+    <dd>
+        <#= Model.Heal #>
+    </dd>
+
+	<dt>
+        Targeting
+    </dt>
+    <dd>
+        <#= Model.Targeting #>
+    </dd>
+
+	<dt>
+        Stat1
+    </dt>
+    <dd>
+        <#= Model.Stat1 #>
+    </dd>
+
+	<dt>
+        Stat2
+    </dt>
+    <dd>
+        <#= Model.Stat2 #>
+    </dd>
+
+	<dt>
+        Stat3
+    </dt>
+    <dd>
+        <#= Model.Stat3 #>
+    </dd>
+
+	<dt>
+        Stat1Num
+    </dt>
+    <dd>
+        <#= Model.Stat1Num #>
+    </dd>
+
+	<dt>
+        Stat2Num
+    </dt>
+    <dd>
+        <#= Model.Stat2Num #>
+    </dd>
+
+	<dt>
+        Stat3Num
+    </dt>
+    <dd>
+        <#= Model.Stat3Num #>
+    </dd>
+
+	<dt>
+        Stat1Percent
+    </dt>
+    <dd>
+        <#= Model.Stat1Percent #>
+    </dd>
+
+	<dt>
+        Stat2Percent
+    </dt>
+    <dd>
+        <#= Model.Stat2Percent #>
+    </dd>
+
+	<dt>
+        Stat3Percent
+    </dt>
+    <dd>
+        <#= Model.Stat3Percent #>
+    </dd>
+	
+</dl>
+
+<h3>Pokémon Through Level-Up</h3>
+<table class="table">
+    <tr>
+        <th>Level</th>
+        <th>Move</th>
+    </tr>
+    <# foreach (var item in Model.PokemonThroughLevelUp)
+    { #>
+        <tr>
+            <td>
+                <#= item.Level #>
+            </td>
+            <td>
+				<a href='{page="gen7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+</table>
+<h3>Pokémon Through TM</h3>
+<table class="table">
+    <tr>
+        <th>Move</th>
+    </tr>
+    <# foreach (var item in Model.PokemonThroughTM)
+    { #>
+        <tr>
+            <td>
+				<a href='{page="gen7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+</table>
+<h3>Pokémon Through Egg</h3>
+<table class="table">
+    <tr>
+        <th>Move</th>
+    </tr>
+    <# foreach (var item in Model.PokemonThroughEgg)
+    { #>
+        <tr>
+            <td>
+				<a href='{page="gen7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+</table>
+<h3>Pokémon Through Tutor</h3>
+<table class="table">
+    <tr>
+        <th>Move</th>
+    </tr>
+    <# foreach (var item in Model.PokemonThroughTutor)
+    { #>
+        <tr>
+            <td>
+				<a href='{page="gen7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+</table>

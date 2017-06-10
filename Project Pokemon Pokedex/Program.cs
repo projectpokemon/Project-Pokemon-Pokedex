@@ -1010,6 +1010,19 @@ namespace ProjectPokemon.Pokedex
             }
             output.Add(catPkm);
 
+            var catMove = new Category();
+            catMove.Name = "Gen7-Moves";
+            catMove.Records = new List<Record>();
+            foreach (var item in data.Moves)
+            {
+                catMove.Records.Add(new Record {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.Gen7.Moves.Details>(item),
+                    InternalName = "gen7-move-" + item.ID
+                });
+            }
+            output.Add(catMove);
+
             File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
 
             // Cleanup
