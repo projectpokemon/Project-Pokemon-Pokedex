@@ -66,30 +66,23 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Types
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n                ");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"eos-type-");
             
             #line 32 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Index.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"{0}/\">{1}</a>", item.ID, item.Name)));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t\t\t<a href=\'{page=\"type-");
-            
-            #line 33 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 33 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Index.tt"
+            #line 32 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("</a>\r\n            </td>\r\n        </tr>\r\n    ");
             
-            #line 36 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Index.tt"
+            #line 35 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Index.tt"
  } 
             
             #line default

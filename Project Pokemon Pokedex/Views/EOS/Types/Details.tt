@@ -53,7 +53,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-					<a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
+					<a href='{page="eos-pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>
@@ -89,8 +89,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    <#= string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name) #>
-					<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+					<a href='{page="eos-move-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>

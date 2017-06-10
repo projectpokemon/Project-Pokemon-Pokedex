@@ -70,7 +70,7 @@
         </dt>
 
         <dd>
-			<a href='{page="pkm-<#=Model.EvolvesFromEntryID #>"}'><#=Model.EvolvesFromName #></a>
+			<a href='{page="psmd-pkm-<#=Model.EvolvesFromEntryID #>"}'><#=Model.EvolvesFromName #></a>
         </dd>
 
         <dt>
@@ -78,7 +78,7 @@
         </dt>
 
         <dd>
-			<a href='{page="ability-<#=Model.Ability1ID #>"}'><#=Model.Ability1 #></a>
+			<a href='{page="psmd-ability-<#=Model.Ability1ID #>"}'><#=Model.Ability1 #></a>
         </dd>
 
         <dt>
@@ -86,7 +86,7 @@
         </dt>
 
         <dd>
-            <a href='{page="ability-<#=Model.Ability2ID #>"}'><#=Model.Ability2 #></a>
+            <a href='{page="psmd-ability-<#=Model.Ability2ID #>"}'><#=Model.Ability2 #></a>
         </dd>
 
         <dt>
@@ -94,7 +94,7 @@
         </dt>
 
         <dd>
-            <a href='{page="ability-<#=Model.AbilityHiddenID #>"}'><#=Model.AbilityHidden #></a>
+            <a href='{page="psmd-ability-<#=Model.AbilityHiddenID #>"}'><#=Model.AbilityHidden #></a>
         </dd>
 
         <dt>
@@ -102,7 +102,7 @@
         </dt>
 
         <dd>
-			<a href='{page="type-<#=Model.Type1ID #>"}'><#=Model.Type1 #></a>
+			<a href='{page="psmd-type-<#=Model.Type1ID #>"}'><#=Model.Type1 #></a>
         </dd>
 
         <dt>
@@ -110,7 +110,7 @@
         </dt>
 
         <dd>
-            <a href='{page="type-<#=Model.Type2ID #>"}'><#=Model.Type2 #></a>
+            <a href='{page="psmd-type-<#=Model.Type2ID #>"}'><#=Model.Type2 #></a>
         </dd>
 
         <dt>
@@ -145,7 +145,7 @@
                     <#= item.Level.ToString() #>
                 </td>
                 <td>
-					<a href='{page="move-<#=item.MoveID #>"}'><#=item.MoveName #></a>
+					<a href='{page="psmd-move-<#=item.MoveID #>"}'><#=item.MoveName #></a>
                 </td>
             </tr>            
         <# } #>

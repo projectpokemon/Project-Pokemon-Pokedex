@@ -36,7 +36,7 @@
                 <#= string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2))#>
             </td>
             <td>
-				<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="psmd-move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>

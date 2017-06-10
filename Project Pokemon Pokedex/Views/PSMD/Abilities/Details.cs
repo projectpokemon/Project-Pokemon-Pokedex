@@ -110,7 +110,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Abilities
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"pkm-");
+            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"psmd-pkm-");
             
             #line 65 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Abilities\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -180,7 +180,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Abilities
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    <a href=\'{page" +
-                    "=\"pkm-");
+                    "=\"psmd-pkm-");
             
             #line 101 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Abilities\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -250,7 +250,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Abilities
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    <a href=\'{page" +
-                    "=\"pkm-");
+                    "=\"psmd-pkm-");
             
             #line 137 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Abilities\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

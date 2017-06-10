@@ -156,7 +156,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("    </dt>\r\n    <dd>\r\n\t\t<a href=\"{page=\"type-");
+            this.Write("    </dt>\r\n    <dd>\r\n\t\t<a href=\"{page=\"gen7-type-");
             
             #line 116 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Type1.ID));
@@ -177,7 +177,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t<a href=\"{page=\"type-");
+            this.Write("\t\t<a href=\"{page=\"gen7-type-");
             
             #line 118 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Type2.ID));
@@ -219,7 +219,8 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t<dt>\r\n        Held Item 1\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"item-");
+            this.Write("\t<dt>\r\n        Held Item 1\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"gen7-ite" +
+                    "m-");
             
             #line 141 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.HeldItem1.ID));
@@ -247,7 +248,8 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t<dt>\r\n        Held Item 2\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"item-");
+            this.Write("\t<dt>\r\n        Held Item 2\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"gen7-ite" +
+                    "m-");
             
             #line 150 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.HeldItem2.ID));
@@ -275,7 +277,8 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t<dt>\r\n        Held Item 3\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"item-");
+            this.Write("\t<dt>\r\n        Held Item 3\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"gen7-ite" +
+                    "m-");
             
             #line 159 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.HeldItem3.ID));
@@ -388,7 +391,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             #line default
             #line hidden
             this.Write("    </dd>\r\n\r\n\t<dt>\r\n        Ability 1\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{pag" +
-                    "e=\"ability-");
+                    "e=\"gen7-ability-");
             
             #line 223 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Ability1.ID));
@@ -403,7 +406,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             #line default
             #line hidden
             this.Write("</a>\r\n    </dd>\r\n\r\n\t<dt>\r\n        Ability 2\r\n    </dt>\r\n    <dd>\r\n        <a href" +
-                    "=\"{page=\"ability-");
+                    "=\"{page=\"gen7-ability-");
             
             #line 230 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Ability2.ID));
@@ -418,7 +421,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             #line default
             #line hidden
             this.Write("</a>\r\n    </dd>\r\n\r\n\t<dt>\r\n        Hidden Ability\r\n    </dt>\r\n    <dd>\r\n        <a" +
-                    " href=\"{page=\"ability-");
+                    " href=\"{page=\"gen7-ability-");
             
             #line 237 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.AbilityHidden.ID));
@@ -502,7 +505,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t<dt>\r\n        Z Item\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"item-");
+            this.Write("\t<dt>\r\n        Z Item\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"gen7-item-");
             
             #line 308 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ZItem.ID));
@@ -530,7 +533,8 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t<dt>\r\n        Z Base Move\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"move-");
+            this.Write("\t<dt>\r\n        Z Base Move\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"gen7-mov" +
+                    "e-");
             
             #line 317 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ZBaseMove.ID));
@@ -558,7 +562,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t<dt>\r\n        Z Move\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"move-");
+            this.Write("\t<dt>\r\n        Z Move\r\n    </dt>\r\n    <dd>\r\n        <a href=\"{page=\"gen7-move-");
             
             #line 326 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ZMove.ID));
@@ -596,16 +600,16 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
 			methodString = item.Method;
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.PokemonReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"pkm-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"gen7-pkm-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.MoveReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"move-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"gen7-move-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.ItemReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"item-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"gen7-item-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.TypeReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"type-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"gen7-type-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else {
 			methodString = item.Method;
@@ -613,7 +617,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\r\n        <tr>\r\n            <td>\r\n                <a href=\'{page=\"pkm-");
+            this.Write("\t\r\n        <tr>\r\n            <td>\r\n                <a href=\'{page=\"gen7-pkm-");
             
             #line 364 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.TargetPokemon.ID));
@@ -685,7 +689,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-move-");
             
             #line 394 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -729,7 +733,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-move-");
             
             #line 411 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -773,7 +777,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-move-");
             
             #line 428 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -817,7 +821,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-move-");
             
             #line 445 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

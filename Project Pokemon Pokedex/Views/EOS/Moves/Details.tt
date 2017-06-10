@@ -34,7 +34,7 @@
             Type
         </dt>
         <dd>
-			<a href='{page="type-<#=Model.TypeID #>"}'><#=Model.TypeName #></a>
+			<a href='{page="eos-type-<#=Model.TypeID #>"}'><#=Model.TypeName #></a>
         </dd>
 
         <dt>
@@ -100,7 +100,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    <a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
+                    <a href='{page="eos-pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
                 <td>
                     <#= string.Join(", ", item.Levels) #>
@@ -139,7 +139,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    <a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
+                    <a href='{page="eos-pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>
@@ -175,7 +175,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-                    <a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
+                    <a href='{page="eos-pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>

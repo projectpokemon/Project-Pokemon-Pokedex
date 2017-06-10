@@ -113,9 +113,9 @@
 		<# } #>
     </dt>
     <dd>
-		<a href="{page="type-<#=Model.Type1.ID #>"}"><#= Model.Type1.Name #></a>
+		<a href="{page="gen7-type-<#=Model.Type1.ID #>"}"><#= Model.Type1.Name #></a>
 		<# if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID) { #>
-		<a href="{page="type-<#=Model.Type2.ID #>"}"><#= Model.Type2.Name #></a>
+		<a href="{page="gen7-type-<#=Model.Type2.ID #>"}"><#= Model.Type2.Name #></a>
 		<# } #>
     </dd>	
 
@@ -138,7 +138,7 @@
         Held Item 1
     </dt>
     <dd>
-        <a href="{page="item-<#=Model.HeldItem1.ID #>"}"><#= Model.HeldItem1.Name #></a> (50%)
+        <a href="{page="gen7-item-<#=Model.HeldItem1.ID #>"}"><#= Model.HeldItem1.Name #></a> (50%)
     </dd>
 	<# } #>
 
@@ -147,7 +147,7 @@
         Held Item 2
     </dt>
     <dd>
-        <a href="{page="item-<#=Model.HeldItem2.ID #>"}"><#= Model.HeldItem2.Name #></a> (5%)
+        <a href="{page="gen7-item-<#=Model.HeldItem2.ID #>"}"><#= Model.HeldItem2.Name #></a> (5%)
     </dd>
 	<# } #>
 
@@ -156,7 +156,7 @@
         Held Item 3
     </dt>
     <dd>
-        <a href="{page="item-<#=Model.HeldItem3.ID #>"}"><#= Model.HeldItem3.Name #></a> (1%)
+        <a href="{page="gen7-item-<#=Model.HeldItem3.ID #>"}"><#= Model.HeldItem3.Name #></a> (1%)
     </dd>
 	<# } #>
 
@@ -220,21 +220,21 @@
         Ability 1
     </dt>
     <dd>
-        <a href="{page="ability-<#=Model.Ability1.ID #>"}"><#= Model.Ability1.Name #></a>
+        <a href="{page="gen7-ability-<#=Model.Ability1.ID #>"}"><#= Model.Ability1.Name #></a>
     </dd>
 
 	<dt>
         Ability 2
     </dt>
     <dd>
-        <a href="{page="ability-<#=Model.Ability2.ID #>"}"><#= Model.Ability2.Name #></a>
+        <a href="{page="gen7-ability-<#=Model.Ability2.ID #>"}"><#= Model.Ability2.Name #></a>
     </dd>
 
 	<dt>
         Hidden Ability
     </dt>
     <dd>
-        <a href="{page="ability-<#=Model.AbilityHidden.ID #>"}"><#= Model.AbilityHidden.Name #></a>
+        <a href="{page="gen7-ability-<#=Model.AbilityHidden.ID #>"}"><#= Model.AbilityHidden.Name #></a>
     </dd>
 
 	<dt>
@@ -305,7 +305,7 @@
         Z Item
     </dt>
     <dd>
-        <a href="{page="item-<#=Model.ZItem.ID #>"}"><#= Model.ZItem.Name #></a>
+        <a href="{page="gen7-item-<#=Model.ZItem.ID #>"}"><#= Model.ZItem.Name #></a>
     </dd>
 	<# } #>
 
@@ -314,7 +314,7 @@
         Z Base Move
     </dt>
     <dd>
-        <a href="{page="move-<#=Model.ZBaseMove.ID #>"}"><#= Model.ZBaseMove.Name #></a>
+        <a href="{page="gen7-move-<#=Model.ZBaseMove.ID #>"}"><#= Model.ZBaseMove.Name #></a>
     </dd>
 	<# } #>
 
@@ -323,7 +323,7 @@
         Z Move
     </dt>
     <dd>
-        <a href="{page="move-<#=Model.ZMove.ID #>"}"><#= Model.ZMove.Name #></a>
+        <a href="{page="gen7-move-<#=Model.ZMove.ID #>"}"><#= Model.ZMove.Name #></a>
     </dd>
 	<# } #>
 
@@ -344,16 +344,16 @@
 			methodString = item.Method;
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.PokemonReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"pkm-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"gen7-pkm-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.MoveReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"move-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"gen7-move-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.ItemReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"item-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"gen7-item-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.TypeReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"type-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"gen7-type-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else {
 			methodString = item.Method;
@@ -361,7 +361,7 @@
 	
         <tr>
             <td>
-                <a href='{page="pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
+                <a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
             </td>
 			<td>
                 <#= item.Level #>
@@ -391,7 +391,7 @@
                 <#= item.Level #>
             </td>
             <td>
-				<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>
@@ -408,7 +408,7 @@
     { #>
         <tr>
             <td>
-				<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>
@@ -425,7 +425,7 @@
     { #>
         <tr>
             <td>
-				<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>
@@ -442,7 +442,7 @@
     { #>
         <tr>
             <td>
-				<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>

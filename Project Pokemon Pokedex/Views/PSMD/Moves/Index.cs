@@ -76,7 +76,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"move-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"psmd-move-");
             
             #line 39 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Moves\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

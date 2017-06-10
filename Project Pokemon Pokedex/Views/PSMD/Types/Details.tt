@@ -53,7 +53,7 @@
                     <#= item.IDHexLittleEndian #>
                 </td>
                 <td>
-					<a href='{page="pkm-<#=item.ID #>"}'><#=item.Name #></a>
+					<a href='{page="psmd-pkm-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>
@@ -70,7 +70,7 @@
                 ID (Hex)
             </th>
             <th>
-                MOve
+                Move
             </th>
         </tr>
         <# foreach (var item in Model.MovesWithType)
@@ -83,7 +83,7 @@
                     <#= item.IDHex #>
                 </td>
                 <td>
-					<a href='{page="move-<#=item.ID #>"}'><#=item.Name #></a>
+					<a href='{page="psmd-move-<#=item.ID #>"}'><#=item.Name #></a>
                 </td>
             </tr>
         <# } #>

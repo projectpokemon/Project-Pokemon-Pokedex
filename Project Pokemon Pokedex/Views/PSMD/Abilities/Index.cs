@@ -76,7 +76,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Abilities
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"ability-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"psmd-ability-");
             
             #line 39 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Abilities\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

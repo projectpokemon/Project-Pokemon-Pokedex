@@ -101,7 +101,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Types
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"pkm-");
+            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"eos-pkm-");
             
             #line 56 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -170,30 +170,23 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Types
             
             #line default
             #line hidden
-            this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
+            this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"eos-move-");
             
             #line 92 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("<a href=\"../../moves/{0}/\">{1}</a>", item.ID, item.Name)));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t\t\t\t<a href=\'{page=\"move-");
-            
-            #line 93 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 93 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Details.tt"
+            #line 92 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("</a>\r\n                </td>\r\n            </tr>\r\n        ");
             
-            #line 96 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Details.tt"
+            #line 95 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Types\Details.tt"
  } 
             
             #line default
