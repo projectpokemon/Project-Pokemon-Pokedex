@@ -265,7 +265,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             this.Write("        <tr>\r\n            <td>\r\n                ");
             
             #line 239 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Level));
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", item.Levels)));
             
             #line default
             #line hidden

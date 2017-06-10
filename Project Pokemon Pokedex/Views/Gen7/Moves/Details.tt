@@ -236,7 +236,7 @@
     { #>
         <tr>
             <td>
-                <#= item.Level #>
+                <#= string.Join(",", item.Levels) #>
             </td>
             <td>
 				<a href='{page="gen7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
