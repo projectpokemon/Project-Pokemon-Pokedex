@@ -1,4 +1,4 @@
-﻿using DotNet3dsToolkit;
+﻿using DotNetNdsToolkit;
 using IPS_Pages_Publisher.Interfaces;
 using Microsoft.CSharp;
 using Microsoft.VisualStudio.TextTemplating;
@@ -41,17 +41,15 @@ namespace ProjectPokemon.Pokedex
             p.WaitForExit();
         }
 
-        public static async Task<EosDataCollection> LoadEosData(string rawFilesDir)
+        public static async Task<EosDataCollection> LoadEosData(NdsRom rom)
         {
             var data = new EosDataCollection();
-            var provider = new PhysicalIOProvider();
 
             var languageFile = new LanguageString();
-            await languageFile.OpenFile(Path.Combine(rawFilesDir, "data", "MESSAGE", "text_e.str"), provider);
-
+            await languageFile.OpenFile("/data/MESSAGE/text_e.str", rom);
 
             var moveFile = new waza_p();
-            await moveFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "waza_p.bin"), provider);
+            await moveFile.OpenFile("/data/BALANCE/waza_p.bin", rom);
 
             // Load Types
             var types = new List<Models.EOS.PkmType>();
@@ -89,7 +87,7 @@ namespace ProjectPokemon.Pokedex
 
             // Read Pokemon
             var monsterFile = new MonsterMDFile();
-            await monsterFile.OpenFile(Path.Combine(rawFilesDir, "data", "BALANCE", "monster.md"), provider);
+            await monsterFile.OpenFile("/data/BALANCE/monster.md", rom);
             var pkms = new List<Models.EOS.Pokemon>();
             for (int i = 0; i < 600; i += 1)
             {
@@ -482,7 +480,7 @@ namespace ProjectPokemon.Pokedex
             var EXPGroups = new string[] { "Medium-Fast", "Erratic", "Fluctuating", "Medium-Slow", "Fast", "Slow" };
             var eggGroups = new string[] { "---", "Monster", "Water 1", "Bug", "Flying", "Field", "Fairy", "Grass", "Human-Like", "Water 3", "Mineral", "Amorphous", "Water 2", "Ditto", "Dragon", "Undiscovered" };
             var colors = new string[] { "Red", "Blue", "Yellow", "Green", "Black", "Brown", "Purple", "Gray", "White", "Pink" };
-            var tutormoves = new ushort[] { 520, 519, 518, 338, 307, 308, 434, 620 };            
+            var tutormoves = new ushort[] { 520, 519, 518, 338, 307, 308, 434, 620 };
 
             // Load TMs
             var TMs = new ushort[0];
@@ -796,7 +794,7 @@ namespace ProjectPokemon.Pokedex
                 {
                     move.Category = "None";
                 }
-                
+
                 move.Power = item.Power;
                 move.Accuracy = item.Power;
                 move.PP = item.PP;
@@ -808,7 +806,7 @@ namespace ProjectPokemon.Pokedex
                 {
                     move.Inflict = InflictionTypes.Last();
                 }
-                else  if (InflictionTypes.Length > inflictVal)
+                else if (InflictionTypes.Length > inflictVal)
                 {
                     move.Inflict = InflictionTypes[inflictVal];
                 }
@@ -816,7 +814,7 @@ namespace ProjectPokemon.Pokedex
                 {
                     move.Inflict = "None";
                 }
-                
+
                 move.InflictChance = item.InflictPercent;
                 move.UnknownB = item._0xB; // 0xB ~ Something to deal with skipImmunity
                 move.TurnMin = item.TurnMin;
@@ -1023,85 +1021,83 @@ namespace ProjectPokemon.Pokedex
         {
             var provider = new PhysicalIOProvider();
             var romDir = "eos-rawfiles";
-            using (var eosROM = new GenericNDSRom())
+            using (var eosROM = new NdsRom())
             {
                 await eosROM.OpenFile(eosPath, provider);
-                await eosROM.Unpack(romDir, provider);
-            }
+                var data = await LoadEosData(eosROM);
 
-            var data = await LoadEosData(romDir);
+                var output = new List<Category>();
 
-            var output = new List<Category>();
-
-            // Pokemon
-            var catPkm = new Category();
-            catPkm.Name = "Eos-Pokemon";
-            catPkm.Records = new List<Record>();            
-            foreach (var item in data.Pokemon)
-            {
+                // Pokemon
+                var catPkm = new Category();
+                catPkm.Name = "Eos-Pokemon";
+                catPkm.Records = new List<Record>();
+                foreach (var item in data.Pokemon)
+                {
+                    catPkm.Records.Add(new Record
+                    {
+                        Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
+                        Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Details>(item),
+                        InternalName = $"eos-pkm-" + item.ID
+                    });
+                }
                 catPkm.Records.Add(new Record
                 {
-                    Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
-                    Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Details>(item),
-                    InternalName = $"eos-pkm-" + item.ID
+                    Title = "Index",
+                    Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Index>(data.Pokemon),
+                    InternalName = $"eos-pkm-index"
                 });
-            }
-            catPkm.Records.Add(new Record
-            {
-                Title = "Index",
-                Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Index>(data.Pokemon),
-                InternalName = $"eos-pkm-index"
-            });
-            output.Add(catPkm);
+                output.Add(catPkm);
 
-            // Moves
-            var catMoves = new Category();
-            catMoves.Name = "Eos-Moves";
-            catMoves.Records = new List<Record>();            
-            foreach (var item in data.Moves)
-            {
+                // Moves
+                var catMoves = new Category();
+                catMoves.Name = "Eos-Moves";
+                catMoves.Records = new List<Record>();
+                foreach (var item in data.Moves)
+                {
+                    catMoves.Records.Add(new Record
+                    {
+                        Title = item.Name,
+                        Content = BuildAndReturnTemplate<Views.EOS.Moves.Details>(item),
+                        InternalName = $"eos-move-" + item.ID
+                    });
+                }
                 catMoves.Records.Add(new Record
                 {
-                    Title = item.Name,
-                    Content = BuildAndReturnTemplate<Views.EOS.Moves.Details>(item),
-                    InternalName = $"eos-move-" + item.ID
+                    Title = "Index",
+                    Content = BuildAndReturnTemplate<Views.EOS.Moves.Index>(data.Moves),
+                    InternalName = $"eos-move-index"
                 });
-            }
-            catMoves.Records.Add(new Record
-            {
-                Title = "Index",
-                Content = BuildAndReturnTemplate<Views.EOS.Moves.Index>(data.Moves),
-                InternalName = $"eos-move-index"
-            });
-            output.Add(catMoves);
+                output.Add(catMoves);
 
-            // Types
-            var catTypes = new Category();
-            catTypes.Name = "Eos-Types";
-            catTypes.Records = new List<Record>();            
-            foreach (var item in data.Types)
-            {
+                // Types
+                var catTypes = new Category();
+                catTypes.Name = "Eos-Types";
+                catTypes.Records = new List<Record>();
+                foreach (var item in data.Types)
+                {
+                    catTypes.Records.Add(new Record
+                    {
+                        Title = item.Name,
+                        Content = BuildAndReturnTemplate<Views.EOS.Types.Details>(item),
+                        InternalName = $"eos-type-" + item.ID
+                    });
+                }
                 catTypes.Records.Add(new Record
                 {
-                    Title = item.Name,
-                    Content = BuildAndReturnTemplate<Views.EOS.Types.Details>(item),
-                    InternalName = $"eos-type-" + item.ID
+                    Title = "Index",
+                    Content = BuildAndReturnTemplate<Views.EOS.Types.Index>(data.Types),
+                    InternalName = $"eos-type-index"
                 });
-            }
-            catTypes.Records.Add(new Record
-            {
-                Title = "Index",
-                Content = BuildAndReturnTemplate<Views.EOS.Types.Index>(data.Types),
-                InternalName = $"eos-type-index"
-            });
-            output.Add(catTypes);
+                output.Add(catTypes);
 
-            File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
+                File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
 
-            // Cleanup
-            if (Directory.Exists(romDir))
-            {
-                Directory.Delete(romDir, true);
+                // Cleanup
+                if (Directory.Exists(romDir))
+                {
+                    Directory.Delete(romDir, true);
+                }
             }
         }
 
@@ -1124,7 +1120,7 @@ namespace ProjectPokemon.Pokedex
                 File.Delete("RomFS.bin");
                 File.Delete("ExeFS.bin");
                 psmdPath = tempDir;
-            }            
+            }
 
             var data = await LoadPsmdData(psmdPath);
 
@@ -1133,7 +1129,7 @@ namespace ProjectPokemon.Pokedex
             // Pokemon
             var catPkm = new Category();
             catPkm.Name = "Psmd-Pokemon";
-            catPkm.Records = new List<Record>();            
+            catPkm.Records = new List<Record>();
             foreach (var item in data.Pokemon)
             {
                 catPkm.Records.Add(new Record
@@ -1154,7 +1150,7 @@ namespace ProjectPokemon.Pokedex
             // Moves
             var catMoves = new Category();
             catMoves.Name = "Psmd-Moves";
-            catMoves.Records = new List<Record>();            
+            catMoves.Records = new List<Record>();
             foreach (var item in data.Moves)
             {
                 catMoves.Records.Add(new Record
@@ -1175,7 +1171,7 @@ namespace ProjectPokemon.Pokedex
             // Abilities
             var catAbilities = new Category();
             catAbilities.Name = "Psmd-Abilities";
-            catAbilities.Records = new List<Record>();            
+            catAbilities.Records = new List<Record>();
             foreach (var item in data.Abilities)
             {
                 catAbilities.Records.Add(new Record
@@ -1196,7 +1192,7 @@ namespace ProjectPokemon.Pokedex
             // Types
             var catTypes = new Category();
             catTypes.Name = "Psmd-Types";
-            catTypes.Records = new List<Record>();            
+            catTypes.Records = new List<Record>();
             foreach (var item in data.Types)
             {
                 catTypes.Records.Add(new Record
@@ -1243,7 +1239,7 @@ namespace ProjectPokemon.Pokedex
                 default:
                     Console.WriteLine("Usage: ProjectPokemonPokedex.exe <eos|psmd|moon> <RomFilename> <OutputFilename>");
                     break;
-            }            
+            }
         }
     }
 }
