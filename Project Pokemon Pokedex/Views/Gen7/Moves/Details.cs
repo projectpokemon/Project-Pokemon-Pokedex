@@ -254,7 +254,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             #line default
             #line hidden
             this.Write("\r\n    </dd>\r\n\t\r\n</dl>\r\n\r\n<h3>Pokémon Through Level-Up</h3>\r\n<table class=\"table\">" +
-                    "\r\n    <tr>\r\n        <th>Level</th>\r\n        <th>Move</th>\r\n    </tr>\r\n    ");
+                    "\r\n    <tr>\r\n        <th>Level(s)</th>\r\n        <th>Move</th>\r\n    </tr>\r\n    ");
             
             #line 235 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
  foreach (var item in Model.PokemonThroughLevelUp)
@@ -265,7 +265,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             this.Write("        <tr>\r\n            <td>\r\n                ");
             
             #line 239 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", item.Levels)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", item.Levels)));
             
             #line default
             #line hidden

@@ -229,14 +229,14 @@
 <h3>Pokémon Through Level-Up</h3>
 <table class="table">
     <tr>
-        <th>Level</th>
+        <th>Level(s)</th>
         <th>Move</th>
     </tr>
     <# foreach (var item in Model.PokemonThroughLevelUp)
     { #>
         <tr>
             <td>
-                <#= string.Join(",", item.Levels) #>
+                <#= string.Join(", ", item.Levels) #>
             </td>
             <td>
 				<a href='{page="gen7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
