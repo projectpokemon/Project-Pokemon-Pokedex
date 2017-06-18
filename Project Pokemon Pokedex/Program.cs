@@ -700,7 +700,7 @@ namespace ProjectPokemon.Pokedex
                         case 0: // No Parameter Required
                             { evoMethod.ParameterString = ""; break; }
                         case 1: // Level
-                            { evoMethod.ParameterString = ""; break; }
+                            { evoMethod.ParameterString = param.ToString(); break; }
                         case 2: // Items
                             { evoMethod.ParameterReference = new ItemReference { ID = param, Name = items[param] }; break; }
                         case 3: // Moves
@@ -1006,7 +1006,32 @@ namespace ProjectPokemon.Pokedex
                     InternalName = $"gen7-pkm-" + item.ID
                 });
             }
+            catPkm.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.Gen7.Pokemon.Index>(data.Pokemon),
+                InternalName = "gen7-pkm-index"
+            });
             output.Add(catPkm);
+
+            var catMove = new Category();
+            catMove.Name = "Gen7-Moves";
+            catMove.Records = new List<Record>();
+            foreach (var item in data.Moves)
+            {
+                catMove.Records.Add(new Record {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.Gen7.Moves.Details>(item),
+                    InternalName = "gen7-move-" + item.ID
+                });
+            }
+            catMove.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.Gen7.Moves.Index>(data.Moves),
+                InternalName = "gen7-move-index"
+            });
+            output.Add(catMove);
 
             File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
 
