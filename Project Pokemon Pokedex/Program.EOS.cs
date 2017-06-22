@@ -26,32 +26,32 @@ namespace ProjectPokemon.Pokedex
             await moveFile.OpenFile("/data/BALANCE/waza_p.bin", rom);
 
             // Load Types
-            var types = new List<Models.EOS.PkmType>();
+            var types = new List<PkmType>();
             for (int i = 0; i < 19; i++)
             {
-                var t = new Models.EOS.PkmType();
+                var t = new PkmType();
                 t.ID = i;
                 t.Name = languageFile.GetTypeName(i);
-                t.Pokemon = new List<Models.EOS.PokemonReference>();
-                t.Moves = new List<Models.EOS.MoveReference>();
+                t.Pokemon = new List<PokemonReference>();
+                t.Moves = new List<MoveReference>();
                 types.Add(t);
             }
             data.Types = types;
 
             // Read Move Data
-            var moves = new List<Models.EOS.Move>();
+            var moves = new List<Move>();
             for (int i = 0; i < moveFile.Moves.Count; i++)
             {
-                var m = new Models.EOS.Move { ID = i, Name = languageFile.GetMoveName(i), RawData = moveFile.Moves[i] };
+                var m = new Move { ID = i, Name = languageFile.GetMoveName(i), RawData = moveFile.Moves[i] };
                 m.TypeID = moveFile.Moves[i].Type;
                 m.TypeName = languageFile.GetTypeName(m.TypeID);
                 m.Category = moveFile.Moves[i].Category.ToString();
                 m.BasePower = moveFile.Moves[i].BasePower;
                 m.BasePP = moveFile.Moves[i].BasePP;
                 m.BaseAccuracy = moveFile.Moves[i].MoveAccuracy;
-                m.PokemonLevelUp = new List<Models.EOS.LevelPokemonReference>();
-                m.PokemonTM = new List<Models.EOS.PokemonReference>();
-                m.PokemonEgg = new List<Models.EOS.PokemonReference>();
+                m.PokemonLevelUp = new List<LevelPokemonReference>();
+                m.PokemonTM = new List<PokemonReference>();
+                m.PokemonEgg = new List<PokemonReference>();
                 moves.Add(m);
 
                 // Add to types
@@ -68,7 +68,7 @@ namespace ProjectPokemon.Pokedex
                 var maleEntry = monsterFile.Entries[i];
                 var femaleEntry = monsterFile.Entries.Count > i + 600 ? monsterFile.Entries[i + 600] : null;
 
-                var entry = new Models.EOS.Pokemon();
+                var entry = new Pokemon();
                 entry.ID = i;// monsterFile.Entries[i].EntityID;
                 entry.Name = languageFile.GetPokemonName(entry.ID % 600);
                 entry.DexNumber = maleEntry.DexNumber;
@@ -157,13 +157,13 @@ namespace ProjectPokemon.Pokedex
                         if (moveFile.Moves.Count > item.Item2)
                         {
                             // Add move to Pokemon
-                            levelupMoves.Add(new Tuple<int, Models.EOS.Move>(item.Item1, new Models.EOS.Move { ID = item.Item2, Name = languageFile.GetMoveName(item.Item2), RawData = moveFile.Moves[item.Item2] }));
+                            levelupMoves.Add(new Tuple<int, Move>(item.Item1, new Move { ID = item.Item2, Name = languageFile.GetMoveName(item.Item2), RawData = moveFile.Moves[item.Item2] }));
 
                             // Add Pokemon to move
                             var levelUp = moves[item.Item2].PokemonLevelUp.FirstOrDefault(x => x.ID == entry.ID);
                             if (levelUp == null)
                             {
-                                moves[item.Item2].PokemonLevelUp.Add(new Models.EOS.LevelPokemonReference { ID = entry.ID, Name = entry.Name, Levels = new List<string> { item.Item1.ToString() } });
+                                moves[item.Item2].PokemonLevelUp.Add(new LevelPokemonReference(entry.ID, entry.Name, new List<string> { item.Item1.ToString() }));
                             }
                             else
                             {
@@ -174,30 +174,30 @@ namespace ProjectPokemon.Pokedex
                     }
                     entry.LevelupMoves = levelupMoves;
 
-                    var tmMoves = new List<Models.EOS.Move>();
+                    var tmMoves = new List<Move>();
                     foreach (var item in moveFile.PokemonLearnsets[i].TMMoves)
                     {
                         if (moveFile.Moves.Count > item)
                         {
                             // Add move to Pokemon
-                            tmMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
+                            tmMoves.Add(new Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
 
                             // Add Pokemon to move
-                            moves[item].PokemonTM.Add(new Models.EOS.PokemonReference { ID = entry.ID, Name = entry.Name });
+                            moves[item].PokemonTM.Add(new PokemonReference(entry.ID, entry.Name));
                         }
                     }
                     entry.TMMoves = tmMoves;
 
-                    var eggMoves = new List<Models.EOS.Move>();
+                    var eggMoves = new List<Move>();
                     foreach (var item in moveFile.PokemonLearnsets[i].EggMoves)
                     {
                         if (moveFile.Moves.Count > item)
                         {
                             // Add move to Pokemon
-                            eggMoves.Add(new Models.EOS.Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
+                            eggMoves.Add(new Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
 
                             // Add Pokemon to move
-                            moves[item].PokemonEgg.Add(new Models.EOS.PokemonReference { ID = entry.ID, Name = entry.Name });
+                            moves[item].PokemonEgg.Add(new PokemonReference(entry.ID, entry.Name));
                         }
 
                     }
@@ -205,18 +205,46 @@ namespace ProjectPokemon.Pokedex
                 }
                 else
                 {
-                    entry.LevelupMoves = new List<Tuple<int, Models.EOS.Move>>();
-                    entry.TMMoves = new List<Models.EOS.Move>();
-                    entry.EggMoves = new List<Models.EOS.Move>();
+                    entry.LevelupMoves = new List<Tuple<int, Move>>();
+                    entry.TMMoves = new List<Move>();
+                    entry.EggMoves = new List<Move>();
                 }
 
                 pkms.Add(entry);
 
                 // Add to types
-                types[maleEntry.MainType].Pokemon.Add(new Models.EOS.PokemonReference { ID = entry.ID, Name = entry.Name });
+                types[maleEntry.MainType].Pokemon.Add(new PokemonReference(entry.ID, entry.Name));
                 if (maleEntry.MainType != maleEntry.AltType)
                 {
-                    types[maleEntry.AltType].Pokemon.Add(new Models.EOS.PokemonReference { ID = entry.ID, Name = entry.Name });
+                    types[maleEntry.AltType].Pokemon.Add(new PokemonReference(entry.ID, entry.Name));
+                }
+
+                // Dungeons
+                var dungeons = new List<Dungeon>();
+                var mappa = new mappa();
+                await mappa.OpenFile("/data/BALANCE/mappa_s.bin", rom);
+                foreach (var d in mappa.Dungeons)
+                {
+                    var dungeon = new Dungeon();
+                    foreach (var f in d.Floors)
+                    {
+                        var floor = new DungeonFloorDetails();
+                        // Populate floor attributes
+                        throw new NotImplementedException();
+
+                        // Populate Pokemon references
+                        foreach (var p in f.PokemonSpawns)
+                        {
+                            throw new NotImplementedException();
+                            //var pokemon = new DungeonSpawnPokemonReference();
+                            //floor.Pokemon.Add(pokemon);
+                        }
+
+                        // To-do: determine if `floor` is equivalent to the last one. If so, simply update the last one's end floor
+                        throw new NotImplementedException();
+                        dungeon.Floors.Add(floor);
+                    }
+                    dungeons.Add(dungeon);
                 }
             }
             data.Pokemon = pkms;
