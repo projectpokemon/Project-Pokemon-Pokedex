@@ -19,7 +19,7 @@ namespace ProjectPokemon.Pokedex
 
             // Load abilities
             var abilities = new List<Ability>();
-            var abilityNames = File.ReadAllLines("alist.txt");
+            var abilityNames = File.ReadAllLines("Resources/PSMD/alist.txt");
             for (int i = 0; i < abilityNames.Length; i++)
             {
                 abilities.Add(new Ability
@@ -31,11 +31,11 @@ namespace ProjectPokemon.Pokedex
             data.Abilities = abilities;
 
             // Load types
-            var types = new List<Models.PSMD.PkmType>();
-            var typeNames = File.ReadAllLines("tlist.txt");
+            var types = new List<PkmType>();
+            var typeNames = File.ReadAllLines("Resources/PSMD/tlist.txt");
             for (int i = 0; i < typeNames.Length; i++)
             {
-                types.Add(new Models.PSMD.PkmType
+                types.Add(new PkmType
                 {
                     ID = i,
                     Name = typeNames[i]
@@ -54,11 +54,11 @@ namespace ProjectPokemon.Pokedex
             var actHitFile = new SkyEditor.ROMEditor.MysteryDungeon.PSMD.ActHitCountTableDataInfo();
             await actHitFile.OpenFile(Path.Combine(rawFilesDir, "RomFS", "dungeon", "act_hit_count_table_data_info.bin"), new PhysicalIOProvider());
 
-            var moves = new List<Models.PSMD.Move>();
-            var moveNames = File.ReadAllLines("mlist.txt");
+            var moves = new List<Move>();
+            var moveNames = File.ReadAllLines("Resources/PSMD/mlist.txt");
             for (int i = 0; i < moveNames.Length; i++)
             {
-                var m = new Models.PSMD.Move();
+                var m = new Move();
                 m.ID = i;
                 if (string.IsNullOrEmpty(moveNames[i]))
                 {
@@ -125,11 +125,11 @@ namespace ProjectPokemon.Pokedex
             var pokemonFile = new SkyEditor.ROMEditor.MysteryDungeon.PSMD.PokemonDataInfo();
             await pokemonFile.OpenFile(Path.Combine(rawFilesDir, "RomFS", "pokemon", "pokemon_data_info.bin"), new PhysicalIOProvider());
 
-            var pkms = new List<Models.PSMD.Pokemon>();
-            var pkmNames = File.ReadAllLines("plist.txt");
+            var pkms = new List<Pokemon>();
+            var pkmNames = File.ReadAllLines("Resources/PSMD/plist.txt");
             for (int i = 0; i < pkmNames.Length; i++)
             {
-                var pkm = new Models.PSMD.Pokemon
+                var pkm = new Pokemon
                 {
                     ID = i,
                     Name = pkmNames[i]

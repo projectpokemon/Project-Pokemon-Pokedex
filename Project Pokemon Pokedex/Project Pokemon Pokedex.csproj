@@ -290,18 +290,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="mlist.txt">
+    <None Include="Resources\PSMD\mlist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="tlist.txt">
+    <None Include="Resources\PSMD\tlist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="alist.txt">
+    <None Include="Resources\PSMD\alist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="plist.txt">
+    <None Include="Resources\PSMD\plist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
