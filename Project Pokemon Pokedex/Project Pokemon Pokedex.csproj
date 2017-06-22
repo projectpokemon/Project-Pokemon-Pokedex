@@ -190,6 +190,9 @@
     <Compile Include="Models\PSMD\PsmdDataCollection.cs" />
     <Compile Include="Models\PSMD\TypeDetailsViewModel.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Program.EOS.cs" />
+    <Compile Include="Program.PSMD.cs" />
+    <Compile Include="Program.SM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\EOS\Moves\Details.cs">
       <AutoGen>True</AutoGen>
