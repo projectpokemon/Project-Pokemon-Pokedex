@@ -5,6 +5,7 @@ using pk3DS.Core.Structures;
 using pk3DS.Core.Structures.Gen6;
 using pk3DS.Core.Structures.PersonalInfo;
 using ProjectPokemon.Pokedex.Models.Gen7;
+using SkyEditor.Core.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +34,7 @@ namespace ProjectPokemon.Pokedex
             TMs = tms.ToArray();
         }
 
-        public static SMDataCollection LoadSunMoonData(string rawFilesDir)
+        public static async Task<SMDataCollection> LoadSunMoonData(string rawFilesDir)
         {
             var data = new SMDataCollection();
             var config = new GameConfig(GameVersion.SM);
@@ -55,6 +56,26 @@ namespace ProjectPokemon.Pokedex
             // Load TMs
             var TMs = new ushort[0];
             getTMHMList(Path.Combine(rawFilesDir, "ExeFS"), ref TMs);
+
+            // Load type effectiveness
+            using (var exeFS = new GenericFile())
+            {
+                await exeFS.OpenFile(Path.Combine(rawFilesDir, "ExeFS", "code.bin"), new PhysicalIOProvider());
+                data.TypeEffectiveness = new TypeEffectivenessChart(exeFS.Read(0x000D12A8, 18 * 18));
+            }
+
+            // Load Types
+            const int numTypes = 18;
+            var pkmTypes = new List<PkmType>();
+            for (int i = 0;i<numTypes;i++)
+            {
+                var type = new PkmType();
+                type.ID = i;
+                type.Name = types[i];
+                type.Pokemon = new List<PokemonReference>();
+                type.Moves = new List<MoveReference>();
+                pkmTypes.Add(type);
+            }
 
             // Load Pokemon
             // - Load Level-up GARC
@@ -133,10 +154,10 @@ namespace ProjectPokemon.Pokedex
             var megaEvoGarcFiles = config.getGARCData("megaevo").Files;
 
             // - Consolidate data
-            var pkms = new List<Models.Gen7.Pokemon>();
+            var pkms = new List<Pokemon>();
             foreach (var item in config.Personal.Table)
             {
-                var pkm = new Models.Gen7.Pokemon();
+                var pkm = new Pokemon();
 
                 pkm.ID = pkms.Count;
                 if (pokemonEntryNames.Length > pkm.ID)
@@ -295,11 +316,17 @@ namespace ProjectPokemon.Pokedex
                 {
                     pkm.ZItem = new ItemReference { ID = sm.SpecialZ_Item, Name = items[sm.SpecialZ_Item] };
                 }
-                pkm.ZBaseMove = new Models.Gen7.MoveReference { ID = sm.SpecialZ_BaseMove, Name = moveNames[sm.SpecialZ_BaseMove] };
-                pkm.ZMove = new Models.Gen7.MoveReference { ID = sm.SpecialZ_ZMove, Name = moveNames[sm.SpecialZ_ZMove] };
+                pkm.ZBaseMove = new MoveReference { ID = sm.SpecialZ_BaseMove, Name = moveNames[sm.SpecialZ_BaseMove] };
+                pkm.ZMove = new MoveReference { ID = sm.SpecialZ_ZMove, Name = moveNames[sm.SpecialZ_ZMove] };
                 pkm.LocalVariant = sm.LocalVariant;
 
+                // Add to lists
                 pkms.Add(pkm);
+                pkmTypes[pkm.Type1.ID].Pokemon.Add(new PokemonReference(pkm));
+                if (pkm.Type1.ID != pkm.Type2.ID)
+                {
+                    pkmTypes[pkm.Type2.ID].Pokemon.Add(new PokemonReference(pkm));
+                }
             }
             data.Pokemon = pkms;
 
@@ -458,17 +485,17 @@ namespace ProjectPokemon.Pokedex
                 move.Unknown21 = item._0x21; // 0x21
 
                 // Pokemon references
-                move.PokemonThroughLevelUp = new List<Models.Gen7.LevelupPokemonReference>();
-                move.PokemonThroughTM = new List<Models.Gen7.PokemonReference>();
-                move.PokemonThroughEgg = new List<Models.Gen7.PokemonReference>();
-                move.PokemonThroughTutor = new List<Models.Gen7.PokemonReference>();
+                move.PokemonThroughLevelUp = new List<LevelupPokemonReference>();
+                move.PokemonThroughTM = new List<PokemonReference>();
+                move.PokemonThroughEgg = new List<PokemonReference>();
+                move.PokemonThroughTutor = new List<PokemonReference>();
                 foreach (var pkm in data.Pokemon)
                 {
                     // Levelup
                     var referenceMovesLevel = pkm.MoveLevelUp.Where(x => x.ID == move.ID);
                     if (referenceMovesLevel.Any())
                     {
-                        var pkmReference = new Models.Gen7.LevelupPokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new LevelupPokemonReference { ID = pkm.ID, Name = pkm.Name };
                         pkmReference.Levels = referenceMovesLevel.Select(x => x.Level).ToList();
                         move.PokemonThroughLevelUp.Add(pkmReference);
                     }
@@ -477,7 +504,7 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesTM = pkm.MoveTMs.Where(x => x.ID == move.ID);
                     if (referenceMovesTM.Any())
                     {
-                        var pkmReference = new Models.Gen7.PokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new PokemonReference { ID = pkm.ID, Name = pkm.Name };
                         move.PokemonThroughTM.Add(pkmReference);
                     }
 
@@ -485,7 +512,7 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesEgg = pkm.MoveEgg.Where(x => x.ID == move.ID);
                     if (referenceMovesEgg.Any())
                     {
-                        var pkmReference = new Models.Gen7.PokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new PokemonReference { ID = pkm.ID, Name = pkm.Name };
                         move.PokemonThroughEgg.Add(pkmReference);
                     }
 
@@ -493,12 +520,14 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesTutor = pkm.MoveTutors.Where(x => x.ID == move.ID);
                     if (referenceMovesTutor.Any())
                     {
-                        var pkmReference = new Models.Gen7.PokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new PokemonReference { ID = pkm.ID, Name = pkm.Name };
                         move.PokemonThroughTutor.Add(pkmReference);
                     }
                 }
 
+                // Add to lists
                 moves.Add(move);
+                pkmTypes[move.Type.ID].Moves.Add(new MoveReference(move));
             }
             data.Moves = moves;
 
@@ -526,7 +555,7 @@ namespace ProjectPokemon.Pokedex
                 smPath = tempDir;
             }
 
-            var data = LoadSunMoonData(smPath);
+            var data = LoadSunMoonData(smPath).Result;
 
             var output = new List<Category>();
 
@@ -570,6 +599,26 @@ namespace ProjectPokemon.Pokedex
                 InternalName = "gen7-move-index"
             });
             output.Add(catMove);
+
+            var catType = new Category();
+            catType.Name = "Gen7-Types";
+            catType.Records = new List<Record>();
+            foreach (var item in data.Types)
+            {
+                catType.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.Gen7.Types.Details>(item),
+                    InternalName = "gen7-type-" + item.ID
+                });
+            }
+            catType.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.Gen7.Types.Index>(data.Types),
+                InternalName = "gen7-type-index"
+            });
+            output.Add(catType);
 
             File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
 
