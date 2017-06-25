@@ -52,6 +52,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                             break;
                     }
                 }
+                Results.Add(result);
             }
             
         }
