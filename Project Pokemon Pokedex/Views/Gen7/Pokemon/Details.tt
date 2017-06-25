@@ -6,7 +6,7 @@
 <#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Pokemon" name="Model" #>
 <h2>#<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #></h2>
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<h2>Images</h2>
 		<h4>Sugimori Artwork</h4>
 		<div class="pkm-image-inner" style="text-align:center;">
@@ -19,7 +19,7 @@
 		<img alt="Shiny <#= Model.Name.ToLower() #>" src="https://projectpokemon.org/images/shiny-sprite/<#= Model.Name.ToLower() #>.gif" />
 	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<h3>Details</h3>
 		<dl class="dl-horizontal">
 		<dt>
@@ -81,7 +81,18 @@
 			Gender
 		</dt>
 		<dd>
-			<#= Model.Gender #>
+			<# if (Model.Gender == 0) { #>
+				All Male
+			<# } else if (Model.Gender == 254) { #>
+				All Female
+			<# } else if (Model.Gender == 255) { #>
+				Genderless
+			<# } else { #>
+				<#= (1 - ((Model.Gender - 1) / 252)).ToString("P") #>%
+				<span style="color: cyan;">&#9794;</span>
+				<#= ((Model.Gender - 1) / 252).ToString("P") #>%
+				<span style="color: magenta;">&#9792;</span>
+			<# } #>			
 		</dd>
 
 		<dt>
@@ -182,14 +193,14 @@
 			Height
 		</dt>
 		<dd>
-			<#= Model.Height #> m (<#= (Model.Height * (decimal)3.2808399).ToString("0.0") #>)
+			<#= Model.Height #> m (<#= (Model.Height * (decimal)3.2808399).ToString("0.0") #> ft.)
 		</dd>
 
 		<dt>
 			Weight
 		</dt>
 		<dd>
-			<#= Model.Weight #> kg (<#= (Model.Weight * (decimal)2.20462262).ToString("0.0") #>)
+			<#= Model.Weight #> kg (<#= (Model.Weight * (decimal)2.20462262).ToString("0.0") #> lbs.)
 		</dd>
 
 		<dt>
@@ -235,7 +246,7 @@
 
 	</dl>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<h3>Stats</h3>
 		<table class="dex-stat-table">
 			<thead>
@@ -277,21 +288,17 @@
 			</tr>
 		</table>		
 	</div>
-</div>
-<div>
-	<h3>Type Effectiveness</h3>
-	<table class="table">
-		<thead>
-			<tr>
-				<# foreach (var item in Model.TypeEffectiveness) { #>
+	<div class="col-md-3">
+		<h3>Type Effectiveness</h3>
+		<table class="table">
+			<# foreach (var item in Model.TypeEffectiveness) { #>
+				<tr>
 					<td><a href='{page="gen7-type-<#=item.Type.ID #>"}'><img alt="<#=item.Type.Name #>" src="https://projectpokemon.org/images/gen7-types/<#=item.Type.Name #>.png" /></a></td>
-				<# } #>
-			</tr>
-		</thead>
-		<# foreach (var item in Model.TypeEffectiveness) { #>
-			<td>x<#=item.Multiplier #></td>
-		<# } #>
-	</table>
+					<td>x<#=item.Multiplier #></td>
+				</tr>
+			<# } #>
+		</table>
+	</div>
 </div>
 <# if (Model.Evolutions.Count > 0) { #>
 <h3>Evolutions</h3>
@@ -352,7 +359,7 @@
     { #>
         <tr>
             <td>
-                <#= item.Level #>
+                <#= item.Level == 0 ? "With Evolution" : item.Level.ToString() #>
             </td>
             <td>
 				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>

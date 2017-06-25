@@ -292,7 +292,7 @@ namespace ProjectPokemon.Pokedex
                     evoMethod.Form = evo.PossibleEvolutions[i].Form;
                     evoMethod.Level = evo.PossibleEvolutions[i].Level;
                     evoMethod.Method = evolutionMethods[evo.PossibleEvolutions[i].Method];
-                    evoMethod.TargetPokemon = new Models.Gen7.PokemonReference { ID = evo.PossibleEvolutions[i].Species, Name = species[evo.PossibleEvolutions[i].Species] };
+                    evoMethod.TargetPokemon = new PokemonReference { ID = evo.PossibleEvolutions[i].Species, Name = species[evo.PossibleEvolutions[i].Species] };
 
                     // Parameter
                     int cv = evolutionMethodCase[evo.PossibleEvolutions[i].Method];
