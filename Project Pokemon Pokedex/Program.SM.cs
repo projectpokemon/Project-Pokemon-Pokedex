@@ -306,9 +306,9 @@ namespace ProjectPokemon.Pokedex
                         case 2: // Items
                             { evoMethod.ParameterReference = new ItemReference { ID = param, Name = items[param] }; break; }
                         case 3: // Moves
-                            { evoMethod.ParameterReference = new Models.Gen7.MoveReference { ID = param, Name = moveNames[param] }; break; }
+                            { evoMethod.ParameterReference = new MoveReference { ID = param, Name = moveNames[param] }; break; }
                         case 4: // Species
-                            { evoMethod.ParameterReference = new Models.Gen7.PokemonReference { ID = param, Name = species[param] }; break; }
+                            { evoMethod.ParameterReference = new PokemonReference { ID = param, Name = species[param] }; break; }
                         case 5: // 0-255 (Beauty)
                             { evoMethod.ParameterString = param.ToString(); break; }
                         case 6:

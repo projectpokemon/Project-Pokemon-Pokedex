@@ -106,20 +106,6 @@
 		</dd>
 
 		<dt>
-			Egg Group 1
-		</dt>
-		<dd>
-			<#= Model.EggGroup1 #>
-		</dd>
-
-		<dt>
-			Egg Group 2
-		</dt>
-		<dd>
-			<#= Model.EggGroup2 #>
-		</dd>
-
-		<dt>
 			<# if (Model.EggGroup1 != Model.EggGroup2) { #>
 			Egg Groups
 			<# } else { #>
@@ -196,14 +182,14 @@
 			Height
 		</dt>
 		<dd>
-			<#= Model.Height #>
+			<#= Model.Height #> m (<#= (Model.Height * 3.2808399).ToString("0.0") #>)
 		</dd>
 
 		<dt>
 			Weight
 		</dt>
 		<dd>
-			<#= Model.Weight #>
+			<#= Model.Weight #> kg (<#= (Model.Weight * 2.20462262).ToString("0.0") #>)
 		</dd>
 
 		<dt>
@@ -318,10 +304,7 @@
     </tr>
     <# foreach (var item in Model.Evolutions) { 
 		string methodString;
-		if (item.ParameterReference == null) {
-			methodString = item.Method;
-		}
-		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.PokemonReference) {
+		if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.PokemonReference) {
 			methodString = string.Format(item.Method, "<a href='{page=\"gen7-pkm-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.MoveReference) {
@@ -333,6 +316,9 @@
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.TypeReference) {
 			methodString = string.Format(item.Method, "<a href='{page=\"gen7-type-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
+		else if (!string.IsNullOrEmpty(item.ParameterString)) {
+			methodString = string.Format(item.Method, item.ParameterString);
+		} 
 		else {
 			methodString = item.Method;
 		} #>
