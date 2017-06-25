@@ -218,34 +218,6 @@ namespace ProjectPokemon.Pokedex
                 {
                     types[maleEntry.AltType].Pokemon.Add(new PokemonReference(entry.ID, entry.Name));
                 }
-
-                // Dungeons
-                var dungeons = new List<Dungeon>();
-                var mappa = new mappa();
-                await mappa.OpenFile("/data/BALANCE/mappa_s.bin", rom);
-                foreach (var d in mappa.Dungeons)
-                {
-                    var dungeon = new Dungeon();
-                    foreach (var f in d.Floors)
-                    {
-                        var floor = new DungeonFloorDetails();
-                        // Populate floor attributes
-                        throw new NotImplementedException();
-
-                        // Populate Pokemon references
-                        foreach (var p in f.PokemonSpawns)
-                        {
-                            throw new NotImplementedException();
-                            //var pokemon = new DungeonSpawnPokemonReference();
-                            //floor.Pokemon.Add(pokemon);
-                        }
-
-                        // To-do: determine if `floor` is equivalent to the last one. If so, simply update the last one's end floor
-                        throw new NotImplementedException();
-                        dungeon.Floors.Add(floor);
-                    }
-                    dungeons.Add(dungeon);
-                }
             }
             data.Pokemon = pkms;
 
