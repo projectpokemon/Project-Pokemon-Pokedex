@@ -483,7 +483,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             this.Write(" m (");
             
             #line 185 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((Model.Height * 3.2808399).ToString("0.0")));
+            this.Write(this.ToStringHelper.ToStringWithCulture((Model.Height * (decimal)3.2808399).ToString("0.0")));
             
             #line default
             #line hidden
@@ -497,7 +497,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             this.Write(" kg (");
             
             #line 192 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((Model.Weight * 2.20462262).ToString("0.0")));
+            this.Write(this.ToStringHelper.ToStringWithCulture((Model.Weight * (decimal)2.20462262).ToString("0.0")));
             
             #line default
             #line hidden

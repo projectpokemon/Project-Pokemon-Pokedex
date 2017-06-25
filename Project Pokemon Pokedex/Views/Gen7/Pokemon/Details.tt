@@ -182,14 +182,14 @@
 			Height
 		</dt>
 		<dd>
-			<#= Model.Height #> m (<#= (Model.Height * 3.2808399).ToString("0.0") #>)
+			<#= Model.Height #> m (<#= (Model.Height * (decimal)3.2808399).ToString("0.0") #>)
 		</dd>
 
 		<dt>
 			Weight
 		</dt>
 		<dd>
-			<#= Model.Weight #> kg (<#= (Model.Weight * 2.20462262).ToString("0.0") #>)
+			<#= Model.Weight #> kg (<#= (Model.Weight * (decimal)2.20462262).ToString("0.0") #>)
 		</dd>
 
 		<dt>
