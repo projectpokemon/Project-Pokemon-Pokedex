@@ -518,7 +518,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             this.Write("\r\n\t\t</dd>\r\n\r\n\t\t");
             
             #line 223 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
- if (Model.ZItem.ID > 0) { 
+ if (Model.ZItem != null && Model.ZItem.ID > 0) { 
             
             #line default
             #line hidden
@@ -546,7 +546,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             this.Write("\r\n\t\t");
             
             #line 232 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
- if (Model.ZBaseMove.ID > 0) { 
+ if (Model.ZBaseMove != null && Model.ZBaseMove.ID > 0) { 
             
             #line default
             #line hidden
@@ -574,7 +574,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             this.Write("\r\n\t\t");
             
             #line 241 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
- if (Model.ZItem.ID > 0) { 
+ if (Model.ZMove != null && Model.ZMove.ID > 0) { 
             
             #line default
             #line hidden

@@ -34,6 +34,15 @@ namespace ProjectPokemon.Pokedex
             TMs = tms.ToArray();
         }
 
+        // exefs stuff
+        private static readonly byte[] ExefsSignature =
+        {
+            0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00,
+            0xC3, 0x00, 0x00, 0x00, 0xCB, 0x00, 0x00, 0x00, 0xD3, 0x00, 0x00, 0x00, 0xDB, 0x00, 0x00, 0x00,
+            0xF3, 0x00, 0x00, 0x00, 0xFB, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+            0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00,
+        };
+
         public static async Task<SMDataCollection> LoadSunMoonData(string rawFilesDir)
         {
             var data = new SMDataCollection();
@@ -58,11 +67,11 @@ namespace ProjectPokemon.Pokedex
             getTMHMList(Path.Combine(rawFilesDir, "ExeFS"), ref TMs);
 
             // Load type effectiveness
-            using (var exeFS = new GenericFile())
-            {
-                await exeFS.OpenFile(Path.Combine(rawFilesDir, "ExeFS", "code.bin"), new PhysicalIOProvider());
-                data.TypeEffectiveness = new TypeEffectivenessChart(exeFS.Read(0x000D12A8, 18 * 18));
-            }
+            var exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", "code.bin"));
+            var typeEffectivenessOffset = Util.IndexOfBytes(exefs, ExefsSignature, 0x400000, 0) + ExefsSignature.Length;
+            var chart = new byte[18 * 18];
+            Array.Copy(exefs, typeEffectivenessOffset, chart, 0, chart.Length);
+            data.TypeEffectiveness = new TypeEffectivenessChart(chart);
 
             // Load Types
             const int numTypes = 18;
@@ -76,6 +85,7 @@ namespace ProjectPokemon.Pokedex
                 type.Moves = new List<MoveReference>();
                 pkmTypes.Add(type);
             }
+            data.Types = pkmTypes;
 
             // Load Pokemon
             // - Load Level-up GARC
@@ -186,6 +196,7 @@ namespace ProjectPokemon.Pokedex
                 // Types
                 pkm.Type1 = new TypeReference { ID = item.Types[0], Name = types[item.Types[0]] };
                 pkm.Type2 = new TypeReference { ID = item.Types[1], Name = types[item.Types[1]] };
+                pkm.TypeEffectiveness = new TypeEffectivenessList(data.TypeEffectiveness, data.Types, pkm.Type1.ID, pkm.Type2.ID);
 
                 pkm.CatchRate = item.CatchRate;
                 pkm.EvoStage = item.EvoStage;

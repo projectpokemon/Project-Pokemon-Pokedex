@@ -220,7 +220,7 @@
 			<#= Model.LocalVariant #>
 		</dd>
 
-		<# if (Model.ZItem.ID > 0) { #>
+		<# if (Model.ZItem != null && Model.ZItem.ID > 0) { #>
 		<dt>
 			Z Item
 		</dt>
@@ -229,7 +229,7 @@
 		</dd>
 		<# } #>
 
-		<# if (Model.ZBaseMove.ID > 0) { #>
+		<# if (Model.ZBaseMove != null && Model.ZBaseMove.ID > 0) { #>
 		<dt>
 			Z Base Move
 		</dt>
@@ -238,7 +238,7 @@
 		</dd>
 		<# } #>
 
-		<# if (Model.ZItem.ID > 0) { #>
+		<# if (Model.ZMove != null && Model.ZMove.ID > 0) { #>
 		<dt>
 			Z Move
 		</dt>
