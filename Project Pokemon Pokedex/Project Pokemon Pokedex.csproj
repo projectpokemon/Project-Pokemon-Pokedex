@@ -156,6 +156,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\EOS\Dungeon.cs" />
+    <Compile Include="Models\EOS\DungeonFloorDetails.cs" />
+    <Compile Include="Models\EOS\DungeonSpawnPokemonReference.cs" />
     <Compile Include="Models\EOS\EosDataCollection.cs" />
     <Compile Include="Models\EOS\LevelPokemonReference.cs" />
     <Compile Include="Models\EOS\Move.cs" />
@@ -193,6 +196,9 @@
     <Compile Include="Models\PSMD\TypeDetailsViewModel.cs" />
     <Compile Include="Models\TypeEffectiveness.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Program.EOS.cs" />
+    <Compile Include="Program.PSMD.cs" />
+    <Compile Include="Program.SM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\EOS\Moves\Details.cs">
       <AutoGen>True</AutoGen>
@@ -290,18 +296,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="mlist.txt">
+    <None Include="Resources\PSMD\mlist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="tlist.txt">
+    <None Include="Resources\PSMD\tlist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="alist.txt">
+    <None Include="Resources\PSMD\alist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="plist.txt">
+    <None Include="Resources\PSMD\plist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
