@@ -4,107 +4,17 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Pokemon" name="Model" #>
-<h2><#= Model.Name #></h2>
-<h3>Details</h3>
+<h2>#<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #></h2>
+<h3>General</h3>
+<div class="pkm-image-panel">
+    <div class="pkm-image-inner">
+        <a href="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png"><img alt="<#=Model.Name #> Sugimori Artwork" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" class="pkm-image" /></a>
+    </div>
+</div>
+
+<div style="float:left;">
+	<h3>Details</h3>
 <dl class="dl-horizontal">
-    <dt>
-        ID
-    </dt>
-    <dd>
-        <#= Model.ID #>
-    </dd>
-
-	<dt>
-        Name
-    </dt>
-    <dd>
-        <#= Model.Name #>
-    </dd>
-
-	<dt>
-        Base HP
-    </dt>
-    <dd>
-        <#= Model.BaseHP #>
-    </dd>
-
-	<dt>
-        Base Attack
-    </dt>
-    <dd>
-        <#= Model.BaseAttack #>
-    </dd>
-
-	<dt>
-        Base Defense
-    </dt>
-    <dd>
-        <#= Model.BaseDefense #>
-    </dd>
-
-	<dt>
-        Base Speed
-    </dt>
-    <dd>
-        <#= Model.BaseSpeed #>
-    </dd>
-
-	<dt>
-        Base Sp. Attack
-    </dt>
-    <dd>
-        <#= Model.BaseSpAttack #>
-    </dd>
-
-	<dt>
-        Base Sp. Defense
-    </dt>
-    <dd>
-        <#= Model.BaseSpDefense #>
-    </dd>
-
-	<dt>
-        HP EV Yield
-    </dt>
-    <dd>
-        <#= Model.HPEVYield #>
-    </dd>
-
-	<dt>
-        Attack EV Yield
-    </dt>
-    <dd>
-        <#= Model.AttackEVYield #>
-    </dd>
-
-	<dt>
-        Defense EV Yield
-    </dt>
-    <dd>
-        <#= Model.DefenseEVYield #>
-    </dd>
-
-	<dt>
-        Speed EV Yield
-    </dt>
-    <dd>
-        <#= Model.SpeedEVYield #>
-    </dd>
-
-	<dt>
-        Sp. Attack EV Yield
-    </dt>
-    <dd>
-        <#= Model.SpAttackEVYield #>
-    </dd>
-
-	<dt>
-        Sp. Defense EV Yield
-    </dt>
-    <dd>
-        <#= Model.SpDefenseEVYield #>
-    </dd>
-
 	<dt>
 		<# if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID) { #>
         Types
@@ -328,6 +238,50 @@
 	<# } #>
 
 </dl>
+</div>
+
+<div>
+<h3>Stats</h3>
+	<table class="dex-stat-table">
+		<thead>
+			<tr>
+				<td></td>
+				<td>Base</td>
+				<td>EV Yield</td>
+			</tr>
+		</thead>
+		<tr>
+			<td>HP</td>
+			<td><#= Model.BaseHP #></td>
+			<td><#= Model.HPEVYield #></td>
+		</tr>
+		<tr>
+			<td>Attack</td>
+			<td><#= Model.BaseAttack #></td>
+			<td><#= Model.AttackEVYield #></td>
+		</tr>
+		<tr>
+			<td>Sp. Attack</td>
+			<td><#= Model.BaseSpAttack #></td>
+			<td><#= Model.SpAttackEVYield #></td>
+		</tr>
+		<tr>
+			<td>Defense</td>
+			<td><#= Model.BaseDefense #></td>
+			<td><#= Model.DefenseEVYield #></td>
+		</tr>
+		<tr>
+			<td>Sp. Defense</td>
+			<td><#= Model.BaseSpDefense #></td>
+			<td><#= Model.SpDefenseEVYield #></td>
+		</tr>
+		<tr>
+			<td>Speed</td>
+			<td><#= Model.BaseSpeed #></td>
+			<td><#= Model.SpeedEVYield #></td>
+		</tr>
+	</table>
+</div>
 
 <# if (Model.Evolutions.Count > 0) { #>
 <h3>Evolutions</h3>
