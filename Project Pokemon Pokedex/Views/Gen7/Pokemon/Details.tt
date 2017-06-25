@@ -5,242 +5,252 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Pokemon" name="Model" #>
 <h2>#<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #></h2>
-<h3>General</h3>
-<div class="pkm-image-panel">
-    <div class="pkm-image-inner">
-        <a href="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png"><img alt="<#=Model.Name #> Sugimori Artwork" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" class="pkm-image" /></a>
-    </div>
+<div class="row">
+	<div class="col-md-4">
+		<h2>Images</h2>
+		<h4>Sugimori Artwork</h4>
+		<div class="pkm-image-inner" style="padding-left: auto;padding-right: auto;">
+			<a href="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png">
+				<img alt="<#=Model.Name #> Sugimori Artwork" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" class="pkm-image" />
+			</a>
+		</div>
+		<h4>Sprites</h4>
+		<img alt="<#= Model.Name.ToLower() #>" src="https://projectpokemon.org/images/normal-sprite/<#= Model.Name.ToLower() #>.gif" />
+		<img alt="Shiny <#= Model.Name.ToLower() #>" src="https://projectpokemon.org/images/shiny-sprite/<#= Model.Name.ToLower() #>.gif" />
+	</div>
+
+	<div class="col-md-4">
+		<h3>Details</h3>
+		<dl class="dl-horizontal">
+		<dt>
+			<# if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID) { #>
+			Types
+			<# } else { #>
+			Type
+			<# } #>
+		</dt>
+		<dd>
+			<a href="{page="gen7-type-<#=Model.Type1.ID #>"}"><img alt="<#= Model.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= Model.Type1.Name #>.png" /></a>
+			<# if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID) { #>
+			<a href="{page="gen7-type-<#=Model.Type2.ID #>"}"><img alt="<#= Model.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= Model.Type2.Name #>.png" /></a>
+			<# } #>
+		</dd>	
+
+		<dt>
+			Catch Rate
+		</dt>
+		<dd>
+			<#= Model.CatchRate #>
+		</dd>
+
+		<dt>
+			Evo Stage
+		</dt>
+		<dd>
+			<#= Model.EvoStage #>
+		</dd>
+
+		<# if (Model.HeldItem1.ID > 0) { #>
+		<dt>
+			Held Item 1
+		</dt>
+		<dd>
+			<a href="{page="gen7-item-<#=Model.HeldItem1.ID #>"}"><#= Model.HeldItem1.Name #></a> (50%)
+		</dd>
+		<# } #>
+
+		<# if (Model.HeldItem2.ID > 0) { #>
+		<dt>
+			Held Item 2
+		</dt>
+		<dd>
+			<a href="{page="gen7-item-<#=Model.HeldItem2.ID #>"}"><#= Model.HeldItem2.Name #></a> (5%)
+		</dd>
+		<# } #>
+
+		<# if (Model.HeldItem3.ID > 0) { #>
+		<dt>
+			Held Item 3
+		</dt>
+		<dd>
+			<a href="{page="gen7-item-<#=Model.HeldItem3.ID #>"}"><#= Model.HeldItem3.Name #></a> (1%)
+		</dd>
+		<# } #>
+
+		<dt>
+			Gender
+		</dt>
+		<dd>
+			<#= Model.Gender #>
+		</dd>
+
+		<dt>
+			Hatch Cycles
+		</dt>
+		<dd>
+			<#= Model.HatchCycles #>
+		</dd>
+
+		<dt>
+			Base Friendship
+		</dt>
+		<dd>
+			<#= Model.BaseFriendship #>
+		</dd>
+
+		<dt>
+			Exp Growth
+		</dt>
+		<dd>
+			<#= Model.ExpGrowth #>
+		</dd>
+
+		<dt>
+			Egg Group 1
+		</dt>
+		<dd>
+			<#= Model.EggGroup1 #>
+		</dd>
+
+		<dt>
+			Egg Group 2
+		</dt>
+		<dd>
+			<#= Model.EggGroup2 #>
+		</dd>
+
+		<dt>
+			<# if (Model.EggGroup1 != Model.EggGroup2) { #>
+			Egg Groups
+			<# } else { #>
+			Egg Group
+			<# } #>
+		</dt>
+		<dd>
+			<#= Model.EggGroup1 #> 
+			<# if (Model.EggGroup1 != Model.EggGroup2) { #>
+			<#= Model.EggGroup2 #>
+			<# } #>
+		</dd>
+
+		<dt>
+			<# if (Model.Ability1.ID == Model.Ability2.ID) { #>
+				Ability
+			<# } else { #>
+				Abilities
+			<# } #>
+		</dt>
+		<dd>
+			<a href="{page="gen7-ability-<#=Model.Ability1.ID #>"}"><#= Model.Ability1.Name #></a>
+
+			<# if (Model.Ability1.ID != Model.Ability2.ID) { #>
+				<a href="{page="gen7-ability-<#=Model.Ability2.ID #>"}"><#= Model.Ability2.Name #></a>
+			<# } #>
+		</dd>
+
+		<# if (Model.AbilityHidden.ID != Model.Ability1.ID && Model.AbilityHidden.ID != Model.Ability2.ID) { #>
+			<dt>
+				Hidden Ability
+			</dt>
+			<dd>
+				<a href="{page="gen7-ability-<#=Model.AbilityHidden.ID #>"}"><#= Model.AbilityHidden.Name #></a>
+			</dd>
+		<# } #>
+
+		<dt>
+			Forme Count
+		</dt>
+		<dd>
+			<#= Model.FormeCount #>
+		</dd>
+
+		<dt>
+			Forme Sprite
+		</dt>
+		<dd>
+			<#= Model.FormeSprite #>
+		</dd>
+
+		<dt>
+			Color
+		</dt>
+		<dd>
+			<#= Model.Color #>
+		</dd>
+
+		<dt>
+			Base Exp
+		</dt>
+		<dd>
+			<#= Model.BaseExp #>
+		</dd>
+
+		<dt>
+			BST
+		</dt>
+		<dd>
+			<#= Model.BST #>
+		</dd>
+
+		<dt>
+			Height
+		</dt>
+		<dd>
+			<#= Model.Height #>
+		</dd>
+
+		<dt>
+			Weight
+		</dt>
+		<dd>
+			<#= Model.Weight #>
+		</dd>
+
+		<dt>
+			Escape Rate
+		</dt>
+		<dd>
+			<#= Model.EscapeRate #>
+		</dd>
+
+		<dt>
+			Local Variant
+		</dt>
+		<dd>
+			<#= Model.LocalVariant #>
+		</dd>
+
+		<# if (Model.ZItem.ID > 0) { #>
+		<dt>
+			Z Item
+		</dt>
+		<dd>
+			<a href="{page="gen7-item-<#=Model.ZItem.ID #>"}"><#= Model.ZItem.Name #></a>
+		</dd>
+		<# } #>
+
+		<# if (Model.ZBaseMove.ID > 0) { #>
+		<dt>
+			Z Base Move
+		</dt>
+		<dd>
+			<a href="{page="gen7-move-<#=Model.ZBaseMove.ID #>"}"><#= Model.ZBaseMove.Name #></a>
+		</dd>
+		<# } #>
+
+		<# if (Model.ZItem.ID > 0) { #>
+		<dt>
+			Z Move
+		</dt>
+		<dd>
+			<a href="{page="gen7-move-<#=Model.ZMove.ID #>"}"><#= Model.ZMove.Name #></a>
+		</dd>
+		<# } #>
+
+	</dl>
+	</div>
 </div>
-
-<div style="float:left;">
-	<h3>Details</h3>
-<dl class="dl-horizontal">
-	<dt>
-		<# if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID) { #>
-        Types
-		<# } else { #>
-		Type
-		<# } #>
-    </dt>
-    <dd>
-		<a href="{page="gen7-type-<#=Model.Type1.ID #>"}"><#= Model.Type1.Name #></a>
-		<# if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID) { #>
-		<a href="{page="gen7-type-<#=Model.Type2.ID #>"}"><#= Model.Type2.Name #></a>
-		<# } #>
-    </dd>	
-
-	<dt>
-        Catch Rate
-    </dt>
-    <dd>
-        <#= Model.CatchRate #>
-    </dd>
-
-	<dt>
-        Evo Stage
-    </dt>
-    <dd>
-        <#= Model.EvoStage #>
-    </dd>
-
-	<# if (Model.HeldItem1.ID > 0) { #>
-	<dt>
-        Held Item 1
-    </dt>
-    <dd>
-        <a href="{page="gen7-item-<#=Model.HeldItem1.ID #>"}"><#= Model.HeldItem1.Name #></a> (50%)
-    </dd>
-	<# } #>
-
-	<# if (Model.HeldItem2.ID > 0) { #>
-	<dt>
-        Held Item 2
-    </dt>
-    <dd>
-        <a href="{page="gen7-item-<#=Model.HeldItem2.ID #>"}"><#= Model.HeldItem2.Name #></a> (5%)
-    </dd>
-	<# } #>
-
-	<# if (Model.HeldItem3.ID > 0) { #>
-	<dt>
-        Held Item 3
-    </dt>
-    <dd>
-        <a href="{page="gen7-item-<#=Model.HeldItem3.ID #>"}"><#= Model.HeldItem3.Name #></a> (1%)
-    </dd>
-	<# } #>
-
-	<dt>
-        Gender
-    </dt>
-    <dd>
-        <#= Model.Gender #>
-    </dd>
-
-	<dt>
-        Hatch Cycles
-    </dt>
-    <dd>
-        <#= Model.HatchCycles #>
-    </dd>
-
-	<dt>
-        Base Friendship
-    </dt>
-    <dd>
-        <#= Model.BaseFriendship #>
-    </dd>
-
-	<dt>
-        Exp Growth
-    </dt>
-    <dd>
-        <#= Model.ExpGrowth #>
-    </dd>
-
-	<dt>
-        Egg Group 1
-    </dt>
-    <dd>
-        <#= Model.EggGroup1 #>
-    </dd>
-
-	<dt>
-        Egg Group 2
-    </dt>
-    <dd>
-        <#= Model.EggGroup2 #>
-    </dd>
-
-	<dt>
-		<# if (Model.EggGroup1 != Model.EggGroup2) { #>
-        Egg Groups
-		<# } else { #>
-		Egg Group
-		<# } #>
-    </dt>
-    <dd>
-		<#= Model.EggGroup1 #> 
-		<# if (Model.EggGroup1 != Model.EggGroup2) { #>
-		<#= Model.EggGroup2 #>
-		<# } #>
-    </dd>
-
-	<dt>
-        Ability 1
-    </dt>
-    <dd>
-        <a href="{page="gen7-ability-<#=Model.Ability1.ID #>"}"><#= Model.Ability1.Name #></a>
-    </dd>
-
-	<dt>
-        Ability 2
-    </dt>
-    <dd>
-        <a href="{page="gen7-ability-<#=Model.Ability2.ID #>"}"><#= Model.Ability2.Name #></a>
-    </dd>
-
-	<dt>
-        Hidden Ability
-    </dt>
-    <dd>
-        <a href="{page="gen7-ability-<#=Model.AbilityHidden.ID #>"}"><#= Model.AbilityHidden.Name #></a>
-    </dd>
-
-	<dt>
-        Forme Count
-    </dt>
-    <dd>
-        <#= Model.FormeCount #>
-    </dd>
-
-	<dt>
-        Forme Sprite
-    </dt>
-    <dd>
-        <#= Model.FormeSprite #>
-    </dd>
-
-	<dt>
-        Color
-    </dt>
-    <dd>
-        <#= Model.Color #>
-    </dd>
-
-	<dt>
-        Base Exp
-    </dt>
-    <dd>
-        <#= Model.BaseExp #>
-    </dd>
-
-	<dt>
-        BST
-    </dt>
-    <dd>
-        <#= Model.BST #>
-    </dd>
-
-	<dt>
-        Height
-    </dt>
-    <dd>
-        <#= Model.Height #>
-    </dd>
-
-	<dt>
-        Weight
-    </dt>
-    <dd>
-        <#= Model.Weight #>
-    </dd>
-
-	<dt>
-        Escape Rate
-    </dt>
-    <dd>
-        <#= Model.EscapeRate #>
-    </dd>
-
-	<dt>
-        Local Variant
-    </dt>
-    <dd>
-        <#= Model.LocalVariant #>
-    </dd>
-
-	<# if (Model.ZItem.ID > 0) { #>
-	<dt>
-        Z Item
-    </dt>
-    <dd>
-        <a href="{page="gen7-item-<#=Model.ZItem.ID #>"}"><#= Model.ZItem.Name #></a>
-    </dd>
-	<# } #>
-
-	<# if (Model.ZBaseMove.ID > 0) { #>
-	<dt>
-        Z Base Move
-    </dt>
-    <dd>
-        <a href="{page="gen7-move-<#=Model.ZBaseMove.ID #>"}"><#= Model.ZBaseMove.Name #></a>
-    </dd>
-	<# } #>
-
-	<# if (Model.ZItem.ID > 0) { #>
-	<dt>
-        Z Move
-    </dt>
-    <dd>
-        <a href="{page="gen7-move-<#=Model.ZMove.ID #>"}"><#= Model.ZMove.Name #></a>
-    </dd>
-	<# } #>
-
-</dl>
-</div>
-
-<div>
+<div class="col-md-4">
 <h3>Stats</h3>
 	<table class="dex-stat-table">
 		<thead>
