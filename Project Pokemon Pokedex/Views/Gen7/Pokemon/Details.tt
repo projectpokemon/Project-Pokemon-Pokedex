@@ -288,17 +288,23 @@
 			</tr>
 		</table>		
 	</div>
-	<div class="col-md-3">
-		<h3>Type Effectiveness</h3>
-		<table class="table">
-			<# foreach (var item in Model.TypeEffectiveness) { #>
-				<tr>
+</div>
+<div>
+	<h3>Type Effectiveness</h3>
+	<table class="table">
+		<thead>
+			<tr>
+				<# foreach (var item in Model.TypeEffectiveness) { #>
 					<td><a href='{page="gen7-type-<#=item.Type.ID #>"}'><img alt="<#=item.Type.Name #>" src="https://projectpokemon.org/images/gen7-types/<#=item.Type.Name #>.png" /></a></td>
+				<# } #>
+			</tr>
+		</thead>
+		<tr>
+			<# foreach (var item in Model.TypeEffectiveness) { #>
 					<td>x<#=item.Multiplier #></td>
-				</tr>
 			<# } #>
-		</table>
-	</div>
+		</tr>
+	</table>
 </div>
 <# if (Model.Evolutions.Count > 0) { #>
 <h3>Evolutions</h3>
