@@ -88,9 +88,9 @@
 			<# } else if (Model.Gender == 255) { #>
 				Genderless
 			<# } else { #>
-				<#= (1 - ((Model.Gender - 1) / 252)).ToString("P") #>%
-				<span style="color: cyan;">&#9794;</span>
-				<#= ((Model.Gender - 1) / 252).ToString("P") #>%
+				<#= (1 - ((Model.Gender - 1) / (decimal)252)).ToString("P") #>
+				<span style="color: blue;">&#9794;</span>
+				<#= ((Model.Gender - 1) / (decimal)252).ToString("P") #>
 				<span style="color: magenta;">&#9792;</span>
 			<# } #>			
 		</dd>

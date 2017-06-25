@@ -300,18 +300,18 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             this.Write("\t\t\t\t");
             
             #line 91 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((1 - ((Model.Gender - 1) / 252)).ToString("P")));
+            this.Write(this.ToStringHelper.ToStringWithCulture((1 - ((Model.Gender - 1) / (decimal)252)).ToString("P")));
             
             #line default
             #line hidden
-            this.Write("%\r\n\t\t\t\t<span style=\"color: cyan;\">&#9794;</span>\r\n\t\t\t\t");
+            this.Write("\r\n\t\t\t\t<span style=\"color: blue;\">&#9794;</span>\r\n\t\t\t\t");
             
             #line 93 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(((Model.Gender - 1) / 252).ToString("P")));
+            this.Write(this.ToStringHelper.ToStringWithCulture(((Model.Gender - 1) / (decimal)252).ToString("P")));
             
             #line default
             #line hidden
-            this.Write("%\r\n\t\t\t\t<span style=\"color: magenta;\">&#9792;</span>\r\n\t\t\t");
+            this.Write("\r\n\t\t\t\t<span style=\"color: magenta;\">&#9792;</span>\r\n\t\t\t");
             
             #line 95 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 
