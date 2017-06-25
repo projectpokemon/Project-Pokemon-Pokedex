@@ -9,7 +9,7 @@
 	<div class="col-md-4">
 		<h2>Images</h2>
 		<h4>Sugimori Artwork</h4>
-		<div class="pkm-image-inner" style="padding-left: auto;padding-right: auto;">
+		<div class="pkm-image-inner" style="text-align:center;">
 			<a href="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png">
 				<img alt="<#=Model.Name #> Sugimori Artwork" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" class="pkm-image" />
 			</a>
@@ -249,50 +249,49 @@
 
 	</dl>
 	</div>
-</div>
-<div class="col-md-4">
-<h3>Stats</h3>
-	<table class="dex-stat-table">
-		<thead>
+	<div class="col-md-4">
+	<h3>Stats</h3>
+		<table class="dex-stat-table">
+			<thead>
+				<tr>
+					<td></td>
+					<td>Base</td>
+					<td>EV Yield</td>
+				</tr>
+			</thead>
 			<tr>
-				<td></td>
-				<td>Base</td>
-				<td>EV Yield</td>
+				<td>HP</td>
+				<td><#= Model.BaseHP #></td>
+				<td><#= Model.HPEVYield #></td>
 			</tr>
-		</thead>
-		<tr>
-			<td>HP</td>
-			<td><#= Model.BaseHP #></td>
-			<td><#= Model.HPEVYield #></td>
-		</tr>
-		<tr>
-			<td>Attack</td>
-			<td><#= Model.BaseAttack #></td>
-			<td><#= Model.AttackEVYield #></td>
-		</tr>
-		<tr>
-			<td>Sp. Attack</td>
-			<td><#= Model.BaseSpAttack #></td>
-			<td><#= Model.SpAttackEVYield #></td>
-		</tr>
-		<tr>
-			<td>Defense</td>
-			<td><#= Model.BaseDefense #></td>
-			<td><#= Model.DefenseEVYield #></td>
-		</tr>
-		<tr>
-			<td>Sp. Defense</td>
-			<td><#= Model.BaseSpDefense #></td>
-			<td><#= Model.SpDefenseEVYield #></td>
-		</tr>
-		<tr>
-			<td>Speed</td>
-			<td><#= Model.BaseSpeed #></td>
-			<td><#= Model.SpeedEVYield #></td>
-		</tr>
-	</table>
+			<tr>
+				<td>Attack</td>
+				<td><#= Model.BaseAttack #></td>
+				<td><#= Model.AttackEVYield #></td>
+			</tr>
+			<tr>
+				<td>Sp. Attack</td>
+				<td><#= Model.BaseSpAttack #></td>
+				<td><#= Model.SpAttackEVYield #></td>
+			</tr>
+			<tr>
+				<td>Defense</td>
+				<td><#= Model.BaseDefense #></td>
+				<td><#= Model.DefenseEVYield #></td>
+			</tr>
+			<tr>
+				<td>Sp. Defense</td>
+				<td><#= Model.BaseSpDefense #></td>
+				<td><#= Model.SpDefenseEVYield #></td>
+			</tr>
+			<tr>
+				<td>Speed</td>
+				<td><#= Model.BaseSpeed #></td>
+				<td><#= Model.SpeedEVYield #></td>
+			</tr>
+		</table>
+	</div>
 </div>
-
 <# if (Model.Evolutions.Count > 0) { #>
 <h3>Evolutions</h3>
 <table class="table">

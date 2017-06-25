@@ -170,9 +170,11 @@
     <Compile Include="Models\Gen7\LevelupMoveReference.cs" />
     <Compile Include="Models\Gen7\Move.cs" />
     <Compile Include="Models\Gen7\MoveReference.cs" />
+    <Compile Include="Models\Gen7\PkmType.cs" />
     <Compile Include="Models\Gen7\Pokemon.cs" />
     <Compile Include="Models\Gen7\PokemonReference.cs" />
     <Compile Include="Models\Gen7\SMDataCollection.cs" />
+    <Compile Include="Models\Gen7\TypeEffectivenessChart.cs" />
     <Compile Include="Models\Gen7\TypeReference.cs" />
     <Compile Include="Models\IModelReference.cs" />
     <Compile Include="Models\PSMD\Ability.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="Models\PSMD\PokemonLevelUp.cs" />
     <Compile Include="Models\PSMD\PsmdDataCollection.cs" />
     <Compile Include="Models\PSMD\TypeDetailsViewModel.cs" />
+    <Compile Include="Models\TypeEffectiveness.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\EOS\Moves\Details.cs">
