@@ -18,7 +18,7 @@ A work-in-progress Pokédex for various games.
 
 ## Requirements
 
-* .Net Framework 4.6.2
+* .Net Core 2.0
 
 ## Building
 

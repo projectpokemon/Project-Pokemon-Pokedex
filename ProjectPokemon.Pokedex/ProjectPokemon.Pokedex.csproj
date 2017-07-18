@@ -1,0 +1,209 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>ProjectPokemon.Pokedex</AssemblyName>
+    <RootNamespace>ProjectPokemon.Pokedex</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetNdsToolkit" Version="2.0.0-CI111" />
+    <PackageReference Include="IPS-Pages-Publisher.Interfaces" Version="1.0.0-CI113" />
+    <PackageReference Include="pk3DS.Core" Version="1.0.0-netstandard001" />
+    <PackageReference Include="SkyEditor.Core" Version="4.1.0-CI161" />
+    <PackageReference Include="SkyEditor.ROMEditor" Version="4.1.0-CI49" />
+    <PackageReference Include="System.CodeDom" Version="4.4.0-preview2-25405-01" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Views\EOS\Moves\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Update="Views\EOS\Moves\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+    <None Update="Views\EOS\Pokemon\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Update="Views\EOS\Pokemon\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+    <None Update="Views\EOS\Types\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Update="Views\EOS\Types\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+    <None Update="Views\Gen7\Moves\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Update="Views\Gen7\Moves\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+    <None Update="Views\Gen7\Pokemon\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Update="Views\Gen7\Pokemon\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+    <None Update="Views\Gen7\Types\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Update="Views\Gen7\Types\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+    <None Update="Views\PSMD\Abilities\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Update="Views\PSMD\Abilities\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+    <None Update="Views\PSMD\Moves\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Update="Views\PSMD\Moves\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+    <None Update="Views\PSMD\Pokemon\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Update="Views\PSMD\Pokemon\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+    <None Update="Views\PSMD\Types\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Update="Views\PSMD\Types\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\EOS\Moves\Details.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EOS\Moves\Index.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EOS\Pokemon\Details.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EOS\Pokemon\Index.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EOS\Types\Details.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EOS\Types\Index.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Gen7\Moves\Details.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Gen7\Moves\Index.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Gen7\Pokemon\Details.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Gen7\Pokemon\Index.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Gen7\Types\Details.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Gen7\Types\Index.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PSMD\Abilities\Details.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PSMD\Abilities\Index.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PSMD\Moves\Details.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PSMD\Moves\Index.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PSMD\Pokemon\Details.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PSMD\Pokemon\Index.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PSMD\Types\Details.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PSMD\Types\Index.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

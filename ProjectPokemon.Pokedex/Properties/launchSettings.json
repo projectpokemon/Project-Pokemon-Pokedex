@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ProjectPokemon.Pokedex": {
+      "commandName": "Project",
+      "commandLineArgs": "psmd D:\\ROMs\\psmde.3ds psmd.ipsdb"
+    }
+  }
+}
