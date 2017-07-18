@@ -68,6 +68,8 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
 
         public decimal Height { get; set; }
         public decimal Weight { get; set; }
+
+        public TypeEffectivenessList TypeEffectiveness { get; set; }
         
         public List<LevelupMoveReference> MoveLevelUp { get; set; }
         public List<MoveReference> MoveTMs { get; set; }

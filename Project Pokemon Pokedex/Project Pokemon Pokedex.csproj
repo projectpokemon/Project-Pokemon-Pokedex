@@ -156,6 +156,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\EOS\Dungeon.cs" />
+    <Compile Include="Models\EOS\DungeonFloorDetails.cs" />
+    <Compile Include="Models\EOS\DungeonSpawnPokemonReference.cs" />
     <Compile Include="Models\EOS\EosDataCollection.cs" />
     <Compile Include="Models\EOS\LevelPokemonReference.cs" />
     <Compile Include="Models\EOS\Move.cs" />
@@ -170,9 +173,13 @@
     <Compile Include="Models\Gen7\LevelupMoveReference.cs" />
     <Compile Include="Models\Gen7\Move.cs" />
     <Compile Include="Models\Gen7\MoveReference.cs" />
+    <Compile Include="Models\Gen7\PkmType.cs" />
     <Compile Include="Models\Gen7\Pokemon.cs" />
     <Compile Include="Models\Gen7\PokemonReference.cs" />
     <Compile Include="Models\Gen7\SMDataCollection.cs" />
+    <Compile Include="Models\Gen7\TypeEffectivenessChart.cs" />
+    <Compile Include="Models\Gen7\TypeEffectivenessList.cs" />
+    <Compile Include="Models\Gen7\TypeEffectivenessResult.cs" />
     <Compile Include="Models\Gen7\TypeReference.cs" />
     <Compile Include="Models\IModelReference.cs" />
     <Compile Include="Models\PSMD\Ability.cs" />
@@ -189,7 +196,11 @@
     <Compile Include="Models\PSMD\PokemonLevelUp.cs" />
     <Compile Include="Models\PSMD\PsmdDataCollection.cs" />
     <Compile Include="Models\PSMD\TypeDetailsViewModel.cs" />
+    <Compile Include="Models\TypeEffectiveness.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Program.EOS.cs" />
+    <Compile Include="Program.PSMD.cs" />
+    <Compile Include="Program.SM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\EOS\Moves\Details.cs">
       <AutoGen>True</AutoGen>
@@ -241,6 +252,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\Gen7\Types\Details.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Gen7\Types\Index.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
     <Compile Include="Views\PSMD\Abilities\Details.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -287,18 +308,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="mlist.txt">
+    <None Include="Resources\PSMD\mlist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="tlist.txt">
+    <None Include="Resources\PSMD\tlist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="alist.txt">
+    <None Include="Resources\PSMD\alist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="plist.txt">
+    <None Include="Resources\PSMD\plist.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -348,6 +369,14 @@
       <LastGenOutput>Details.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Gen7\Pokemon\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Gen7\Types\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Gen7\Types\Index.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Index.cs</LastGenOutput>
     </Content>

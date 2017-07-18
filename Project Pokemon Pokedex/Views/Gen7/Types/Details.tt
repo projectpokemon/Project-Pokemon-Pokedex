@@ -1,0 +1,56 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.PkmType" name="Model" #>
+<h2><#= Model.Name #></h2>
+<h3>Pokemon</h3>
+<table class="table">
+    <tr>
+        <th width="10%">
+            ID
+        </th>
+        <th width="60%">
+            Name
+        </th>
+    </tr>
+
+    <# foreach (var item in Model.Pokemon) {
+        var hex = item.ID.ToString("X").PadLeft(4, '0'); #>
+        <tr>
+            <td>
+                <#= item.ID.ToString() #>
+            </td>
+            <td>
+				<a href='{page="gen7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+
+</table>
+
+<h3>Moves</h3>
+<table class="table">
+    <tr>
+        <th width="10%">
+            ID
+        </th>
+        <th width="60%">
+            Name
+        </th>
+    </tr>
+
+    <# foreach (var item in Model.Moves) {
+        var hex = item.ID.ToString("X").PadLeft(4, '0'); #>
+        <tr>
+            <td>
+                <#= item.ID.ToString() #>
+            </td>
+            <td>
+				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+
+</table>
