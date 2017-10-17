@@ -302,7 +302,7 @@ namespace ProjectPokemon.Pokedex
                         case 0: // No Parameter Required
                             { evoMethod.ParameterString = ""; break; }
                         case 1: // Level
-                            { evoMethod.ParameterString = param.ToString(); break; }
+                            { evoMethod.ParameterString = evoMethod.Level.ToString(); break; }
                         case 2: // Items
                             { evoMethod.ParameterReference = new ItemReference { ID = param, Name = items[param] }; break; }
                         case 3: // Moves
