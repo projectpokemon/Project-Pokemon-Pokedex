@@ -98,7 +98,7 @@
 				</td>
 				<td>
 					<# var feet = Model.Height * (decimal)3.2808399; #>
-					<#= Model.Height #> m (<#= Math.Floor(feet).ToString() #>.<#= ((feet - Math.Floor(feet)) * 12).ToString() #> ft.)
+					<#= Model.Height #> m (<#= Math.Floor(feet).ToString() #>'<#= ((feet - Math.Floor(feet)) * 12).ToString("0") #>")
 				</td>
 			</tr>
 			<tr>

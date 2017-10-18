@@ -310,15 +310,15 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write(".");
+            this.Write("\'");
             
             #line 101 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(((feet - Math.Floor(feet)) * 12).ToString()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(((feet - Math.Floor(feet)) * 12).ToString("0")));
             
             #line default
             #line hidden
-            this.Write(" ft.)\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tWeight\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n" +
-                    "\t\t\t\t\t");
+            this.Write("\")\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tWeight\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t" +
+                    "\t\t");
             
             #line 109 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Weight));
