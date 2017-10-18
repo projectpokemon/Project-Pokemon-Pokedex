@@ -880,7 +880,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             this.Write("\"}\'>");
             
             #line 376 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.PokespriteHtml));
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.TargetPokemon.PokespriteHtml));
             
             #line default
             #line hidden

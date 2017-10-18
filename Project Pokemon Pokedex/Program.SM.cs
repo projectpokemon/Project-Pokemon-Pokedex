@@ -509,7 +509,7 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesLevel = pkm.MoveLevelUp.Where(x => x.ID == move.ID);
                     if (referenceMovesLevel.Any())
                     {
-                        var pkmReference = new LevelupPokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new LevelupPokemonReference(pkm);
                         pkmReference.Levels = referenceMovesLevel.Select(x => x.Level).ToList();
                         move.PokemonThroughLevelUp.Add(pkmReference);
                     }

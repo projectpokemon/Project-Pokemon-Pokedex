@@ -373,7 +373,7 @@
 	
         <tr>
 			<td>
-				<a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#= item.PokespriteHtml #></a>				
+				<a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#= item.TargetPokemon.PokespriteHtml #></a>				
 			</td>
             <td>
                 <a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
