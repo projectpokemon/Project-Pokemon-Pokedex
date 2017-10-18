@@ -304,7 +304,7 @@ namespace ProjectPokemon.Pokedex
                 evoMethod.Form = evo.PossibleEvolutions[i].Form;
                 evoMethod.Level = evo.PossibleEvolutions[i].Level;
                 evoMethod.Method = evolutionMethods[evo.PossibleEvolutions[i].Method];
-                evoMethod.TargetPokemon = new PokemonReference { ID = evo.PossibleEvolutions[i].Species, Name = speciesNames[evo.PossibleEvolutions[i].Species] };
+                evoMethod.TargetPokemon = new PokemonReference(evo.PossibleEvolutions[i].Species, speciesNames[evo.PossibleEvolutions[i].Species], data);
 
                 // Parameter
                 int cv = evolutionMethodCase[evo.PossibleEvolutions[i].Method];
@@ -320,7 +320,7 @@ namespace ProjectPokemon.Pokedex
                     case 3: // Moves
                         { evoMethod.ParameterReference = new MoveReference { ID = param, Name = moveNames[param] }; break; }
                     case 4: // Species
-                        { evoMethod.ParameterReference = new PokemonReference { ID = param, Name = speciesNames[param] }; break; }
+                        { evoMethod.ParameterReference = new PokemonReference(param, speciesNames[param], data); break; }
                     case 5: // 0-255 (Beauty)
                         { evoMethod.ParameterString = param.ToString(); break; }
                     case 6:
@@ -518,7 +518,7 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesTM = pkm.MoveTMs.Where(x => x.ID == move.ID);
                     if (referenceMovesTM.Any())
                     {
-                        var pkmReference = new PokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new PokemonReference(pkm);
                         move.PokemonThroughTM.Add(pkmReference);
                     }
 
@@ -526,7 +526,7 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesEgg = pkm.MoveEgg.Where(x => x.ID == move.ID);
                     if (referenceMovesEgg.Any())
                     {
-                        var pkmReference = new PokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new PokemonReference(pkm);
                         move.PokemonThroughEgg.Add(pkmReference);
                     }
 
@@ -534,7 +534,7 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesTutor = pkm.MoveTutors.Where(x => x.ID == move.ID);
                     if (referenceMovesTutor.Any())
                     {
-                        var pkmReference = new PokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new PokemonReference(pkm);
                         move.PokemonThroughTutor.Add(pkmReference);
                     }
                 }

@@ -84,6 +84,22 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
 
         public List<EvolutionMethod> Evolutions { get; set; }
 
+        public bool EvolvesToAltForm
+        {
+            get
+            {
+                return Evolutions.Any(x => x.Form != -1);
+            }
+        }
+
+        public string PokespriteHtml
+        {
+            get
+            {
+                return string.Format("<span class=\"pkspr pkmn-{0}\"></span>", Name.ToLower());
+            }            
+        }
+
         public override string ToString()
         {
             return Name ?? base.ToString();
