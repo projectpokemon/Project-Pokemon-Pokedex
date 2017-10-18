@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using pk3DS.Core;
 using pk3DS.Core.Structures;
-using pk3DS.Core.Structures.Gen6;
 using pk3DS.Core.Structures.PersonalInfo;
 using ProjectPokemon.Pokedex.Models.Gen7;
 using SkyEditor.Core.IO;
@@ -67,7 +66,7 @@ namespace ProjectPokemon.Pokedex
             data.Types = pkmTypes;
         }
 
-        private static void LoadPokemon(SMDataCollection data, GameConfig config, string rawFilesDir, string[] speciesNames, string[] typeNames, string[] itemNames, string[] abilityNames, string[] moveNames, string[] EXPGroups, string[] eggGroups, string[] colors)
+        private static void LoadPokemon(SMDataCollection data, GameConfig config, string rawFilesDir, string[] speciesNames, string[] typeNames, string[] itemNames, string[] abilityNames, string[] moveNames, string[] EXPGroups, string[] eggGroups, string[] colors, string[] pokemonClassifications, string[] pokedexEntries1, string[] pokedexEntries2)
         {
             // Load TMs
             var TMs = new ushort[0];
@@ -102,6 +101,33 @@ namespace ProjectPokemon.Pokedex
                 else
                 {
                     pkm.Name = "(Unnamed)";
+                }
+
+                if (pokemonClassifications.Length > pkm.ID)
+                {
+                    pkm.Classification = pokemonClassifications[pkm.ID];
+                }
+                else
+                {
+                    pkm.Classification = "N/A";
+                }
+
+                if (pokedexEntries1.Length > pkm.ID)
+                {
+                    pkm.PokedexTextSun = pokedexEntries1[pkm.ID];
+                }
+                else
+                {
+                    pkm.PokedexTextSun = "N/A";
+                }
+
+                if (pokedexEntries2.Length > pkm.ID)
+                {
+                    pkm.PokedexTextMoon = pokedexEntries2[pkm.ID];
+                }
+                else
+                {
+                    pkm.PokedexTextMoon = "N/A";
                 }
 
                 // Stats
@@ -558,6 +584,9 @@ namespace ProjectPokemon.Pokedex
             var moveNames = config.getText(TextName.MoveNames);
             var moveflavor = config.getText(TextName.MoveFlavor);
             var species = config.getText(TextName.SpeciesNames);
+            var speciesClassifications = config.getText(TextName.SpeciesClassifications);
+            var pokedexEntries1 = config.getText(TextName.PokedexEntry1);
+            var pokedexEntries2 = config.getText(TextName.PokedexEntry1);
             var abilities = config.getText(TextName.AbilityNames);
             var forms = config.getText(TextName.Forms);
             var typeNames = config.getText(TextName.Types);
@@ -568,7 +597,7 @@ namespace ProjectPokemon.Pokedex
             // Load stuff
             LoadTypeEffectiveness(data, exefs);
             LoadTypes(data, typeNames);
-            LoadPokemon(data, config, rawFilesDir, species, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors);
+            LoadPokemon(data, config, rawFilesDir, species, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors, speciesClassifications, pokedexEntries1, pokedexEntries2);
             LoadMoves(data, config, moveNames, moveflavor, typeNames);
 
             return data;

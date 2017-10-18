@@ -5,10 +5,9 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Pokemon" name="Model" #>
 <h2>#<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #></h2>
+<p></p>
 <div class="row">
 	<div class="col-md-3">
-		<h2>Images</h2>
-		<h4>Sugimori Artwork</h4>
 		<div class="pkm-image-inner" style="text-align:center;">
 			<a href="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png">
 				<img alt="<#=Model.Name #> Sugimori Artwork" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" class="pkm-image" />
@@ -17,9 +16,25 @@
 		<a href="https://projectpokemon.org/home/gallery/album/<#=(Model.ID + 1).ToString() #>-<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #>/">See more images</a>
 	</div>
 
-	<div class="col-md-5">
-		<h3>Details</h3>
+	<div class="col-md-6">
+		<h3>Pokédex</h3>
 		<table class="table">
+			<tr>
+				<td>
+					Name
+				</td>
+				<td>
+					<#= Model.Name #>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Category
+				</td>
+				<td>
+					<#= Model.Classification #>
+				</td>
+			</tr>
 			<tr>
 				<td>
 					<# if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID) { #>
@@ -35,6 +50,102 @@
 					<# } #>
 				</td>	
 			</tr>
+			<tr>
+				<td>
+					<# if (Model.Ability1.ID == Model.Ability2.ID) { #>
+						Ability
+					<# } else { #>
+						Abilities
+					<# } #>
+				</td>
+				<td>
+					<a href="{page="gen7-ability-<#=Model.Ability1.ID #>"}"><#= Model.Ability1.Name #></a>
+
+					<# if (Model.Ability1.ID != Model.Ability2.ID) { #>
+						<a href="{page="gen7-ability-<#=Model.Ability2.ID #>"}"><#= Model.Ability2.Name #></a>
+					<# } #>
+				</td>
+			</tr>			
+			<# if (Model.AbilityHidden.ID != Model.Ability1.ID && Model.AbilityHidden.ID != Model.Ability2.ID) { #>
+			<tr>
+				<td>
+					Hidden Ability
+				</td>
+				<td>
+					<a href="{page="gen7-ability-<#=Model.AbilityHidden.ID #>"}"><#= Model.AbilityHidden.Name #></a>
+				</td>
+			</tr>
+			<# } #>
+			<tr>
+				<td>
+					Description (Sun)
+				</td>
+				<td>
+					<#= Model.PokedexTextSun #>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Description (Moon)
+				</td>
+				<td>
+					<#= Model.PokedexTextMoon #>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Height
+				</td>
+				<td>
+					<# var feet = Model.Height * (decimal)3.2808399; #>
+					<#= Model.Height #> m (<#= Math.Floor(feet).ToString() #>.<#= ((feet - Math.Floor(feet)) * 12).ToString() #> ft.)
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Weight
+				</td>
+				<td>
+					<#= Model.Weight #> kg (<#= (Model.Weight * (decimal)2.20462262).ToString("0.0") #> lbs.)
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Gender
+				</td>
+				<td>
+					<# if (Model.Gender == 0) { #>
+						All Male
+					<# } else if (Model.Gender == 254) { #>
+						All Female
+					<# } else if (Model.Gender == 255) { #>
+						Genderless
+					<# } else { #>
+						<#= (1 - ((Model.Gender - 1) / (decimal)252)).ToString("P") #>
+						<span style="color: blue;">&#9794;</span>
+						<#= ((Model.Gender - 1) / (decimal)252).ToString("P") #>
+						<span style="color: magenta;">&#9792;</span>
+					<# } #>			
+				</td>				
+			</tr>
+			<tr>				
+				<td>
+					<# if (Model.EggGroup1 != Model.EggGroup2) { #>
+					Egg Groups
+					<# } else { #>
+					Egg Group
+					<# } #>
+				</td>
+				<td>
+					<#= Model.EggGroup1 #> 
+					<# if (Model.EggGroup1 != Model.EggGroup2) { #>
+					<#= Model.EggGroup2 #>
+					<# } #>
+				</td>
+			</tr>
+		</table>
+		<h3>Details</h3>
+		<table class="table">			
 			<tr>
 				<td>
 					Catch Rate
@@ -72,7 +183,6 @@
 				</td>
 			</tr>
 			<# } #>
-
 			<# if (Model.HeldItem3.ID > 0) { #>
 				<tr>
 				<td>
@@ -83,26 +193,6 @@
 				</td>
 				</tr>
 			<# } #>
-
-			<tr>
-				<td>
-					Gender
-				</td>
-				<td>
-					<# if (Model.Gender == 0) { #>
-						All Male
-					<# } else if (Model.Gender == 254) { #>
-						All Female
-					<# } else if (Model.Gender == 255) { #>
-						Genderless
-					<# } else { #>
-						<#= (1 - ((Model.Gender - 1) / (decimal)252)).ToString("P") #>
-						<span style="color: blue;">&#9794;</span>
-						<#= ((Model.Gender - 1) / (decimal)252).ToString("P") #>
-						<span style="color: magenta;">&#9792;</span>
-					<# } #>			
-				</td>				
-			</tr>
 			<tr>				
 				<td>
 					Hatch Cycles
@@ -127,47 +217,6 @@
 					<#= Model.ExpGrowth #>
 				</td>				
 			</tr>
-			<tr>				
-				<td>
-					<# if (Model.EggGroup1 != Model.EggGroup2) { #>
-					Egg Groups
-					<# } else { #>
-					Egg Group
-					<# } #>
-				</td>
-				<td>
-					<#= Model.EggGroup1 #> 
-					<# if (Model.EggGroup1 != Model.EggGroup2) { #>
-					<#= Model.EggGroup2 #>
-					<# } #>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<# if (Model.Ability1.ID == Model.Ability2.ID) { #>
-						Ability
-					<# } else { #>
-						Abilities
-					<# } #>
-				</td>
-				<td>
-					<a href="{page="gen7-ability-<#=Model.Ability1.ID #>"}"><#= Model.Ability1.Name #></a>
-
-					<# if (Model.Ability1.ID != Model.Ability2.ID) { #>
-						<a href="{page="gen7-ability-<#=Model.Ability2.ID #>"}"><#= Model.Ability2.Name #></a>
-					<# } #>
-				</td>
-			</tr>			
-			<# if (Model.AbilityHidden.ID != Model.Ability1.ID && Model.AbilityHidden.ID != Model.Ability2.ID) { #>
-			<tr>
-				<td>
-					Hidden Ability
-				</td>
-				<td>
-					<a href="{page="gen7-ability-<#=Model.AbilityHidden.ID #>"}"><#= Model.AbilityHidden.Name #></a>
-				</td>
-			</tr>
-			<# } #>
 			<tr>
 				<td>
 					Forme Count
@@ -207,23 +256,7 @@
 				<td>
 					<#= Model.BST #>
 				</td>
-			</tr>
-			<tr>
-			<td>
-				Height
-			</td>
-			<td>
-				<#= Model.Height #> m (<#= (Model.Height * (decimal)3.2808399).ToString("0.0") #> ft.)
-			</td>
-			</tr>
-			<tr>
-				<td>
-					Weight
-				</td>
-				<td>
-					<#= Model.Weight #> kg (<#= (Model.Weight * (decimal)2.20462262).ToString("0.0") #> lbs.)
-				</td>
-			</tr>
+			</tr>			
 			<tr>
 				<td>
 					Escape Rate
@@ -275,7 +308,7 @@
 
 	</table>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<h3>Stats</h3>
 		<table class="table">
 			<tr>
@@ -331,7 +364,6 @@
     <tr>
 		<th style="width:60px;"></th>
         <th>Target</th>
-        <th>Level</th>
 		<# if (Model.EvolvesToAltForm) { #>
 		<th>Form</th>
 		<# } #>
@@ -358,15 +390,12 @@
 			methodString = item.Method;
 		} #>
 	
-        <tr>
+        <tr style="height:60px;vertical-align: middle;">
 			<td>
 				<a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#= item.TargetPokemon.PokespriteHtml #></a>				
 			</td>
             <td>
                 <a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
-            </td>
-			<td>
-                <#= item.Level #>
             </td>
 			<# if (Model.EvolvesToAltForm) { #>
 			<td>

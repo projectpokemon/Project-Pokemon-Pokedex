@@ -10,6 +10,9 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Classification { get; set; } // The _____ Pokémon
+        public string PokedexTextSun { get; set; }
+        public string PokedexTextMoon { get; set; }
 
         public int BaseHP { get; set; }
         public int BaseAttack { get; set; }
