@@ -10,6 +10,9 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Classification { get; set; } // The _____ Pokémon
+        public string PokedexTextSun { get; set; }
+        public string PokedexTextMoon { get; set; }
 
         public int BaseHP { get; set; }
         public int BaseAttack { get; set; }
@@ -83,6 +86,22 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         public bool LocalVariant { get; set; }
 
         public List<EvolutionMethod> Evolutions { get; set; }
+
+        public bool EvolvesToAltForm
+        {
+            get
+            {
+                return Evolutions.Any(x => x.Form != -1);
+            }
+        }
+
+        public string PokespriteHtml
+        {
+            get
+            {
+                return string.Format("<span class=\"pkspr pkmn-{0}\"></span>", Name.ToLower());
+            }            
+        }
 
         public override string ToString()
         {

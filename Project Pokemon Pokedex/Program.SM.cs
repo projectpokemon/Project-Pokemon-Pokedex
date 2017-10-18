@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using pk3DS.Core;
 using pk3DS.Core.Structures;
-using pk3DS.Core.Structures.Gen6;
 using pk3DS.Core.Structures.PersonalInfo;
 using ProjectPokemon.Pokedex.Models.Gen7;
 using SkyEditor.Core.IO;
@@ -43,61 +42,217 @@ namespace ProjectPokemon.Pokedex
             0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00,
         };
 
-        public static async Task<SMDataCollection> LoadSunMoonData(string rawFilesDir)
-        {
-            var data = new SMDataCollection();
-            var config = new GameConfig(GameVersion.SM);
-            config.Initialize(Path.Combine(rawFilesDir, "RomFS"), Path.Combine(rawFilesDir, "ExeFS"), lang: 2); // Language index 2 is English
-
-            // Load strings
-            var items = config.getText(TextName.ItemNames);
-            var moveNames = config.getText(TextName.MoveNames);
-            var moveflavor = config.getText(TextName.MoveFlavor);
-            var species = config.getText(TextName.SpeciesNames);
-            var abilities = config.getText(TextName.AbilityNames);
-            var forms = config.getText(TextName.Forms);
-            var types = config.getText(TextName.Types);
-            var EXPGroups = new string[] { "Medium-Fast", "Erratic", "Fluctuating", "Medium-Slow", "Fast", "Slow" };
-            var eggGroups = new string[] { "---", "Monster", "Water 1", "Bug", "Flying", "Field", "Fairy", "Grass", "Human-Like", "Water 3", "Mineral", "Amorphous", "Water 2", "Ditto", "Dragon", "Undiscovered" };
-            var colors = new string[] { "Red", "Blue", "Yellow", "Green", "Black", "Brown", "Purple", "Gray", "White", "Pink" };
-            var tutormoves = new ushort[] { 520, 519, 518, 338, 307, 308, 434, 620 };
-
-            // Load TMs
-            var TMs = new ushort[0];
-            getTMHMList(Path.Combine(rawFilesDir, "ExeFS"), ref TMs);
-
-            // Load type effectiveness
-            var exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", "code.bin"));
+        private static void LoadTypeEffectiveness(SMDataCollection data, byte[] exefs)
+        {            
             var typeEffectivenessOffset = Util.IndexOfBytes(exefs, ExefsSignature, 0x400000, 0) + ExefsSignature.Length;
             var chart = new byte[18 * 18];
             Array.Copy(exefs, typeEffectivenessOffset, chart, 0, chart.Length);
             data.TypeEffectiveness = new TypeEffectivenessChart(chart);
+        }
 
-            // Load Types
+        private static void LoadTypes(SMDataCollection data, string[] typeNames)
+        {
             const int numTypes = 18;
             var pkmTypes = new List<PkmType>();
-            for (int i = 0;i<numTypes;i++)
+            for (int i = 0; i < numTypes; i++)
             {
                 var type = new PkmType();
                 type.ID = i;
-                type.Name = types[i];
+                type.Name = typeNames[i];
                 type.Pokemon = new List<PokemonReference>();
                 type.Moves = new List<MoveReference>();
                 pkmTypes.Add(type);
             }
             data.Types = pkmTypes;
+        }
+
+        private static void LoadPokemon(SMDataCollection data, GameConfig config, string rawFilesDir, string[] speciesNames, string[] typeNames, string[] itemNames, string[] abilityNames, string[] moveNames, string[] EXPGroups, string[] eggGroups, string[] colors, string[] pokemonClassifications, string[] pokedexEntries1, string[] pokedexEntries2)
+        {
+            // Load TMs
+            var TMs = new ushort[0];
+            getTMHMList(Path.Combine(rawFilesDir, "ExeFS"), ref TMs);
 
             // Load Pokemon
             // - Load Level-up GARC
             var levelupGarcFiles = config.getGARCData("levelup").Files;
             int[] baseForms, formVal;
-            string[][] altForms = config.Personal.getFormList(species, config.MaxSpeciesID);
-            string[] specieslist = config.Personal.getPersonalEntryList(altForms, species, config.MaxSpeciesID, out baseForms, out formVal);
-            var pokemonEntryNames = config.Personal.getPersonalEntryList(altForms, species, config.MaxSpeciesID, out baseForms, out formVal);
+            string[][] altForms = config.Personal.getFormList(speciesNames, config.MaxSpeciesID);
+            string[] specieslist = config.Personal.getPersonalEntryList(altForms, speciesNames, config.MaxSpeciesID, out baseForms, out formVal);
+            var pokemonEntryNames = config.Personal.getPersonalEntryList(altForms, speciesNames, config.MaxSpeciesID, out baseForms, out formVal);
 
             // - Load Egg move GARC
             var eggmoveGarcFiles = config.getGARCData("eggmove").Files;
 
+            
+            // - Load Mega Evolution GARC
+            var megaEvoGarcFiles = config.getGARCData("megaevo").Files;
+
+            // - Consolidate data
+            var pkms = new List<Pokemon>();
+            foreach (var item in config.Personal.Table)
+            {
+                var pkm = new Pokemon();
+
+                pkm.ID = pkms.Count;
+                if (pokemonEntryNames.Length > pkm.ID)
+                {
+                    pkm.Name = pokemonEntryNames[pkm.ID];
+                }
+                else
+                {
+                    pkm.Name = "(Unnamed)";
+                }
+
+                if (pokemonClassifications.Length > pkm.ID)
+                {
+                    pkm.Classification = pokemonClassifications[pkm.ID];
+                }
+                else
+                {
+                    pkm.Classification = "N/A";
+                }
+
+                if (pokedexEntries1.Length > pkm.ID || string.IsNullOrEmpty(pokedexEntries1[pkm.ID]))
+                {
+                    pkm.PokedexTextSun = pokedexEntries1[pkm.ID];
+                }
+                else
+                {
+                    pkm.PokedexTextSun = "N/A";
+                }
+
+                if (pokedexEntries2.Length > pkm.ID || string.IsNullOrEmpty(pokedexEntries2[pkm.ID]))
+                {
+                    pkm.PokedexTextMoon = pokedexEntries2[pkm.ID];
+                }
+                else
+                {
+                    pkm.PokedexTextMoon = "N/A";
+                }
+
+                // Stats
+                pkm.BaseHP = item.HP;
+                pkm.BaseAttack = item.ATK;
+                pkm.BaseDefense = item.DEF;
+                pkm.BaseSpeed = item.SPE;
+                pkm.BaseSpAttack = item.SPA;
+                pkm.BaseSpDefense = item.SPD;
+                pkm.HPEVYield = item.EV_HP;
+                pkm.AttackEVYield = item.EV_ATK;
+                pkm.DefenseEVYield = item.EV_DEF;
+                pkm.SpeedEVYield = item.EV_SPE;
+                pkm.SpAttackEVYield = item.EV_SPA;
+                pkm.SpDefenseEVYield = item.EV_SPD;
+
+                // Types
+                pkm.Type1 = new TypeReference { ID = item.Types[0], Name = typeNames[item.Types[0]] };
+                pkm.Type2 = new TypeReference { ID = item.Types[1], Name = typeNames[item.Types[1]] };
+                pkm.TypeEffectiveness = new TypeEffectivenessList(data.TypeEffectiveness, data.Types, pkm.Type1.ID, pkm.Type2.ID);
+
+                pkm.CatchRate = item.CatchRate;
+                pkm.EvoStage = item.EvoStage;
+
+                // Items
+                pkm.HeldItem1 = new ItemReference { ID = item.Items[0], Name = itemNames[item.Items[0]] };
+                pkm.HeldItem2 = new ItemReference { ID = item.Items[1], Name = itemNames[item.Items[1]] };
+                pkm.HeldItem3 = new ItemReference { ID = item.Items[2], Name = itemNames[item.Items[2]] };
+
+                pkm.Gender = item.Gender;
+                pkm.HatchCycles = item.HatchCycles;
+                pkm.BaseFriendship = item.BaseFriendship;
+
+                pkm.ExpGrowth = EXPGroups[item.EXPGrowth];
+
+                pkm.EggGroup1 = eggGroups[item.EggGroups[0]];
+                pkm.EggGroup2 = eggGroups[item.EggGroups[1]];
+
+                pkm.Ability1 = new AbilityReference { ID = item.Abilities[0], Name = abilityNames[item.Abilities[0]] };
+                pkm.Ability2 = new AbilityReference { ID = item.Abilities[1], Name = abilityNames[item.Abilities[1]] };
+                pkm.AbilityHidden = new AbilityReference { ID = item.Abilities[2], Name = abilityNames[item.Abilities[2]] };
+
+                pkm.FormeCount = item.FormeCount;
+                pkm.FormeSprite = item.FormeSprite;
+
+                pkm.Color = colors[item.Color & 0xF];
+
+                pkm.BaseExp = item.BaseEXP;
+                pkm.BST = item.BST;
+
+                pkm.Height = ((decimal)item.Height / 100);
+                pkm.Weight = ((decimal)item.Weight / 10);
+
+                // Sun/Moon specific
+                var sm = (PersonalInfoSM)item;
+                pkm.EscapeRate = sm.EscapeRate;
+                if (sm.SpecialZ_Item != ushort.MaxValue)
+                {
+                    pkm.ZItem = new ItemReference { ID = sm.SpecialZ_Item, Name = itemNames[sm.SpecialZ_Item] };
+                }
+                pkm.ZBaseMove = new MoveReference { ID = sm.SpecialZ_BaseMove, Name = moveNames[sm.SpecialZ_BaseMove] };
+                pkm.ZMove = new MoveReference { ID = sm.SpecialZ_ZMove, Name = moveNames[sm.SpecialZ_ZMove] };
+                pkm.LocalVariant = sm.LocalVariant;
+
+                // Evolutions
+                LoadPokemonEvolutions(data, pkm, config, speciesNames, specieslist, moveNames, itemNames, typeNames);
+
+                // Moves
+                // - Level-up
+                var pkmLevelup = new List<LevelupMoveReference>();
+                var currentLevelup = new Learnset7(levelupGarcFiles[pkm.ID]);
+                for (int i = 0; i < currentLevelup.Count; i++)
+                {
+                    var levelupReference = new LevelupMoveReference();
+                    levelupReference.Level = currentLevelup.Levels[i];
+                    levelupReference.ID = currentLevelup.Moves[i];
+                    levelupReference.Name = moveNames[levelupReference.ID];
+                    pkmLevelup.Add(levelupReference);
+                }
+                pkm.MoveLevelUp = pkmLevelup;
+
+                // - TMs
+                var pkmTms = new List<MoveReference>();
+                for (int i = 0; i < TMs.Length; i++)
+                {
+                    if (item.TMHM[i])
+                    {
+                        pkmTms.Add(new MoveReference { ID = TMs[i], Name = moveNames[TMs[i]] });
+                    }
+                }
+                pkm.MoveTMs = pkmTms;
+
+                // - Egg moves
+                var eggMoves = new List<Models.Gen7.MoveReference>();
+                var currentEgg = new EggMoves7(eggmoveGarcFiles[pkm.ID]);
+                for (int i = 0; i < currentEgg.Count; i++)
+                {
+                    var eggReference = new Models.Gen7.MoveReference();
+                    eggReference.ID = currentEgg.Moves[i];
+                    eggReference.Name = moveNames[eggReference.ID];
+                    eggMoves.Add(eggReference);
+                }
+                pkm.MoveEgg = eggMoves;
+
+                // - Tutors
+                var tutormoves = new ushort[] { 520, 519, 518, 338, 307, 308, 434, 620 };
+                var pkmTutors = new List<Models.Gen7.MoveReference>();
+                for (int i = 0; i < tutormoves.Length; i++)
+                {
+                    if (item.TypeTutors[i])
+                    {
+                        pkmTutors.Add(new Models.Gen7.MoveReference { ID = tutormoves[i], Name = moveNames[tutormoves[i]] });
+                    }
+                }
+                pkm.MoveTutors = pkmTutors;
+
+                // Finish
+                AddPkmToType(data, pkm);
+                pkms.Add(pkm);
+            }
+            data.Pokemon = pkms;
+        }
+
+        private static void LoadPokemonEvolutions(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[] specieslist, string[] moveNames, string[] itemNames, string[] typeNames)
+        {
             // - Load Evolution GARC
             var evolutionGarcFiles = config.getGARCData("evolution").Files;
             string[] evolutionMethods =
@@ -133,7 +288,7 @@ namespace ProjectPokemon.Pokedex
 
                 "Level Up with 3DS Upside Down at level {0}", // Level
                 "Level Up with 50 Affection and a move of type {0}", // Type
-                $"{types[16]} Type in Party " + "at level {0}", // Level
+                $"{typeNames[16]} Type in Party " + "at level {0}", // Level
                 "Overworld Rain at level {0}", // Level
                 "Level Up (@) at Morning at level {0}", // Level
                 "Level Up (@) at Night at level {0}", // Level
@@ -160,187 +315,61 @@ namespace ProjectPokemon.Pokedex
                 1,
             };
 
-            // - Load Mega Evolution GARC
-            var megaEvoGarcFiles = config.getGARCData("megaevo").Files;
-
-            // - Consolidate data
-            var pkms = new List<Pokemon>();
-            foreach (var item in config.Personal.Table)
+            // Evolutions
+            var evo = new EvolutionSet7(evolutionGarcFiles[pkm.ID]);
+            var currentEvolutionMethods = new List<Models.Gen7.EvolutionMethod>();
+            for (int i = 0; i < evo.PossibleEvolutions.Length; i++)
             {
-                var pkm = new Pokemon();
-
-                pkm.ID = pkms.Count;
-                if (pokemonEntryNames.Length > pkm.ID)
+                if (evo.PossibleEvolutions[i].Argument == 0 && evo.PossibleEvolutions[i].Form == 0 && evo.PossibleEvolutions[i].Level == 0 && evo.PossibleEvolutions[i].Method == 0 && evo.PossibleEvolutions[i].Species == 0)
                 {
-                    pkm.Name = pokemonEntryNames[pkm.ID];
-                }
-                else
-                {
-                    pkm.Name = "(Unnamed)";
+                    // Method is null
+                    continue;
                 }
 
-                // Stats
-                pkm.BaseHP = item.HP;
-                pkm.BaseAttack = item.ATK;
-                pkm.BaseDefense = item.DEF;
-                pkm.BaseSpeed = item.SPE;
-                pkm.BaseSpAttack = item.SPA;
-                pkm.BaseSpDefense = item.SPD;
-                pkm.HPEVYield = item.EV_HP;
-                pkm.AttackEVYield = item.EV_ATK;
-                pkm.DefenseEVYield = item.EV_DEF;
-                pkm.SpeedEVYield = item.EV_SPE;
-                pkm.SpAttackEVYield = item.EV_SPA;
-                pkm.SpDefenseEVYield = item.EV_SPD;
+                var evoMethod = new Models.Gen7.EvolutionMethod();
+                evoMethod.Form = evo.PossibleEvolutions[i].Form;
+                evoMethod.Level = evo.PossibleEvolutions[i].Level;
+                evoMethod.Method = evolutionMethods[evo.PossibleEvolutions[i].Method];
+                evoMethod.TargetPokemon = new PokemonReference(evo.PossibleEvolutions[i].Species, speciesNames[evo.PossibleEvolutions[i].Species], data);
 
-                // Types
-                pkm.Type1 = new TypeReference { ID = item.Types[0], Name = types[item.Types[0]] };
-                pkm.Type2 = new TypeReference { ID = item.Types[1], Name = types[item.Types[1]] };
-                pkm.TypeEffectiveness = new TypeEffectivenessList(data.TypeEffectiveness, data.Types, pkm.Type1.ID, pkm.Type2.ID);
-
-                pkm.CatchRate = item.CatchRate;
-                pkm.EvoStage = item.EvoStage;
-
-                // Items
-                pkm.HeldItem1 = new ItemReference { ID = item.Items[0], Name = items[item.Items[0]] };
-                pkm.HeldItem2 = new ItemReference { ID = item.Items[1], Name = items[item.Items[1]] };
-                pkm.HeldItem3 = new ItemReference { ID = item.Items[2], Name = items[item.Items[2]] };
-
-                pkm.Gender = item.Gender;
-                pkm.HatchCycles = item.HatchCycles;
-                pkm.BaseFriendship = item.BaseFriendship;
-
-                pkm.ExpGrowth = EXPGroups[item.EXPGrowth];
-
-                pkm.EggGroup1 = eggGroups[item.EggGroups[0]];
-                pkm.EggGroup2 = eggGroups[item.EggGroups[1]];
-
-                pkm.Ability1 = new AbilityReference { ID = item.Abilities[0], Name = abilities[item.Abilities[0]] };
-                pkm.Ability2 = new AbilityReference { ID = item.Abilities[1], Name = abilities[item.Abilities[1]] };
-                pkm.AbilityHidden = new AbilityReference { ID = item.Abilities[2], Name = abilities[item.Abilities[2]] };
-
-                pkm.FormeCount = item.FormeCount;
-                pkm.FormeSprite = item.FormeSprite;
-
-                pkm.Color = colors[item.Color & 0xF];
-
-                pkm.BaseExp = item.BaseEXP;
-                pkm.BST = item.BST;
-
-                pkm.Height = ((decimal)item.Height / 100);
-                pkm.Weight = ((decimal)item.Weight / 10);
-
-                // Level-up
-                var pkmLevelup = new List<LevelupMoveReference>();
-                var currentLevelup = new Learnset7(levelupGarcFiles[pkm.ID]);
-                for (int i = 0; i < currentLevelup.Count; i++)
+                // Parameter
+                int cv = evolutionMethodCase[evo.PossibleEvolutions[i].Method];
+                int param = evo.PossibleEvolutions[i].Argument;
+                switch (cv)
                 {
-                    var levelupReference = new LevelupMoveReference();
-                    levelupReference.Level = currentLevelup.Levels[i];
-                    levelupReference.ID = currentLevelup.Moves[i];
-                    levelupReference.Name = moveNames[levelupReference.ID];
-                    pkmLevelup.Add(levelupReference);
+                    case 0: // No Parameter Required
+                        { evoMethod.ParameterString = ""; break; }
+                    case 1: // Level
+                        { evoMethod.ParameterString = evoMethod.Level.ToString(); break; }
+                    case 2: // Items
+                        { evoMethod.ParameterReference = new ItemReference { ID = param, Name = itemNames[param] }; break; }
+                    case 3: // Moves
+                        { evoMethod.ParameterReference = new MoveReference { ID = param, Name = moveNames[param] }; break; }
+                    case 4: // Species
+                        { evoMethod.ParameterReference = new PokemonReference(param, speciesNames[param], data); break; }
+                    case 5: // 0-255 (Beauty)
+                        { evoMethod.ParameterString = param.ToString(); break; }
+                    case 6:
+                        { evoMethod.ParameterReference = new TypeReference { ID = param, Name = typeNames[param] }; break; }
+                    case 7: // Version
+                        { evoMethod.ParameterString = param.ToString(); break; }
                 }
-                pkm.MoveLevelUp = pkmLevelup;
-
-                // TMs
-                var pkmTms = new List<Models.Gen7.MoveReference>();
-                for (int i = 0; i < TMs.Length; i++)
-                {
-                    if (item.TMHM[i])
-                    {
-                        pkmTms.Add(new Models.Gen7.MoveReference { ID = TMs[i], Name = moveNames[TMs[i]] });
-                    }
-                }
-                pkm.MoveTMs = pkmTms;
-
-                // Egg moves
-                var eggMoves = new List<Models.Gen7.MoveReference>();
-                var currentEgg = new EggMoves7(eggmoveGarcFiles[pkm.ID]);
-                for (int i = 0; i < currentEgg.Count; i++)
-                {
-                    var eggReference = new Models.Gen7.MoveReference();
-                    eggReference.ID = currentEgg.Moves[i];
-                    eggReference.Name = moveNames[eggReference.ID];
-                    eggMoves.Add(eggReference);
-                }
-                pkm.MoveEgg = eggMoves;
-
-                // Tutors
-                var pkmTutors = new List<Models.Gen7.MoveReference>();
-                for (int i = 0; i < tutormoves.Length; i++)
-                {
-                    if (item.TypeTutors[i])
-                    {
-                        pkmTutors.Add(new Models.Gen7.MoveReference { ID = tutormoves[i], Name = moveNames[tutormoves[i]] });
-                    }
-                }
-                pkm.MoveTutors = pkmTutors;
-
-                // Evolutions
-                var evo = new EvolutionSet7(evolutionGarcFiles[pkm.ID]);
-                var currentEvolutionMethods = new List<Models.Gen7.EvolutionMethod>();
-                for (int i = 0; i < evo.PossibleEvolutions.Length; i++)
-                {
-                    if (evo.PossibleEvolutions[i].Argument == 0 && evo.PossibleEvolutions[i].Form == 0 && evo.PossibleEvolutions[i].Level == 0 && evo.PossibleEvolutions[i].Method == 0 && evo.PossibleEvolutions[i].Species == 0)
-                    {
-                        // Method is null
-                        continue;
-                    }
-
-                    var evoMethod = new Models.Gen7.EvolutionMethod();
-                    evoMethod.Form = evo.PossibleEvolutions[i].Form;
-                    evoMethod.Level = evo.PossibleEvolutions[i].Level;
-                    evoMethod.Method = evolutionMethods[evo.PossibleEvolutions[i].Method];
-                    evoMethod.TargetPokemon = new PokemonReference { ID = evo.PossibleEvolutions[i].Species, Name = species[evo.PossibleEvolutions[i].Species] };
-
-                    // Parameter
-                    int cv = evolutionMethodCase[evo.PossibleEvolutions[i].Method];
-                    int param = evo.PossibleEvolutions[i].Argument;
-                    switch (cv)
-                    {
-                        case 0: // No Parameter Required
-                            { evoMethod.ParameterString = ""; break; }
-                        case 1: // Level
-                            { evoMethod.ParameterString = param.ToString(); break; }
-                        case 2: // Items
-                            { evoMethod.ParameterReference = new ItemReference { ID = param, Name = items[param] }; break; }
-                        case 3: // Moves
-                            { evoMethod.ParameterReference = new MoveReference { ID = param, Name = moveNames[param] }; break; }
-                        case 4: // Species
-                            { evoMethod.ParameterReference = new PokemonReference { ID = param, Name = species[param] }; break; }
-                        case 5: // 0-255 (Beauty)
-                            { evoMethod.ParameterString = param.ToString(); break; }
-                        case 6:
-                            { evoMethod.ParameterReference = new TypeReference { ID = param, Name = types[param] }; break; }
-                        case 7: // Version
-                            { evoMethod.ParameterString = param.ToString(); break; }
-                    }
-                    currentEvolutionMethods.Add(evoMethod);
-                }
-                pkm.Evolutions = currentEvolutionMethods;
-
-                // Sun/Moon specific
-                var sm = (PersonalInfoSM)item;
-                pkm.EscapeRate = sm.EscapeRate;
-                if (sm.SpecialZ_Item != ushort.MaxValue)
-                {
-                    pkm.ZItem = new ItemReference { ID = sm.SpecialZ_Item, Name = items[sm.SpecialZ_Item] };
-                }
-                pkm.ZBaseMove = new MoveReference { ID = sm.SpecialZ_BaseMove, Name = moveNames[sm.SpecialZ_BaseMove] };
-                pkm.ZMove = new MoveReference { ID = sm.SpecialZ_ZMove, Name = moveNames[sm.SpecialZ_ZMove] };
-                pkm.LocalVariant = sm.LocalVariant;
-
-                // Add to lists
-                pkms.Add(pkm);
-                pkmTypes[pkm.Type1.ID].Pokemon.Add(new PokemonReference(pkm));
-                if (pkm.Type1.ID != pkm.Type2.ID)
-                {
-                    pkmTypes[pkm.Type2.ID].Pokemon.Add(new PokemonReference(pkm));
-                }
+                currentEvolutionMethods.Add(evoMethod);
             }
-            data.Pokemon = pkms;
+            pkm.Evolutions = currentEvolutionMethods;
+        }
 
+        private static void AddPkmToType(SMDataCollection data, Pokemon pkm)
+        {
+            data.Types[pkm.Type1.ID].Pokemon.Add(new PokemonReference(pkm));
+            if (pkm.Type1.ID != pkm.Type2.ID)
+            {
+                data.Types[pkm.Type2.ID].Pokemon.Add(new PokemonReference(pkm));
+            }
+        }
+
+        private static void LoadMoves(SMDataCollection data, GameConfig config, string[] moveNames, string[] moveflavor, string[] typeNames)
+        {
             // Moves
             var moves = new List<Models.Gen7.Move>();
             var MoveCategories = new string[] { "Status", "Physical", "Special", };
@@ -376,13 +405,13 @@ namespace ProjectPokemon.Pokedex
                 string flavor = moveflavor[move.ID].Replace("\\n", Environment.NewLine);
                 move.Description = flavor;
 
-                if (types.Length > item.Type)
+                if (typeNames.Length > item.Type)
                 {
-                    move.Type = new TypeReference { ID = item.Type, Name = types[item.Type] };
+                    move.Type = new TypeReference { ID = item.Type, Name = typeNames[item.Type] };
                 }
                 else
                 {
-                    move.Type = new TypeReference { ID = 0, Name = types[0] };
+                    move.Type = new TypeReference { ID = 0, Name = typeNames[0] };
                 }
 
                 if (MoveQualities.Length > item.Quality)
@@ -506,7 +535,7 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesLevel = pkm.MoveLevelUp.Where(x => x.ID == move.ID);
                     if (referenceMovesLevel.Any())
                     {
-                        var pkmReference = new LevelupPokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new LevelupPokemonReference(pkm);
                         pkmReference.Levels = referenceMovesLevel.Select(x => x.Level).ToList();
                         move.PokemonThroughLevelUp.Add(pkmReference);
                     }
@@ -515,7 +544,7 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesTM = pkm.MoveTMs.Where(x => x.ID == move.ID);
                     if (referenceMovesTM.Any())
                     {
-                        var pkmReference = new PokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new PokemonReference(pkm);
                         move.PokemonThroughTM.Add(pkmReference);
                     }
 
@@ -523,7 +552,7 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesEgg = pkm.MoveEgg.Where(x => x.ID == move.ID);
                     if (referenceMovesEgg.Any())
                     {
-                        var pkmReference = new PokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new PokemonReference(pkm);
                         move.PokemonThroughEgg.Add(pkmReference);
                     }
 
@@ -531,16 +560,45 @@ namespace ProjectPokemon.Pokedex
                     var referenceMovesTutor = pkm.MoveTutors.Where(x => x.ID == move.ID);
                     if (referenceMovesTutor.Any())
                     {
-                        var pkmReference = new PokemonReference { ID = pkm.ID, Name = pkm.Name };
+                        var pkmReference = new PokemonReference(pkm);
                         move.PokemonThroughTutor.Add(pkmReference);
                     }
                 }
 
                 // Add to lists
                 moves.Add(move);
-                pkmTypes[move.Type.ID].Moves.Add(new MoveReference(move));
+                data.Types[move.Type.ID].Moves.Add(new MoveReference(move));
             }
             data.Moves = moves;
+        }
+
+        public static async Task<SMDataCollection> LoadSunMoonData(string rawFilesDir)
+        {
+            var data = new SMDataCollection();
+            var exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", "code.bin"));
+            var config = new GameConfig(GameVersion.SM);
+            config.Initialize(Path.Combine(rawFilesDir, "RomFS"), Path.Combine(rawFilesDir, "ExeFS"), lang: 2); // Language index 2 is English
+
+            // Load strings
+            var items = config.getText(TextName.ItemNames);
+            var moveNames = config.getText(TextName.MoveNames);
+            var moveflavor = config.getText(TextName.MoveFlavor);
+            var species = config.getText(TextName.SpeciesNames);
+            var speciesClassifications = config.getText(TextName.SpeciesClassifications);
+            var pokedexEntries1 = config.getText(TextName.PokedexEntry1);
+            var pokedexEntries2 = config.getText(TextName.PokedexEntry1);
+            var abilities = config.getText(TextName.AbilityNames);
+            var forms = config.getText(TextName.Forms);
+            var typeNames = config.getText(TextName.Types);
+            var EXPGroups = new string[] { "Medium-Fast", "Erratic", "Fluctuating", "Medium-Slow", "Fast", "Slow" };
+            var eggGroups = new string[] { "---", "Monster", "Water 1", "Bug", "Flying", "Field", "Fairy", "Grass", "Human-Like", "Water 3", "Mineral", "Amorphous", "Water 2", "Ditto", "Dragon", "Undiscovered" };
+            var colors = new string[] { "Red", "Blue", "Yellow", "Green", "Black", "Brown", "Purple", "Gray", "White", "Pink" };            
+
+            // Load stuff
+            LoadTypeEffectiveness(data, exefs);
+            LoadTypes(data, typeNames);
+            LoadPokemon(data, config, rawFilesDir, species, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors, speciesClassifications, pokedexEntries1, pokedexEntries2);
+            LoadMoves(data, config, moveNames, moveflavor, typeNames);
 
             return data;
         }

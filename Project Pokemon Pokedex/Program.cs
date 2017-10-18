@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TextTemplating;
 using Newtonsoft.Json;
 using pk3DS.Core;
 using pk3DS.Core.Structures;
-using pk3DS.Core.Structures.Gen6;
 using pk3DS.Core.Structures.PersonalInfo;
 using ProjectPokemon.Pokedex.Models.EOS;
 using ProjectPokemon.Pokedex.Models.Gen7;
