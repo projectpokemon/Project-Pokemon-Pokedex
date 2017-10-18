@@ -15,9 +15,6 @@
 			</a>
 		</div>
 		<a href="https://projectpokemon.org/home/gallery/album/<#=(Model.ID + 1).ToString() #>-<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #>/">See more images</a>
-		<h4>Sprites</h4>
-		<img alt="<#= Model.Name.ToLower() #>" src="https://projectpokemon.org/images/normal-sprite/<#= Model.Name.ToLower() #>.gif" />
-		<img alt="Shiny <#= Model.Name.ToLower() #>" src="https://projectpokemon.org/images/shiny-sprite/<#= Model.Name.ToLower() #>.gif" />
 	</div>
 
 	<div class="col-md-3">
