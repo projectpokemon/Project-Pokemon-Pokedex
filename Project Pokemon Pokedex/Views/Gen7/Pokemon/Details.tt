@@ -4,8 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Pokemon" name="Model" #>
-<h2>#<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #></h2>
-<p></p>
 <div class="row">
 	<div class="col-md-3">
 		<div class="pkm-image-inner" style="text-align:center;">
@@ -19,7 +17,7 @@
 	</div>
 
 	<div class="col-md-6">
-		<h3>Pokédex</h3>
+		<h2>Pokédex</h2>
 		<table class="table">
 			<tr>
 				<td style="width: 50%;">
@@ -146,7 +144,7 @@
 				</td>
 			</tr>
 		</table>
-		<h3>Details</h3>
+		<h2>Details</h2>
 		<table class="table">			
 			<tr>
 				<td style="width: 50%;">
@@ -311,7 +309,7 @@
 	</table>
 	</div>
 	<div class="col-md-3">
-		<h3>Stats</h3>
+		<h2>Stats</h2>
 		<table class="table">
 			<tr>
 				<td></td>
@@ -349,7 +347,7 @@
 				<td><#= Model.SpeedEVYield #></td>
 			</tr>
 		</table>
-		<h3>Type Effectiveness</h3>
+		<h2>Type Effectiveness</h2>
 		<table class="table">
 			<# foreach (var item in Model.TypeEffectiveness) { #>
 			<tr>
@@ -361,7 +359,7 @@
 	</div>
 </div>
 <# if (Model.Evolutions.Count > 0) { #>
-<h3>Evolutions</h3>
+<h2>Evolutions</h2>
 <table class="table">
     <tr>
 		<th style="width:60px;"></th>
@@ -413,7 +411,7 @@
 <# } #>
 
 <# if (Model.MoveLevelUp.Count > 0) { #>
-<h3>Moves (Level Up)</h3>
+<h2>Moves (Level Up)</h2>
 <table class="table">
     <tr>
         <th>Level</th>
@@ -434,7 +432,7 @@
 <# } #>
 
 <# if (Model.MoveTMs.Count > 0) { #>
-<h3>Moves (TM)</h3>
+<h2>Moves (TM)</h2>
 <table class="table">
     <tr>
         <th>Move</th>
@@ -451,7 +449,7 @@
 <# } #>
 
 <# if (Model.MoveEgg.Count > 0) { #>
-<h3>Moves (Egg)</h3>
+<h2>Moves (Egg)</h2>
 <table class="table">
     <tr>
         <th>Move</th>
@@ -468,7 +466,7 @@
 <# } #>
 
 <# if (Model.MoveTutors.Count > 0) { #>
-<h3>Moves (Tutor)</h3>
+<h2>Moves (Tutor)</h2>
 <table class="table">
     <tr>
         <th>Move</th>
