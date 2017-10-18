@@ -568,7 +568,7 @@ namespace ProjectPokemon.Pokedex
             // Load stuff
             LoadTypeEffectiveness(data, exefs);
             LoadTypes(data, typeNames);
-            LoadPokemon(data, config, Path.Combine(rawFilesDir, "ExeFS"), species, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors);
+            LoadPokemon(data, config, rawFilesDir, species, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors);
             LoadMoves(data, config, moveNames, moveflavor, typeNames);
 
             return data;
