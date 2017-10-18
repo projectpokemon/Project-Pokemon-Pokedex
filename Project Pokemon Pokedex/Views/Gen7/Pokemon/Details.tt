@@ -484,7 +484,7 @@
             </td>
 			<td>
 				<# foreach (var parent in item.GetEggMoveSources(Model)) { #>
-					<#= parent.PokespriteHtml #>
+					<a href="{page="gen7-pkm-<#=parent.ID #>"}"><#= parent.PokespriteHtml #></a>
 				<# } #>
 			</td>
         </tr>

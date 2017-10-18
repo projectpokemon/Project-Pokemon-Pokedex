@@ -1121,14 +1121,21 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t");
+            this.Write("\t\t\t\t\t<a href=\"{page=\"gen7-pkm-");
+            
+            #line 487 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(parent.ID));
+            
+            #line default
+            #line hidden
+            this.Write("\"}\">");
             
             #line 487 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.PokespriteHtml));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t\t");
+            this.Write("</a>\r\n\t\t\t\t");
             
             #line 488 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 
