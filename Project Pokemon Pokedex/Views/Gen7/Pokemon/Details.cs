@@ -87,7 +87,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("/\">See more images</a>\r\n\t</div>\r\n\r\n\t<div class=\"col-md-3\">\r\n\t\t<h3>Details</h3>\r\n\t" +
+            this.Write("/\">See more images</a>\r\n\t</div>\r\n\r\n\t<div class=\"col-md-5\">\r\n\t\t<h3>Details</h3>\r\n\t" +
                     "\t<table class=\"table\">\r\n\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t");
             
             #line 25 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
@@ -651,7 +651,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\r\n\t</table>\r\n\t</div>\r\n\t<div class=\"col-md-3\">\r\n\t\t<h3>Stats</h3>\r\n\t\t<table class=\"" +
+            this.Write("\r\n\t</table>\r\n\t</div>\r\n\t<div class=\"col-md-4\">\r\n\t\t<h3>Stats</h3>\r\n\t\t<table class=\"" +
                     "table\">\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<td>Base</td>\r\n\t\t\t\t\t<td>EV Y" +
                     "ield</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tr>\r\n\t\t\t\t<td>HP</td>\r\n\t\t\t\t<td>");
             

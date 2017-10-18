@@ -247,6 +247,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Details.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\Gen7\Pokemon\Details1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
     <Compile Include="Views\Gen7\Pokemon\Index.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -366,7 +371,7 @@
     </Content>
     <Content Include="Views\Gen7\Pokemon\Details.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Details.cs</LastGenOutput>
+      <LastGenOutput>Details1.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Gen7\Pokemon\Index.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

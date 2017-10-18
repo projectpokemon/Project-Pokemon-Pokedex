@@ -17,7 +17,7 @@
 		<a href="https://projectpokemon.org/home/gallery/album/<#=(Model.ID + 1).ToString() #>-<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #>/">See more images</a>
 	</div>
 
-	<div class="col-md-3">
+	<div class="col-md-5">
 		<h3>Details</h3>
 		<table class="table">
 			<tr>
@@ -275,16 +275,14 @@
 
 	</table>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-4">
 		<h3>Stats</h3>
 		<table class="table">
-			<thead>
-				<tr>
-					<td></td>
-					<td>Base</td>
-					<td>EV Yield</td>
-				</tr>
-			</thead>
+			<tr>
+				<td></td>
+				<td>Base</td>
+				<td>EV Yield</td>
+			</tr>
 			<tr>
 				<td>HP</td>
 				<td><#= Model.BaseHP #></td>
@@ -315,25 +313,18 @@
 				<td><#= Model.BaseSpeed #></td>
 				<td><#= Model.SpeedEVYield #></td>
 			</tr>
-		</table>		
-	</div>
-</div>
-<div>
-	<h3>Type Effectiveness</h3>
-	<table class="table">
-		<thead>
-			<tr>
-				<# foreach (var item in Model.TypeEffectiveness) { #>
-					<td><a href='{page="gen7-type-<#=item.Type.ID #>"}'><img alt="<#=item.Type.Name #>" src="https://projectpokemon.org/images/gen7-types/<#=item.Type.Name #>.png" /></a></td>
-				<# } #>
-			</tr>
-		</thead>
-		<tr>
+		</table>	
+		<div>
+		<h3>Type Effectiveness</h3>
+		<table class="table">
 			<# foreach (var item in Model.TypeEffectiveness) { #>
-					<td>x<#=item.Multiplier #></td>
+			<tr>
+				<td><a href='{page="gen7-type-<#=item.Type.ID #>"}'><img alt="<#=item.Type.Name #>" src="https://projectpokemon.org/images/gen7-types/<#=item.Type.Name #>.png" /></a></td>
+				<td>x<#=item.Multiplier #></td>
+			</tr>
 			<# } #>
-		</tr>
-	</table>
+		</table>
+	</div>
 </div>
 <# if (Model.Evolutions.Count > 0) { #>
 <h3>Evolutions</h3>
