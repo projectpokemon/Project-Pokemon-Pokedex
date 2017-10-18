@@ -313,8 +313,7 @@
 				<td><#= Model.BaseSpeed #></td>
 				<td><#= Model.SpeedEVYield #></td>
 			</tr>
-		</table>	
-		<div>
+		</table>
 		<h3>Type Effectiveness</h3>
 		<table class="table">
 			<# foreach (var item in Model.TypeEffectiveness) { #>
