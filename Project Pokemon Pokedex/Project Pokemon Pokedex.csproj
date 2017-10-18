@@ -366,7 +366,7 @@
     </Content>
     <Content Include="Views\Gen7\Pokemon\Details.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Details1.cs</LastGenOutput>
+      <LastGenOutput>Details.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Gen7\Pokemon\Index.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
