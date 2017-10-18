@@ -9,9 +9,11 @@
 <div class="row">
 	<div class="col-md-3">
 		<div class="pkm-image-inner" style="text-align:center;">
-			<a href="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png">
-				<img alt="<#=Model.Name #> Sugimori Artwork" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" class="pkm-image" />
-			</a>
+			<div data-role='commentContent' class='ipsType_normal ipsType_richText ipsContained' data-controller='core.front.core.lightboxedImages'>
+				<p>
+					<img class="ipsImage" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" alt="<#=Model.Name #> Sugimori Artwork">
+				</p>			
+			</div>
 		</div>
 		<a href="https://projectpokemon.org/home/gallery/album/<#=(Model.ID + 1).ToString() #>-<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #>/">See more images</a>
 	</div>
@@ -20,7 +22,7 @@
 		<h3>Pokédex</h3>
 		<table class="table">
 			<tr>
-				<td>
+				<td style="width: 50%;">
 					Name
 				</td>
 				<td>
@@ -81,7 +83,7 @@
 					Description (Sun)
 				</td>
 				<td>
-					<#= Model.PokedexTextSun #>
+					<#= Model.PokedexTextSun.Replace("\\n", "<br />") #>
 				</td>
 			</tr>
 			<tr>
@@ -89,7 +91,7 @@
 					Description (Moon)
 				</td>
 				<td>
-					<#= Model.PokedexTextMoon #>
+					<#= Model.PokedexTextMoon.Replace("\\n", "<br />") #>
 				</td>
 			</tr>
 			<tr>
@@ -147,7 +149,7 @@
 		<h3>Details</h3>
 		<table class="table">			
 			<tr>
-				<td>
+				<td style="width: 50%;">
 					Catch Rate
 				</td>
 				<td>

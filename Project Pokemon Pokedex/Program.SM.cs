@@ -112,7 +112,7 @@ namespace ProjectPokemon.Pokedex
                     pkm.Classification = "N/A";
                 }
 
-                if (pokedexEntries1.Length > pkm.ID)
+                if (pokedexEntries1.Length > pkm.ID || string.IsNullOrEmpty(pokedexEntries1[pkm.ID]))
                 {
                     pkm.PokedexTextSun = pokedexEntries1[pkm.ID];
                 }
@@ -121,7 +121,7 @@ namespace ProjectPokemon.Pokedex
                     pkm.PokedexTextSun = "N/A";
                 }
 
-                if (pokedexEntries2.Length > pkm.ID)
+                if (pokedexEntries2.Length > pkm.ID || string.IsNullOrEmpty(pokedexEntries2[pkm.ID]))
                 {
                     pkm.PokedexTextMoon = pokedexEntries2[pkm.ID];
                 }
