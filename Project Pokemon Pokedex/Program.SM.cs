@@ -188,8 +188,8 @@ namespace ProjectPokemon.Pokedex
                 {
                     pkm.ZItem = new ItemReference { ID = sm.SpecialZ_Item, Name = itemNames[sm.SpecialZ_Item] };
                 }
-                pkm.ZBaseMove = new MoveReference { ID = sm.SpecialZ_BaseMove, Name = moveNames[sm.SpecialZ_BaseMove] };
-                pkm.ZMove = new MoveReference { ID = sm.SpecialZ_ZMove, Name = moveNames[sm.SpecialZ_ZMove] };
+                pkm.ZBaseMove = new MoveReference(sm.SpecialZ_BaseMove, moveNames[sm.SpecialZ_BaseMove], data);
+                pkm.ZMove = new MoveReference(sm.SpecialZ_ZMove, moveNames[sm.SpecialZ_ZMove], data);
                 pkm.LocalVariant = sm.LocalVariant;
 
                 // Evolutions
@@ -201,10 +201,11 @@ namespace ProjectPokemon.Pokedex
                 var currentLevelup = new Learnset7(levelupGarcFiles[pkm.ID]);
                 for (int i = 0; i < currentLevelup.Count; i++)
                 {
-                    var levelupReference = new LevelupMoveReference();
-                    levelupReference.Level = currentLevelup.Levels[i];
-                    levelupReference.ID = currentLevelup.Moves[i];
-                    levelupReference.Name = moveNames[levelupReference.ID];
+                    var levelupReference = new LevelupMoveReference(
+                        currentLevelup.Moves[i],
+                        moveNames[currentLevelup.Moves[i]],
+                        currentLevelup.Levels[i],
+                        data);
                     pkmLevelup.Add(levelupReference);
                 }
                 pkm.MoveLevelUp = pkmLevelup;
@@ -215,7 +216,7 @@ namespace ProjectPokemon.Pokedex
                 {
                     if (item.TMHM[i])
                     {
-                        pkmTms.Add(new MoveReference { ID = TMs[i], Name = moveNames[TMs[i]] });
+                        pkmTms.Add(new MoveReference(TMs[i], moveNames[TMs[i]], data));
                     }
                 }
                 pkm.MoveTMs = pkmTms;
@@ -225,9 +226,7 @@ namespace ProjectPokemon.Pokedex
                 var currentEgg = new EggMoves7(eggmoveGarcFiles[pkm.ID]);
                 for (int i = 0; i < currentEgg.Count; i++)
                 {
-                    var eggReference = new Models.Gen7.MoveReference();
-                    eggReference.ID = currentEgg.Moves[i];
-                    eggReference.Name = moveNames[eggReference.ID];
+                    var eggReference = new MoveReference(currentEgg.Moves[i], moveNames[currentEgg.Moves[i]], data);
                     eggMoves.Add(eggReference);
                 }
                 pkm.MoveEgg = eggMoves;
@@ -239,7 +238,7 @@ namespace ProjectPokemon.Pokedex
                 {
                     if (item.TypeTutors[i])
                     {
-                        pkmTutors.Add(new Models.Gen7.MoveReference { ID = tutormoves[i], Name = moveNames[tutormoves[i]] });
+                        pkmTutors.Add(new MoveReference(tutormoves[i], moveNames[tutormoves[i]], data));
                     }
                 }
                 pkm.MoveTutors = pkmTutors;
@@ -344,7 +343,7 @@ namespace ProjectPokemon.Pokedex
                     case 2: // Items
                         { evoMethod.ParameterReference = new ItemReference { ID = param, Name = itemNames[param] }; break; }
                     case 3: // Moves
-                        { evoMethod.ParameterReference = new MoveReference { ID = param, Name = moveNames[param] }; break; }
+                        { evoMethod.ParameterReference = new MoveReference(param, moveNames[param], data); break; }
                     case 4: // Species
                         { evoMethod.ParameterReference = new PokemonReference(param, speciesNames[param], data); break; }
                     case 5: // 0-255 (Beauty)
@@ -567,7 +566,7 @@ namespace ProjectPokemon.Pokedex
 
                 // Add to lists
                 moves.Add(move);
-                data.Types[move.Type.ID].Moves.Add(new MoveReference(move));
+                data.Types[move.Type.ID].Moves.Add(new MoveReference(move, data));
             }
             data.Moves = moves;
         }

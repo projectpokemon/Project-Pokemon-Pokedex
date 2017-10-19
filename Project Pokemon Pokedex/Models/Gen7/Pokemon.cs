@@ -99,7 +99,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         {
             get
             {
-                return string.Format("<span class=\"pkspr pkmn-{0}\"></span>", Name.ToLower());
+                return string.Format("<span class=\"pkspr pkmn-{0}\"><span style=\"display: none;\">&nbsp;</span></span>", Name.ToLower());
             }            
         }
 

@@ -248,15 +248,7 @@
 				<td>
 					<#= Model.BaseExp #>
 				</td>
-			</tr>
-			<tr>
-				<td>
-					BST
-				</td>
-				<td>
-					<#= Model.BST #>
-				</td>
-			</tr>			
+			</tr>		
 			<tr>
 				<td>
 					Escape Rate
@@ -346,6 +338,16 @@
 				<td><#= Model.BaseSpeed #></td>
 				<td><#= Model.SpeedEVYield #></td>
 			</tr>
+			<tr>
+				<td>
+					<b>BST</b>
+				</td>
+				<td>
+					<#= Model.BST #>
+				</td>
+				<td>
+				</td>
+			</tr>	
 		</table>
 		<h2>Type Effectiveness</h2>
 		<table class="table">
@@ -448,25 +450,8 @@
 </table>
 <# } #>
 
-<# if (Model.MoveEgg.Count > 0) { #>
-<h2>Moves (Egg)</h2>
-<table class="table">
-    <tr>
-        <th>Move</th>
-    </tr>
-    <# foreach (var item in Model.MoveEgg)
-    { #>
-        <tr>
-            <td>
-				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
-            </td>
-        </tr>
-    <# } #>
-</table>
-<# } #>
-
 <# if (Model.MoveTutors.Count > 0) { #>
-<h2>Moves (Tutor)</h2>
+<h3>Moves (Tutor)</h3>
 <table class="table">
     <tr>
         <th>Move</th>
@@ -477,6 +462,29 @@
             <td>
 				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
+        </tr>
+    <# } #>
+</table>
+<# } #>
+
+<# if (Model.MoveEgg.Count > 0) { #>
+<h3>Moves (Egg)</h3>
+<table class="table">
+    <tr>
+        <th>Move</th>
+		<th>Parents</th>
+    </tr>
+    <# foreach (var item in Model.MoveEgg)
+    { #>
+        <tr>
+            <td>
+				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+			<td>
+				<# foreach (var parent in item.GetEggMoveSources(Model)) { #>
+					<a href="{page="gen7-pkm-<#=parent.ID #>"}"><#= parent.PokespriteHtml #></a>
+				<# } #>
+			</td>
         </tr>
     <# } #>
 </table>
