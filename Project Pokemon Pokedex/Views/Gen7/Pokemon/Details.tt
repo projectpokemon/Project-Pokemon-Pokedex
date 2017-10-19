@@ -154,7 +154,7 @@
 				<td>
 					<#= Model.EggGroup1 #> 
 					<# if (Model.EggGroup1 != Model.EggGroup2) { #>
-					<#= Model.EggGroup2 #>
+					<br /><#= Model.EggGroup2 #>
 					<# } #>
 				</td>
 			</tr>
@@ -358,7 +358,7 @@
 					<b>BST</b>
 				</td>
 				<td>
-					<#= Model.BST #>
+					<b><#= Model.BST #></b>
 				</td>
 				<td>
 				</td>
