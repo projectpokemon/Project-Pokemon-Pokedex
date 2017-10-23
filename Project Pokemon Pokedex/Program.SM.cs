@@ -43,23 +43,18 @@ namespace ProjectPokemon.Pokedex
             var formNames = PKHeX.Core.Util.GetFormsList("en");
             for (int i = 0; i <= MaxSpeciesId; i++)
             {
+                int FormCount = (table.Length > i ? table[i] : table[0]).FormeCount;
+                FormList[i] = new string[FormCount];
+
+                if (FormCount <= 0) continue;
+
+                string[] formStrings;
                 try
-                {
-                    int FormCount = (table.Length > i ? table[i] : table[0]).FormeCount;
-                    FormList[i] = new string[FormCount];
-
-                    if (FormCount <= 0) continue;
-
+                {                   
                     // PKHeX form list
-                    string[] formStrings = PKHeX.Core.PKX.GetFormList(i,
+                    formStrings = PKHeX.Core.PKX.GetFormList(i,
                     typeNames,
-                    formNames, gendersymbols, 7);
-
-                    FormList[i][0] = species[i];
-                    for (int j = 1; j < FormCount; j++)
-                    {
-                        FormList[i][j] = $"{species[i]} ({formStrings[i]})";
-                    }
+                    formNames, gendersymbols, 7);                    
                 }
                 catch (Exception ex)
                 {
@@ -67,9 +62,16 @@ namespace ProjectPokemon.Pokedex
                     Console.WriteLine("typeNames.Length = " + typeNames.Length);
                     Console.WriteLine("formNames.Length = " + formNames.Length);
                     Console.WriteLine("Message: " + ex.ToString());
+                    Console.WriteLine("Stack trace: " + ex.StackTrace);
                     throw;
                 }
-                
+
+                FormList[i][0] = species[i];
+                for (int j = 1; j < FormCount; j++)
+                {
+                    FormList[i][j] = $"{species[i]} ({formStrings[i]})";
+                }
+
             }
 
             return FormList;
