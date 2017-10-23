@@ -58,9 +58,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                                             ) &&
                                             (
                                                 // Ensure the Pokemon in the egg group can learn this move
-                                                p.MoveLevelUp.Any(m => m.ID == this.ID) ||
-                                                p.MoveTMs.Any(m => m.ID == this.ID) ||
-                                                p.MoveTutors.Any(m => m.ID == this.ID)
+                                                p.MoveLevelUp.Any(m => m.ID == this.ID)
                                             )
                                         ).OrderBy(p => p.ID);
         }
