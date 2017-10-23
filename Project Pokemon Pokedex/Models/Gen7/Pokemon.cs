@@ -129,7 +129,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
 
         private void AddFutureEvolutions(Stack<EvolutionMethod> methods, Pokemon pkm)
         {
-            foreach (var item in Evolutions.Select(x => x).Reverse()) // the .Select is used for the LINQ reverse
+            foreach (var item in pkm.Evolutions.Select(x => x).Reverse()) // the .Select is used for the LINQ reverse
             {
                 // Find future evolutions for the next Pokemon
                 AddFutureEvolutions(methods, Data.Pokemon[item.TargetPokemon.ID]);
