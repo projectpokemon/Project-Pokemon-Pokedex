@@ -58,7 +58,12 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                                             ) &&
                                             (
                                                 // Ensure the Pokemon in the egg group can learn this move
-                                                p.MoveLevelUp.Any(m => m.ID == this.ID)
+                                                p.MoveLevelUp.Any(m => m.ID == this.ID) ||
+                                                p.MoveEgg.Any(m => m.ID == this.ID)
+                                            ) && 
+                                            (
+                                                // Filter out members of the current evolution chain
+                                                !p.GetEvolutionChain().Any(c => c.TargetPokemon.ID == pkm.ID)
                                             )
                                         ).OrderBy(p => p.ID);
         }
