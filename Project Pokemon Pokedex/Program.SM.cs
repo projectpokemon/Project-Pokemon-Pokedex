@@ -43,14 +43,16 @@ namespace ProjectPokemon.Pokedex
             {
                 try
                 {
+                    int FormCount = (table.Length > i ? table[i] : table[0]).FormeCount;
+                    FormList[i] = new string[FormCount];
+
+                    if (FormCount <= 0) continue;
+
                     // PKHeX form list
                     string[] formStrings = PKHeX.Core.PKX.GetFormList(i,
                     PKHeX.Core.Util.GetTypesList("en"),
                     PKHeX.Core.Util.GetFormsList("en"), gendersymbols, 7);
 
-                    int FormCount = (table.Length > i ? table[i] : table[0]).FormeCount;
-                    FormList[i] = new string[FormCount];
-                    if (FormCount <= 0) continue;
                     FormList[i][0] = species[i];
                     for (int j = 1; j < FormCount; j++)
                     {
