@@ -482,14 +482,15 @@
 </table>
 <# } #>
 
-<# if (Model.MoveEgg.Count > 0) { #>
+<# var eggMoves = Model.GetEggMoves(); #>
+<# if (eggMoves.Count > 0) { #>
 <h2>Moves (Egg)</h2>
 <table class="table">
     <tr>
         <th>Move</th>
 		<th>Parents</th>
     </tr>
-    <# foreach (var item in Model.MoveEgg)
+    <# foreach (var item in eggMoves)
     { #>
         <tr>
             <td>

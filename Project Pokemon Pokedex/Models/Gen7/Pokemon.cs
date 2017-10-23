@@ -8,6 +8,13 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
 {
     public class Pokemon
     {
+        public Pokemon(SMDataCollection data)
+        {
+            Data = data;
+        }
+
+        private SMDataCollection Data { get; set; }
+
         public int ID { get; set; }
         public string Name { get; set; }
         public string Classification { get; set; } // The _____ Pokémon
@@ -101,6 +108,23 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             {
                 return string.Format("<span class=\"pkspr pkmn-{0}\"><span style=\"display: none;\">&nbsp;</span></span>", Name.ToLower());
             }            
+        }
+
+        private Pokemon GetPreviousEvolution()
+        {
+            return Data.Pokemon.Where(p => p.Evolutions.Any(e => e.TargetPokemon.ID == ID)).FirstOrDefault();
+        }
+
+        public List<MoveReference> GetEggMoves()
+        {
+            if (MoveEgg == null || MoveEgg.Count == 0)
+            {
+                return GetPreviousEvolution()?.GetEggMoves() ?? MoveEgg;
+            }
+            else
+            {
+                return MoveEgg;
+            }
         }
 
         public override string ToString()
