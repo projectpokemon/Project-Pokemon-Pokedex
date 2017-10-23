@@ -61,11 +61,12 @@ namespace ProjectPokemon.Pokedex
                         FormList[i][j] = $"{species[i]} ({formStrings[i]})";
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     Console.WriteLine("Failed when i = " + i.ToString());
                     Console.WriteLine("typeNames.Length = " + typeNames.Length);
                     Console.WriteLine("formNames.Length = " + formNames.Length);
+                    Console.WriteLine("Message: " + ex.ToString());
                     throw;
                 }
                 
