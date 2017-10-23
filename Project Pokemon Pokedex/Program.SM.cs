@@ -687,6 +687,9 @@ namespace ProjectPokemon.Pokedex
             catPkm.Records = new List<Record>();
             foreach (var item in data.Pokemon)
             {
+                // Exclude Egg
+                if (item.ID == 0) continue;
+
                 catPkm.Records.Add(new Record
                 {
                     Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
