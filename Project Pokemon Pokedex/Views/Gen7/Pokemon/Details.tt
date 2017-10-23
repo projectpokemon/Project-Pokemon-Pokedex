@@ -4,8 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Pokemon" name="Model" #>
-<h2>#<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #></h2>
-<p></p>
 <div class="row">
 	<div class="col-md-3">
 		<div class="pkm-image-inner" style="text-align:center;">
@@ -19,7 +17,7 @@
 	</div>
 
 	<div class="col-md-6">
-		<h3>Pokédex</h3>
+		<h2>Pokédex</h2>
 		<table class="table">
 			<tr>
 				<td style="width: 50%;">
@@ -78,22 +76,37 @@
 				</td>
 			</tr>
 			<# } #>
-			<tr>
-				<td>
-					Description (Sun)
-				</td>
-				<td>
-					<#= Model.PokedexTextSun.Replace("\\n", "<br />") #>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Description (Moon)
-				</td>
-				<td>
-					<#= Model.PokedexTextMoon.Replace("\\n", "<br />") #>
-				</td>
-			</tr>
+			<# if (!string.IsNullOrEmpty(Model.PokedexTextSun) && Model.PokedexTextSun == Model.PokedexTextMoon) { #>
+				<tr>
+					<td>
+						Description
+					</td>
+					<td>
+						<#= Model.PokedexTextSun.Replace("\\n", "<br />") #>
+					</td>
+				</tr>
+			<# } else { #>
+				<# if (!string.IsNullOrEmpty(Model.PokedexTextSun)) { #>
+					<tr>
+						<td>
+							Description (Sun)
+						</td>
+						<td>
+							<#= Model.PokedexTextSun.Replace("\\n", "<br />") #>
+						</td>
+					</tr>
+				<# } #>
+				<# if (!string.IsNullOrEmpty(Model.PokedexTextMoon)) { #>
+					<tr>
+						<td>
+							Description (Moon)
+						</td>
+						<td>
+							<#= Model.PokedexTextMoon.Replace("\\n", "<br />") #>
+						</td>
+					</tr>
+				<# } #>
+			<# } #>			
 			<tr>
 				<td>
 					Height
@@ -141,12 +154,12 @@
 				<td>
 					<#= Model.EggGroup1 #> 
 					<# if (Model.EggGroup1 != Model.EggGroup2) { #>
-					<#= Model.EggGroup2 #>
+					<br /><#= Model.EggGroup2 #>
 					<# } #>
 				</td>
 			</tr>
 		</table>
-		<h3>Details</h3>
+		<h2>Details</h2>
 		<table class="table">			
 			<tr>
 				<td style="width: 50%;">
@@ -250,15 +263,7 @@
 				<td>
 					<#= Model.BaseExp #>
 				</td>
-			</tr>
-			<tr>
-				<td>
-					BST
-				</td>
-				<td>
-					<#= Model.BST #>
-				</td>
-			</tr>			
+			</tr>		
 			<tr>
 				<td>
 					Escape Rate
@@ -311,7 +316,7 @@
 	</table>
 	</div>
 	<div class="col-md-3">
-		<h3>Stats</h3>
+		<h2>Stats</h2>
 		<table class="table">
 			<tr>
 				<td></td>
@@ -348,8 +353,18 @@
 				<td><#= Model.BaseSpeed #></td>
 				<td><#= Model.SpeedEVYield #></td>
 			</tr>
+			<tr>
+				<td>
+					<b>BST</b>
+				</td>
+				<td>
+					<b><#= Model.BST #></b>
+				</td>
+				<td>
+				</td>
+			</tr>	
 		</table>
-		<h3>Type Effectiveness</h3>
+		<h2>Type Effectiveness</h2>
 		<table class="table">
 			<# foreach (var item in Model.TypeEffectiveness) { #>
 			<tr>
@@ -361,7 +376,7 @@
 	</div>
 </div>
 <# if (Model.Evolutions.Count > 0) { #>
-<h3>Evolutions</h3>
+<h2>Evolutions</h2>
 <table class="table">
     <tr>
 		<th style="width:60px;"></th>
@@ -413,7 +428,7 @@
 <# } #>
 
 <# if (Model.MoveLevelUp.Count > 0) { #>
-<h3>Moves (Level Up)</h3>
+<h2>Moves (Level Up)</h2>
 <table class="table">
     <tr>
         <th>Level</th>
@@ -434,7 +449,7 @@
 <# } #>
 
 <# if (Model.MoveTMs.Count > 0) { #>
-<h3>Moves (TM)</h3>
+<h2>Moves (TM)</h2>
 <table class="table">
     <tr>
         <th>Move</th>
@@ -450,25 +465,8 @@
 </table>
 <# } #>
 
-<# if (Model.MoveEgg.Count > 0) { #>
-<h3>Moves (Egg)</h3>
-<table class="table">
-    <tr>
-        <th>Move</th>
-    </tr>
-    <# foreach (var item in Model.MoveEgg)
-    { #>
-        <tr>
-            <td>
-				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
-            </td>
-        </tr>
-    <# } #>
-</table>
-<# } #>
-
 <# if (Model.MoveTutors.Count > 0) { #>
-<h3>Moves (Tutor)</h3>
+<h2>Moves (Tutor)</h2>
 <table class="table">
     <tr>
         <th>Move</th>
@@ -479,6 +477,29 @@
             <td>
 				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
+        </tr>
+    <# } #>
+</table>
+<# } #>
+
+<# if (Model.MoveEgg.Count > 0) { #>
+<h2>Moves (Egg)</h2>
+<table class="table">
+    <tr>
+        <th>Move</th>
+		<th>Parents</th>
+    </tr>
+    <# foreach (var item in Model.MoveEgg)
+    { #>
+        <tr>
+            <td>
+				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+			<td>
+				<# foreach (var parent in item.GetEggMoveSources(Model)) { #>
+					<a href="{page="gen7-pkm-<#=parent.ID #>"}"><#= parent.PokespriteHtml #></a>
+				<# } #>
+			</td>
         </tr>
     <# } #>
 </table>
