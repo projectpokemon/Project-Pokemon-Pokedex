@@ -41,19 +41,28 @@ namespace ProjectPokemon.Pokedex
             string[][] FormList = new string[MaxSpeciesId + 1][];
             for (int i = 0; i <= MaxSpeciesId; i++)
             {
-                // PKHeX form list
-                string[] formStrings = PKHeX.Core.PKX.GetFormList(i,
+                try
+                {
+                    // PKHeX form list
+                    string[] formStrings = PKHeX.Core.PKX.GetFormList(i,
                     PKHeX.Core.Util.GetTypesList("en"),
                     PKHeX.Core.Util.GetFormsList("en"), gendersymbols, 7);
 
-                int FormCount = (table.Length > i ? table[i] : table[0]).FormeCount;
-                FormList[i] = new string[FormCount];
-                if (FormCount <= 0) continue;
-                FormList[i][0] = species[i];
-                for (int j = 1; j < FormCount; j++)
-                {
-                    FormList[i][j] = $"{species[i]} ({formStrings[i]})";
+                    int FormCount = (table.Length > i ? table[i] : table[0]).FormeCount;
+                    FormList[i] = new string[FormCount];
+                    if (FormCount <= 0) continue;
+                    FormList[i][0] = species[i];
+                    for (int j = 1; j < FormCount; j++)
+                    {
+                        FormList[i][j] = $"{species[i]} ({formStrings[i]})";
+                    }
                 }
+                catch (Exception)
+                {
+                    Console.WriteLine("Failed when i = " + i.ToString());
+                    throw;
+                }
+                
             }
 
             return FormList;
