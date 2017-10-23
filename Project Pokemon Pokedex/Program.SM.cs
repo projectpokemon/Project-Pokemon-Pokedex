@@ -50,11 +50,11 @@ namespace ProjectPokemon.Pokedex
 
                 string[] formStrings;
                 try
-                {                   
+                {
                     // PKHeX form list
                     formStrings = PKHeX.Core.PKX.GetFormList(i,
                     typeNames,
-                    formNames, gendersymbols, 7);                    
+                    formNames, gendersymbols, 7);
                 }
                 catch (Exception ex)
                 {
@@ -69,9 +69,15 @@ namespace ProjectPokemon.Pokedex
                 FormList[i][0] = species[i];
                 for (int j = 1; j < FormCount; j++)
                 {
-                    FormList[i][j] = $"{species[i]} ({formStrings[i]})";
+                    if (i < formStrings.Length)
+                    {
+                        FormList[i][j] = $"{species[i]} ({formStrings[i]})";
+                    }
+                    else
+                    {
+                        FormList[i][j] = $"{species[i]} (Form {i})";
+                    }                    
                 }
-
             }
 
             return FormList;
@@ -81,7 +87,7 @@ namespace ProjectPokemon.Pokedex
         {
             var altForms = getFormList(config, speciesNames);
             int[] baseForms, formVal;
-            return config.Personal.getPersonalEntryList(altForms, speciesNames, config.MaxSpeciesID, out baseForms, out formVal);         
+            return config.Personal.getPersonalEntryList(altForms, speciesNames, config.MaxSpeciesID, out baseForms, out formVal);
         }
 
         // exefs stuff
@@ -94,7 +100,7 @@ namespace ProjectPokemon.Pokedex
         };
 
         private static void LoadTypeEffectiveness(SMDataCollection data, byte[] exefs)
-        {            
+        {
             var typeEffectivenessOffset = Util.IndexOfBytes(exefs, ExefsSignature, 0x400000, 0) + ExefsSignature.Length;
             var chart = new byte[18 * 18];
             Array.Copy(exefs, typeEffectivenessOffset, chart, 0, chart.Length);
@@ -125,13 +131,13 @@ namespace ProjectPokemon.Pokedex
 
             // Load Pokemon
             // - Load Level-up GARC
-            var levelupGarcFiles = config.getGARCData("levelup").Files;                      
+            var levelupGarcFiles = config.getGARCData("levelup").Files;
             string[] pokemonEntryNames = GetPokemonEntryNames(config, speciesNames);
 
             // - Load Egg move GARC
             var eggmoveGarcFiles = config.getGARCData("eggmove").Files;
 
-            
+
             // - Load Mega Evolution GARC
             var megaEvoGarcFiles = config.getGARCData("megaevo").Files;
 
@@ -639,7 +645,7 @@ namespace ProjectPokemon.Pokedex
             var typeNames = config.getText(TextName.Types);
             var EXPGroups = new string[] { "Medium-Fast", "Erratic", "Fluctuating", "Medium-Slow", "Fast", "Slow" };
             var eggGroups = new string[] { "---", "Monster", "Water 1", "Bug", "Flying", "Field", "Fairy", "Grass", "Human-Like", "Water 3", "Mineral", "Amorphous", "Water 2", "Ditto", "Dragon", "Undiscovered" };
-            var colors = new string[] { "Red", "Blue", "Yellow", "Green", "Black", "Brown", "Purple", "Gray", "White", "Pink" };            
+            var colors = new string[] { "Red", "Blue", "Yellow", "Green", "Black", "Brown", "Purple", "Gray", "White", "Pink" };
 
             // Load stuff
             LoadTypeEffectiveness(data, exefs);
