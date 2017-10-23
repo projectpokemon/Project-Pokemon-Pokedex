@@ -39,6 +39,8 @@ namespace ProjectPokemon.Pokedex
             string[] gendersymbols = { "♂", "♀", "-" };
             var table = config.Personal.Table;
             string[][] FormList = new string[MaxSpeciesId + 1][];
+            var typeNames = PKHeX.Core.Util.GetTypesList("en");
+            var formNames = PKHeX.Core.Util.GetFormsList("en");
             for (int i = 0; i <= MaxSpeciesId; i++)
             {
                 try
@@ -50,8 +52,8 @@ namespace ProjectPokemon.Pokedex
 
                     // PKHeX form list
                     string[] formStrings = PKHeX.Core.PKX.GetFormList(i,
-                    PKHeX.Core.Util.GetTypesList("en"),
-                    PKHeX.Core.Util.GetFormsList("en"), gendersymbols, 7);
+                    typeNames,
+                    formNames, gendersymbols, 7);
 
                     FormList[i][0] = species[i];
                     for (int j = 1; j < FormCount; j++)
@@ -62,6 +64,8 @@ namespace ProjectPokemon.Pokedex
                 catch (Exception)
                 {
                     Console.WriteLine("Failed when i = " + i.ToString());
+                    Console.WriteLine("typeNames.Length = " + typeNames.Length);
+                    Console.WriteLine("formNames.Length = " + formNames.Length);
                     throw;
                 }
                 
