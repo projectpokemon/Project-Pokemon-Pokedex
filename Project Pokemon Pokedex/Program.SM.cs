@@ -35,10 +35,11 @@ namespace ProjectPokemon.Pokedex
 
         private static string[][] getFormList(GameConfig config, string[] species)
         {
+            const int MaxSpeciesId = 802;
             string[] gendersymbols = { "♂", "♀", "-" };
             var table = config.Personal.Table;
-            string[][] FormList = new string[config.MaxSpeciesID + 1][];
-            for (int i = 0; i <= config.MaxSpeciesID; i++)
+            string[][] FormList = new string[MaxSpeciesId + 1][];
+            for (int i = 0; i <= MaxSpeciesId; i++)
             {
                 // PKHeX form list
                 string[] formStrings = PKHeX.Core.PKX.GetFormList(i,
