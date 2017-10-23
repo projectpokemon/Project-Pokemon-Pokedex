@@ -33,6 +33,38 @@ namespace ProjectPokemon.Pokedex
             TMs = tms.ToArray();
         }
 
+        private static string[][] getFormList(GameConfig config, string[] species)
+        {
+            string[] gendersymbols = { "♂", "♀", "-" };
+            var table = config.Personal.Table;
+            string[][] FormList = new string[config.MaxSpeciesID + 1][];
+            for (int i = 0; i <= config.MaxSpeciesID; i++)
+            {
+                // PKHeX form list
+                string[] formStrings = PKHeX.Core.PKX.GetFormList(i,
+                    PKHeX.Core.Util.GetTypesList("en"),
+                    PKHeX.Core.Util.GetFormsList("en"), gendersymbols, 7);
+
+                int FormCount = (table.Length > i ? table[i] : table[0]).FormeCount;
+                FormList[i] = new string[FormCount];
+                if (FormCount <= 0) continue;
+                FormList[i][0] = species[i];
+                for (int j = 1; j < FormCount; j++)
+                {
+                    FormList[i][j] = $"{species[i]} ({formStrings[i]})";
+                }
+            }
+
+            return FormList;
+        }
+
+        private static string[] GetPokemonEntryNames(GameConfig config, string[] speciesNames)
+        {
+            var altForms = getFormList(config, speciesNames);
+            int[] baseForms, formVal;
+            return config.Personal.getPersonalEntryList(altForms, speciesNames, config.MaxSpeciesID, out baseForms, out formVal);         
+        }
+
         // exefs stuff
         private static readonly byte[] ExefsSignature =
         {
@@ -74,11 +106,8 @@ namespace ProjectPokemon.Pokedex
 
             // Load Pokemon
             // - Load Level-up GARC
-            var levelupGarcFiles = config.getGARCData("levelup").Files;
-            int[] baseForms, formVal;
-            string[][] altForms = config.Personal.getFormList(speciesNames, config.MaxSpeciesID);
-            string[] specieslist = config.Personal.getPersonalEntryList(altForms, speciesNames, config.MaxSpeciesID, out baseForms, out formVal);
-            var pokemonEntryNames = config.Personal.getPersonalEntryList(altForms, speciesNames, config.MaxSpeciesID, out baseForms, out formVal);
+            var levelupGarcFiles = config.getGARCData("levelup").Files;                      
+            string[] pokemonEntryNames = GetPokemonEntryNames(config, speciesNames);
 
             // - Load Egg move GARC
             var eggmoveGarcFiles = config.getGARCData("eggmove").Files;
@@ -193,7 +222,7 @@ namespace ProjectPokemon.Pokedex
                 pkm.LocalVariant = sm.LocalVariant;
 
                 // Evolutions
-                LoadPokemonEvolutions(data, pkm, config, speciesNames, specieslist, moveNames, itemNames, typeNames);
+                LoadPokemonEvolutions(data, pkm, config, speciesNames, pokemonEntryNames, moveNames, itemNames, typeNames);
 
                 // Moves
                 // - Level-up
