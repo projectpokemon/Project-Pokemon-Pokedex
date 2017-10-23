@@ -69,13 +69,13 @@ namespace ProjectPokemon.Pokedex
                 FormList[i][0] = species[i];
                 for (int j = 1; j < FormCount; j++)
                 {
-                    if (i < formStrings.Length)
+                    if (j < formStrings.Length)
                     {
-                        FormList[i][j] = $"{species[i]} ({formStrings[i]})";
+                        FormList[i][j] = $"{species[i]} ({formStrings[j]})";
                     }
                     else
                     {
-                        FormList[i][j] = $"{species[i]} (Form {i})";
+                        FormList[i][j] = $"{species[i]} (Form {j})";
                     }                    
                 }
             }
