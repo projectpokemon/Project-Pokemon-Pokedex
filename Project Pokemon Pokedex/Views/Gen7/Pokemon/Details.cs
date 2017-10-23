@@ -874,8 +874,8 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("<h2>Evolutions</h2>\r\n<table class=\"table\">\r\n    <tr>\r\n\t\t<th style=\"width:60px;\"><" +
-                    "/th>\r\n        <th>Target</th>\r\n\t\t");
+            this.Write("<h2>Evolution Chain</h2>\r\n<table class=\"table\">\r\n    <tr>\r\n\t\t<th style=\"width:60p" +
+                    "x;\"></th>\r\n        <th>Target</th>\r\n\t\t");
             
             #line 384 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  if (Model.EvolvesToAltForm) { 
@@ -892,7 +892,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             this.Write("\t\t<th>Method</th>\r\n    </tr>\r\n    ");
             
             #line 389 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
- foreach (var item in Model.Evolutions) { 
+ foreach (var item in Model.GetEvolutionChain()) { 
 		string methodString;
 		if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.PokemonReference) {
 			methodString = string.Format(item.Method, "<a href='{page=\"gen7-pkm-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");

@@ -110,7 +110,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             }            
         }
 
-        private Pokemon GetPreviousEvolution()
+        public Pokemon GetPreviousEvolution()
         {
             return Data.Pokemon.Where(p => p.Evolutions.Any(e => e.TargetPokemon.ID == ID)).FirstOrDefault();
         }
@@ -125,6 +125,26 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             {
                 return MoveEgg;
             }
+        }
+
+        public List<EvolutionMethod> GetEvolutionChain()
+        {
+            var methods = new Stack<EvolutionMethod>();
+            foreach (var item in Evolutions.Select(x => x).Reverse()) // the .Select is used for the LINQ reverse
+            {
+                methods.Push(item);
+            }
+
+            var previousEvolution = GetPreviousEvolution();
+            if (previousEvolution != null)
+            {
+                foreach (var item in previousEvolution.GetEvolutionChain().Select(x => x).Reverse()) // the .Select is used for the LINQ reverse
+                {
+                    methods.Push(item);
+                }
+            }
+
+            return methods.ToList();
         }
 
         public override string ToString()
