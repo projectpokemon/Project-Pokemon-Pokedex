@@ -376,7 +376,7 @@
 	</div>
 </div>
 <# var evolutionChain = Model.GetEvolutionChain(); #>
-<# if (evolutionChain > 0) { #>
+<# if (evolutionChain.Count > 0) { #>
 <h2>Evolution Chain</h2>
 <table class="table">
     <tr>

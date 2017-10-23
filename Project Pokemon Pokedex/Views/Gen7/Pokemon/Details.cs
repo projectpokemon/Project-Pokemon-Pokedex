@@ -876,7 +876,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             #line hidden
             
             #line 379 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
- if (evolutionChain > 0) { 
+ if (evolutionChain.Count > 0) { 
             
             #line default
             #line hidden
