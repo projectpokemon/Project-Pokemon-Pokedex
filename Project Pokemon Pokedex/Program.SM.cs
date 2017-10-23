@@ -145,7 +145,7 @@ namespace ProjectPokemon.Pokedex
             var pkms = new List<Pokemon>();
             foreach (var item in config.Personal.Table)
             {
-                var pkm = new Pokemon();
+                var pkm = new Pokemon(data);
 
                 pkm.ID = pkms.Count;
                 if (pokemonEntryNames.Length > pkm.ID)
