@@ -143,6 +143,12 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                     methods.Push(item);
                 }
             }
+            else
+            {
+                // Add current Pokemon as a dummy entry
+                // This shows the base form when viewing evolutions
+                methods.Push(new EvolutionMethod { Form = -1, Method = "", TargetPokemon = new PokemonReference(this) });
+            }
 
             return methods.ToList();
         }

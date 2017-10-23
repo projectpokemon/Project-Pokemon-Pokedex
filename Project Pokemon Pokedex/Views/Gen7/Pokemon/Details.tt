@@ -375,7 +375,8 @@
 		</table>
 	</div>
 </div>
-<# if (Model.Evolutions.Count > 0) { #>
+<# var evolutionChain = Model.GetEvolutionChain(); #>
+<# if (evolutionChain > 0) { #>
 <h2>Evolution Chain</h2>
 <table class="table">
     <tr>
@@ -386,7 +387,7 @@
 		<# } #>
 		<th>Method</th>
     </tr>
-    <# foreach (var item in Model.GetEvolutionChain()) { 
+    <# foreach (var item in evolutionChain) { 
 		string methodString;
 		if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.PokemonReference) {
 			methodString = string.Format(item.Method, "<a href='{page=\"gen7-pkm-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
