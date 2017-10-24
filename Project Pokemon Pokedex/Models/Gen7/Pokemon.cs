@@ -133,8 +133,11 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             {
                 // Find future evolutions for the next Pokemon
                 AddFutureEvolutions(methods, Data.Pokemon[item.TargetPokemon.ID]);
-                
-                methods.Push(item);
+
+                if (!methods.Contains(item))
+                {
+                    methods.Push(item);
+                }                    
             }            
         }
 
@@ -149,7 +152,10 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             {
                 foreach (var item in previousEvolution.GetEvolutionChain().Select(x => x).Reverse()) // the .Select is used for the LINQ reverse
                 {
-                    methods.Push(item);
+                    if (!methods.Contains(item))
+                    {
+                        methods.Push(item);
+                    }                    
                 }
             }
             else

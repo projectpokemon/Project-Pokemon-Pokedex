@@ -26,5 +26,16 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         /// The user-friendly string representing the evolution parameter. Refer to <see cref="ParameterReference"/> first if it is not null.
         /// </summary>
         public string ParameterString { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as EvolutionMethod;
+            return other != null && TargetPokemon.ID == other.TargetPokemon.ID && Level == other.Level && Form == other.Form && Method == other.Method && ParameterReference?.ID == other.ParameterReference?.ID && ParameterString == other.ParameterString;
+        }
+
+        public override int GetHashCode()
+        {
+            return TargetPokemon.ID ^ Level ^ Form ^ Method.GetHashCode() ^ (ParameterReference?.ID ?? 0) ^ ParameterString.GetHashCode();
+        }
     }
 }
