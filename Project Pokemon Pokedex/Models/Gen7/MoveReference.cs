@@ -59,13 +59,33 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                                             (
                                                 // Ensure the Pokemon in the egg group can learn this move
                                                 p.MoveLevelUp.Any(m => m.ID == this.ID) ||
-                                                p.MoveEgg.Any(m => m.ID == this.ID)
+                                                p.GetEggMoves().Any(m => m.ID == this.ID)
                                             ) && 
                                             (
                                                 // Filter out members of the current evolution chain
                                                 !p.GetEvolutionChain().Any(c => c.TargetPokemon.ID == pkm.ID)
                                             )
                                         ).OrderBy(p => p.ID);
+        }
+
+        public bool RequiresChainBreeding(Pokemon pkm)
+        {
+            return !_data.Pokemon.Where(p => (
+                                                // Compare egg groups, taking into account the possibility egg group 1 corresponds to egg group 2
+                                                p.EggGroup1 == pkm.EggGroup1 ||
+                                                p.EggGroup2 == pkm.EggGroup2 ||
+                                                p.EggGroup1 == pkm.EggGroup2 ||
+                                                p.EggGroup2 == pkm.EggGroup1
+                                            ) &&
+                                            (
+                                                // Ensure the Pokemon in the egg group can learn this move
+                                                p.MoveLevelUp.Any(m => m.ID == this.ID)
+                                            ) &&
+                                            (
+                                                // Filter out members of the current evolution chain
+                                                !p.GetEvolutionChain().Any(c => c.TargetPokemon.ID == pkm.ID)
+                                            )
+                                        ).Any();
         }
 
         public override string ToString()
