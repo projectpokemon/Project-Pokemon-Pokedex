@@ -496,6 +496,9 @@
         <tr>
             <td>
 				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
+				<# if (item.RequiresChainBreeding(Model)) { #>
+					(Requires chain breeding)
+				<# } #>
             </td>
 			<td>
 				<# foreach (var parent in item.GetEggMoveSources(Model)) { #>
