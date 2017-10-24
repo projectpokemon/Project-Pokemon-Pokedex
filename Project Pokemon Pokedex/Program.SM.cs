@@ -33,6 +33,63 @@ namespace ProjectPokemon.Pokedex
             TMs = tms.ToArray();
         }
 
+        private static string[][] getFormList(GameConfig config, string[] species)
+        {
+            const int MaxSpeciesId = 802;
+            string[] gendersymbols = { "♂", "♀", "-" };
+            var table = config.Personal.Table;
+            string[][] FormList = new string[MaxSpeciesId + 1][];
+            var typeNames = PKHeX.Core.Util.GetTypesList("en");
+            var formNames = PKHeX.Core.Util.GetFormsList("en");
+            for (int i = 0; i <= MaxSpeciesId; i++)
+            {
+                int FormCount = (table.Length > i ? table[i] : table[0]).FormeCount;
+                FormList[i] = new string[FormCount];
+
+                if (FormCount <= 0) continue;
+
+                string[] formStrings;
+                try
+                {
+                    // PKHeX form list
+                    formStrings = PKHeX.Core.PKX.GetFormList(i,
+                    typeNames,
+                    formNames, gendersymbols, 7);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Failed when i = " + i.ToString());
+                    Console.WriteLine("typeNames.Length = " + typeNames.Length);
+                    Console.WriteLine("formNames.Length = " + formNames.Length);
+                    Console.WriteLine("Message: " + ex.ToString());
+                    Console.WriteLine("Stack trace: " + ex.StackTrace);
+                    throw;
+                }
+
+                FormList[i][0] = species[i];
+                for (int j = 1; j < FormCount; j++)
+                {
+                    if (j < formStrings.Length)
+                    {
+                        FormList[i][j] = $"{species[i]} ({formStrings[j]})";
+                    }
+                    else
+                    {
+                        FormList[i][j] = $"{species[i]} (Form {j})";
+                    }                    
+                }
+            }
+
+            return FormList;
+        }
+
+        private static string[] GetPokemonEntryNames(GameConfig config, string[] speciesNames)
+        {
+            var altForms = getFormList(config, speciesNames);
+            int[] baseForms, formVal;
+            return config.Personal.getPersonalEntryList(altForms, speciesNames, config.MaxSpeciesID, out baseForms, out formVal);
+        }
+
         // exefs stuff
         private static readonly byte[] ExefsSignature =
         {
@@ -43,7 +100,7 @@ namespace ProjectPokemon.Pokedex
         };
 
         private static void LoadTypeEffectiveness(SMDataCollection data, byte[] exefs)
-        {            
+        {
             var typeEffectivenessOffset = Util.IndexOfBytes(exefs, ExefsSignature, 0x400000, 0) + ExefsSignature.Length;
             var chart = new byte[18 * 18];
             Array.Copy(exefs, typeEffectivenessOffset, chart, 0, chart.Length);
@@ -75,15 +132,12 @@ namespace ProjectPokemon.Pokedex
             // Load Pokemon
             // - Load Level-up GARC
             var levelupGarcFiles = config.getGARCData("levelup").Files;
-            int[] baseForms, formVal;
-            string[][] altForms = config.Personal.getFormList(speciesNames, config.MaxSpeciesID);
-            string[] specieslist = config.Personal.getPersonalEntryList(altForms, speciesNames, config.MaxSpeciesID, out baseForms, out formVal);
-            var pokemonEntryNames = config.Personal.getPersonalEntryList(altForms, speciesNames, config.MaxSpeciesID, out baseForms, out formVal);
+            string[] pokemonEntryNames = GetPokemonEntryNames(config, speciesNames);
 
             // - Load Egg move GARC
             var eggmoveGarcFiles = config.getGARCData("eggmove").Files;
 
-            
+
             // - Load Mega Evolution GARC
             var megaEvoGarcFiles = config.getGARCData("megaevo").Files;
 
@@ -91,7 +145,7 @@ namespace ProjectPokemon.Pokedex
             var pkms = new List<Pokemon>();
             foreach (var item in config.Personal.Table)
             {
-                var pkm = new Pokemon();
+                var pkm = new Pokemon(data);
 
                 pkm.ID = pkms.Count;
                 if (pokemonEntryNames.Length > pkm.ID)
@@ -193,7 +247,7 @@ namespace ProjectPokemon.Pokedex
                 pkm.LocalVariant = sm.LocalVariant;
 
                 // Evolutions
-                LoadPokemonEvolutions(data, pkm, config, speciesNames, specieslist, moveNames, itemNames, typeNames);
+                LoadPokemonEvolutions(data, pkm, config, speciesNames, pokemonEntryNames, moveNames, itemNames, typeNames);
 
                 // Moves
                 // - Level-up
@@ -591,7 +645,7 @@ namespace ProjectPokemon.Pokedex
             var typeNames = config.getText(TextName.Types);
             var EXPGroups = new string[] { "Medium-Fast", "Erratic", "Fluctuating", "Medium-Slow", "Fast", "Slow" };
             var eggGroups = new string[] { "---", "Monster", "Water 1", "Bug", "Flying", "Field", "Fairy", "Grass", "Human-Like", "Water 3", "Mineral", "Amorphous", "Water 2", "Ditto", "Dragon", "Undiscovered" };
-            var colors = new string[] { "Red", "Blue", "Yellow", "Green", "Black", "Brown", "Purple", "Gray", "White", "Pink" };            
+            var colors = new string[] { "Red", "Blue", "Yellow", "Green", "Black", "Brown", "Purple", "Gray", "White", "Pink" };
 
             // Load stuff
             LoadTypeEffectiveness(data, exefs);
@@ -633,6 +687,9 @@ namespace ProjectPokemon.Pokedex
             catPkm.Records = new List<Record>();
             foreach (var item in data.Pokemon)
             {
+                // Exclude Egg
+                if (item.ID == 0) continue;
+
                 catPkm.Records.Add(new Record
                 {
                     Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
