@@ -334,14 +334,14 @@
 				<td><#= Model.AttackEVYield #></td>
 			</tr>
 			<tr>
-				<td>Sp. Attack</td>
-				<td><#= Model.BaseSpAttack #></td>
-				<td><#= Model.SpAttackEVYield #></td>
-			</tr>
-			<tr>
 				<td>Defense</td>
 				<td><#= Model.BaseDefense #></td>
 				<td><#= Model.DefenseEVYield #></td>
+			</tr>
+			<tr>
+				<td>Sp. Attack</td>
+				<td><#= Model.BaseSpAttack #></td>
+				<td><#= Model.SpAttackEVYield #></td>
 			</tr>
 			<tr>
 				<td>Sp. Defense</td>
