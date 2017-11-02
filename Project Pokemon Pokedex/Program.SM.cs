@@ -126,7 +126,7 @@ namespace ProjectPokemon.Pokedex
             data.Types = pkmTypes;
         }
 
-        private static void LoadPokemon(SMDataCollection data, GameConfig config, string rawFilesDir, string[] speciesNames, string[] typeNames, string[] itemNames, string[] abilityNames, string[] moveNames, string[] EXPGroups, string[] eggGroups, string[] colors, string[] pokemonClassifications, string[] pokedexEntries1, string[] pokedexEntries2)
+        private static void LoadPokemon(SMDataCollection data, GameConfig config, string rawFilesDir, string[] speciesNames, string[] typeNames, string[] itemNames, string[] abilityNames, string[] moveNames, string[] EXPGroups, string[] eggGroups, string[] colors, string[] pokemonClassifications, string[] pokedexEntries1, string[] pokedexEntries2, string[][] altForms)
         {
             // Load TMs
             var TMs = new ushort[0];
@@ -249,9 +249,11 @@ namespace ProjectPokemon.Pokedex
                 pkm.ZMove = new MoveReference(sm.SpecialZ_ZMove, moveNames[sm.SpecialZ_ZMove], data);
                 pkm.LocalVariant = sm.LocalVariant;
 
-                // Evolutions
+                // Evolutions & forms
+                LoadPokemonAltFormReferences(data, pkm, config, speciesNames, altForms);
                 LoadPokemonEvolutions(data, pkm, config, speciesNames, pokemonEntryNames, moveNames, itemNames, typeNames);
-
+                LoadPokemonMegaEvolutions(data, pkm, config, speciesNames, itemNames);
+                
                 // Moves
                 // - Level-up
                 var pkmLevelup = new List<LevelupMoveReference>();
@@ -682,7 +684,7 @@ namespace ProjectPokemon.Pokedex
             data.Moves = moves;
         }
 
-        public static async Task<SMDataCollection> LoadSunMoonData(string rawFilesDir)
+        public static SMDataCollection LoadSunMoonData(string rawFilesDir)
         {
             var data = new SMDataCollection();
             var exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", "code.bin"));
@@ -693,7 +695,7 @@ namespace ProjectPokemon.Pokedex
             var items = config.getText(TextName.ItemNames);
             var moveNames = config.getText(TextName.MoveNames);
             var moveflavor = config.getText(TextName.MoveFlavor);
-            var species = config.getText(TextName.SpeciesNames);
+            var speciesNames = config.getText(TextName.SpeciesNames);
             var speciesClassifications = config.getText(TextName.SpeciesClassifications);
             var pokedexEntries1 = config.getText(TextName.PokedexEntry1);
             var pokedexEntries2 = config.getText(TextName.PokedexEntry1);
@@ -703,11 +705,12 @@ namespace ProjectPokemon.Pokedex
             var EXPGroups = new string[] { "Medium-Fast", "Erratic", "Fluctuating", "Medium-Slow", "Fast", "Slow" };
             var eggGroups = new string[] { "---", "Monster", "Water 1", "Bug", "Flying", "Field", "Fairy", "Grass", "Human-Like", "Water 3", "Mineral", "Amorphous", "Water 2", "Ditto", "Dragon", "Undiscovered" };
             var colors = new string[] { "Red", "Blue", "Yellow", "Green", "Black", "Brown", "Purple", "Gray", "White", "Pink" };
+            var altForms = getFormList(config, speciesNames);
 
             // Load stuff
             LoadTypeEffectiveness(data, exefs);
             LoadTypes(data, typeNames);
-            LoadPokemon(data, config, rawFilesDir, species, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors, speciesClassifications, pokedexEntries1, pokedexEntries2);
+            LoadPokemon(data, config, rawFilesDir, speciesNames, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors, speciesClassifications, pokedexEntries1, pokedexEntries2, altForms);
             LoadMoves(data, config, moveNames, moveflavor, typeNames);
 
             return data;
@@ -734,7 +737,7 @@ namespace ProjectPokemon.Pokedex
                 smPath = tempDir;
             }
 
-            var data = LoadSunMoonData(smPath).Result;
+            var data = LoadSunMoonData(smPath);
 
             var output = new List<Category>();
 
