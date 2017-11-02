@@ -419,7 +419,7 @@ namespace ProjectPokemon.Pokedex
 
         private static void LoadPokemonAltFormReferences(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[][] altForms)
         {
-            if (config.Personal.Table.Length <= pkm.ID)
+            if (config.Personal.Table.Length <= pkm.ID || altForms.Length <= pkm.ID)
             {
                 return;
             }
@@ -456,9 +456,9 @@ namespace ProjectPokemon.Pokedex
                     Level = 0,
                     Method = "Mega evolve with {0}",
                     ParameterReference = new ItemReference((int)megaEvo.Argument[0], itemNames[(int)megaEvo.Argument[0]]),
-                    TargetPokemon = pkm.AltForms[megaEvo.Form[0]]
+                    TargetPokemon = pkm.AltForms[megaEvo.Form[0] - 1]
                 });
-                pkm.MegaEvolutions.Add(pkm.AltForms[megaEvo.Form[0]]);
+                pkm.MegaEvolutions.Add(pkm.AltForms[megaEvo.Form[0] - 1]);
             }
 
             if (megaEvo.Method[1] == 1)
@@ -469,9 +469,9 @@ namespace ProjectPokemon.Pokedex
                     Level = 0,
                     Method = "Mega evolve with {0}",
                     ParameterReference = new ItemReference((int)megaEvo.Argument[1], itemNames[(int)megaEvo.Argument[1]]),
-                    TargetPokemon = pkm.AltForms[megaEvo.Form[1]]
+                    TargetPokemon = pkm.AltForms[megaEvo.Form[1] - 1]
                 });
-                pkm.MegaEvolutions.Add(pkm.AltForms[megaEvo.Form[1]]);
+                pkm.MegaEvolutions.Add(pkm.AltForms[megaEvo.Form[1] - 1]);
             }                        
             
         }
