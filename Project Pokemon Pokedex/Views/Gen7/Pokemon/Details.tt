@@ -376,7 +376,7 @@
 	</div>
 </div>
 
-<# if (Model.GetNonMegaAltForms().Any()) #>
+<# if (Model.GetNonMegaAltForms().Any()) { #>
 <h2>Alternate Forms</h2>
 <table class="table">
 	<tr>
@@ -386,10 +386,10 @@
 	<# foreach (var item in Model.GetNonMegaAltForms()) { #>
 	<tr style="height:60px;vertical-align: middle;">
 		<td>
-			<a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#= item.TargetPokemon.PokespriteHtml #></a>				
+			<a href='{page="gen7-pkm-<#=item.ID #>"}'><#= item.PokespriteHtml #></a>				
 		</td>
         <td>
-            <a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
+            <a href='{page="gen7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
         </td>
     </tr>
 	<# } #>

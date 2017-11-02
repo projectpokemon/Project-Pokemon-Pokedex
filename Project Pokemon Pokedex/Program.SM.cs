@@ -418,7 +418,7 @@ namespace ProjectPokemon.Pokedex
         private static void LoadPokemonAltFormReferences(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[][] altForms)
         {
             pkm.AltForms = new List<PokemonReference>();
-            int altformpointer = config.Personal.FormStatsIndex;
+            int altformpointer = config.Personal.Table[pkm.ID].FormStatsIndex;
             for (int j = 1; j < altForms[pkm.ID].Length; j++)
             {
                 var referenceId = altformpointer + j - 1;
