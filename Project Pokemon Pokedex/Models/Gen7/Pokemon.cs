@@ -11,6 +11,8 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         public Pokemon(SMDataCollection data)
         {
             Data = data;
+            AltForms = new List<PokemonReference>();
+            MegaEvolutions = new List<PokemonReference>();
         }
 
         private SMDataCollection Data { get; set; }

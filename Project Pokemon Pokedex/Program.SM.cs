@@ -417,7 +417,6 @@ namespace ProjectPokemon.Pokedex
 
         private static void LoadPokemonAltFormReferences(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[][] altForms)
         {
-            pkm.AltForms = new List<PokemonReference>();
             int altformpointer = config.Personal.Table[pkm.ID].FormStatsIndex;
             for (int j = 1; j < altForms[pkm.ID].Length; j++)
             {
@@ -439,8 +438,6 @@ namespace ProjectPokemon.Pokedex
                 // We're outside the range of mega evolution files. This probably means this Pokemon is an alt form.
                 return;
             }
-
-            pkm.MegaEvolutions = new List<PokemonReference>();
 
             var megaEvo = new MegaEvolutions(_megaGarcFiles[pkm.ID]);
 
