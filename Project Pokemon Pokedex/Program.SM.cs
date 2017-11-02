@@ -250,9 +250,9 @@ namespace ProjectPokemon.Pokedex
                 pkm.LocalVariant = sm.LocalVariant;
 
                 // Evolutions & forms
-                LoadPokemonAltFormReferences(data, pkm, config, speciesNames, altForms);
+                LoadPokemonAltFormReferences(data, pkm, config, pokemonEntryNames, altForms);
                 LoadPokemonEvolutions(data, pkm, config, speciesNames, pokemonEntryNames, moveNames, itemNames, typeNames);
-                LoadPokemonMegaEvolutions(data, pkm, config, speciesNames, itemNames);
+                LoadPokemonMegaEvolutions(data, pkm, config, itemNames);
                 
                 // Moves
                 // - Level-up
@@ -433,7 +433,7 @@ namespace ProjectPokemon.Pokedex
         }
 
         private static byte[][] _megaGarcFiles = null;
-        private static void LoadPokemonMegaEvolutions(SMDataCollection data, Pokemon pkm, GameConfig config, string[] pokemonNames, string[] itemNames)
+        private static void LoadPokemonMegaEvolutions(SMDataCollection data, Pokemon pkm, GameConfig config, string[] itemNames)
         {
             if (_megaGarcFiles == null)
             {
