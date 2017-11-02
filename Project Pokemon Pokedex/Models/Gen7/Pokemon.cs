@@ -93,6 +93,8 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         public bool LocalVariant { get; set; }
 
         public List<EvolutionMethod> Evolutions { get; set; }
+        public List<PokemonReference> AltForms { get; set; }
+        public List<PokemonReference> MegaEvolutions { get; set; }
 
         public bool EvolvesToAltForm
         {
@@ -139,6 +141,16 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                     methods.Push(item);
                 }                    
             }            
+        }
+
+        public IEnumerable<PokemonReference> GetNonMegaAltForms()
+        {
+            return AltForms.Where(a => !Evolutions.Any(e => e.TargetPokemon.ID == a.ID));
+        }
+
+        public bool GetIsMega()
+        {
+            return Data.Pokemon.Any(p => p.MegaEvolutions.Any(m => m.ID == this.ID));
         }
 
         public List<EvolutionMethod> GetEvolutionChain()

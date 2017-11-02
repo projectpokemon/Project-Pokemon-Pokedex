@@ -8,6 +8,12 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
 {
     public class ItemReference : IModelReference
     {
+        public ItemReference(int id, string name)
+        {
+            ID = id;
+            Name = name;
+        }
+
         public int ID { get; set; }
         public string Name { get; set; }
 

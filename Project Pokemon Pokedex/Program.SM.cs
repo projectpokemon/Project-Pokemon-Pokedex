@@ -83,6 +83,9 @@ namespace ProjectPokemon.Pokedex
             return FormList;
         }
 
+        /// <summary>
+        /// Gets names for all Pokemon IDs, even alt forms
+        /// </summary>
         private static string[] GetPokemonEntryNames(GameConfig config, string[] speciesNames)
         {
             var altForms = getFormList(config, speciesNames);
@@ -207,9 +210,9 @@ namespace ProjectPokemon.Pokedex
                 pkm.EvoStage = item.EvoStage;
 
                 // Items
-                pkm.HeldItem1 = new ItemReference { ID = item.Items[0], Name = itemNames[item.Items[0]] };
-                pkm.HeldItem2 = new ItemReference { ID = item.Items[1], Name = itemNames[item.Items[1]] };
-                pkm.HeldItem3 = new ItemReference { ID = item.Items[2], Name = itemNames[item.Items[2]] };
+                pkm.HeldItem1 = new ItemReference(item.Items[0], itemNames[item.Items[0]]);
+                pkm.HeldItem2 = new ItemReference(item.Items[1], itemNames[item.Items[1]]);
+                pkm.HeldItem3 = new ItemReference(item.Items[2], itemNames[item.Items[2]]);
 
                 pkm.Gender = item.Gender;
                 pkm.HatchCycles = item.HatchCycles;
@@ -240,7 +243,7 @@ namespace ProjectPokemon.Pokedex
                 pkm.EscapeRate = sm.EscapeRate;
                 if (sm.SpecialZ_Item != ushort.MaxValue)
                 {
-                    pkm.ZItem = new ItemReference { ID = sm.SpecialZ_Item, Name = itemNames[sm.SpecialZ_Item] };
+                    pkm.ZItem = new ItemReference(sm.SpecialZ_Item, itemNames[sm.SpecialZ_Item]);
                 }
                 pkm.ZBaseMove = new MoveReference(sm.SpecialZ_BaseMove, moveNames[sm.SpecialZ_BaseMove], data);
                 pkm.ZMove = new MoveReference(sm.SpecialZ_ZMove, moveNames[sm.SpecialZ_ZMove], data);
@@ -395,7 +398,7 @@ namespace ProjectPokemon.Pokedex
                     case 1: // Level
                         { evoMethod.ParameterString = evoMethod.Level.ToString(); break; }
                     case 2: // Items
-                        { evoMethod.ParameterReference = new ItemReference { ID = param, Name = itemNames[param] }; break; }
+                        { evoMethod.ParameterReference = new ItemReference(param, itemNames[param]); break; }
                     case 3: // Moves
                         { evoMethod.ParameterReference = new MoveReference(param, moveNames[param], data); break; }
                     case 4: // Species
@@ -410,6 +413,63 @@ namespace ProjectPokemon.Pokedex
                 currentEvolutionMethods.Add(evoMethod);
             }
             pkm.Evolutions = currentEvolutionMethods;
+        }
+
+        private static void LoadPokemonAltFormReferences(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[][] altForms)
+        {
+            pkm.AltForms = new List<PokemonReference>();
+            int altformpointer = config.Personal.FormStatsIndex;
+            for (int j = 1; j < altForms[pkm.ID].Length; j++)
+            {
+                var referenceId = altformpointer + j - 1;
+                pkm.AltForms.Add(new PokemonReference(referenceId, speciesNames[referenceId], data));
+            }                
+        }
+
+        private static byte[][] _megaGarcFiles = null;
+        private static void LoadPokemonMegaEvolutions(SMDataCollection data, Pokemon pkm, GameConfig config, string[] pokemonNames, string[] itemNames)
+        {
+            if (_megaGarcFiles == null)
+            {
+                _megaGarcFiles = config.getGARCData("megaevo").Files;
+            }
+
+            if (_megaGarcFiles.Length <= pkm.ID)
+            {
+                // We're outside the range of mega evolution files. This probably means this Pokemon is an alt form.
+                return;
+            }
+
+            pkm.MegaEvolutions = new List<PokemonReference>();
+
+            var megaEvo = new MegaEvolutions(_megaGarcFiles[pkm.ID]);
+
+            if (megaEvo.Method[0] == 1)
+            {
+                pkm.Evolutions.Add(new Models.Gen7.EvolutionMethod
+                {
+                    Form = -1,
+                    Level = 0,
+                    Method = "Mega evolve with {0}",
+                    ParameterReference = new ItemReference((int)megaEvo.Argument[0], itemNames[(int)megaEvo.Argument[0]]),
+                    TargetPokemon = pkm.AltForms[megaEvo.Form[0]]
+                });
+                pkm.MegaEvolutions.Add(pkm.AltForms[megaEvo.Form[0]]);
+            }
+
+            if (megaEvo.Method[1] == 1)
+            {
+                pkm.Evolutions.Add(new Models.Gen7.EvolutionMethod
+                {
+                    Form = -1,
+                    Level = 0,
+                    Method = "Mega evolve with {0}",
+                    ParameterReference = new ItemReference((int)megaEvo.Argument[1], itemNames[(int)megaEvo.Argument[1]]),
+                    TargetPokemon = pkm.AltForms[megaEvo.Form[1]]
+                });
+                pkm.MegaEvolutions.Add(pkm.AltForms[megaEvo.Form[1]]);
+            }                        
+            
         }
 
         private static void AddPkmToType(SMDataCollection data, Pokemon pkm)

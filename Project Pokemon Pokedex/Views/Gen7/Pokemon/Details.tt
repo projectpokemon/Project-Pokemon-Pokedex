@@ -375,6 +375,27 @@
 		</table>
 	</div>
 </div>
+
+<# if (Model.GetNonMegaAltForms().Any()) #>
+<h2>Alternate Forms</h2>
+<table class="table">
+	<tr>
+		<th style="width:60px;"></th>
+        <th>Form</th>
+    </tr>
+	<# foreach (var item in Model.GetNonMegaAltForms()) { #>
+	<tr style="height:60px;vertical-align: middle;">
+		<td>
+			<a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#= item.TargetPokemon.PokespriteHtml #></a>				
+		</td>
+        <td>
+            <a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
+        </td>
+    </tr>
+	<# } #>
+</table>
+<# } #>
+
 <# var evolutionChain = Model.GetEvolutionChain(); #>
 <# if (evolutionChain.Count > 0) { #>
 <h2>Evolution Chain</h2>
