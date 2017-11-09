@@ -35,7 +35,20 @@ namespace ProjectPokemon.Pokedex
 
         private static string[][] getFormList(GameConfig config, string[] species)
         {
-            const int MaxSpeciesId = 802;
+            int MaxSpeciesId;
+            if (config.Version == GameVersion.SM)
+            {
+                MaxSpeciesId = 802;
+            }
+            else if (config.Version == GameVersion.USUM)
+            {
+                MaxSpeciesId = 807;
+            }
+            else
+            {
+                throw new Exception("Unsupported version");
+            }
+
             string[] gendersymbols = { "♂", "♀", "-" };
             var table = config.Personal.Table;
             string[][] FormList = new string[MaxSpeciesId + 1][];
@@ -43,18 +56,32 @@ namespace ProjectPokemon.Pokedex
             var formNames = PKHeX.Core.Util.GetFormsList("en");
             for (int i = 0; i <= MaxSpeciesId; i++)
             {
-                int FormCount = (table.Length > i ? table[i] : table[0]).FormeCount;
-                FormList[i] = new string[FormCount];
-
-                if (FormCount <= 0) continue;
-
                 string[] formStrings;
                 try
                 {
+                    int FormCount = (table.Length > i ? table[i] : table[0]).FormeCount;
+                    FormList[i] = new string[FormCount];
+
+                    if (FormCount <= 0) continue;
+
                     // PKHeX form list
                     formStrings = PKHeX.Core.PKX.GetFormList(i,
                     typeNames,
                     formNames, gendersymbols, 7);
+
+                    FormList[i][0] = species[i];
+
+                    for (int j = 1; j < FormCount; j++)
+                    {
+                        if (j < formStrings.Length)
+                        {
+                            FormList[i][j] = $"{species[i]} ({formStrings[j]})";
+                        }
+                        else
+                        {
+                            FormList[i][j] = $"{species[i]} (Form {j})";
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -64,22 +91,8 @@ namespace ProjectPokemon.Pokedex
                     Console.WriteLine("Message: " + ex.ToString());
                     Console.WriteLine("Stack trace: " + ex.StackTrace);
                     throw;
-                }
-
-                FormList[i][0] = species[i];
-                for (int j = 1; j < FormCount; j++)
-                {
-                    if (j < formStrings.Length)
-                    {
-                        FormList[i][j] = $"{species[i]} ({formStrings[j]})";
-                    }
-                    else
-                    {
-                        FormList[i][j] = $"{species[i]} (Form {j})";
-                    }                    
-                }
+                }   
             }
-
             return FormList;
         }
 
@@ -629,7 +642,8 @@ namespace ProjectPokemon.Pokedex
         {
             var data = new SMDataCollection();
             var exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", "code.bin"));
-            var config = new GameConfig(GameVersion.SM);
+            //var config = new GameConfig(GameVersion.SM);
+            var config = new GameConfig(GameVersion.USUM);
             config.Initialize(Path.Combine(rawFilesDir, "RomFS"), Path.Combine(rawFilesDir, "ExeFS"), lang: 2); // Language index 2 is English
 
             // Load strings
