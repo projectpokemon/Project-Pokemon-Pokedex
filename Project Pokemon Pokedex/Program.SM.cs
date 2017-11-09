@@ -364,6 +364,7 @@ namespace ProjectPokemon.Pokedex
                 "Level Up Daytime on Version {0}", // Version
                 "Level Up Nighttime on Version {0}", // Version
                 "Level Up Summit at level {0}", // Level
+                "Level Up (40???)", "Level Up (41???)", "Used Item (42???)" // new in USUM
             };
             ushort[] evolutionMethodCase =
             {
@@ -379,6 +380,10 @@ namespace ProjectPokemon.Pokedex
                 1, // 35 - UNUSED
                 7, 7, 7, // Version Specific
                 1,
+                // USUM new
+                1, // 40 - Level Up with Condition (???)
+                1, // 41 - Level Up with Condition (???)
+                2, // 42 - Use Item with Condition (???)
             };
 
             // Evolutions
@@ -638,12 +643,21 @@ namespace ProjectPokemon.Pokedex
             data.Moves = moves;
         }
 
-        public static async Task<SMDataCollection> LoadSunMoonData(string rawFilesDir)
+        public static async Task<SMDataCollection> LoadSunMoonData(string rawFilesDir, bool isUltra)
         {
             var data = new SMDataCollection();
             var exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", "code.bin"));
-            //var config = new GameConfig(GameVersion.SM);
-            var config = new GameConfig(GameVersion.USUM);
+
+            GameConfig config;
+            if (isUltra)
+            {
+                config = new GameConfig(GameVersion.USUM);
+            }
+            else
+            {
+                config = new GameConfig(GameVersion.SM);
+            }
+            
             config.Initialize(Path.Combine(rawFilesDir, "RomFS"), Path.Combine(rawFilesDir, "ExeFS"), lang: 2); // Language index 2 is English
 
             // Load strings
@@ -670,7 +684,7 @@ namespace ProjectPokemon.Pokedex
             return data;
         }
 
-        static void BuildSM(string smPath, string outputFilename)
+        static void BuildSM(string smPath, string outputFilename, bool isUltra)
         {
             // Extract ROM if needed
             var tempDir = "smROM";
@@ -691,13 +705,23 @@ namespace ProjectPokemon.Pokedex
                 smPath = tempDir;
             }
 
-            var data = LoadSunMoonData(smPath).Result;
+            var data = LoadSunMoonData(smPath, isUltra).Result;
 
             var output = new List<Category>();
 
+            string gameTag;
+            if (isUltra)
+            {
+                gameTag = "usum";
+            }
+            else
+            {
+                gameTag = "sm";
+            }
+
             // Pokemon
             var catPkm = new Category();
-            catPkm.Name = "Gen7-Pokemon";
+            catPkm.Name = $"{gameTag}-Pokemon";
             catPkm.Records = new List<Record>();
             foreach (var item in data.Pokemon)
             {
@@ -708,19 +732,19 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
                     Content = BuildAndReturnTemplate<Views.Gen7.Pokemon.Details>(item),
-                    InternalName = $"gen7-pkm-" + item.ID
+                    InternalName = $"{gameTag}-pkm-" + item.ID
                 });
             }
             catPkm.Records.Add(new Record
             {
                 Title = "Index",
                 Content = BuildAndReturnTemplate<Views.Gen7.Pokemon.Index>(data.Pokemon),
-                InternalName = "gen7-pkm-index"
+                InternalName = $"{gameTag}-pkm-index"
             });
             output.Add(catPkm);
 
             var catMove = new Category();
-            catMove.Name = "Gen7-Moves";
+            catMove.Name = $"{gameTag}-Moves";
             catMove.Records = new List<Record>();
             foreach (var item in data.Moves)
             {
@@ -728,19 +752,19 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.Gen7.Moves.Details>(item),
-                    InternalName = "gen7-move-" + item.ID
+                    InternalName = $"{gameTag}-move-" + item.ID
                 });
             }
             catMove.Records.Add(new Record
             {
                 Title = "Index",
                 Content = BuildAndReturnTemplate<Views.Gen7.Moves.Index>(data.Moves),
-                InternalName = "gen7-move-index"
+                InternalName = $"{gameTag}-move-index"
             });
             output.Add(catMove);
 
             var catType = new Category();
-            catType.Name = "Gen7-Types";
+            catType.Name = $"{gameTag}-Types";
             catType.Records = new List<Record>();
             foreach (var item in data.Types)
             {
@@ -748,14 +772,14 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.Gen7.Types.Details>(item),
-                    InternalName = "gen7-type-" + item.ID
+                    InternalName = $"{gameTag}-type-" + item.ID
                 });
             }
             catType.Records.Add(new Record
             {
                 Title = "Index",
                 Content = BuildAndReturnTemplate<Views.Gen7.Types.Index>(data.Types),
-                InternalName = "gen7-type-index"
+                InternalName = $"{gameTag}-type-index"
             });
             output.Add(catType);
 

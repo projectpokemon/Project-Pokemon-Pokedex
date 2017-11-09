@@ -82,7 +82,7 @@ namespace ProjectPokemon.Pokedex
             switch (name.ToLower())
             {
                 case "moon":
-                    BuildSM(filename, outputFilename);
+                    BuildSM(filename, outputFilename, args.Contains("ultra"));
                     break;
                 case "psmd":
                     BuildPSMD(filename, outputFilename).Wait();

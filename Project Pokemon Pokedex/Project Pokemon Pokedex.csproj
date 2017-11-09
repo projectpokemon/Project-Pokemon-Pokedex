@@ -64,10 +64,10 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="pk3DS.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\pk3DS.Core.1.0.179\lib\net40\pk3DS.Core.dll</HintPath>
+      <HintPath>..\packages\pk3DS.Core.1.0.186\lib\net40\pk3DS.Core.dll</HintPath>
     </Reference>
     <Reference Include="PKHeX.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PKHeX.Core.1.0.4021\lib\net46\PKHeX.Core.dll</HintPath>
+      <HintPath>..\packages\PKHeX.Core.1.0.4043\lib\net46\PKHeX.Core.dll</HintPath>
     </Reference>
     <Reference Include="Portable.Text.Encoding, Version=0.8.3.0, Culture=neutral, PublicKeyToken=96f7b8f9dde885b2, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.Text.Encoding.0.8.3.0\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Text.Encoding.dll</HintPath>

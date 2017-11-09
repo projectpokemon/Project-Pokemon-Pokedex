@@ -45,7 +45,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-move-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"$idPrefix-move-");
             
             #line 26 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
