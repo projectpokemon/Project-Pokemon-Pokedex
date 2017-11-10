@@ -45,7 +45,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Types
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-type-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"$idPrefix-type-");
             
             #line 26 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

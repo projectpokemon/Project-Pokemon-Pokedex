@@ -52,7 +52,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Types
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-pkm-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"ge$idPrefixn7-pkm-");
             
             #line 26 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -90,7 +90,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Types
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-move-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"$idPrefix-move-");
             
             #line 51 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
