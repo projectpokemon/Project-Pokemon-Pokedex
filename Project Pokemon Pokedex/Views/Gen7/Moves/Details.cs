@@ -269,7 +269,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             
             #line default
             #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-pkm-");
+            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen$idPrefix7-pkm-");
             
             #line 242 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -299,7 +299,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             
             #line default
             #line hidden
-            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-pkm-");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"$idPrefix-pkm-");
             
             #line 256 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -329,7 +329,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             
             #line default
             #line hidden
-            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-pkm-");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"$idPrefix-pkm-");
             
             #line 270 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
@@ -359,7 +359,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             
             #line default
             #line hidden
-            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"gen7-pkm-");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"$idPrefix-pkm-");
             
             #line 284 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));

@@ -44,9 +44,9 @@
 					<# } #>
 				</td>
 				<td>
-					<a href="{page="gen7-type-<#=Model.Type1.ID #>"}"><img alt="<#= Model.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= Model.Type1.Name #>.png" /></a>
+					<a href="{page="$idPrefix-type-<#=Model.Type1.ID #>"}"><img alt="<#= Model.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= Model.Type1.Name #>.png" /></a>
 					<# if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID) { #>
-					<a href="{page="gen7-type-<#=Model.Type2.ID #>"}"><img alt="<#= Model.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= Model.Type2.Name #>.png" /></a>
+					<a href="{page="$idPrefix-type-<#=Model.Type2.ID #>"}"><img alt="<#= Model.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= Model.Type2.Name #>.png" /></a>
 					<# } #>
 				</td>	
 			</tr>
@@ -59,10 +59,10 @@
 					<# } #>
 				</td>
 				<td>
-					<a href="{page="gen7-ability-<#=Model.Ability1.ID #>"}"><#= Model.Ability1.Name #></a>
+					<a href="{page="$idPrefix-ability-<#=Model.Ability1.ID #>"}"><#= Model.Ability1.Name #></a>
 
 					<# if (Model.Ability1.ID != Model.Ability2.ID) { #>
-						<a href="{page="gen7-ability-<#=Model.Ability2.ID #>"}"><#= Model.Ability2.Name #></a>
+						<a href="{page="$idPrefix-ability-<#=Model.Ability2.ID #>"}"><#= Model.Ability2.Name #></a>
 					<# } #>
 				</td>
 			</tr>			
@@ -72,7 +72,7 @@
 					Hidden Ability
 				</td>
 				<td>
-					<a href="{page="gen7-ability-<#=Model.AbilityHidden.ID #>"}"><#= Model.AbilityHidden.Name #></a>
+					<a href="{page="$idPrefix-ability-<#=Model.AbilityHidden.ID #>"}"><#= Model.AbilityHidden.Name #></a>
 				</td>
 			</tr>
 			<# } #>
@@ -183,7 +183,7 @@
 					Held Item 1
 				</td>
 				<td>
-					<a href="{page="gen7-item-<#=Model.HeldItem1.ID #>"}"><#= Model.HeldItem1.Name #></a> (50%)
+					<a href="{page="$idPrefix-item-<#=Model.HeldItem1.ID #>"}"><#= Model.HeldItem1.Name #></a> (50%)
 				</td>
 			</tr>
 			<# } #>
@@ -194,7 +194,7 @@
 					Held Item 2
 				</td>
 				<td>
-					<a href="{page="gen7-item-<#=Model.HeldItem2.ID #>"}"><#= Model.HeldItem2.Name #></a> (5%)
+					<a href="{page="$idPrefix-item-<#=Model.HeldItem2.ID #>"}"><#= Model.HeldItem2.Name #></a> (5%)
 				</td>
 			</tr>
 			<# } #>
@@ -204,7 +204,7 @@
 					Held Item 3
 				</td>
 				<td>
-					<a href="{page="gen7-item-<#=Model.HeldItem3.ID #>"}"><#= Model.HeldItem3.Name #></a> (1%)
+					<a href="{page="$idPrefix-item-<#=Model.HeldItem3.ID #>"}"><#= Model.HeldItem3.Name #></a> (1%)
 				</td>
 				</tr>
 			<# } #>
@@ -286,7 +286,7 @@
 					Z Item
 				</td>
 				<td>
-					<a href="{page="gen7-item-<#=Model.ZItem.ID #>"}"><#= Model.ZItem.Name #></a>
+					<a href="{page="$idPrefix-item-<#=Model.ZItem.ID #>"}"><#= Model.ZItem.Name #></a>
 				</td>
 			</tr>
 			<# } #>
@@ -297,7 +297,7 @@
 					Z Base Move
 				</td>
 				<td>
-					<a href="{page="gen7-move-<#=Model.ZBaseMove.ID #>"}"><#= Model.ZBaseMove.Name #></a>
+					<a href="{page="$idPrefix-move-<#=Model.ZBaseMove.ID #>"}"><#= Model.ZBaseMove.Name #></a>
 				</td>
 			</tr>
 			<# } #>
@@ -308,7 +308,7 @@
 					Z Move
 				</td>
 				<td>
-					<a href="{page="gen7-move-<#=Model.ZMove.ID #>"}"><#= Model.ZMove.Name #></a>
+					<a href="{page="$idPrefix-move-<#=Model.ZMove.ID #>"}"><#= Model.ZMove.Name #></a>
 				</td>
 			</tr>
 			<# } #>
@@ -368,7 +368,7 @@
 		<table class="table">
 			<# foreach (var item in Model.TypeEffectiveness) { #>
 			<tr>
-				<td><a href='{page="gen7-type-<#=item.Type.ID #>"}'><img alt="<#=item.Type.Name #>" src="https://projectpokemon.org/images/gen7-types/<#=item.Type.Name #>.png" /></a></td>
+				<td><a href='{page="$idPrefix-type-<#=item.Type.ID #>"}'><img alt="<#=item.Type.Name #>" src="https://projectpokemon.org/images/gen7-types/<#=item.Type.Name #>.png" /></a></td>
 				<td>x<#=item.Multiplier #></td>
 			</tr>
 			<# } #>
@@ -390,16 +390,16 @@
     <# foreach (var item in evolutionChain) { 
 		string methodString;
 		if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.PokemonReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"gen7-pkm-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"$idPrefix-pkm-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.MoveReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"gen7-move-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"$idPrefix-move-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.ItemReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"gen7-item-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"$idPrefix-item-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.TypeReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"gen7-type-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<a href='{page=\"$idPrefix-type-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (!string.IsNullOrEmpty(item.ParameterString)) {
 			methodString = string.Format(item.Method, item.ParameterString);
@@ -410,10 +410,10 @@
 	
         <tr style="height:60px;vertical-align: middle;">
 			<td>
-				<a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#= item.TargetPokemon.PokespriteHtml #></a>				
+				<a href='{page="$idPrefix-pkm-<#=item.TargetPokemon.ID #>"}'><#= item.TargetPokemon.PokespriteHtml #></a>				
 			</td>
             <td>
-                <a href='{page="gen7-pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
+                <a href='{page="$idPrefix-pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
             </td>
 			<# if (Model.EvolvesToAltForm) { #>
 			<td>
@@ -442,7 +442,7 @@
                 <#= item.Level == 0 ? "With Evolution" : item.Level.ToString() #>
             </td>
             <td>
-				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="$idPrefix-move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>
@@ -459,7 +459,7 @@
     { #>
         <tr>
             <td>
-				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="$idPrefix-move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>
@@ -476,7 +476,7 @@
     { #>
         <tr>
             <td>
-				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="$idPrefix-move-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>
@@ -495,14 +495,14 @@
     { #>
         <tr>
             <td>
-				<a href='{page="gen7-move-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="$idPrefix-move-<#=item.ID #>"}'><#=item.Name #></a>
 				<# if (item.RequiresChainBreeding(Model)) { #>
 					(Requires chain breeding)
 				<# } #>
             </td>
 			<td>
 				<# foreach (var parent in item.GetEggMoveSources(Model)) { #>
-					<a href="{page="gen7-pkm-<#=parent.ID #>"}"><#= parent.PokespriteHtml #></a>
+					<a href="{page="$idPrefix-pkm-<#=parent.ID #>"}"><#= parent.PokespriteHtml #></a>
 				<# } #>
 			</td>
         </tr>
