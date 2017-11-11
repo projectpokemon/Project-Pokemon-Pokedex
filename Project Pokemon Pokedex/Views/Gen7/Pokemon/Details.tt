@@ -403,9 +403,6 @@
     <tr>
 		<th style="width:60px;"></th>
         <th>Target</th>
-		<# if (Model.EvolvesToAltForm) { #>
-		<th>Form</th>
-		<# } #>
 		<th>Method</th>
     </tr>
     <# foreach (var item in evolutionChain) { 
@@ -436,11 +433,6 @@
             <td>
                 <a href='{page="$idPrefix-pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
             </td>
-			<# if (Model.EvolvesToAltForm) { #>
-			<td>
-                <#= item.Form #>
-            </td>
-			<# } #>
 			<td>
                 <#= methodString #>
             </td>

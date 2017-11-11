@@ -409,7 +409,15 @@ namespace ProjectPokemon.Pokedex
                 evoMethod.Form = evo.PossibleEvolutions[i].Form;
                 evoMethod.Level = evo.PossibleEvolutions[i].Level;
                 evoMethod.Method = evolutionMethods[evo.PossibleEvolutions[i].Method];
-                evoMethod.TargetPokemon = new PokemonReference(evo.PossibleEvolutions[i].Species, speciesNames[evo.PossibleEvolutions[i].Species], data);
+                if (evoMethod.Form > -1 )
+                {
+                    var targetId = GetAltFormId(evo.PossibleEvolutions[i].Species, evo.PossibleEvolutions[i].Form, config);
+                    evoMethod.TargetPokemon = new PokemonReference(targetId, speciesNames[targetId], data);
+                }
+                else
+                {
+                    evoMethod.TargetPokemon = new PokemonReference(evo.PossibleEvolutions[i].Species, speciesNames[evo.PossibleEvolutions[i].Species], data);
+                }                
 
                 // Parameter
                 int cv = evolutionMethodCase[evo.PossibleEvolutions[i].Method];
@@ -438,17 +446,21 @@ namespace ProjectPokemon.Pokedex
             pkm.Evolutions = currentEvolutionMethods;
         }
 
+        private static int GetAltFormId(int pkmId, int formIndex, GameConfig config)
+        {
+            return config.Personal.Table[pkmId].FormStatsIndex + formIndex - 1;
+        }
+
         private static void LoadPokemonAltFormReferences(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[][] altForms)
         {
             if (config.Personal.Table.Length <= pkm.ID || altForms.Length <= pkm.ID)
             {
                 return;
             }
-
-            int altformpointer = config.Personal.Table[pkm.ID].FormStatsIndex;
+            
             for (int j = 1; j < altForms[pkm.ID].Length; j++)
             {
-                var referenceId = altformpointer + j - 1;
+                var referenceId = GetAltFormId(pkm.ID, j, config);
                 pkm.AltForms.Add(new PokemonReference(referenceId, speciesNames[referenceId], data));
             }                
         }
