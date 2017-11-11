@@ -118,11 +118,11 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
 
                 if (form == "")
                 {
-                    return $"<span class=\"pkspr pkmn-{Name.ToLower()} form-{form}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                    return $"<span class=\"pkspr pkmn-{Name.ToLower()}\"><span style=\"display: none;\">&nbsp;</span></span>";
                 }
                 else
                 {
-                    return $"<span class=\"pkspr pkmn-{Name.ToLower()}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                    return $"<span class=\"pkspr pkmn-{Name.ToLower()} form-{form}\"><span style=\"display: none;\">&nbsp;</span></span>";
                 }
                 
             }            
