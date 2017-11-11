@@ -147,7 +147,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
 
         public IEnumerable<PokemonReference> GetNonMegaAltForms()
         {
-            return AltForms.Where(a => !Evolutions.Any(e => e.TargetPokemon.ID == a.ID));
+            return AltForms.Where(a => !MegaEvolutions.Any(e => e.ID == a.ID));
         }
 
         public bool GetIsMega()
