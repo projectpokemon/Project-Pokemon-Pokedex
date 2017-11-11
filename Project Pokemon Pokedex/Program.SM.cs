@@ -361,15 +361,18 @@ namespace ProjectPokemon.Pokedex
                 "Level Up with 50 Affection and a move of type {0}", // Type
                 $"{typeNames[16]} Type in Party " + "at level {0}", // Level
                 "Overworld Rain at level {0}", // Level
-                "Level Up (@) at Morning at level {0}", // Level
-                "Level Up (@) at Night at level {0}", // Level
+                "Level Up at Morning at level {0}", // Level
+                "Level Up at Night at level {0}", // Level
                 "Level Up Female (SetForm 1) at level {0}", // Level
                 "UNUSED",
                 "Level Up Any Time on Version {0}", // Version
                 "Level Up Daytime on Version {0}", // Version
                 "Level Up Nighttime on Version {0}", // Version
                 "Level Up Summit at level {0}", // Level
-                "Level Up (40???)", "Level Up (41???)", "Used Item (42???)" // new in USUM
+                 // new in USUM
+                "Level Up at Dusk at level {0}",
+                "Level Up in Ultra Wormhole at level {0}",
+                "Used Item {0} in Ultra Wormhole"
             };
             ushort[] evolutionMethodCase =
             {
