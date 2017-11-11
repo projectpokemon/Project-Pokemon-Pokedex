@@ -264,7 +264,7 @@ namespace ProjectPokemon.Pokedex
 
                 // Evolutions & forms
                 LoadPokemonAltFormReferences(data, pkm, config, pokemonEntryNames, altForms);
-                LoadPokemonEvolutions(data, pkm, config, speciesNames, pokemonEntryNames, moveNames, itemNames, typeNames);
+                LoadPokemonEvolutions(data, pkm, config, pokemonEntryNames, moveNames, itemNames, typeNames);
                 LoadPokemonMegaEvolutions(data, pkm, config, itemNames);
                 
                 // Moves
@@ -322,7 +322,7 @@ namespace ProjectPokemon.Pokedex
             data.Pokemon = pkms;
         }
 
-        private static void LoadPokemonEvolutions(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[] specieslist, string[] moveNames, string[] itemNames, string[] typeNames)
+        private static void LoadPokemonEvolutions(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[] moveNames, string[] itemNames, string[] typeNames)
         {
             // - Load Evolution GARC
             var evolutionGarcFiles = config.getGARCData("evolution").Files;
@@ -335,15 +335,15 @@ namespace ProjectPokemon.Pokedex
                 "Level Up at level {0}", // Level
                 "Trade", // No param
                 "Trade with Held Item: {0}", // Item
-                $"Trade for opposite {specieslist[588]}/{specieslist[616]}", // Shelmet&Karrablast  // No param
+                $"Trade for opposite {speciesNames[588]}/{speciesNames[616]}", // Shelmet&Karrablast  // No param
                 "Used Item: {0}", // Item
                 "Level Up (Attack > Defense) at level {0}", // Level
                 "Level Up (Attack = Defense) at level {0}", // Level
                 "Level Up (Attack < Defense) at level {0}", // Level
                 "Level Up (Random < 5) at level {0}", // Level
                 "Level Up (Random > 5) at level {0}", // Level
-                $"Level Up ({specieslist[291]}) at level {0}", // Ninjask // Level
-                $"Level Up ({specieslist[292]}) at level {0}", // Shedinja // Level
+                $"Level Up ({speciesNames[291]}) at level {0}", // Ninjask // Level
+                $"Level Up ({speciesNames[292]}) at level {0}", // Shedinja // Level
                 "Level Up (Beauty): {0}", // Beauty
                 "Used Item (Male): {0}", // Kirlia->Gallade // Item
                 "Used Item (Female): {0}", // Snorunt->Froslass // Item
@@ -412,7 +412,10 @@ namespace ProjectPokemon.Pokedex
                 if (evoMethod.Form > -1 )
                 {
                     var targetId = GetAltFormId(evo.PossibleEvolutions[i].Species, evo.PossibleEvolutions[i].Form, config);
-                    evoMethod.TargetPokemon = new PokemonReference(targetId, speciesNames[targetId], data);
+
+                    if (!targetId.HasValue) continue; // Form doesn't exist (like for Unown)
+
+                    evoMethod.TargetPokemon = new PokemonReference(targetId.Value, speciesNames[targetId.Value], data);
                 }
                 else
                 {
@@ -446,9 +449,14 @@ namespace ProjectPokemon.Pokedex
             pkm.Evolutions = currentEvolutionMethods;
         }
 
-        private static int GetAltFormId(int pkmId, int formIndex, GameConfig config)
+        private static int? GetAltFormId(int pkmId, int formIndex, GameConfig config)
         {
-            return config.Personal.Table[pkmId].FormStatsIndex + formIndex - 1;
+            var index = config.Personal.Table[pkmId].FormStatsIndex;
+            if (index == 0)
+            {
+                return null;
+            }
+            return index + formIndex - 1;
         }
 
         private static void LoadPokemonAltFormReferences(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[][] altForms)
@@ -461,7 +469,10 @@ namespace ProjectPokemon.Pokedex
             for (int j = 1; j < altForms[pkm.ID].Length; j++)
             {
                 var referenceId = GetAltFormId(pkm.ID, j, config);
-                pkm.AltForms.Add(new PokemonReference(referenceId, speciesNames[referenceId], data));
+                if (referenceId.HasValue)
+                {
+                    pkm.AltForms.Add(new PokemonReference(referenceId.Value, speciesNames[referenceId.Value], data));
+                }                
             }                
         }
 
@@ -725,7 +736,15 @@ namespace ProjectPokemon.Pokedex
         public static SMDataCollection LoadSunMoonData(string rawFilesDir, bool isUltra)
         {
             var data = new SMDataCollection();
-            var exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", "code.bin"));
+            byte[] exefs;
+            if (File.Exists(Path.Combine(rawFilesDir, "ExeFS", ".code.bin")))
+            {
+                exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", ".code.bin"));
+            }
+            else
+            {
+                exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", "code.bin"));
+            }
 
             GameConfig config;
             if (isUltra)

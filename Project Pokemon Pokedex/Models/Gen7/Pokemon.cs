@@ -110,7 +110,21 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         {
             get
             {
-                return string.Format("<span class=\"pkspr pkmn-{0}\"><span style=\"display: none;\">&nbsp;</span></span>", Name.ToLower());
+                string form = "";
+
+                switch (ID)
+                {
+                }
+
+                if (form == "")
+                {
+                    return $"<span class=\"pkspr pkmn-{Name.ToLower()} form-{form}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                }
+                else
+                {
+                    return $"<span class=\"pkspr pkmn-{Name.ToLower()}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                }
+                
             }            
         }
 
