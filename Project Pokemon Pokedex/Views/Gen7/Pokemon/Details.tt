@@ -4,22 +4,9 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Pokemon" name="Model" #>
-<div class="row">
-	<div class="col-md-1">
-		<# if (Model.Data.IsUltra) { #>
-			<b>Ultra Sun and Ultra Moon</b>
-		<# } else { #>
-			<a href="{page="usum-pkm-<#=Model.ID #>"}">Ultra Sun and Ultra Moon</a>
-		<# } #>
-	</div>
-	<div class="col-md-1">
-		<# if (Model.Data.IsUltra) { #>
-			<a href="{page="sm-pkm-<#=Model.ID #>"}">Sun and Moon</a>
-		<# } else { #>
-			<b>Sun and Moon</b>
-		<# } #>
-	</div>	
-</div>
+<p>
+	<#= Model.GetCrossReferenceHtml() #>
+</p>
 <div class="row">
 	<div class="col-md-3">
 		<div class="pkm-image-inner" style="text-align:center;">

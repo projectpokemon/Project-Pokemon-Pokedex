@@ -736,6 +736,25 @@ namespace ProjectPokemon.Pokedex
 
         public static SMDataCollection LoadSunMoonData(string rawFilesDir, bool isUltra)
         {
+            // Extract ROM if needed
+            var tempDir = "smROM";
+            if (File.Exists(rawFilesDir))
+            {
+                // It's needed
+                if (!Directory.Exists(tempDir))
+                {
+                    Directory.CreateDirectory(tempDir);
+                }
+                RunProgram("3dstool.exe", $"-xtf 3ds \"{rawFilesDir}\" -0 Partition0.bin");
+                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin --exefs ExeFS.bin");
+                RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
+                RunProgram("3dstool.exe", $"-xutf exefs ExeFS.bin --exefs-dir \"{tempDir}/ExeFS\"");
+                File.Delete("Partition0.bin");
+                File.Delete("RomFS.bin");
+                File.Delete("ExeFS.bin");
+                rawFilesDir = tempDir;
+            }
+
             var data = new SMDataCollection();
             data.IsUltra = isUltra;
             byte[] exefs;
@@ -782,32 +801,17 @@ namespace ProjectPokemon.Pokedex
             LoadPokemon(data, config, rawFilesDir, speciesNames, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors, speciesClassifications, pokedexEntries1, pokedexEntries2, altForms);
             LoadMoves(data, config, moveNames, moveflavor, typeNames);
 
+            // Cleanup
+            if (Directory.Exists(tempDir))
+            {
+                Directory.Delete(tempDir, true);
+            }
+
             return data;
         }
 
-        static void BuildSM(string smPath, string outputFilename, bool isUltra)
-        {
-            // Extract ROM if needed
-            var tempDir = "smROM";
-            if (File.Exists(smPath))
-            {
-                // It's needed
-                if (!Directory.Exists(tempDir))
-                {
-                    Directory.CreateDirectory(tempDir);
-                }
-                RunProgram("3dstool.exe", $"-xtf 3ds \"{smPath}\" -0 Partition0.bin");
-                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin --exefs ExeFS.bin");
-                RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
-                RunProgram("3dstool.exe", $"-xutf exefs ExeFS.bin --exefs-dir \"{tempDir}/ExeFS\"");
-                File.Delete("Partition0.bin");
-                File.Delete("RomFS.bin");
-                File.Delete("ExeFS.bin");
-                smPath = tempDir;
-            }
-
-            var data = LoadSunMoonData(smPath, isUltra);
-
+        static void BuildSM(SMDataCollection data, string outputFilename, bool isUltra)
+        {    
             var output = new List<Category>();
 
             string gameTag;
@@ -885,12 +889,6 @@ namespace ProjectPokemon.Pokedex
             output.Add(catType);
 
             File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
-
-            // Cleanup
-            if (Directory.Exists(tempDir))
-            {
-                Directory.Delete(tempDir, true);
-            }
         }
     }
 }

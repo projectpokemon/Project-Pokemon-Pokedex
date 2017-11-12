@@ -160,6 +160,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\DataCollection.cs" />
     <Compile Include="Models\EOS\Dungeon.cs" />
     <Compile Include="Models\EOS\DungeonFloorDetails.cs" />
     <Compile Include="Models\EOS\DungeonSpawnPokemonReference.cs" />

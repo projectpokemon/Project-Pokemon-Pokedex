@@ -241,6 +241,33 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             return methods.ToList();
         }
 
+        public string GetCrossReferenceHtml()
+        {
+            var html = new StringBuilder();
+
+            if (Data.IsUltra)
+            {
+                html.AppendLine("<b>Ultra Sun and Ultra Moon</b>");
+            }
+            else
+            {
+                html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-<#=Model.ID #>\"}\">Ultra Sun and Ultra Moon</a>");
+            }
+
+            html.AppendLine(" | ");
+
+            if (Data.IsUltra)
+            {
+                html.AppendLine("<a href=\"{page=\"sm/sm-pkm-<#=Model.ID #>\"}\">Sun and Moon</a>");
+            }
+            else
+            {
+                html.AppendLine("<b>Ultra Sun and Ultra Moon</b>");
+            }
+
+            return Data.ToString();
+        }
+
         public override string ToString()
         {
             return Name ?? base.ToString();

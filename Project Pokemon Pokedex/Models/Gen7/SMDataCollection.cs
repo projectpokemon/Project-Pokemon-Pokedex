@@ -14,6 +14,8 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         public string[][] AltFormStrings { get; set; }
         public bool IsUltra { get; set; }
 
+        public DataCollection ParentCollection { get; set; }
+
         public TypeEffectivenessChart TypeEffectiveness { get; set; }
     }
 }

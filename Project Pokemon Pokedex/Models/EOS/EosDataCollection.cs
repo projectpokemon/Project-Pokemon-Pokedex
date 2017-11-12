@@ -11,5 +11,7 @@ namespace ProjectPokemon.Pokedex.Models.EOS
         public List<Pokemon> Pokemon { get; set; }
         public List<Move> Moves { get; set; }
         public List<PkmType> Types { get; set; }
+
+        public DataCollection ParentCollection { get; set; }
     }
 }
