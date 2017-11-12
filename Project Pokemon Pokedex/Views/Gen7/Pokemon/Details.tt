@@ -9,8 +9,10 @@
 		<div class="pkm-image-inner" style="text-align:center;">
 			<div data-role='commentContent' class='ipsType_normal ipsType_richText ipsContained' data-controller='core.front.core.lightboxedImages'>
 				<p>
-					<# if (Model.GetIsAltForm()) { #>
-						<img class="ipsImage" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>-<#=Model.GetFormName().ToLower().Replace(' ', '-') #>.png" alt="<#=Model.Name #> Sugimori Artwork" />
+					<# if (Model.GetIsAltForm()) {
+						var originalForm = Model.Data.Pokemon[Model.GetOriginalFormId().Value];
+						#>
+						<img class="ipsImage" src="https://projectpokemon.org/images/sugimori/<#=originalForm.ID #>-<#=Model.GetFormName().ToLower().Replace(' ', '-') #>.png" alt="<#=Model.Name #> Sugimori Artwork" />
 					<# } else { #>
 						<img class="ipsImage" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" alt="<#=Model.Name #> Sugimori Artwork" />
 					<# } #>
