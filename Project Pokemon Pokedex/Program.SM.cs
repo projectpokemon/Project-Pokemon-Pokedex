@@ -738,7 +738,7 @@ namespace ProjectPokemon.Pokedex
         {
             // Extract ROM if needed
             var tempDir = "smROM";
-            if (File.Exists(rawFilesDir))
+            if (!Directory.Exists(rawFilesDir))
             {
                 // It's needed
                 if (!Directory.Exists(tempDir))
