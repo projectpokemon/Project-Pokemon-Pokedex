@@ -149,6 +149,7 @@ namespace ProjectPokemon.Pokedex
             // - Load Level-up GARC
             var levelupGarcFiles = config.getGARCData("levelup").Files;
             string[] pokemonEntryNames = GetPokemonEntryNames(config, speciesNames);
+            data.AltFormStrings = altForms;
 
             // - Load Egg move GARC
             var eggmoveGarcFiles = config.getGARCData("eggmove").Files;

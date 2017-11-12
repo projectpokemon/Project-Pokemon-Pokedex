@@ -11,6 +11,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         public List<Pokemon> Pokemon { get; set; }
         public List<Move> Moves { get; set; }
         public List<PkmType> Types { get; set; }
+        public string[][] AltFormStrings { get; set; }
 
         public TypeEffectivenessChart TypeEffectiveness { get; set; }
     }
