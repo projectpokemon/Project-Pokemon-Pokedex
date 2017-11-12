@@ -15,7 +15,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             MegaEvolutions = new List<PokemonReference>();
         }
 
-        private SMDataCollection Data { get; set; }
+        public SMDataCollection Data { get; private set; }
 
         public int ID { get; set; }
         public string Name { get; set; }
@@ -112,14 +112,12 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             {           
                 if (GetIsAltForm())
                 {
-                    string form = "";
+                    string form = GetFormName();
                     var originalId = GetOriginalFormId();
-                    if (originalId.HasValue)
+                    if (form != "")
                     {
                         var originalPkm = Data.Pokemon[originalId.Value];
-                        var formIndex = originalPkm.AltForms.IndexOf(originalPkm.AltForms.First(a => a.ID == this.ID)) + 1; // Add 1 to take into account the original form
-                        form = originalPkm.GetPkhexAltFormStrings()[formIndex].ToLower().Replace(' ', '-');
-                        return $"<span class=\"pkspr pkmn-{originalPkm.Name.ToLower()} form-{form}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                        return $"<span class=\"pkspr pkmn-{originalPkm.Name.ToLower()} form-{form.ToLower().Replace(' ', '-')}\"><span style=\"display: none;\">&nbsp;</span></span>";
                     }
                     else
                     {
@@ -131,6 +129,28 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                     return $"<span class=\"pkspr pkmn-{Name.ToLower()}\"><span style=\"display: none;\">&nbsp;</span></span>";
                 }                
             }            
+        }
+
+        public string GetFormName()
+        {
+            if (GetIsAltForm())
+            {
+                var originalId = GetOriginalFormId();
+                if (originalId.HasValue)
+                {
+                    var originalPkm = Data.Pokemon[originalId.Value];
+                    var formIndex = originalPkm.AltForms.IndexOf(originalPkm.AltForms.First(a => a.ID == this.ID)) + 1; // Add 1 to take into account the original form
+                    return originalPkm.GetPkhexAltFormStrings()[formIndex];
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            else
+            {
+                return "";
+            }
         }
 
         public string[] GetPkhexAltFormStrings()
