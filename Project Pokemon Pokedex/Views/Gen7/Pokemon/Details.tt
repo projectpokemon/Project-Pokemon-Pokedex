@@ -5,6 +5,22 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Pokemon" name="Model" #>
 <div class="row">
+	<div class="col-md-1">
+		<# if (Model.Data.IsUltra) { #>
+			<b>Ultra Sun and Ultra Moon</b>
+		<# } else { #>
+			<a href="{page="usum-pkm-<#=Model.ID #>"}">Ultra Sun and Ultra Moon</a>
+		<# } #>
+	</div>
+	<div class="col-md-1">
+		<# if (Model.Data.IsUltra) { #>
+			<a href="{page="sm-pkm-<#=Model.ID #>"}">Sun and Moon</a>
+		<# } else { #>
+			<b>Sun and Moon</b>
+		<# } #>
+	</div>	
+</div>
+<div class="row">
 	<div class="col-md-3">
 		<div class="pkm-image-inner" style="text-align:center;">
 			<div data-role='commentContent' class='ipsType_normal ipsType_richText ipsContained' data-controller='core.front.core.lightboxedImages'>
@@ -398,10 +414,10 @@
 	<# foreach (var item in Model.GetNonMegaAltForms()) { #>
 	<tr style="height:60px;vertical-align: middle;">
 		<td>
-			<a href='{page="gen7-pkm-<#=item.ID #>"}'><#= item.PokespriteHtml #></a>				
+			<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#= item.PokespriteHtml #></a>				
 		</td>
         <td>
-            <a href='{page="gen7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
+            <a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
         </td>
     </tr>
 	<# } #>

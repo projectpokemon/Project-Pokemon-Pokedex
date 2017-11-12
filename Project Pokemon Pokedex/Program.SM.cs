@@ -737,6 +737,7 @@ namespace ProjectPokemon.Pokedex
         public static SMDataCollection LoadSunMoonData(string rawFilesDir, bool isUltra)
         {
             var data = new SMDataCollection();
+            data.IsUltra = isUltra;
             byte[] exefs;
             if (File.Exists(Path.Combine(rawFilesDir, "ExeFS", ".code.bin")))
             {
