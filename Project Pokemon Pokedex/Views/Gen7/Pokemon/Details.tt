@@ -74,10 +74,10 @@
 					<# } #>
 				</td>
 				<td>
-					<a href="{page="$idPrefix-ability-<#=Model.Ability1.ID #>"}"><#= Model.Ability1.Name #></a>
+					<span><#= Model.Ability1.Name #></span>
 
 					<# if (Model.Ability1.ID != Model.Ability2.ID) { #>
-						<a href="{page="$idPrefix-ability-<#=Model.Ability2.ID #>"}"><#= Model.Ability2.Name #></a>
+						<span><#= Model.Ability2.Name #></span>
 					<# } #>
 				</td>
 			</tr>			
@@ -87,7 +87,7 @@
 					Hidden Ability
 				</td>
 				<td>
-					<a href="{page="$idPrefix-ability-<#=Model.AbilityHidden.ID #>"}"><#= Model.AbilityHidden.Name #></a>
+					<span><#= Model.AbilityHidden.Name #></span>
 				</td>
 			</tr>
 			<# } #>
@@ -198,7 +198,7 @@
 					Held Item 1
 				</td>
 				<td>
-					<a href="{page="$idPrefix-item-<#=Model.HeldItem1.ID #>"}"><#= Model.HeldItem1.Name #></a> (50%)
+					<span><#= Model.HeldItem1.Name #></span> (50%)
 				</td>
 			</tr>
 			<# } #>
@@ -209,7 +209,7 @@
 					Held Item 2
 				</td>
 				<td>
-					<a href="{page="$idPrefix-item-<#=Model.HeldItem2.ID #>"}"><#= Model.HeldItem2.Name #></a> (5%)
+					<span><#= Model.HeldItem2.Name #></span> (5%)
 				</td>
 			</tr>
 			<# } #>
@@ -219,7 +219,7 @@
 					Held Item 3
 				</td>
 				<td>
-					<a href="{page="$idPrefix-item-<#=Model.HeldItem3.ID #>"}"><#= Model.HeldItem3.Name #></a> (1%)
+					<span><#= Model.HeldItem3.Name #></span> (1%)
 				</td>
 				</tr>
 			<# } #>
@@ -301,7 +301,7 @@
 					Z Item
 				</td>
 				<td>
-					<a href="{page="$idPrefix-item-<#=Model.ZItem.ID #>"}"><#= Model.ZItem.Name #></a>
+					<span><#= Model.ZItem.Name #></span>
 				</td>
 			</tr>
 			<# } #>
@@ -312,7 +312,7 @@
 					Z Base Move
 				</td>
 				<td>
-					<a href="{page="$idPrefix-move-<#=Model.ZBaseMove.ID #>"}"><#= Model.ZBaseMove.Name #></a>
+					<span><#= Model.ZBaseMove.Name #></span>
 				</td>
 			</tr>
 			<# } #>
@@ -323,7 +323,7 @@
 					Z Move
 				</td>
 				<td>
-					<a href="{page="$idPrefix-move-<#=Model.ZMove.ID #>"}"><#= Model.ZMove.Name #></a>
+					<span><#= Model.ZMove.Name #></span>
 				</td>
 			</tr>
 			<# } #>
@@ -429,7 +429,7 @@
 			methodString = string.Format(item.Method, "<a href='{page=\"$idPrefix-move-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.ItemReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"$idPrefix-item-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<span>" + item.ParameterReference.Name + "</span>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.TypeReference) {
 			methodString = string.Format(item.Method, "<a href='{page=\"$idPrefix-type-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
