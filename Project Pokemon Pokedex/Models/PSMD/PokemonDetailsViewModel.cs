@@ -34,6 +34,7 @@ namespace ProjectPokemon.Pokedex.Models.PSMD
 
         public PokemonDetailsViewModel(Pokemon Pkm, PsmdDataCollection context)
         {
+            Model = Pkm;
             ID = Pkm.ID;
             var hex = Pkm.ID.ToString("X").PadLeft(4, '0');
             IDHexBigEndian = $"0x{hex}";
@@ -143,5 +144,11 @@ namespace ProjectPokemon.Pokedex.Models.PSMD
         public List<MoveLevelUp> MovesLevelUp { get; set; }
         public List<ExpLevelUp> StatLevelUp { get; set; }
 
+        private Pokemon Model { get; set; }
+        
+        public string GetCrossReferenceHtml()
+        {
+            return Model.GetCrossReferenceHtml();
+        }
     }
 }

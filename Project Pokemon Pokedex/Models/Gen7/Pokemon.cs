@@ -251,21 +251,35 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             }
             else
             {
-                html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-<#=Model.ID #>\"}\">Ultra Sun and Ultra Moon</a>");
+                html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-" + ID.ToString() + "\"}\">Ultra Sun and Ultra Moon</a>");
             }
 
             html.AppendLine(" | ");
 
             if (Data.IsUltra)
             {
-                html.AppendLine("<a href=\"{page=\"sm/sm-pkm-<#=Model.ID #>\"}\">Sun and Moon</a>");
+                html.AppendLine("<a href=\"{page=\"sm/sm-pkm-" + ID.ToString() + "\"}\">Sun and Moon</a>");
             }
             else
             {
                 html.AppendLine("<b>Ultra Sun and Ultra Moon</b>");
             }
 
-            return Data.ToString();
+            var psmd = Data.ParentCollection.PsmdData.Pokemon.Where(p => p.DexNumber == ID).FirstOrDefault();
+            if (psmd != null)
+            {
+                html.AppendLine(" | ");
+                html.AppendLine("<a href=\"{page=\"psmd/psmd-pkm-" + ID.ToString() + "\"}\">Super Mystery Dungeon</a>");
+            }
+
+            var eos = Data.ParentCollection.EosData.Pokemon.Where(p => p.DexNumber == ID).FirstOrDefault();
+            if (eos != null)
+            {
+                html.AppendLine(" | ");
+                html.AppendLine("<a href=\"{page=\"eos/eos-pkm-" + ID.ToString() + "\"}\">Explorers of Sky</a>");
+            }
+
+            return html.ToString();
         }
 
         public override string ToString()
