@@ -23,7 +23,7 @@
                 <#= item.ID.ToString() #>
             </td>
             <td>
-				<a href='{page="ge$idPrefixn7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>
