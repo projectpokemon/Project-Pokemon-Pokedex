@@ -15,24 +15,24 @@ namespace ProjectPokemon.Pokedex
     {
         public static async Task<PsmdDataCollection> LoadPsmdData(string rawFilesDir)
         {
-            // Extract ROM if needed
-            var tempDir = "theROM";
-            if (File.Exists(rawFilesDir))
-            {
-                // It's needed
-                if (!Directory.Exists(tempDir))
-                {
-                    Directory.CreateDirectory(tempDir);
-                }
-                RunProgram("3dstool.exe", $"-xtf 3ds \"{rawFilesDir}\" -0 Partition0.bin");
-                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin --exefs ExeFS.bin");
-                RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
-                RunProgram("3dstool.exe", $"-xutf exefs ExeFS.bin --exefs-dir=\"{tempDir}/ExeFS\"");
-                File.Delete("Partition0.bin");
-                File.Delete("RomFS.bin");
-                File.Delete("ExeFS.bin");
-                rawFilesDir = tempDir;
-            }
+            //// Extract ROM if needed
+            //var tempDir = "theROM";
+            //if (File.Exists(rawFilesDir))
+            //{
+            //    // It's needed
+            //    if (!Directory.Exists(tempDir))
+            //    {
+            //        Directory.CreateDirectory(tempDir);
+            //    }
+            //    RunProgram("3dstool.exe", $"-xtf 3ds \"{rawFilesDir}\" -0 Partition0.bin");
+            //    RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin --exefs ExeFS.bin");
+            //    RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
+            //    RunProgram("3dstool.exe", $"-xutf exefs ExeFS.bin --exefs-dir=\"{tempDir}/ExeFS\"");
+            //    File.Delete("Partition0.bin");
+            //    File.Delete("RomFS.bin");
+            //    File.Delete("ExeFS.bin");
+            //    rawFilesDir = tempDir;
+            //}
 
             var data = new PsmdDataCollection();
 
@@ -225,11 +225,11 @@ namespace ProjectPokemon.Pokedex
             }
             data.Experience = exps;
 
-            // Cleanup
-            if (Directory.Exists(tempDir))
-            {
-                Directory.Delete(tempDir, true);
-            }
+            //// Cleanup
+            //if (Directory.Exists(tempDir))
+            //{
+            //    Directory.Delete(tempDir, true);
+            //}
 
             return data;
         }
