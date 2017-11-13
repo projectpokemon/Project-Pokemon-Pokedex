@@ -453,6 +453,10 @@ namespace ProjectPokemon.Pokedex
         private static int? GetAltFormId(int pkmId, int formIndex, GameConfig config)
         {
             var index = config.Personal.Table[pkmId].FormStatsIndex;
+            if (formIndex == 0)
+            {
+                return pkmId;
+            }
             if (index == 0)
             {
                 return null;
