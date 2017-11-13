@@ -116,7 +116,7 @@ namespace ProjectPokemon.Pokedex
             }
 
             Console.WriteLine("Building data");
-            var data = BuildAllData(eosPath, psmdPath, eosPath, ultraSmPath).Result;
+            var data = BuildAllData(eosPath, psmdPath, smPath, ultraSmPath).Result;
 
             Console.WriteLine("Generating EOS records");
             BuildEOS(data.EosData, "eos.ipsdb");
