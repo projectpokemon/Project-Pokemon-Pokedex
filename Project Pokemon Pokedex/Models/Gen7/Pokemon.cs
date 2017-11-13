@@ -262,7 +262,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             }
             else
             {
-                html.AppendLine("<b>Ultra Sun and Ultra Moon</b>");
+                html.AppendLine("<b>Sun and Moon</b>");
             }
 
             var psmd = Data.ParentCollection.PsmdData.Pokemon.Where(p => p.DexNumber == ID).FirstOrDefault();
