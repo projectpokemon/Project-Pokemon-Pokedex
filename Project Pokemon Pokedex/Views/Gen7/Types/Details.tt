@@ -4,7 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.PkmType" name="Model" #>
-<h2><#= Model.Name #></h2>
 <h3>Pokemon</h3>
 <table class="table">
     <tr>
