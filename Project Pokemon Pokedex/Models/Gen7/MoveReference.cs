@@ -60,7 +60,11 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                                                 // Ensure the Pokemon in the egg group can learn this move
                                                 p.MoveLevelUp.Any(m => m.ID == this.ID) ||
                                                 p.GetEggMoves().Any(m => m.ID == this.ID)
-                                            ) && 
+                                            ) &&
+                                            (
+                                                // Filter out mega evolutions because they can't breed
+                                                !p.GetIsMega()
+                                            ) &&
                                             (
                                                 // Filter out members of the current evolution chain
                                                 !p.GetEvolutionChain().Any(c => c.TargetPokemon.ID == pkm.ID)

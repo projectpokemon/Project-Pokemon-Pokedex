@@ -15,5 +15,7 @@ namespace ProjectPokemon.Pokedex.Models.PSMD
         public List<Pokemon> Pokemon { get; set; }
         public List<PokemonLevelUp> PokemonLevelUp { get; set; }
         public List<ExperienceLevel> Experience { get; set; }
+
+        public DataCollection ParentCollection { get; set; }
     }
 }

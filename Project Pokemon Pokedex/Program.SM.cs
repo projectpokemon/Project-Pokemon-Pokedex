@@ -96,6 +96,9 @@ namespace ProjectPokemon.Pokedex
             return FormList;
         }
 
+        /// <summary>
+        /// Gets names for all Pokemon IDs, even alt forms
+        /// </summary>
         private static string[] GetPokemonEntryNames(GameConfig config, string[] speciesNames)
         {
             var altForms = getFormList(config, speciesNames);
@@ -136,7 +139,7 @@ namespace ProjectPokemon.Pokedex
             data.Types = pkmTypes;
         }
 
-        private static void LoadPokemon(SMDataCollection data, GameConfig config, string rawFilesDir, string[] speciesNames, string[] typeNames, string[] itemNames, string[] abilityNames, string[] moveNames, string[] EXPGroups, string[] eggGroups, string[] colors, string[] pokemonClassifications, string[] pokedexEntries1, string[] pokedexEntries2)
+        private static void LoadPokemon(SMDataCollection data, GameConfig config, string rawFilesDir, string[] speciesNames, string[] typeNames, string[] itemNames, string[] abilityNames, string[] moveNames, string[] EXPGroups, string[] eggGroups, string[] colors, string[] pokemonClassifications, string[] pokedexEntries1, string[] pokedexEntries2, string[][] altForms)
         {
             // Load TMs
             var TMs = new ushort[0];
@@ -146,6 +149,7 @@ namespace ProjectPokemon.Pokedex
             // - Load Level-up GARC
             var levelupGarcFiles = config.getGARCData("levelup").Files;
             string[] pokemonEntryNames = GetPokemonEntryNames(config, speciesNames);
+            data.AltFormStrings = altForms;
 
             // - Load Egg move GARC
             var eggmoveGarcFiles = config.getGARCData("eggmove").Files;
@@ -220,9 +224,9 @@ namespace ProjectPokemon.Pokedex
                 pkm.EvoStage = item.EvoStage;
 
                 // Items
-                pkm.HeldItem1 = new ItemReference { ID = item.Items[0], Name = itemNames[item.Items[0]] };
-                pkm.HeldItem2 = new ItemReference { ID = item.Items[1], Name = itemNames[item.Items[1]] };
-                pkm.HeldItem3 = new ItemReference { ID = item.Items[2], Name = itemNames[item.Items[2]] };
+                pkm.HeldItem1 = new ItemReference(item.Items[0], itemNames[item.Items[0]]);
+                pkm.HeldItem2 = new ItemReference(item.Items[1], itemNames[item.Items[1]]);
+                pkm.HeldItem3 = new ItemReference(item.Items[2], itemNames[item.Items[2]]);
 
                 pkm.Gender = item.Gender;
                 pkm.HatchCycles = item.HatchCycles;
@@ -253,15 +257,17 @@ namespace ProjectPokemon.Pokedex
                 pkm.EscapeRate = sm.EscapeRate;
                 if (sm.SpecialZ_Item != ushort.MaxValue)
                 {
-                    pkm.ZItem = new ItemReference { ID = sm.SpecialZ_Item, Name = itemNames[sm.SpecialZ_Item] };
+                    pkm.ZItem = new ItemReference(sm.SpecialZ_Item, itemNames[sm.SpecialZ_Item]);
                 }
                 pkm.ZBaseMove = new MoveReference(sm.SpecialZ_BaseMove, moveNames[sm.SpecialZ_BaseMove], data);
                 pkm.ZMove = new MoveReference(sm.SpecialZ_ZMove, moveNames[sm.SpecialZ_ZMove], data);
                 pkm.LocalVariant = sm.LocalVariant;
 
-                // Evolutions
-                LoadPokemonEvolutions(data, pkm, config, speciesNames, pokemonEntryNames, moveNames, itemNames, typeNames);
-
+                // Evolutions & forms
+                LoadPokemonAltFormReferences(data, pkm, config, pokemonEntryNames, altForms);
+                LoadPokemonEvolutions(data, pkm, config, pokemonEntryNames, moveNames, itemNames, typeNames);
+                LoadPokemonMegaEvolutions(data, pkm, config, itemNames);
+                
                 // Moves
                 // - Level-up
                 var pkmLevelup = new List<LevelupMoveReference>();
@@ -317,7 +323,7 @@ namespace ProjectPokemon.Pokedex
             data.Pokemon = pkms;
         }
 
-        private static void LoadPokemonEvolutions(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[] specieslist, string[] moveNames, string[] itemNames, string[] typeNames)
+        private static void LoadPokemonEvolutions(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[] moveNames, string[] itemNames, string[] typeNames)
         {
             // - Load Evolution GARC
             var evolutionGarcFiles = config.getGARCData("evolution").Files;
@@ -330,15 +336,15 @@ namespace ProjectPokemon.Pokedex
                 "Level Up at level {0}", // Level
                 "Trade", // No param
                 "Trade with Held Item: {0}", // Item
-                $"Trade for opposite {specieslist[588]}/{specieslist[616]}", // Shelmet&Karrablast  // No param
+                $"Trade for opposite {speciesNames[588]}/{speciesNames[616]}", // Shelmet&Karrablast  // No param
                 "Used Item: {0}", // Item
                 "Level Up (Attack > Defense) at level {0}", // Level
                 "Level Up (Attack = Defense) at level {0}", // Level
                 "Level Up (Attack < Defense) at level {0}", // Level
                 "Level Up (Random < 5) at level {0}", // Level
                 "Level Up (Random > 5) at level {0}", // Level
-                $"Level Up ({specieslist[291]}) at level {0}", // Ninjask // Level
-                $"Level Up ({specieslist[292]}) at level {0}", // Shedinja // Level
+                $"Level Up ({speciesNames[291]}) at level {0}", // Ninjask // Level
+                $"Level Up ({speciesNames[292]}) at level {0}", // Shedinja // Level
                 "Level Up (Beauty): {0}", // Beauty
                 "Used Item (Male): {0}", // Kirlia->Gallade // Item
                 "Used Item (Female): {0}", // Snorunt->Froslass // Item
@@ -356,15 +362,18 @@ namespace ProjectPokemon.Pokedex
                 "Level Up with 50 Affection and a move of type {0}", // Type
                 $"{typeNames[16]} Type in Party " + "at level {0}", // Level
                 "Overworld Rain at level {0}", // Level
-                "Level Up (@) at Morning at level {0}", // Level
-                "Level Up (@) at Night at level {0}", // Level
+                "Level Up at Morning at level {0}", // Level
+                "Level Up at Night at level {0}", // Level
                 "Level Up Female (SetForm 1) at level {0}", // Level
                 "UNUSED",
                 "Level Up Any Time on Version {0}", // Version
                 "Level Up Daytime on Version {0}", // Version
                 "Level Up Nighttime on Version {0}", // Version
                 "Level Up Summit at level {0}", // Level
-                "Level Up (40???)", "Level Up (41???)", "Used Item (42???)" // new in USUM
+                 // new in USUM
+                "Level Up at Dusk at level {0}",
+                "Level Up in Ultra Wormhole at level {0}",
+                "Used Item {0} in Ultra Wormhole"
             };
             ushort[] evolutionMethodCase =
             {
@@ -401,7 +410,18 @@ namespace ProjectPokemon.Pokedex
                 evoMethod.Form = evo.PossibleEvolutions[i].Form;
                 evoMethod.Level = evo.PossibleEvolutions[i].Level;
                 evoMethod.Method = evolutionMethods[evo.PossibleEvolutions[i].Method];
-                evoMethod.TargetPokemon = new PokemonReference(evo.PossibleEvolutions[i].Species, speciesNames[evo.PossibleEvolutions[i].Species], data);
+                if (evoMethod.Form > -1 )
+                {
+                    var targetId = GetAltFormId(evo.PossibleEvolutions[i].Species, evo.PossibleEvolutions[i].Form, config);
+
+                    if (!targetId.HasValue) continue; // Form doesn't exist (like for Unown)
+
+                    evoMethod.TargetPokemon = new PokemonReference(targetId.Value, speciesNames[targetId.Value], data);
+                }
+                else
+                {
+                    evoMethod.TargetPokemon = new PokemonReference(evo.PossibleEvolutions[i].Species, speciesNames[evo.PossibleEvolutions[i].Species], data);
+                }                
 
                 // Parameter
                 int cv = evolutionMethodCase[evo.PossibleEvolutions[i].Method];
@@ -413,7 +433,7 @@ namespace ProjectPokemon.Pokedex
                     case 1: // Level
                         { evoMethod.ParameterString = evoMethod.Level.ToString(); break; }
                     case 2: // Items
-                        { evoMethod.ParameterReference = new ItemReference { ID = param, Name = itemNames[param] }; break; }
+                        { evoMethod.ParameterReference = new ItemReference(param, itemNames[param]); break; }
                     case 3: // Moves
                         { evoMethod.ParameterReference = new MoveReference(param, moveNames[param], data); break; }
                     case 4: // Species
@@ -428,6 +448,77 @@ namespace ProjectPokemon.Pokedex
                 currentEvolutionMethods.Add(evoMethod);
             }
             pkm.Evolutions = currentEvolutionMethods;
+        }
+
+        private static int? GetAltFormId(int pkmId, int formIndex, GameConfig config)
+        {
+            var index = config.Personal.Table[pkmId].FormStatsIndex;
+            if (index == 0)
+            {
+                return null;
+            }
+            return index + formIndex - 1;
+        }
+
+        private static void LoadPokemonAltFormReferences(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[][] altForms)
+        {
+            if (config.Personal.Table.Length <= pkm.ID || altForms.Length <= pkm.ID)
+            {
+                return;
+            }
+            
+            for (int j = 1; j < altForms[pkm.ID].Length; j++)
+            {
+                var referenceId = GetAltFormId(pkm.ID, j, config);
+                if (referenceId.HasValue)
+                {
+                    pkm.AltForms.Add(new PokemonReference(referenceId.Value, speciesNames[referenceId.Value], data));
+                }                
+            }                
+        }
+
+        private static byte[][] _megaGarcFiles = null;
+        private static void LoadPokemonMegaEvolutions(SMDataCollection data, Pokemon pkm, GameConfig config, string[] itemNames)
+        {
+            if (_megaGarcFiles == null)
+            {
+                _megaGarcFiles = config.getGARCData("megaevo").Files;
+            }
+
+            if (_megaGarcFiles.Length <= pkm.ID)
+            {
+                // We're outside the range of mega evolution files. This probably means this Pokemon is an alt form.
+                return;
+            }
+
+            var megaEvo = new MegaEvolutions(_megaGarcFiles[pkm.ID]);
+
+            if (megaEvo.Method[0] == 1)
+            {
+                pkm.Evolutions.Add(new Models.Gen7.EvolutionMethod
+                {
+                    Form = -1,
+                    Level = 0,
+                    Method = "Mega evolve with {0}",
+                    ParameterReference = new ItemReference((int)megaEvo.Argument[0], itemNames[(int)megaEvo.Argument[0]]),
+                    TargetPokemon = pkm.AltForms[megaEvo.Form[0] - 1]
+                });
+                pkm.MegaEvolutions.Add(pkm.AltForms[megaEvo.Form[0] - 1]);
+            }
+
+            if (megaEvo.Method[1] == 1)
+            {
+                pkm.Evolutions.Add(new Models.Gen7.EvolutionMethod
+                {
+                    Form = -1,
+                    Level = 0,
+                    Method = "Mega evolve with {0}",
+                    ParameterReference = new ItemReference((int)megaEvo.Argument[1], itemNames[(int)megaEvo.Argument[1]]),
+                    TargetPokemon = pkm.AltForms[megaEvo.Form[1] - 1]
+                });
+                pkm.MegaEvolutions.Add(pkm.AltForms[megaEvo.Form[1] - 1]);
+            }                        
+            
         }
 
         private static void AddPkmToType(SMDataCollection data, Pokemon pkm)
@@ -643,10 +734,38 @@ namespace ProjectPokemon.Pokedex
             data.Moves = moves;
         }
 
-        public static async Task<SMDataCollection> LoadSunMoonData(string rawFilesDir, bool isUltra)
+        public static SMDataCollection LoadSunMoonData(string rawFilesDir, bool isUltra)
         {
+            // Extract ROM if needed
+            var tempDir = "smROM";
+            if (!Directory.Exists(rawFilesDir))
+            {
+                // It's needed
+                if (!Directory.Exists(tempDir))
+                {
+                    Directory.CreateDirectory(tempDir);
+                }
+                RunProgram("3dstool.exe", $"-xtf 3ds \"{rawFilesDir}\" -0 Partition0.bin");
+                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin --exefs ExeFS.bin");
+                RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
+                RunProgram("3dstool.exe", $"-xutf exefs ExeFS.bin --exefs-dir \"{tempDir}/ExeFS\"");
+                File.Delete("Partition0.bin");
+                File.Delete("RomFS.bin");
+                File.Delete("ExeFS.bin");
+                rawFilesDir = tempDir;
+            }
+
             var data = new SMDataCollection();
-            var exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", "code.bin"));
+            data.IsUltra = isUltra;
+            byte[] exefs;
+            if (File.Exists(Path.Combine(rawFilesDir, "ExeFS", ".code.bin")))
+            {
+                exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", ".code.bin"));
+            }
+            else
+            {
+                exefs = File.ReadAllBytes(Path.Combine(rawFilesDir, "ExeFS", "code.bin"));
+            }
 
             GameConfig config;
             if (isUltra)
@@ -664,7 +783,7 @@ namespace ProjectPokemon.Pokedex
             var items = config.getText(TextName.ItemNames);
             var moveNames = config.getText(TextName.MoveNames);
             var moveflavor = config.getText(TextName.MoveFlavor);
-            var species = config.getText(TextName.SpeciesNames);
+            var speciesNames = config.getText(TextName.SpeciesNames);
             var speciesClassifications = config.getText(TextName.SpeciesClassifications);
             var pokedexEntries1 = config.getText(TextName.PokedexEntry1);
             var pokedexEntries2 = config.getText(TextName.PokedexEntry1);
@@ -674,39 +793,25 @@ namespace ProjectPokemon.Pokedex
             var EXPGroups = new string[] { "Medium-Fast", "Erratic", "Fluctuating", "Medium-Slow", "Fast", "Slow" };
             var eggGroups = new string[] { "---", "Monster", "Water 1", "Bug", "Flying", "Field", "Fairy", "Grass", "Human-Like", "Water 3", "Mineral", "Amorphous", "Water 2", "Ditto", "Dragon", "Undiscovered" };
             var colors = new string[] { "Red", "Blue", "Yellow", "Green", "Black", "Brown", "Purple", "Gray", "White", "Pink" };
+            var altForms = getFormList(config, speciesNames);
 
             // Load stuff
             LoadTypeEffectiveness(data, exefs);
             LoadTypes(data, typeNames);
-            LoadPokemon(data, config, rawFilesDir, species, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors, speciesClassifications, pokedexEntries1, pokedexEntries2);
+            LoadPokemon(data, config, rawFilesDir, speciesNames, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors, speciesClassifications, pokedexEntries1, pokedexEntries2, altForms);
             LoadMoves(data, config, moveNames, moveflavor, typeNames);
+
+            // Cleanup
+            if (Directory.Exists(tempDir))
+            {
+                Directory.Delete(tempDir, true);
+            }
 
             return data;
         }
 
-        static void BuildSM(string smPath, string outputFilename, bool isUltra)
-        {
-            // Extract ROM if needed
-            var tempDir = "smROM";
-            if (File.Exists(smPath))
-            {
-                // It's needed
-                if (!Directory.Exists(tempDir))
-                {
-                    Directory.CreateDirectory(tempDir);
-                }
-                RunProgram("3dstool.exe", $"-xtf 3ds \"{smPath}\" -0 Partition0.bin");
-                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin --exefs ExeFS.bin");
-                RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
-                RunProgram("3dstool.exe", $"-xutf exefs ExeFS.bin --exefs-dir \"{tempDir}/ExeFS\"");
-                File.Delete("Partition0.bin");
-                File.Delete("RomFS.bin");
-                File.Delete("ExeFS.bin");
-                smPath = tempDir;
-            }
-
-            var data = LoadSunMoonData(smPath, isUltra).Result;
-
+        static void BuildSM(SMDataCollection data, string outputFilename, bool isUltra)
+        {    
             var output = new List<Category>();
 
             string gameTag;
@@ -784,12 +889,6 @@ namespace ProjectPokemon.Pokedex
             output.Add(catType);
 
             File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
-
-            // Cleanup
-            if (Directory.Exists(tempDir))
-            {
-                Directory.Delete(tempDir, true);
-            }
         }
     }
 }

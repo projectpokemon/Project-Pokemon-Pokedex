@@ -11,9 +11,11 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         public Pokemon(SMDataCollection data)
         {
             Data = data;
+            AltForms = new List<PokemonReference>();
+            MegaEvolutions = new List<PokemonReference>();
         }
 
-        private SMDataCollection Data { get; set; }
+        public SMDataCollection Data { get; private set; }
 
         public int ID { get; set; }
         public string Name { get; set; }
@@ -93,6 +95,8 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         public bool LocalVariant { get; set; }
 
         public List<EvolutionMethod> Evolutions { get; set; }
+        public List<PokemonReference> AltForms { get; set; }
+        public List<PokemonReference> MegaEvolutions { get; set; }
 
         public bool EvolvesToAltForm
         {
@@ -105,9 +109,56 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         public string PokespriteHtml
         {
             get
-            {
-                return string.Format("<span class=\"pkspr pkmn-{0}\"><span style=\"display: none;\">&nbsp;</span></span>", Name.ToLower());
+            {           
+                if (GetIsAltForm())
+                {
+                    string form = GetFormName();
+                    var originalId = GetOriginalFormId();
+                    if (form != "")
+                    {
+                        var originalPkm = Data.Pokemon[originalId.Value];
+                        return $"<span class=\"pkspr pkmn-{originalPkm.Name.ToLower()} form-{form.ToLower().Replace(' ', '-')}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                    }
+                    else
+                    {
+                        return $"<span class=\"pkspr pkmn-{Name.ToLower()}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                    }
+                }   
+                else
+                {
+                    return $"<span class=\"pkspr pkmn-{Name.ToLower()}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                }                
             }            
+        }
+
+        public string GetFormName()
+        {
+            if (GetIsAltForm())
+            {
+                var originalId = GetOriginalFormId();
+                if (originalId.HasValue)
+                {
+                    var originalPkm = Data.Pokemon[originalId.Value];
+                    var formIndex = originalPkm.AltForms.IndexOf(originalPkm.AltForms.First(a => a.ID == this.ID)) + 1; // Add 1 to take into account the original form
+                    return originalPkm.GetPkhexAltFormStrings()[formIndex];
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public string[] GetPkhexAltFormStrings()
+        {
+            string[] gendersymbols = { "♂", "♀", "-" };
+            var typeNames = PKHeX.Core.Util.GetTypesList("en");
+            var formNames = PKHeX.Core.Util.GetFormsList("en");
+            return PKHeX.Core.PKX.GetFormList(ID, typeNames, formNames, gendersymbols, 7);
         }
 
         public Pokemon GetPreviousEvolution()
@@ -141,6 +192,28 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             }            
         }
 
+        public IEnumerable<PokemonReference> GetNonMegaAltForms()
+        {
+            var theseForms = AltForms.Where(a => !MegaEvolutions.Any(e => e.ID == a.ID));
+            var others = Data.Pokemon.Where(p => p.AltForms.Any(a => a.ID == this.ID)).Select(p => new PokemonReference(p));
+            return theseForms.Concat(others);
+        }
+
+        public bool GetIsAltForm()
+        {
+            return Data.Pokemon.Any(p => p.AltForms.Any(a => a.ID == this.ID));
+        }
+
+        public int? GetOriginalFormId()
+        {
+            return Data.Pokemon.FirstOrDefault(p => p.AltForms.Any(a => a.ID == this.ID))?.ID ?? null;
+        }
+
+        public bool GetIsMega()
+        {
+            return Data.Pokemon.Any(p => p.MegaEvolutions.Any(m => m.ID == this.ID));
+        }
+
         public List<EvolutionMethod> GetEvolutionChain()
         {
             var methods = new Stack<EvolutionMethod>();
@@ -166,6 +239,33 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             }
 
             return methods.ToList();
+        }
+
+        public string GetCrossReferenceHtml()
+        {
+            var html = new StringBuilder();
+
+            if (Data.IsUltra)
+            {
+                html.AppendLine("<b>Ultra Sun and Ultra Moon</b>");
+            }
+            else
+            {
+                html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-<#=Model.ID #>\"}\">Ultra Sun and Ultra Moon</a>");
+            }
+
+            html.AppendLine(" | ");
+
+            if (Data.IsUltra)
+            {
+                html.AppendLine("<a href=\"{page=\"sm/sm-pkm-<#=Model.ID #>\"}\">Sun and Moon</a>");
+            }
+            else
+            {
+                html.AppendLine("<b>Ultra Sun and Ultra Moon</b>");
+            }
+
+            return Data.ToString();
         }
 
         public override string ToString()

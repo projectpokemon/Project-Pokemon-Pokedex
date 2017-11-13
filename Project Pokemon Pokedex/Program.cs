@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using pk3DS.Core;
 using pk3DS.Core.Structures;
 using pk3DS.Core.Structures.PersonalInfo;
+using ProjectPokemon.Pokedex.Models;
 using ProjectPokemon.Pokedex.Models.EOS;
 using ProjectPokemon.Pokedex.Models.Gen7;
 using ProjectPokemon.Pokedex.Models.PSMD;
@@ -73,27 +74,61 @@ namespace ProjectPokemon.Pokedex
             return resultText;
         }
 
+        static async Task<DataCollection> BuildAllData(string eosFilename, string psmdFilename, string moonFilename, string ultraMoonFilename)
+        {
+            var data = new DataCollection();
+            var provider = new PhysicalIOProvider();
+            using (var eosROM = new NdsRom())
+            {
+                await eosROM.OpenFile(eosFilename, provider);
+                Console.WriteLine("Building EOS data");
+                data.EosData = await LoadEosData(eosROM);
+            }
+
+            Console.WriteLine("Building PSMD data");
+            data.PsmdData = await LoadPsmdData(psmdFilename);
+
+            Console.WriteLine("Building SM data");
+            data.SMData = LoadSunMoonData(moonFilename, false);
+
+            Console.WriteLine("Building Ultra SM data");
+            data.UltraSMData = LoadSunMoonData(ultraMoonFilename, true);
+
+            data.EosData.ParentCollection = data;
+            data.PsmdData.ParentCollection = data;
+            data.SMData.ParentCollection = data;
+            data.UltraSMData.ParentCollection = data;
+
+            return data;
+        }
+
         static void Main(string[] args)
         {
-            var name = args[0];
-            var filename = args[1];
-            var outputFilename = args[2];
+            var eosPath = args[0];
+            var psmdPath = args[1];
+            var smPath = args[2];
+            var ultraSmPath = args[3];
 
-            switch (name.ToLower())
+            if (args.Length < 4)
             {
-                case "moon":
-                    BuildSM(filename, outputFilename, args.Contains("ultra"));
-                    break;
-                case "psmd":
-                    BuildPSMD(filename, outputFilename).Wait();
-                    break;
-                case "eos":
-                    BuildEOS(filename, outputFilename).Wait();
-                    break;
-                default:
-                    Console.WriteLine("Usage: ProjectPokemonPokedex.exe <eos|psmd|moon> <RomFilename> <OutputFilename>");
-                    break;
+                Console.WriteLine("Usage: ProjectPokemonPokedex.exe <eosPath> <psmdPath> <smPath> <ultraSmPath> <OutputFilename>");
+                return;
             }
+
+            Console.WriteLine("Building data");
+            var data = BuildAllData(eosPath, psmdPath, smPath, ultraSmPath).Result;
+
+            Console.WriteLine("Generating EOS records");
+            BuildEOS(data.EosData, "eos.ipsdb");
+
+            Console.WriteLine("Generating PSMD records");
+            BuildPSMD(data.PsmdData, "psmd.ipsdb");
+
+            Console.WriteLine("Generating SM records");
+            BuildSM(data.SMData, "sm.ipsdb", false);
+
+            Console.WriteLine("Generating Ultra SM records");
+            BuildSM(data.UltraSMData, "ultrasm.ipsdb", true);
         }
     }
 }

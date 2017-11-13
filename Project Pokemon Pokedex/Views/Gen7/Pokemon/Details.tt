@@ -4,16 +4,31 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.Gen7.Pokemon" name="Model" #>
+<p>
+	<#= Model.GetCrossReferenceHtml() #>
+</p>
 <div class="row">
 	<div class="col-md-3">
 		<div class="pkm-image-inner" style="text-align:center;">
 			<div data-role='commentContent' class='ipsType_normal ipsType_richText ipsContained' data-controller='core.front.core.lightboxedImages'>
 				<p>
-					<img class="ipsImage" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" alt="<#=Model.Name #> Sugimori Artwork">
+					<# if (Model.GetIsAltForm()) {
+						var originalForm = Model.Data.Pokemon[Model.GetOriginalFormId().Value];
+						#>
+						<img class="ipsImage" src="https://projectpokemon.org/images/sugimori/<#=originalForm.ID #>-<#=Model.GetFormName().ToLower().Replace(' ', '-') #>.png" alt="<#=Model.Name #> Sugimori Artwork" />
+					<# } else { #>
+						<img class="ipsImage" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" alt="<#=Model.Name #> Sugimori Artwork" />
+					<# } #>
 				</p>			
 			</div>
 		</div>
-		<a href="https://projectpokemon.org/home/gallery/album/<#=(Model.ID + 1).ToString() #>-<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #>/">See more images</a>
+		<# if (Model.GetIsAltForm()) {
+			var originalForm = Model.Data.Pokemon[Model.GetOriginalFormId().Value];
+			#>
+			<a href="https://projectpokemon.org/home/gallery/album/<#=(originalForm.ID + 1).ToString() #>-<#=originalForm.ID.ToString().PadLeft(3, '0') #> <#=originalForm.Name #>/">See more images</a>
+		<# } else { #>
+			<a href="https://projectpokemon.org/home/gallery/album/<#=(Model.ID + 1).ToString() #>-<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #>/">See more images</a>
+		<# } #>
 	</div>
 
 	<div class="col-md-6">
@@ -375,6 +390,27 @@
 		</table>
 	</div>
 </div>
+
+<# if (Model.GetNonMegaAltForms().Any()) { #>
+<h2>Alternate Forms</h2>
+<table class="table">
+	<tr>
+		<th style="width:60px;"></th>
+        <th>Form</th>
+    </tr>
+	<# foreach (var item in Model.GetNonMegaAltForms()) { #>
+	<tr style="height:60px;vertical-align: middle;">
+		<td>
+			<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#= item.PokespriteHtml #></a>				
+		</td>
+        <td>
+            <a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
+        </td>
+    </tr>
+	<# } #>
+</table>
+<# } #>
+
 <# var evolutionChain = Model.GetEvolutionChain(); #>
 <# if (evolutionChain.Count > 0) { #>
 <h2>Evolution Chain</h2>
@@ -382,9 +418,6 @@
     <tr>
 		<th style="width:60px;"></th>
         <th>Target</th>
-		<# if (Model.EvolvesToAltForm) { #>
-		<th>Form</th>
-		<# } #>
 		<th>Method</th>
     </tr>
     <# foreach (var item in evolutionChain) { 
@@ -415,11 +448,6 @@
             <td>
                 <a href='{page="$idPrefix-pkm-<#=item.TargetPokemon.ID #>"}'><#=item.TargetPokemon.Name #></a>
             </td>
-			<# if (Model.EvolvesToAltForm) { #>
-			<td>
-                <#= item.Form #>
-            </td>
-			<# } #>
 			<td>
                 <#= methodString #>
             </td>
