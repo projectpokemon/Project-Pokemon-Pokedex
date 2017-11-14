@@ -238,7 +238,7 @@
                 <#= string.Join(", ", item.Levels) #>
             </td>
             <td>
-				<a href='{page="gen$idPrefix7-pkm-<#=item.ID #>"}'><#=item.Name #></a>
+				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
             </td>
         </tr>
     <# } #>
