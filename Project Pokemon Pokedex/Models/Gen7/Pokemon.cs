@@ -269,14 +269,14 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             if (psmd != null)
             {
                 html.AppendLine(" | ");
-                html.AppendLine("<a href=\"{page=\"psmd/psmd-pkm-" + ID.ToString() + "\"}\">Super Mystery Dungeon</a>");
+                html.AppendLine("<a href=\"{page=\"psmd/psmd-pkm-" + psmd.ID.ToString() + "\"}\">Super Mystery Dungeon</a>");
             }
 
             var eos = Data.ParentCollection.EosData.Pokemon.Where(p => p.DexNumber == ID).FirstOrDefault();
             if (eos != null)
             {
                 html.AppendLine(" | ");
-                html.AppendLine("<a href=\"{page=\"eos/eos-pkm-" + ID.ToString() + "\"}\">Explorers of Sky</a>");
+                html.AppendLine("<a href=\"{page=\"eos/eos-pkm-" + eos.ID.ToString() + "\"}\">Explorers of Sky</a>");
             }
 
             return html.ToString();
