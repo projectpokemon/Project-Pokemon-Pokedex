@@ -121,14 +121,26 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                     }
                     else
                     {
-                        return $"<span class=\"pkspr pkmn-{Name.ToLower().Replace(' ', '-').Replace(":", "")}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                        return $"<span class=\"pkspr pkmn-{GetPokespriteSpeciesName()}\"><span style=\"display: none;\">&nbsp;</span></span>";
                     }
                 }   
                 else
                 {
-                    return $"<span class=\"pkspr pkmn-{Name.ToLower().Replace(' ', '-').Replace(":", "")}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                    return $"<span class=\"pkspr pkmn-{GetPokespriteSpeciesName()}\"><span style=\"display: none;\">&nbsp;</span></span>";
                 }                
             }            
+        }
+
+        private string GetPokespriteSpeciesName()
+        {
+            return Name.ToLower()
+                .Replace(' ', '-')
+                .Replace(":", "")
+                .Replace("'", "")
+                .Replace("’", "")
+                .Replace(".", "")
+                .Replace("♂", "-m")
+                .Replace("♀", "-f");
         }
 
         public string GetFormName()

@@ -780,6 +780,7 @@ namespace ProjectPokemon.Pokedex
             {
                 config = new GameConfig(GameVersion.SM);
             }
+            config.RemapCharacters = true;
             
             config.Initialize(Path.Combine(rawFilesDir, "RomFS"), Path.Combine(rawFilesDir, "ExeFS"), lang: 2); // Language index 2 is English
 
