@@ -137,6 +137,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                 .Replace(' ', '-')
                 .Replace(":", "")
                 .Replace("'", "")
+                .Replace("’", "")
                 .Replace(".", "")
                 .Replace("♂", "-m")
                 .Replace("♀", "-f");
