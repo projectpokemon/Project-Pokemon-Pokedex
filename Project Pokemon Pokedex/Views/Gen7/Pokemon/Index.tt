@@ -11,6 +11,7 @@
         <th width="10%">
             ID
         </th>
+		<th></th>
         <th width="60%">
             Name
         </th>
@@ -22,6 +23,9 @@
             <td>
                 <#= item.ID.ToString() #>
             </td>
+			<td>
+				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.PokespriteHtml #></a>
+			</td>
             <td>
 				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
             </td>

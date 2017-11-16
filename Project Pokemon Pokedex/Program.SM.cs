@@ -453,6 +453,10 @@ namespace ProjectPokemon.Pokedex
         private static int? GetAltFormId(int pkmId, int formIndex, GameConfig config)
         {
             var index = config.Personal.Table[pkmId].FormStatsIndex;
+            if (formIndex == 0)
+            {
+                return pkmId;
+            }
             if (index == 0)
             {
                 return null;
@@ -776,6 +780,7 @@ namespace ProjectPokemon.Pokedex
             {
                 config = new GameConfig(GameVersion.SM);
             }
+            config.RemapCharacters = true;
             
             config.Initialize(Path.Combine(rawFilesDir, "RomFS"), Path.Combine(rawFilesDir, "ExeFS"), lang: 2); // Language index 2 is English
 

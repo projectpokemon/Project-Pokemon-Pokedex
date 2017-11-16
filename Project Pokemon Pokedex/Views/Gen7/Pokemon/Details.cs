@@ -279,42 +279,28 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<a href=\"{page=\"$idPrefix-ability-");
-            
-            #line 77 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Ability1.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\">");
+            this.Write("\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<span>");
             
             #line 77 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Ability1.Name));
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\r\n\t\t\t\t\t");
+            this.Write("</span>\r\n\r\n\t\t\t\t\t");
             
             #line 79 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  if (Model.Ability1.ID != Model.Ability2.ID) { 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t<a href=\"{page=\"$idPrefix-ability-");
-            
-            #line 80 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Ability2.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\">");
+            this.Write("\t\t\t\t\t\t<span>");
             
             #line 80 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Ability2.Name));
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t\t\t\t");
+            this.Write("</span>\r\n\t\t\t\t\t");
             
             #line 81 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 
@@ -328,22 +314,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tHidden Ability\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<a href=\"{page=" +
-                    "\"$idPrefix-ability-");
-            
-            #line 90 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.AbilityHidden.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\">");
+            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tHidden Ability\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<span>");
             
             #line 90 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.AbilityHidden.Name));
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
+            this.Write("</span>\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
             
             #line 93 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 
@@ -588,22 +566,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tHeld Item 1\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<a href=\"{page=\"$i" +
-                    "dPrefix-item-");
-            
-            #line 201 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.HeldItem1.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\">");
+            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tHeld Item 1\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<span>");
             
             #line 201 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.HeldItem1.Name));
             
             #line default
             #line hidden
-            this.Write("</a> (50%)\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
+            this.Write("</span> (50%)\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
             
             #line 204 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 
@@ -617,22 +587,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tHeld Item 2\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<a href=\"{page=\"$i" +
-                    "dPrefix-item-");
-            
-            #line 212 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.HeldItem2.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\">");
+            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tHeld Item 2\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<span>");
             
             #line 212 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.HeldItem2.Name));
             
             #line default
             #line hidden
-            this.Write("</a> (5%)\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
+            this.Write("</span> (5%)\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
             
             #line 215 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 
@@ -646,22 +608,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tHeld Item 3\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<a href=\"{page=\"$" +
-                    "idPrefix-item-");
-            
-            #line 222 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.HeldItem3.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\">");
+            this.Write("\t\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tHeld Item 3\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<span>");
             
             #line 222 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.HeldItem3.Name));
             
             #line default
             #line hidden
-            this.Write("</a> (1%)\r\n\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t");
+            this.Write("</span> (1%)\r\n\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t");
             
             #line 225 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 
@@ -745,22 +699,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tZ Item\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<a href=\"{page=\"$idPref" +
-                    "ix-item-");
-            
-            #line 304 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ZItem.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\">");
+            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tZ Item\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<span>");
             
             #line 304 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ZItem.Name));
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
+            this.Write("</span>\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
             
             #line 307 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 
@@ -774,22 +720,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tZ Base Move\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<a href=\"{page=\"$i" +
-                    "dPrefix-move-");
-            
-            #line 315 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ZBaseMove.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\">");
+            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tZ Base Move\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<span>");
             
             #line 315 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ZBaseMove.Name));
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
+            this.Write("</span>\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
             
             #line 318 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 
@@ -803,22 +741,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tZ Move\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<a href=\"{page=\"$idPref" +
-                    "ix-move-");
-            
-            #line 326 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ZMove.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\">");
+            this.Write("\t\t\t<tr>\r\n\t\t\t\t<td>\r\n\t\t\t\t\tZ Move\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<span>");
             
             #line 326 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ZMove.Name));
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
+            this.Write("</span>\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t\t");
             
             #line 329 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 
@@ -1046,7 +976,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
 			methodString = string.Format(item.Method, "<a href='{page=\"$idPrefix-move-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.ItemReference) {
-			methodString = string.Format(item.Method, "<a href='{page=\"$idPrefix-item-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");
+			methodString = string.Format(item.Method, "<span>" + item.ParameterReference.Name + "</span>");
 		}
 		else if (item.ParameterReference is ProjectPokemon.Pokedex.Models.Gen7.TypeReference) {
 			methodString = string.Format(item.Method, "<a href='{page=\"$idPrefix-type-" + item.ParameterReference.ID + "\"}'>" + item.ParameterReference.Name + "</a>");

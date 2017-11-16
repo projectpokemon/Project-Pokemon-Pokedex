@@ -121,14 +121,26 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                     }
                     else
                     {
-                        return $"<span class=\"pkspr pkmn-{Name.ToLower()}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                        return $"<span class=\"pkspr pkmn-{GetPokespriteSpeciesName()}\"><span style=\"display: none;\">&nbsp;</span></span>";
                     }
                 }   
                 else
                 {
-                    return $"<span class=\"pkspr pkmn-{Name.ToLower()}\"><span style=\"display: none;\">&nbsp;</span></span>";
+                    return $"<span class=\"pkspr pkmn-{GetPokespriteSpeciesName()}\"><span style=\"display: none;\">&nbsp;</span></span>";
                 }                
             }            
+        }
+
+        private string GetPokespriteSpeciesName()
+        {
+            return Name.ToLower()
+                .Replace(' ', '-')
+                .Replace(":", "")
+                .Replace("'", "")
+                .Replace("’", "")
+                .Replace(".", "")
+                .Replace("♂", "-m")
+                .Replace("♀", "-f");
         }
 
         public string GetFormName()
@@ -251,21 +263,35 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             }
             else
             {
-                html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-<#=Model.ID #>\"}\">Ultra Sun and Ultra Moon</a>");
+                html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-" + ID.ToString() + "\"}\">Ultra Sun and Ultra Moon</a>");
             }
 
             html.AppendLine(" | ");
 
             if (Data.IsUltra)
             {
-                html.AppendLine("<a href=\"{page=\"sm/sm-pkm-<#=Model.ID #>\"}\">Sun and Moon</a>");
+                html.AppendLine("<a href=\"{page=\"sm/sm-pkm-" + ID.ToString() + "\"}\">Sun and Moon</a>");
             }
             else
             {
-                html.AppendLine("<b>Ultra Sun and Ultra Moon</b>");
+                html.AppendLine("<b>Sun and Moon</b>");
             }
 
-            return Data.ToString();
+            var psmd = Data.ParentCollection.PsmdData.Pokemon.Where(p => p.DexNumber == ID).FirstOrDefault();
+            if (psmd != null)
+            {
+                html.AppendLine(" | ");
+                html.AppendLine("<a href=\"{page=\"psmd/psmd-pkm-" + psmd.ID.ToString() + "\"}\">Super Mystery Dungeon</a>");
+            }
+
+            var eos = Data.ParentCollection.EosData.Pokemon.Where(p => p.DexNumber == ID).FirstOrDefault();
+            if (eos != null)
+            {
+                html.AppendLine(" | ");
+                html.AppendLine("<a href=\"{page=\"eos/eos-pkm-" + eos.ID.ToString() + "\"}\">Explorers of Sky</a>");
+            }
+
+            return html.ToString();
         }
 
         public override string ToString()

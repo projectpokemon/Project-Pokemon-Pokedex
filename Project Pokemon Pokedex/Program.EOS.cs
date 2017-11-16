@@ -71,6 +71,7 @@ namespace ProjectPokemon.Pokedex
                 var entry = new Pokemon();
                 entry.ID = i;// monsterFile.Entries[i].EntityID;
                 entry.Name = languageFile.GetPokemonName(entry.ID % 600);
+                entry.Data = data;
                 entry.DexNumber = maleEntry.DexNumber;
                 entry.EvolveFromID = maleEntry.EvolveFrom;
                 entry.EvolveFromName = languageFile.GetPokemonName(entry.EvolveFromID);

@@ -151,7 +151,8 @@ namespace ProjectPokemon.Pokedex
                 var pkm = new Pokemon
                 {
                     ID = i,
-                    Name = pkmNames[i]
+                    Name = pkmNames[i],
+                    Data = data
                 };
                 var dataInfo = pokemonFile.Entries[i];
                 if (dataInfo != null)

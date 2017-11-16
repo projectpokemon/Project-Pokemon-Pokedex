@@ -4,8 +4,9 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ parameter type="ProjectPokemon.Pokedex.Models.PSMD.PokemonDetailsViewModel" name="Model" #>
-<h2><#= Model.Name #></h2>
-
+<p>
+	<#= Model.GetCrossReferenceHtml() #>
+</p>
 <div>
     <h3>Details</h3>
     <dl class="dl-horizontal">
