@@ -16,8 +16,8 @@ namespace ProjectPokemon.Pokedex
 {
     partial class Program
     {
-        private static readonly byte[] Signature = { 0x03, 0x40, 0x03, 0x41, 0x03, 0x42, 0x03, 0x43, 0x03 }; // tail end of item::ITEM_CheckBeads
-        internal static void getTMHMList(string ExeFSPath, ref ushort[] TMs)
+        private static readonly byte[] SignatureSM = { 0x03, 0x40, 0x03, 0x41, 0x03, 0x42, 0x03, 0x43, 0x03 }; // tail end of item::ITEM_CheckBeads
+        internal static void getTMHMList(string ExeFSPath, ref ushort[] TMs, bool isUltra)
         {
             if (ExeFSPath == null) return;
             string exeFsFile = Directory.GetFiles(ExeFSPath).FirstOrDefault(x => x.Contains("code"));
@@ -26,7 +26,13 @@ namespace ProjectPokemon.Pokedex
                 throw new Exception($"Couldn't find code.bin in path '{ExeFSPath}'");
             }
             byte[] data = File.ReadAllBytes(exeFsFile);
-            int dataoffset = Util.IndexOfBytes(data, Signature, 0x400000, 0) + Signature.Length;
+            int dataoffset = Util.IndexOfBytes(data, SignatureSM, 0x400000, 0) + SignatureSM.Length;
+
+            if (isUltra)
+            {
+                dataoffset += 0x22;
+            }
+            
             if (data.Length % 0x200 != 0) return;
 
             List<ushort> tms = new List<ushort>();
