@@ -152,7 +152,7 @@ namespace ProjectPokemon.Pokedex
         {
             // Load TMs
             var TMs = new ushort[0];
-            getTMHMList(Path.Combine(rawFilesDir, "ExeFS"), ref TMs);
+            getTMHMList(Path.Combine(rawFilesDir, "ExeFS"), ref TMs, data.IsUltra);
 
             // Load Pokemon
             // - Load Level-up GARC
