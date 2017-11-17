@@ -21,7 +21,10 @@ namespace ProjectPokemon.Pokedex
         {
             if (ExeFSPath == null) return;
             string[] files = Directory.GetFiles(ExeFSPath);
-            if (!File.Exists(files[0]) || !Path.GetFileNameWithoutExtension(files[0]).Contains("code")) return;
+            if (!File.Exists(files[0]) || !Path.GetFileNameWithoutExtension(files[0]).Contains("code"))
+            {
+                throw new Exception($"Couldn't find code.bin in path '{ExeFSPath}'");
+            }
             byte[] data = File.ReadAllBytes(files[0]);
             int dataoffset = Util.IndexOfBytes(data, Signature, 0x400000, 0) + Signature.Length;
             if (data.Length % 0x200 != 0) return;
