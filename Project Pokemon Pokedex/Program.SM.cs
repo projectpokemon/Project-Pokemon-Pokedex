@@ -20,12 +20,12 @@ namespace ProjectPokemon.Pokedex
         internal static void getTMHMList(string ExeFSPath, ref ushort[] TMs)
         {
             if (ExeFSPath == null) return;
-            string[] files = Directory.GetFiles(ExeFSPath);
-            if (!File.Exists(files[0]) || !Path.GetFileNameWithoutExtension(files[0]).Contains("code"))
+            string exeFsFile = Directory.GetFiles(ExeFSPath).FirstOrDefault(x => x.Contains("code"));
+            if (!File.Exists(exeFsFile) || !Path.GetFileNameWithoutExtension(exeFsFile).Contains("code"))
             {
                 throw new Exception($"Couldn't find code.bin in path '{ExeFSPath}'");
             }
-            byte[] data = File.ReadAllBytes(files[0]);
+            byte[] data = File.ReadAllBytes(exeFsFile);
             int dataoffset = Util.IndexOfBytes(data, Signature, 0x400000, 0) + Signature.Length;
             if (data.Length % 0x200 != 0) return;
 
