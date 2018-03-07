@@ -54,7 +54,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             this.Write("\t\t\t\t\t\t<img class=\"ipsImage\" src=\"{galleryImage=\"");
             
             #line 18 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(originalForm.ID));
+            this.Write(this.ToStringHelper.ToStringWithCulture(originalForm.ID.ToString().PadLeft(3, '0')));
             
             #line default
             #line hidden
@@ -89,7 +89,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             this.Write("\t\t\t\t\t\t<img class=\"ipsImage\" src=\"{galleryImage=\"");
             
             #line 20 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID.ToString().PadLeft(3, '0')));
             
             #line default
             #line hidden

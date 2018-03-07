@@ -15,9 +15,9 @@
 					<# if (Model.GetIsAltForm()) {
 						var originalForm = Model.Data.Pokemon[Model.GetOriginalFormId().Value];
 						#>
-						<img class="ipsImage" src="{galleryImage="<#=originalForm.ID #> <#=originalForm.Name #>/Sugimori <#=Model.GetFormName().Replace(originalForm.Name, "") #>"}" alt="<#=Model.Name #> Sugimori Artwork" />
+						<img class="ipsImage" src="{galleryImage="<#=originalForm.ID.ToString().PadLeft(3, '0') #> <#=originalForm.Name #>/Sugimori <#=Model.GetFormName().Replace(originalForm.Name, "") #>"}" alt="<#=Model.Name #> Sugimori Artwork" />
 					<# } else { #>
-						<img class="ipsImage" src="{galleryImage="<#=Model.ID #> <#=Model.Name #>/Sugimori"}" alt="<#=Model.Name #> Sugimori Artwork" />
+						<img class="ipsImage" src="{galleryImage="<#=Model.ID.ToString().PadLeft(3, '0') #> <#=Model.Name #>/Sugimori"}" alt="<#=Model.Name #> Sugimori Artwork" />
 					<# } #>
 				</p>			
 			</div>
