@@ -249,7 +249,8 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
                     Content = BuildAndReturnTemplate<Views.PSMD.Pokemon.Details>(new PokemonDetailsViewModel(item, data)),
-                    InternalName = $"psmd-pkm-" + item.ID
+                    InternalName = $"psmd-pkm-" + item.ID,
+                    Tags = new[] { item.Name }
                 });
             }
             catPkm.Records.Add(new Record
@@ -271,6 +272,7 @@ namespace ProjectPokemon.Pokedex
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.PSMD.Moves.Details>(new MoveDetailsViewModel(item, data)),
                     InternalName = $"psmd-move-" + item.ID,
+                    Tags = new[] { item.Name }
                 });
             }
             catMoves.Records.Add(new Record
@@ -292,6 +294,7 @@ namespace ProjectPokemon.Pokedex
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.PSMD.Abilities.Details>(new AbilityDetailsViewModel(item, data)),
                     InternalName = $"psmd-ability-" + item.ID,
+                    Tags = new[] { item.Name }
                 });
             }
             catAbilities.Records.Add(new Record
@@ -312,7 +315,8 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.PSMD.Types.Details>(new TypeDetailsViewModel(item, data)),
-                    InternalName = $"psmd-type-" + item.ID
+                    InternalName = $"psmd-type-" + item.ID,
+                    Tags = new[] { item.Name }
                 });
             }
             catTypes.Records.Add(new Record

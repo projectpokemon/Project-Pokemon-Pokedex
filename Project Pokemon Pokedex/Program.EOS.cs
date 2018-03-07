@@ -239,7 +239,8 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
                     Content = BuildAndReturnTemplate<Views.EOS.Pokemon.Details>(item),
-                    InternalName = $"eos-pkm-" + item.ID
+                    InternalName = $"eos-pkm-" + item.ID,
+                    Tags = new[] { item.Name }
                 });
             }
             catPkm.Records.Add(new Record
@@ -260,7 +261,8 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.EOS.Moves.Details>(item),
-                    InternalName = $"eos-move-" + item.ID
+                    InternalName = $"eos-move-" + item.ID,
+                    Tags = new[] { item.Name }
                 });
             }
             catMoves.Records.Add(new Record
@@ -281,7 +283,8 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.EOS.Types.Details>(item),
-                    InternalName = $"eos-type-" + item.ID
+                    InternalName = $"eos-type-" + item.ID,
+                    Tags = new[] { item.Name }
                 });
             }
             catTypes.Records.Add(new Record
