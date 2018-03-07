@@ -39,7 +39,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
 </p>
 <div>
     <h3>Details</h3>
-	<div class=""pkm-image-inner"" style=""text-align:center;"">
+	<div class=""pkm-image-inner"">
 		<div data-role='commentContent' class='ipsType_normal ipsType_richText ipsContained' data-controller='core.front.core.lightboxedImages'>
 			<p>
 				<img class=""ipsImage"" src=""{galleryImage=""");
