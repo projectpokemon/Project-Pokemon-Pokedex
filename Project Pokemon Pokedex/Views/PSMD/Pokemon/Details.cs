@@ -35,10 +35,52 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             
             #line default
             #line hidden
-            this.Write("\r\n</p>\r\n<div>\r\n    <h3>Details</h3>\r\n    <dl class=\"dl-horizontal\">\r\n        <dt>" +
-                    "\r\n            ID (Decimal)\r\n        </dt>\r\n\r\n        <dd>\r\n            ");
+            this.Write(@"
+</p>
+<div>
+    <h3>Details</h3>
+	<div class=""pkm-image-inner"" style=""text-align:center;"">
+		<div data-role='commentContent' class='ipsType_normal ipsType_richText ipsContained' data-controller='core.front.core.lightboxedImages'>
+			<p>
+				<img class=""ipsImage"" src=""{galleryImage=""");
             
-            #line 18 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 15 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID.ToString().PadLeft(3, '0')));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 15 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("/PSMD Portrait Normal\"}\" alt=\"");
+            
+            #line 15 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" Portrait\" />\r\n\t\t\t</p>\t\t\t\r\n\t\t</div>\r\n\t</div>\r\n\t<a href=\"{albumLink=\"");
+            
+            #line 19 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID.ToString().PadLeft(3, '0')));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 19 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\"}\">See more images</a>\r\n    <dl class=\"dl-horizontal\">\r\n        <dt>\r\n          " +
+                    "  ID (Decimal)\r\n        </dt>\r\n\r\n        <dd>\r\n            ");
+            
+            #line 26 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID));
             
             #line default
@@ -46,7 +88,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            ID (Hex, Big Endian)\r\n        </dt>\r" +
                     "\n\r\n        <dd>\r\n            ");
             
-            #line 26 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 34 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.IDHexBigEndian));
             
             #line default
@@ -54,7 +96,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            ID (Hex, Little Endian)\r\n        </d" +
                     "t>\r\n\r\n        <dd>\r\n            ");
             
-            #line 34 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 42 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.IDHexLittleEndian));
             
             #line default
@@ -62,7 +104,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n           Dex Number\r\n        </dt>\r\n\r\n        " +
                     "<dd>\r\n            ");
             
-            #line 42 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 50 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.DexNumber));
             
             #line default
@@ -70,7 +112,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Category\r\n        </dt>\r\n\r\n        <" +
                     "dd>\r\n            ");
             
-            #line 50 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 58 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Category));
             
             #line default
@@ -78,7 +120,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            List Number 1\r\n        </dt>\r\n\r\n    " +
                     "    <dd>\r\n            ");
             
-            #line 58 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 66 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ListNumber1));
             
             #line default
@@ -86,7 +128,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            List Number 2\r\n        </dt>\r\n\r\n    " +
                     "    <dd>\r\n            ");
             
-            #line 66 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 74 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ListNumber2));
             
             #line default
@@ -94,14 +136,14 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Evolves From\r\n        </dt>\r\n\r\n     " +
                     "   <dd>\r\n\t\t\t<a href=\'{page=\"psmd-pkm-");
             
-            #line 74 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 82 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.EvolvesFromEntryID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 74 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 82 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.EvolvesFromName));
             
             #line default
@@ -109,14 +151,14 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("</a>\r\n        </dd>\r\n\r\n        <dt>\r\n            Ability 1\r\n        </dt>\r\n\r\n    " +
                     "    <dd>\r\n\t\t\t<a href=\'{page=\"psmd-ability-");
             
-            #line 82 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 90 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Ability1ID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 82 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 90 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Ability1));
             
             #line default
@@ -124,14 +166,14 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("</a>\r\n        </dd>\r\n\r\n        <dt>\r\n            Ability 2\r\n        </dt>\r\n\r\n    " +
                     "    <dd>\r\n            <a href=\'{page=\"psmd-ability-");
             
-            #line 90 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 98 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Ability2ID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 90 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 98 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Ability2));
             
             #line default
@@ -139,14 +181,14 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("</a>\r\n        </dd>\r\n\r\n        <dt>\r\n            Hidden Ability\r\n        </dt>\r\n\r" +
                     "\n        <dd>\r\n            <a href=\'{page=\"psmd-ability-");
             
-            #line 98 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 106 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.AbilityHiddenID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 98 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 106 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.AbilityHidden));
             
             #line default
@@ -154,14 +196,14 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("</a>\r\n        </dd>\r\n\r\n        <dt>\r\n            Type 1\r\n        </dt>\r\n\r\n       " +
                     " <dd>\r\n\t\t\t<a href=\'{page=\"psmd-type-");
             
-            #line 106 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 114 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Type1ID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 106 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 114 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Type1));
             
             #line default
@@ -169,14 +211,14 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("</a>\r\n        </dd>\r\n\r\n        <dt>\r\n            Type 2\r\n        </dt>\r\n\r\n       " +
                     " <dd>\r\n            <a href=\'{page=\"psmd-type-");
             
-            #line 114 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 122 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Type2ID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 114 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 122 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Type2));
             
             #line default
@@ -184,7 +226,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("</a>\r\n        </dd>\r\n\r\n        <dt>\r\n            Is Mega Evolution\r\n        </dt>" +
                     "\r\n\r\n        <dd>\r\n            ");
             
-            #line 122 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 130 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.IsMegaEvolution));
             
             #line default
@@ -192,7 +234,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write("\r\n        </dd>\r\n\r\n        <dt>\r\n            Min Evolve Level\r\n        </dt>\r\n\r\n " +
                     "       <dd>\r\n            ");
             
-            #line 130 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 138 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MinEvolveLevel));
             
             #line default
@@ -201,7 +243,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
                     "table class=\"table\">\r\n        <tr>\r\n            <th>Level</th>\r\n            <th>" +
                     "Move</th>\r\n        </tr>\r\n        ");
             
-            #line 142 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 150 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
  foreach (var item in Model.MovesLevelUp)
         { 
             
@@ -209,28 +251,28 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             #line hidden
             this.Write("            <tr>\r\n                <td>\r\n                    ");
             
-            #line 146 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 154 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Level.ToString()));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n\t\t\t\t\t<a href=\'{page=\"psmd-move-");
             
-            #line 149 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 157 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.MoveID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 149 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 157 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.MoveName));
             
             #line default
             #line hidden
             this.Write("</a>\r\n                </td>\r\n            </tr>            \r\n        ");
             
-            #line 152 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 160 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
  } 
             
             #line default
@@ -252,7 +294,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
         </tr>
         ");
             
-            #line 168 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 176 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
  foreach (var item in Model.StatLevelUp)
         { 
             
@@ -260,63 +302,63 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             #line hidden
             this.Write("            <tr>\r\n                <td>\r\n                    ");
             
-            #line 172 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 180 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((item.Level + 1)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 175 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 183 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Exp));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 178 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 186 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalHP, item.AddedHP)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 181 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 189 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalAttack, item.AddedAttack)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 184 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 192 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalSpAttack, item.AddedSpAttack)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 187 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 195 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalDefense, item.AddedDefense)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 190 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 198 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalSpDefense, item.AddedSpDefense)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n                <td>\r\n                    ");
             
-            #line 193 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 201 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Format("{0} (+{1})", item.TotalSpeed, item.AddedSpeed)));
             
             #line default
             #line hidden
             this.Write("\r\n                </td>\r\n            </tr>\r\n        ");
             
-            #line 196 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
+            #line 204 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
  } 
             
             #line default
