@@ -12,7 +12,7 @@
 	<div class="pkm-image-inner">
 		<div data-role='commentContent' class='ipsType_normal ipsType_richText ipsContained' data-controller='core.front.core.lightboxedImages'>
 			<p>
-				<img class="ipsImage" src="{galleryImage="<#=Model.ID.ToString().PadLeft(3, '0') #> <#=Model.Name #>/PSMD Portrait Normal"}" alt="<#=Model.Name #> Portrait" />
+				<img class="ipsImage" src="{galleryImage="<#=Model.DexNumber.ToString().PadLeft(3, '0') #> <#=Model.Name #>/PSMD Portrait Normal"}" alt="<#=Model.Name #> Portrait" />
 			</p>			
 		</div>
 	</div>

@@ -45,7 +45,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
 				<img class=""ipsImage"" src=""{galleryImage=""");
             
             #line 15 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID.ToString().PadLeft(3, '0')));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.DexNumber.ToString().PadLeft(3, '0')));
             
             #line default
             #line hidden
