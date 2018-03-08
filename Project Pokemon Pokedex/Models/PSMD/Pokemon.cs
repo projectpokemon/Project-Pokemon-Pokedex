@@ -57,7 +57,7 @@ namespace ProjectPokemon.Pokedex.Models.PSMD
             }
             html.AppendLine("<b>Super Mystery Dungeon</b>");
 
-            var eos = Data.ParentCollection.EosData.Pokemon.Where(p => p.DexNumber == ID).FirstOrDefault();
+            var eos = Data.ParentCollection.EosData.Pokemon.Where(p => p.DexNumber == DexNumber).FirstOrDefault();
             if (eos != null)
             {
                 if (html.Length > 0)

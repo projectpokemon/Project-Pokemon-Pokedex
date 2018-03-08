@@ -89,7 +89,7 @@ namespace ProjectPokemon.Pokedex.Models.EOS
                 html.AppendLine("<a href=\"{page=\"sm/sm-pkm-" + DexNumber.ToString() + "\"}\">Sun and Moon</a>");
             }
 
-            var psmd = Data.ParentCollection.PsmdData.Pokemon.Where(p => p.DexNumber == ID).FirstOrDefault();
+            var psmd = Data.ParentCollection.PsmdData.Pokemon.Where(p => p.DexNumber == DexNumber).FirstOrDefault();
             if (psmd != null)
             {
                 if (html.Length > 0)
