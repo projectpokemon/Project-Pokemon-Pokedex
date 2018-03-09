@@ -15,9 +15,9 @@
 					<# if (Model.GetIsAltForm()) {
 						var originalForm = Model.Data.Pokemon[Model.GetOriginalFormId().Value];
 						#>
-						<img class="ipsImage" src="https://projectpokemon.org/images/sugimori/<#=originalForm.ID #>-<#=Model.GetFormName().ToLower().Replace(' ', '-') #>.png" alt="<#=Model.Name #> Sugimori Artwork" />
+						<img class="ipsImage" src="{galleryImage="<#=originalForm.ID.ToString().PadLeft(3, '0') #> <#=originalForm.Name #>/Sugimori <#=Model.GetFormName().Replace(originalForm.Name, "") #>"}" alt="<#=Model.Name #> Sugimori Artwork" />
 					<# } else { #>
-						<img class="ipsImage" src="https://projectpokemon.org/images/sugimori/<#=Model.ID #>.png" alt="<#=Model.Name #> Sugimori Artwork" />
+						<img class="ipsImage" src="{galleryImage="<#=Model.ID.ToString().PadLeft(3, '0') #> <#=Model.Name #>/Sugimori"}" alt="<#=Model.Name #> Sugimori Artwork" />
 					<# } #>
 				</p>			
 			</div>
@@ -25,9 +25,9 @@
 		<# if (Model.GetIsAltForm()) {
 			var originalForm = Model.Data.Pokemon[Model.GetOriginalFormId().Value];
 			#>
-			<a href="https://projectpokemon.org/home/gallery/album/<#=(originalForm.ID + 1).ToString() #>-<#=originalForm.ID.ToString().PadLeft(3, '0') #> <#=originalForm.Name #>/">See more images</a>
+			<a href="{albumLink="<#=originalForm.ID.ToString().PadLeft(3, '0') #> <#=originalForm.Name #>"}">See more images</a>
 		<# } else { #>
-			<a href="https://projectpokemon.org/home/gallery/album/<#=(Model.ID + 1).ToString() #>-<#=Model.ID.ToString().PadLeft(3, '0') #> <#= Model.Name #>/">See more images</a>
+			<a href="{albumLink="<#=Model.ID.ToString().PadLeft(3, '0') #> <#=Model.Name #>"}">See more images</a>
 		<# } #>
 	</div>
 

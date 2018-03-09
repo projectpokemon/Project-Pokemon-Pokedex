@@ -38,7 +38,7 @@ namespace ProjectPokemon.Pokedex.Models.PSMD
             var ultrasm = Data.ParentCollection.SMData.Pokemon.Where(p => p.ID == DexNumber).FirstOrDefault();
             if (ultrasm != null)
             {
-                html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-" + DexNumber.ToString() + "\"}\">Ultra Sun and Ultra Moon</a>");
+                html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-" + ultrasm.ID.ToString() + "\"}\">Ultra Sun and Ultra Moon</a>");
             }
 
             var sm = Data.ParentCollection.UltraSMData.Pokemon.Where(p => p.ID == DexNumber).FirstOrDefault();
@@ -48,7 +48,7 @@ namespace ProjectPokemon.Pokedex.Models.PSMD
                 {
                     html.AppendLine(" | ");
                 }
-                html.AppendLine("<a href=\"{page=\"sm/sm-pkm-" + DexNumber.ToString() + "\"}\">Sun and Moon</a>");
+                html.AppendLine("<a href=\"{page=\"sm/sm-pkm-" + sm.ID.ToString() + "\"}\">Sun and Moon</a>");
             }
 
             if (html.Length > 0)
@@ -57,14 +57,14 @@ namespace ProjectPokemon.Pokedex.Models.PSMD
             }
             html.AppendLine("<b>Super Mystery Dungeon</b>");
 
-            var eos = Data.ParentCollection.EosData.Pokemon.Where(p => p.DexNumber == ID).FirstOrDefault();
+            var eos = Data.ParentCollection.EosData.Pokemon.Where(p => p.DexNumber == DexNumber).FirstOrDefault();
             if (eos != null)
             {
                 if (html.Length > 0)
                 {
                     html.AppendLine(" | ");
                 }
-                html.AppendLine("<a href=\"{page=\"eos/eos-pkm-" + DexNumber.ToString() + "\"}\">Explorers of Sky</a>");
+                html.AppendLine("<a href=\"{page=\"eos/eos-pkm-" + eos.ID.ToString() + "\"}\">Explorers of Sky</a>");
             }
 
             return html.ToString();

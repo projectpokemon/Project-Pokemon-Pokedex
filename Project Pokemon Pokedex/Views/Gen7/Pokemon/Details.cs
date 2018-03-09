@@ -51,21 +51,28 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t<img class=\"ipsImage\" src=\"https://projectpokemon.org/images/sugimori/");
+            this.Write("\t\t\t\t\t\t<img class=\"ipsImage\" src=\"{galleryImage=\"");
             
             #line 18 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(originalForm.ID));
+            this.Write(this.ToStringHelper.ToStringWithCulture(originalForm.ID.ToString().PadLeft(3, '0')));
             
             #line default
             #line hidden
-            this.Write("-");
+            this.Write(" ");
             
             #line 18 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.GetFormName().ToLower().Replace(' ', '-')));
+            this.Write(this.ToStringHelper.ToStringWithCulture(originalForm.Name));
             
             #line default
             #line hidden
-            this.Write(".png\" alt=\"");
+            this.Write("/Sugimori ");
+            
+            #line 18 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.GetFormName().Replace(originalForm.Name, "")));
+            
+            #line default
+            #line hidden
+            this.Write("\"}\" alt=\"");
             
             #line 18 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -79,14 +86,21 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t<img class=\"ipsImage\" src=\"https://projectpokemon.org/images/sugimori/");
+            this.Write("\t\t\t\t\t\t<img class=\"ipsImage\" src=\"{galleryImage=\"");
             
             #line 20 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID.ToString().PadLeft(3, '0')));
             
             #line default
             #line hidden
-            this.Write(".png\" alt=\"");
+            this.Write(" ");
+            
+            #line 20 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("/Sugimori\"}\" alt=\"");
             
             #line 20 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -109,14 +123,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t<a href=\"https://projectpokemon.org/home/gallery/album/");
-            
-            #line 28 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((originalForm.ID + 1).ToString()));
-            
-            #line default
-            #line hidden
-            this.Write("-");
+            this.Write("\t\t\t<a href=\"{albumLink=\"");
             
             #line 28 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(originalForm.ID.ToString().PadLeft(3, '0')));
@@ -130,21 +137,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("/\">See more images</a>\r\n\t\t");
+            this.Write("\"}\">See more images</a>\r\n\t\t");
             
             #line 29 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("\t\t\t<a href=\"https://projectpokemon.org/home/gallery/album/");
-            
-            #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((Model.ID + 1).ToString()));
-            
-            #line default
-            #line hidden
-            this.Write("-");
+            this.Write("\t\t\t<a href=\"{albumLink=\"");
             
             #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID.ToString().PadLeft(3, '0')));
@@ -158,7 +158,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("/\">See more images</a>\r\n\t\t");
+            this.Write("\"}\">See more images</a>\r\n\t\t");
             
             #line 31 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  } 

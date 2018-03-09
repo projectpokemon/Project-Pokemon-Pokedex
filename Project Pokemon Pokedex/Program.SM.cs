@@ -841,7 +841,7 @@ namespace ProjectPokemon.Pokedex
             // Pokemon
             var catPkm = new Category();
             catPkm.Name = $"{gameTag}-Pokemon";
-            catPkm.Records = new List<Record>();
+            catPkm.Records = new List<Record>();            
             foreach (var item in data.Pokemon)
             {
                 // Exclude Egg
@@ -851,7 +851,8 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.ID.ToString().PadLeft(3, '0') + " " + item.Name,
                     Content = BuildAndReturnTemplate<Views.Gen7.Pokemon.Details>(item),
-                    InternalName = $"{gameTag}-pkm-" + item.ID
+                    InternalName = $"{gameTag}-pkm-" + item.ID,
+                    Tags = new[] { item.Name }
                 });
             }
             catPkm.Records.Add(new Record
@@ -871,7 +872,8 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.Gen7.Moves.Details>(item),
-                    InternalName = $"{gameTag}-move-" + item.ID
+                    InternalName = $"{gameTag}-move-" + item.ID,
+                    Tags = new[] { item.Name }
                 });
             }
             catMove.Records.Add(new Record
@@ -891,7 +893,8 @@ namespace ProjectPokemon.Pokedex
                 {
                     Title = item.Name,
                     Content = BuildAndReturnTemplate<Views.Gen7.Types.Details>(item),
-                    InternalName = $"{gameTag}-type-" + item.ID
+                    InternalName = $"{gameTag}-type-" + item.ID,
+                    Tags = new[] { item.Name }
                 });
             }
             catType.Records.Add(new Record

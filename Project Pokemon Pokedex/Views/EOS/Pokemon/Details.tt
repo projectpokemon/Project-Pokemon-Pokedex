@@ -9,6 +9,14 @@
 </p>
 <div>
     <h3>Details</h3>
+	<div class="pkm-image-inner">
+		<div data-role='commentContent' class='ipsType_normal ipsType_richText ipsContained' data-controller='core.front.core.lightboxedImages'>
+			<p>
+				<img class="ipsImage" src="{galleryImage="<#=Model.DexNumber.ToString().PadLeft(3, '0') #> <#=Model.Name #>/EoS Portrait Normal"}" alt="<#=Model.Name #> Portrait" />
+			</p>			
+		</div>
+	</div>
+	<a href="{albumLink="<#=Model.ID.ToString().PadLeft(3, '0') #> <#=Model.Name #>"}">See more images</a>
     <dl class="dl-horizontal">
         <dt>
             ID (Decimal)
