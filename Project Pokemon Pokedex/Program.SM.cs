@@ -863,6 +863,30 @@ namespace ProjectPokemon.Pokedex
             });
             output.Add(catPkm);
 
+            // Egg Groups
+            var catEggGroups = new Category();
+            catEggGroups.Name = $"{gameTag}-EggGroups";
+            catEggGroups.Records = new List<Record>();
+            var eggGroups = data.GetEggGroups();
+            foreach (var item in eggGroups)
+            {
+                catEggGroups.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.Gen7.EggGroups.Details>(item),
+                    InternalName = $"{gameTag}-egggroup-" + item.Name,
+                    Tags = new[] { item.Name }
+                });
+            }
+            catEggGroups.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.Gen7.EggGroups.Index>(eggGroups),
+                InternalName = $"{gameTag}-egggroup-index"
+            });
+            output.Add(catEggGroups);
+
+            // Moves
             var catMove = new Category();
             catMove.Name = $"{gameTag}-Moves";
             catMove.Records = new List<Record>();
@@ -884,6 +908,7 @@ namespace ProjectPokemon.Pokedex
             });
             output.Add(catMove);
 
+            // Types
             var catType = new Category();
             catType.Name = $"{gameTag}-Types";
             catType.Records = new List<Record>();
