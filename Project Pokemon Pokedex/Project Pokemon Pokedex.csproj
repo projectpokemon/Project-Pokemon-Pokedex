@@ -172,6 +172,7 @@
     <Compile Include="Models\EOS\MoveReference.cs" />
     <Compile Include="Models\EOS\PokemonReference.cs" />
     <Compile Include="Models\Gen7\AbilityReference.cs" />
+    <Compile Include="Models\Gen7\EggGroup.cs" />
     <Compile Include="Models\Gen7\EvolutionMethod.cs" />
     <Compile Include="Models\Gen7\ItemReference.cs" />
     <Compile Include="Models\Gen7\LevelupPokemonReference.cs" />
