@@ -28,6 +28,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
                 group.Name = item;
                 group.SingleEggGroupPokemon = Pokemon.Where(x => x.EggGroup1 == item || x.EggGroup2 == item).Where(x => x.EggGroup1 == x.EggGroup2).Distinct().ToList();
                 group.MultiEggGroupPokemon = Pokemon.Where(x => x.EggGroup1 == item || x.EggGroup2 == item).Where(x => x.EggGroup1 != x.EggGroup2).Distinct().ToList();
+                groups.Add(group);
             }
             return groups;
         }
