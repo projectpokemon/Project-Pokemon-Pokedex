@@ -9,17 +9,39 @@
 <# if (Model.SingleEggGroupPokemon.Any()) { #>
 <table class="table">
 	<tr>
-		<th style="width:60px;"></th>
+		<th style="width:60px;">Dex ID</th>
+		<th style="width:60px;">Icon</th>
         <th>Name</th>
+		<th>Type</th>
+		<th>Ability</th>		
     </tr>
 	<# foreach (var item in Model.SingleEggGroupPokemon) { #>
-	<tr style="height:60px;vertical-align: middle;">
-		<td>
+	<tr style="height:60px;">		
+		<td style="vertical-align: middle;">
+			<#=item.ID #>
+		</td>
+		<td style="vertical-align: middle;">
 			<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.PokespriteHtml #></a>				
 		</td>
-        <td>
+        <td style="vertical-align: middle;">
             <a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
         </td>
+		<td style="vertical-align: middle;">
+			<a href="{page="$idPrefix-type-<#=item.Type1.ID #>"}"><img alt="<#= item.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type1.Name #>.png" /></a>
+			<# if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { #>
+			<a href="{page="$idPrefix-type-<#=item.Type2.ID #>"}"><img alt="<#= item.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type2.Name #>.png" /></a>
+			<# } #>
+		</td>
+		<td style="vertical-align: middle;">
+			<span><#= item.Ability1.Name #></span>
+
+			<# if (item.Ability1.ID != item.Ability2.ID) { #>
+				<br /><span><#= item.Ability2.Name #></span>
+			<# } #>
+			<# if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { #>
+				<br /><span><#= item.AbilityHidden.Name #></span>
+			<# } #>
+		</td>
     </tr>
 	<# } #>
 </table>
@@ -27,21 +49,52 @@
 <p>There are no Pokémon that are in just this one egg group.</p>
 <# } #>
 
-<h2>Pokémon in This and Tnother Egg Group</h2>
+<h2>Pokémon in This and Another Egg Group</h2>
 <# if (Model.SingleEggGroupPokemon.Any()) { #>
 <table class="table">
 	<tr>
-		<th style="width:60px;"></th>
+		<th style="width:60px;">Dex ID</th>
+		<th style="width:60px;">Icon</th>
         <th>Name</th>
+		<th>Type</th>
+		<th>Ability</th>
+		<th>Other Egg Group</th>
     </tr>
 	<# foreach (var item in Model.SingleEggGroupPokemon) { #>
-	<tr style="height:60px;vertical-align: middle;">
-		<td>
+	<tr style="height:60px;">
+		<td style="vertical-align: middle;">
+			<#=item.ID #>
+		</td>
+		<td style="vertical-align: middle;">
 			<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.PokespriteHtml #></a>				
 		</td>
-        <td>
+        <td style="vertical-align: middle;">
             <a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
         </td>
+		<td style="vertical-align: middle;">
+			<a href="{page="$idPrefix-type-<#=item.Type1.ID #>"}"><img alt="<#= item.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type1.Name #>.png" /></a>
+			<# if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { #>
+			<a href="{page="$idPrefix-type-<#=item.Type2.ID #>"}"><img alt="<#= item.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type2.Name #>.png" /></a>
+			<# } #>
+		</td>
+		<td style="vertical-align: middle;">
+			<span><#= item.Ability1.Name #></span>
+
+			<# if (item.Ability1.ID != item.Ability2.ID) { #>
+				<br /><span><#= item.Ability2.Name #></span>
+			<# } #>
+			<# if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { #>
+				<br /><span><#= item.AbilityHidden.Name #></span>
+			<# } #>
+		</td>
+		<td style="vertical-align: middle;">
+			<# if (item.EggGroup1 != Model.Name) { #>
+				<#= item.EggGroup1 #>
+			<# } #>
+			<# if (item.EggGroup2 != Model.Name) { #>
+				<#= item.EggGroup2 #>
+			<# } #>
+		</td>
     </tr>
 	<# } #>
 </table>

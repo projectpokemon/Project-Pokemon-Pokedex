@@ -41,6 +41,7 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             }
         }
         private Pokemon _pokemon;
+
         private SMDataCollection _data;
 
         public int ID { get; set; }
@@ -50,6 +51,46 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
             get
             {
                 return Pokemon?.PokespriteHtml ?? "";
+            }
+        }
+
+        public TypeReference Type1
+        {
+            get
+            {
+                return Pokemon?.Type1 ?? throw new NullReferenceException("PokemonReference.Pokemon is null");
+            }
+        }
+
+        public TypeReference Type2
+        {
+            get
+            {
+                return Pokemon?.Type2 ?? throw new NullReferenceException("PokemonReference.Pokemon is null");
+            }
+        }
+
+        public AbilityReference Ability1
+        {
+            get
+            {
+                return Pokemon?.Ability1 ?? throw new NullReferenceException("PokemonReference.Pokemon is null");
+            }
+        }
+
+        public AbilityReference Ability2
+        {
+            get
+            {
+                return Pokemon?.Ability2 ?? throw new NullReferenceException("PokemonReference.Pokemon is null");
+            }
+        }
+
+        public AbilityReference AbilityHidden
+        {
+            get
+            {
+                return Pokemon?.AbilityHidden ?? throw new NullReferenceException("PokemonReference.Pokemon is null");
             }
         }
 

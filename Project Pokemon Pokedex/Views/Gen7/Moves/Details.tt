@@ -225,63 +225,178 @@
 	
 </dl>
 
+<# if (Model.PokemonThroughLevelUp.Any()) { #>
 <h3>Pokémon Through Level-Up</h3>
 <table class="table">
     <tr>
+		<th style="width:60px;">Dex ID</th>
+		<th style="width:60px;">Icon</th>
+        <th>Name</th>
+		<th>Type</th>
+		<th>Ability</th>
         <th>Level(s)</th>
-        <th>Move</th>
     </tr>
     <# foreach (var item in Model.PokemonThroughLevelUp)
     { #>
-        <tr>
-            <td>
+		<tr style="height:60px;">		
+			<td style="vertical-align: middle;">
+				<#=item.ID #>
+			</td>
+			<td style="vertical-align: middle;">
+				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.PokespriteHtml #></a>				
+			</td>
+			<td style="vertical-align: middle;">
+				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
+			</td>
+			<td style="vertical-align: middle;">
+				<a href="{page="$idPrefix-type-<#=item.Type1.ID #>"}"><img alt="<#= item.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type1.Name #>.png" /></a>
+				<# if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { #>
+				<a href="{page="$idPrefix-type-<#=item.Type2.ID #>"}"><img alt="<#= item.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type2.Name #>.png" /></a>
+				<# } #>
+			</td>
+			<td style="vertical-align: middle;">
+				<span><#= item.Ability1.Name #></span>
+
+				<# if (item.Ability1.ID != item.Ability2.ID) { #>
+					<br /><span><#= item.Ability2.Name #></span>
+				<# } #>
+				<# if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { #>
+					<br /><span><#= item.AbilityHidden.Name #></span>
+				<# } #>
+			</td>
+			<td style="vertical-align: middle;">
                 <#= string.Join(", ", item.Levels) #>
             </td>
-            <td>
-				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
-            </td>
-        </tr>
+		</tr>
     <# } #>
 </table>
+<# } #>
+
+<# if (Model.PokemonThroughTM.Any()) { #>
 <h3>Pokémon Through TM</h3>
 <table class="table">
     <tr>
-        <th>Move</th>
+		<th style="width:60px;">Dex ID</th>
+		<th style="width:60px;">Icon</th>
+        <th>Name</th>
+		<th>Type</th>
+		<th>Ability</th>
     </tr>
     <# foreach (var item in Model.PokemonThroughTM)
     { #>
-        <tr>
-            <td>
+		<tr style="height:60px;">		
+			<td style="vertical-align: middle;">
+				<#=item.ID #>
+			</td>
+			<td style="vertical-align: middle;">
+				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.PokespriteHtml #></a>				
+			</td>
+			<td style="vertical-align: middle;">
 				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
-            </td>
-        </tr>
+			</td>
+			<td style="vertical-align: middle;">
+				<a href="{page="$idPrefix-type-<#=item.Type1.ID #>"}"><img alt="<#= item.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type1.Name #>.png" /></a>
+				<# if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { #>
+				<a href="{page="$idPrefix-type-<#=item.Type2.ID #>"}"><img alt="<#= item.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type2.Name #>.png" /></a>
+				<# } #>
+			</td>
+			<td style="vertical-align: middle;">
+				<span><#= item.Ability1.Name #></span>
+
+				<# if (item.Ability1.ID != item.Ability2.ID) { #>
+					<br /><span><#= item.Ability2.Name #></span>
+				<# } #>
+				<# if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { #>
+					<br /><span><#= item.AbilityHidden.Name #></span>
+				<# } #>
+			</td>
+		</tr>
     <# } #>
 </table>
+<# } #>
+
+<# if (Model.PokemonThroughEgg.Any()) { #>
 <h3>Pokémon Through Egg</h3>
 <table class="table">
     <tr>
-        <th>Move</th>
+		<th style="width:60px;">Dex ID</th>
+		<th style="width:60px;">Icon</th>
+        <th>Name</th>
+		<th>Type</th>
+		<th>Ability</th>
     </tr>
     <# foreach (var item in Model.PokemonThroughEgg)
     { #>
-        <tr>
-            <td>
+        <tr style="height:60px;">		
+			<td style="vertical-align: middle;">
+				<#=item.ID #>
+			</td>
+			<td style="vertical-align: middle;">
+				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.PokespriteHtml #></a>				
+			</td>
+			<td style="vertical-align: middle;">
 				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
-            </td>
-        </tr>
+			</td>
+			<td style="vertical-align: middle;">
+				<a href="{page="$idPrefix-type-<#=item.Type1.ID #>"}"><img alt="<#= item.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type1.Name #>.png" /></a>
+				<# if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { #>
+				<a href="{page="$idPrefix-type-<#=item.Type2.ID #>"}"><img alt="<#= item.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type2.Name #>.png" /></a>
+				<# } #>
+			</td>
+			<td style="vertical-align: middle;">
+				<span><#= item.Ability1.Name #></span>
+
+				<# if (item.Ability1.ID != item.Ability2.ID) { #>
+					<br /><span><#= item.Ability2.Name #></span>
+				<# } #>
+				<# if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { #>
+					<br /><span><#= item.AbilityHidden.Name #></span>
+				<# } #>
+			</td>
+		</tr>
     <# } #>
 </table>
+<# } #>
+
+<# if (Model.PokemonThroughTutor.Any()) { #>
 <h3>Pokémon Through Tutor</h3>
 <table class="table">
     <tr>
-        <th>Move</th>
+		<th style="width:60px;">Dex ID</th>
+		<th style="width:60px;">Icon</th>
+        <th>Name</th>
+		<th>Type</th>
+		<th>Ability</th>
     </tr>
     <# foreach (var item in Model.PokemonThroughTutor)
     { #>
-        <tr>
-            <td>
+        <tr style="height:60px;">		
+			<td style="vertical-align: middle;">
+				<#=item.ID #>
+			</td>
+			<td style="vertical-align: middle;">
+				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.PokespriteHtml #></a>				
+			</td>
+			<td style="vertical-align: middle;">
 				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
-            </td>
-        </tr>
+			</td>
+			<td style="vertical-align: middle;">
+				<a href="{page="$idPrefix-type-<#=item.Type1.ID #>"}"><img alt="<#= item.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type1.Name #>.png" /></a>
+				<# if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { #>
+				<a href="{page="$idPrefix-type-<#=item.Type2.ID #>"}"><img alt="<#= item.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type2.Name #>.png" /></a>
+				<# } #>
+			</td>
+			<td style="vertical-align: middle;">
+				<span><#= item.Ability1.Name #></span>
+
+				<# if (item.Ability1.ID != item.Ability2.ID) { #>
+					<br /><span><#= item.Ability2.Name #></span>
+				<# } #>
+				<# if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { #>
+					<br /><span><#= item.AbilityHidden.Name #></span>
+				<# } #>
+			</td>
+		</tr>
     <# } #>
 </table>
+<# } #>
