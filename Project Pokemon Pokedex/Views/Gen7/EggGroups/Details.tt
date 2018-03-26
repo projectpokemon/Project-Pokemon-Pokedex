@@ -50,7 +50,7 @@
 <# } #>
 
 <h2>Pokémon in This and Another Egg Group</h2>
-<# if (Model.SingleEggGroupPokemon.Any()) { #>
+<# if (Model.MultiEggGroupPokemon.Any()) { #>
 <table class="table">
 	<tr>
 		<th style="width:60px;">Dex ID</th>
@@ -60,7 +60,7 @@
 		<th>Ability</th>
 		<th>Other Egg Group</th>
     </tr>
-	<# foreach (var item in Model.SingleEggGroupPokemon) { #>
+	<# foreach (var item in Model.MultiEggGroupPokemon) { #>
 	<tr style="height:60px;">
 		<td style="vertical-align: middle;">
 			<#=item.ID #>

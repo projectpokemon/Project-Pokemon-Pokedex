@@ -211,7 +211,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
             this.Write("\r\n<h2>Pokémon in This and Another Egg Group</h2>\r\n");
             
             #line 53 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
- if (Model.SingleEggGroupPokemon.Any()) { 
+ if (Model.MultiEggGroupPokemon.Any()) { 
             
             #line default
             #line hidden
@@ -220,7 +220,7 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
                     "th>\r\n\t\t<th>Other Egg Group</th>\r\n    </tr>\r\n\t");
             
             #line 63 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
- foreach (var item in Model.SingleEggGroupPokemon) { 
+ foreach (var item in Model.MultiEggGroupPokemon) { 
             
             #line default
             #line hidden
