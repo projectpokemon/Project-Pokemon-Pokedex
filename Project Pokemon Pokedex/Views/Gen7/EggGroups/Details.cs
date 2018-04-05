@@ -36,17 +36,16 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
             #line default
             #line hidden
             this.Write("<table class=\"table\">\r\n\t<tr>\r\n\t\t<th style=\"width:60px;\">Dex ID</th>\r\n\t\t<th style=" +
-                    "\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th>Type</th>\r\n\t\t<th>Ability</" +
-                    "th>\t\t\r\n    </tr>\r\n\t");
+                    "\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th>Type</th>\r\n    </tr>\r\n\t");
             
-            #line 18 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 17 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  foreach (var item in Model.SingleEggGroupPokemon) { 
             
             #line default
             #line hidden
             this.Write("\t<tr style=\"height:60px;\">\t\t\r\n\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t");
             
-            #line 21 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 20 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
@@ -54,14 +53,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
             this.Write("\r\n\t\t</td>\r\n\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t<a href=\'{page=\"$idPrefix-p" +
                     "km-");
             
-            #line 24 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 23 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 24 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 23 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.PokespriteHtml));
             
             #line default
@@ -69,14 +68,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
             this.Write("</a>\t\t\t\t\r\n\t\t</td>\r\n        <td style=\"vertical-align: middle;\">\r\n            <a h" +
                     "ref=\'{page=\"$idPrefix-pkm-");
             
-            #line 27 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 26 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 27 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 26 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
@@ -84,149 +83,100 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
             this.Write("</a>\r\n        </td>\r\n\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t<a href=\"{page=\"$" +
                     "idPrefix-type-");
             
-            #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 29 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type1.ID));
             
             #line default
             #line hidden
             this.Write("\"}\"><img alt=\"");
             
-            #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 29 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type1.Name));
             
             #line default
             #line hidden
             this.Write("\" src=\"https://projectpokemon.org/images/gen7-types/");
             
-            #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 29 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type1.Name));
             
             #line default
             #line hidden
             this.Write(".png\" /></a>\r\n\t\t\t");
             
-            #line 31 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t<a href=\"{page=\"$idPrefix-type-");
             
-            #line 32 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 31 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type2.ID));
             
             #line default
             #line hidden
             this.Write("\"}\"><img alt=\"");
             
-            #line 32 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 31 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type2.Name));
             
             #line default
             #line hidden
             this.Write("\" src=\"https://projectpokemon.org/images/gen7-types/");
             
-            #line 32 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 31 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type2.Name));
             
             #line default
             #line hidden
             this.Write(".png\" /></a>\r\n\t\t\t");
             
-            #line 33 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t</td>\r\n\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t<span>");
-            
-            #line 36 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Ability1.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</span>\r\n\r\n\t\t\t");
-            
-            #line 38 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
- if (item.Ability1.ID != item.Ability2.ID) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t<br /><span>");
-            
-            #line 39 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Ability2.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</span>\r\n\t\t\t");
-            
-            #line 40 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t");
-            
-            #line 41 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
- if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t<br /><span>");
-            
-            #line 42 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.AbilityHidden.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</span>\r\n\t\t\t");
-            
-            #line 43 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 32 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t</td>\r\n    </tr>\r\n\t");
             
-            #line 46 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 35 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("</table>\r\n");
             
-            #line 48 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 37 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("<p>There are no Pokémon that are in just this one egg group.</p>\r\n");
             
-            #line 50 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 39 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n<h2>Pokémon in This and Another Egg Group</h2>\r\n");
             
-            #line 53 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 42 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  if (Model.MultiEggGroupPokemon.Any()) { 
             
             #line default
             #line hidden
             this.Write("<table class=\"table\">\r\n\t<tr>\r\n\t\t<th style=\"width:60px;\">Dex ID</th>\r\n\t\t<th style=" +
-                    "\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th>Type</th>\r\n\t\t<th>Ability</" +
-                    "th>\r\n\t\t<th>Other Egg Group</th>\r\n    </tr>\r\n\t");
+                    "\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th>Type</th>\r\n\t\t<th>Other Egg" +
+                    " Group</th>\r\n    </tr>\r\n\t");
             
-            #line 63 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 51 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  foreach (var item in Model.MultiEggGroupPokemon) { 
             
             #line default
             #line hidden
             this.Write("\t<tr style=\"height:60px;\">\r\n\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t");
             
-            #line 66 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 54 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
@@ -234,14 +184,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
             this.Write("\r\n\t\t</td>\r\n\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t<a href=\'{page=\"$idPrefix-p" +
                     "km-");
             
-            #line 69 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 57 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 69 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 57 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.PokespriteHtml));
             
             #line default
@@ -249,14 +199,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
             this.Write("</a>\t\t\t\t\r\n\t\t</td>\r\n        <td style=\"vertical-align: middle;\">\r\n            <a h" +
                     "ref=\'{page=\"$idPrefix-pkm-");
             
-            #line 72 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 60 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
             
             #line default
             #line hidden
             this.Write("\"}\'>");
             
-            #line 72 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 60 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
@@ -264,168 +214,119 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
             this.Write("</a>\r\n        </td>\r\n\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t<a href=\"{page=\"$" +
                     "idPrefix-type-");
             
-            #line 75 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 63 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type1.ID));
             
             #line default
             #line hidden
             this.Write("\"}\"><img alt=\"");
             
-            #line 75 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 63 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type1.Name));
             
             #line default
             #line hidden
             this.Write("\" src=\"https://projectpokemon.org/images/gen7-types/");
             
-            #line 75 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 63 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type1.Name));
             
             #line default
             #line hidden
             this.Write(".png\" /></a>\r\n\t\t\t");
             
-            #line 76 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 64 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t<a href=\"{page=\"$idPrefix-type-");
             
-            #line 77 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 65 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type2.ID));
             
             #line default
             #line hidden
             this.Write("\"}\"><img alt=\"");
             
-            #line 77 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 65 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type2.Name));
             
             #line default
             #line hidden
             this.Write("\" src=\"https://projectpokemon.org/images/gen7-types/");
             
-            #line 77 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 65 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type2.Name));
             
             #line default
             #line hidden
             this.Write(".png\" /></a>\r\n\t\t\t");
             
-            #line 78 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t</td>\r\n\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t<span>");
-            
-            #line 81 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Ability1.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</span>\r\n\r\n\t\t\t");
-            
-            #line 83 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
- if (item.Ability1.ID != item.Ability2.ID) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t<br /><span>");
-            
-            #line 84 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Ability2.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</span>\r\n\t\t\t");
-            
-            #line 85 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t");
-            
-            #line 86 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
- if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t<br /><span>");
-            
-            #line 87 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.AbilityHidden.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</span>\r\n\t\t\t");
-            
-            #line 88 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 66 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t</td>\r\n\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t");
             
-            #line 91 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 69 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  if (item.EggGroup1 != Model.Name) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t");
             
-            #line 92 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 70 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.EggGroup1));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t");
             
-            #line 93 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 71 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t");
             
-            #line 94 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 72 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  if (item.EggGroup2 != Model.Name) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t");
             
-            #line 95 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 73 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.EggGroup2));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t");
             
-            #line 96 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 74 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t</td>\r\n    </tr>\r\n\t");
             
-            #line 99 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 77 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  } 
             
             #line default
             #line hidden
             this.Write("</table>\r\n");
             
-            #line 101 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 79 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("<p>There are no Pokémon that are in this and any other egg group.</p>\r\n");
             
-            #line 103 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
+            #line 81 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  } 
             
             #line default

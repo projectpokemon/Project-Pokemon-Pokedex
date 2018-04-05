@@ -77,14 +77,14 @@
     </dd>
 
 	<dt>
-        HitMin
+        Hit Min
     </dt>
     <dd>
         <#= Model.HitMin #>
     </dd>
 
 	<dt>
-        HitMax
+        Hit Max
     </dt>
     <dd>
         <#= Model.HitMax #>
@@ -98,28 +98,28 @@
     </dd>
 
 	<dt>
-        InflictChance
+        Inflict Chance
     </dt>
     <dd>
         <#= Model.InflictChance #>
     </dd>
 
 	<dt>
-        TurnMin
+        Turn Min
     </dt>
     <dd>
         <#= Model.TurnMin #>
     </dd>
 
 	<dt>
-        TurnMax
+        Turn Max
     </dt>
     <dd>
         <#= Model.TurnMax #>
     </dd>
 
 	<dt>
-        CritStage
+        Crit Stage
     </dt>
     <dd>
         <#= Model.CritStage #>
@@ -161,63 +161,63 @@
     </dd>
 
 	<dt>
-        Stat1
+        Stat 1
     </dt>
     <dd>
         <#= Model.Stat1 #>
     </dd>
 
 	<dt>
-        Stat2
+        Stat 2
     </dt>
     <dd>
         <#= Model.Stat2 #>
     </dd>
 
 	<dt>
-        Stat3
+        Stat 3
     </dt>
     <dd>
         <#= Model.Stat3 #>
     </dd>
 
 	<dt>
-        Stat1Num
+        Stat 1 Num
     </dt>
     <dd>
         <#= Model.Stat1Num #>
     </dd>
 
 	<dt>
-        Stat2Num
+        Stat 2 Num
     </dt>
     <dd>
         <#= Model.Stat2Num #>
     </dd>
 
 	<dt>
-        Stat3Num
+        Stat 3 Num
     </dt>
     <dd>
         <#= Model.Stat3Num #>
     </dd>
 
 	<dt>
-        Stat1Percent
+        Stat 1 Percent
     </dt>
     <dd>
         <#= Model.Stat1Percent #>
     </dd>
 
 	<dt>
-        Stat2Percent
+        Stat 2 Percent
     </dt>
     <dd>
         <#= Model.Stat2Percent #>
     </dd>
 
 	<dt>
-        Stat3Percent
+        Stat 3 Percent
     </dt>
     <dd>
         <#= Model.Stat3Percent #>
@@ -233,7 +233,6 @@
 		<th style="width:60px;">Icon</th>
         <th>Name</th>
 		<th>Type</th>
-		<th>Ability</th>
         <th>Level(s)</th>
     </tr>
     <# foreach (var item in Model.PokemonThroughLevelUp)
@@ -255,16 +254,6 @@
 				<# } #>
 			</td>
 			<td style="vertical-align: middle;">
-				<span><#= item.Ability1.Name #></span>
-
-				<# if (item.Ability1.ID != item.Ability2.ID) { #>
-					<br /><span><#= item.Ability2.Name #></span>
-				<# } #>
-				<# if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { #>
-					<br /><span><#= item.AbilityHidden.Name #></span>
-				<# } #>
-			</td>
-			<td style="vertical-align: middle;">
                 <#= string.Join(", ", item.Levels) #>
             </td>
 		</tr>
@@ -280,7 +269,6 @@
 		<th style="width:60px;">Icon</th>
         <th>Name</th>
 		<th>Type</th>
-		<th>Ability</th>
     </tr>
     <# foreach (var item in Model.PokemonThroughTM)
     { #>
@@ -300,16 +288,6 @@
 				<a href="{page="$idPrefix-type-<#=item.Type2.ID #>"}"><img alt="<#= item.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type2.Name #>.png" /></a>
 				<# } #>
 			</td>
-			<td style="vertical-align: middle;">
-				<span><#= item.Ability1.Name #></span>
-
-				<# if (item.Ability1.ID != item.Ability2.ID) { #>
-					<br /><span><#= item.Ability2.Name #></span>
-				<# } #>
-				<# if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { #>
-					<br /><span><#= item.AbilityHidden.Name #></span>
-				<# } #>
-			</td>
 		</tr>
     <# } #>
 </table>
@@ -323,7 +301,6 @@
 		<th style="width:60px;">Icon</th>
         <th>Name</th>
 		<th>Type</th>
-		<th>Ability</th>
     </tr>
     <# foreach (var item in Model.PokemonThroughEgg)
     { #>
@@ -343,16 +320,6 @@
 				<a href="{page="$idPrefix-type-<#=item.Type2.ID #>"}"><img alt="<#= item.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type2.Name #>.png" /></a>
 				<# } #>
 			</td>
-			<td style="vertical-align: middle;">
-				<span><#= item.Ability1.Name #></span>
-
-				<# if (item.Ability1.ID != item.Ability2.ID) { #>
-					<br /><span><#= item.Ability2.Name #></span>
-				<# } #>
-				<# if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { #>
-					<br /><span><#= item.AbilityHidden.Name #></span>
-				<# } #>
-			</td>
 		</tr>
     <# } #>
 </table>
@@ -366,7 +333,6 @@
 		<th style="width:60px;">Icon</th>
         <th>Name</th>
 		<th>Type</th>
-		<th>Ability</th>
     </tr>
     <# foreach (var item in Model.PokemonThroughTutor)
     { #>
@@ -384,16 +350,6 @@
 				<a href="{page="$idPrefix-type-<#=item.Type1.ID #>"}"><img alt="<#= item.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type1.Name #>.png" /></a>
 				<# if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { #>
 				<a href="{page="$idPrefix-type-<#=item.Type2.ID #>"}"><img alt="<#= item.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type2.Name #>.png" /></a>
-				<# } #>
-			</td>
-			<td style="vertical-align: middle;">
-				<span><#= item.Ability1.Name #></span>
-
-				<# if (item.Ability1.ID != item.Ability2.ID) { #>
-					<br /><span><#= item.Ability2.Name #></span>
-				<# } #>
-				<# if (item.AbilityHidden.ID != item.Ability1.ID && item.AbilityHidden.ID != item.Ability2.ID) { #>
-					<br /><span><#= item.AbilityHidden.Name #></span>
 				<# } #>
 			</td>
 		</tr>
