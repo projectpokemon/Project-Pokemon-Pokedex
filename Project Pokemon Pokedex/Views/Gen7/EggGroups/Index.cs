@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace ProjectPokemon.Pokedex.Views.Gen7.Types
+namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
 {
     using System.Linq;
     using System.Text;
@@ -18,9 +18,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Types
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
+    #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Index.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
-    public partial class Details : DetailsBase
+    public partial class Index : IndexBase
     {
 #line hidden
         /// <summary>
@@ -28,151 +28,31 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Types
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<h3>Pokemon</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n        <th style=\"width:60px;" +
-                    "\">Dex ID</th>\r\n\t\t<th style=\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th" +
-                    ">Type</th>\r\n    </tr>\r\n\r\n    ");
+            this.Write("<h2>Pokémon</h2>\r\n\r\n<table class=\"table\">\r\n    <tr>\r\n        <th width=\"60%\">\r\n  " +
+                    "          Name\r\n        </th>\r\n    </tr>\r\n\r\n    ");
             
-            #line 16 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
- foreach (var item in Model.Pokemon) { 
-            
-            #line default
-            #line hidden
-            this.Write("        <tr style=\"height:60px;\">\t\t\r\n\t\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t" +
-                    "\t");
-            
-            #line 19 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
+            #line 16 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Index.tt"
+ foreach (var item in Model) { 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t</td>\r\n\t\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t\t<a href=\'{page=\"$idPrefi" +
-                    "x-pkm-");
+            this.Write("        <tr>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"$idPrefix-egggroup-");
             
-            #line 22 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\'>");
-            
-            #line 22 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.PokespriteHtml));
-            
-            #line default
-            #line hidden
-            this.Write("</a>\t\t\t\t\r\n\t\t\t</td>\r\n\t\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t\t<a href=\'{page=\"" +
-                    "$idPrefix-pkm-");
-            
-            #line 25 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\'>");
-            
-            #line 25 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
+            #line 19 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t\t</td>\r\n\t\t\t<td style=\"vertical-align: middle;\">\r\n\t\t\t\t<a href=\"{page=\"$idP" +
-                    "refix-type-");
-            
-            #line 28 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Type1.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\"><img alt=\"");
-            
-            #line 28 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Type1.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\" src=\"https://projectpokemon.org/images/gen7-types/");
-            
-            #line 28 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Type1.Name));
-            
-            #line default
-            #line hidden
-            this.Write(".png\" /></a>\r\n\t\t\t\t");
-            
-            #line 29 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
- if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t<a href=\"{page=\"$idPrefix-type-");
-            
-            #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Type2.ID));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\"><img alt=\"");
-            
-            #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Type2.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\" src=\"https://projectpokemon.org/images/gen7-types/");
-            
-            #line 30 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Type2.Name));
-            
-            #line default
-            #line hidden
-            this.Write(".png\" /></a>\r\n\t\t\t\t");
-            
-            #line 31 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t</td>\r\n\t\t</tr>\r\n    ");
-            
-            #line 34 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\r\n</table>\r\n\r\n<h3>Moves</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n        <th width=" +
-                    "\"10%\">\r\n            ID\r\n        </th>\r\n        <th width=\"60%\">\r\n            Nam" +
-                    "e\r\n        </th>\r\n    </tr>\r\n\r\n    ");
-            
-            #line 49 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
- foreach (var item in Model.Moves) {
-        var hex = item.ID.ToString("X").PadLeft(4, '0'); 
-            
-            #line default
-            #line hidden
-            this.Write("        <tr>\r\n            <td>\r\n                ");
-            
-            #line 53 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID.ToString()));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n            </td>\r\n            <td>\r\n\t\t\t\t<a href=\'{page=\"$idPrefix-move-");
-            
-            #line 56 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
-            
-            #line default
-            #line hidden
             this.Write("\"}\'>");
             
-            #line 56 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
+            #line 19 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Index.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("</a>\r\n            </td>\r\n        </tr>\r\n    ");
             
-            #line 59 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
+            #line 22 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Index.tt"
  } 
             
             #line default
@@ -181,14 +61,14 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Types
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
+        #line 1 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Index.tt"
 
-private global::ProjectPokemon.Pokedex.Models.Gen7.PkmType _ModelField;
+private global::System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.Gen7.EggGroup> _ModelField;
 
 /// <summary>
 /// Access the Model parameter of the template.
 /// </summary>
-private global::ProjectPokemon.Pokedex.Models.Gen7.PkmType Model
+private global::System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.Gen7.EggGroup> Model
 {
     get
     {
@@ -207,7 +87,7 @@ public virtual void Initialize()
 bool ModelValueAcquired = false;
 if (this.Session.ContainsKey("Model"))
 {
-    this._ModelField = ((global::ProjectPokemon.Pokedex.Models.Gen7.PkmType)(this.Session["Model"]));
+    this._ModelField = ((global::System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.Gen7.EggGroup>)(this.Session["Model"]));
     ModelValueAcquired = true;
 }
 if ((ModelValueAcquired == false))
@@ -215,7 +95,7 @@ if ((ModelValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Model");
     if ((data != null))
     {
-        this._ModelField = ((global::ProjectPokemon.Pokedex.Models.Gen7.PkmType)(data));
+        this._ModelField = ((global::System.Collections.Generic.List<ProjectPokemon.Pokedex.Models.Gen7.EggGroup>)(data));
     }
 }
 
@@ -236,7 +116,7 @@ if ((ModelValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
-    public class DetailsBase
+    public class IndexBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

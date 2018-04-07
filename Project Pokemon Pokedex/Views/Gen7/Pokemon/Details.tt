@@ -167,9 +167,9 @@
 					<# } #>
 				</td>
 				<td>
-					<#= Model.EggGroup1 #> 
+					<a href="{page="$idPrefix-egggroup-<#= Model.EggGroup1 #>"}"><#= Model.EggGroup1 #></a>
 					<# if (Model.EggGroup1 != Model.EggGroup2) { #>
-					<br /><#= Model.EggGroup2 #>
+					<br /><a href="{page="$idPrefix-egggroup-<#= Model.EggGroup2 #>"}"><#= Model.EggGroup2 #></a>
 					<# } #>
 				</td>
 			</tr>

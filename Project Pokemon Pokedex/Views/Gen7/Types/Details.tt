@@ -7,24 +7,30 @@
 <h3>Pokemon</h3>
 <table class="table">
     <tr>
-        <th width="10%">
-            ID
-        </th>
-        <th width="60%">
-            Name
-        </th>
+        <th style="width:60px;">Dex ID</th>
+		<th style="width:60px;">Icon</th>
+        <th>Name</th>
+		<th>Type</th>
     </tr>
 
-    <# foreach (var item in Model.Pokemon) {
-        var hex = item.ID.ToString("X").PadLeft(4, '0'); #>
-        <tr>
-            <td>
-                <#= item.ID.ToString() #>
-            </td>
-            <td>
+    <# foreach (var item in Model.Pokemon) { #>
+        <tr style="height:60px;">		
+			<td style="vertical-align: middle;">
+				<#=item.ID #>
+			</td>
+			<td style="vertical-align: middle;">
+				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.PokespriteHtml #></a>				
+			</td>
+			<td style="vertical-align: middle;">
 				<a href='{page="$idPrefix-pkm-<#=item.ID #>"}'><#=item.Name #></a>
-            </td>
-        </tr>
+			</td>
+			<td style="vertical-align: middle;">
+				<a href="{page="$idPrefix-type-<#=item.Type1.ID #>"}"><img alt="<#= item.Type1.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type1.Name #>.png" /></a>
+				<# if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID) { #>
+				<a href="{page="$idPrefix-type-<#=item.Type2.ID #>"}"><img alt="<#= item.Type2.Name #>" src="https://projectpokemon.org/images/gen7-types/<#= item.Type2.Name #>.png" /></a>
+				<# } #>
+			</td>
+		</tr>
     <# } #>
 
 </table>

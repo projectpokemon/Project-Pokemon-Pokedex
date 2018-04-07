@@ -172,6 +172,7 @@
     <Compile Include="Models\EOS\MoveReference.cs" />
     <Compile Include="Models\EOS\PokemonReference.cs" />
     <Compile Include="Models\Gen7\AbilityReference.cs" />
+    <Compile Include="Models\Gen7\EggGroup.cs" />
     <Compile Include="Models\Gen7\EvolutionMethod.cs" />
     <Compile Include="Models\Gen7\ItemReference.cs" />
     <Compile Include="Models\Gen7\LevelupPokemonReference.cs" />
@@ -233,6 +234,16 @@
       <DependentUpon>Details.tt</DependentUpon>
     </Compile>
     <Compile Include="Views\EOS\Types\Index.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Gen7\EggGroups\Details.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Gen7\EggGroups\Index.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.tt</DependentUpon>
@@ -360,6 +371,14 @@
       <LastGenOutput>Details.cs</LastGenOutput>
     </Content>
     <Content Include="Views\EOS\Types\Index.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Gen7\EggGroups\Details.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Gen7\EggGroups\Index.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Index.cs</LastGenOutput>
     </Content>
