@@ -16,7 +16,7 @@
 			</p>			
 		</div>
 	</div>
-	<a href="{albumLink="<#=Model.ID.ToString().PadLeft(3, '0') #> <#=Model.Name #>"}">See more images</a>
+	<a href="{albumLink="<#=Model.DexNumber.ToString().PadLeft(3, '0') #> <#=Model.Name #>"}">See more images</a>
     <dl class="dl-horizontal">
         <dt>
             ID (Decimal)

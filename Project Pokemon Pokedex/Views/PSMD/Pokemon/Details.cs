@@ -66,7 +66,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write(" Portrait\" />\r\n\t\t\t</p>\t\t\t\r\n\t\t</div>\r\n\t</div>\r\n\t<a href=\"{albumLink=\"");
             
             #line 19 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID.ToString().PadLeft(3, '0')));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.DexNumber.ToString().PadLeft(3, '0')));
             
             #line default
             #line hidden
