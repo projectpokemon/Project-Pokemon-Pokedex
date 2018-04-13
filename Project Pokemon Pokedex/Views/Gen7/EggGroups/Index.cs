@@ -28,8 +28,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<h2>Pokémon</h2>\r\n\r\n<table class=\"table\">\r\n    <tr>\r\n        <th width=\"60%\">\r\n  " +
-                    "          Name\r\n        </th>\r\n    </tr>\r\n\r\n    ");
+            this.Write("<h2>Pokémon</h2>\r\n\r\n<table class=\"table table-striped table-bordered table-conden" +
+                    "sed\">\r\n    <tr>\r\n        <th width=\"60%\">\r\n            Name\r\n        </th>\r\n    " +
+                    "</tr>\r\n\r\n    ");
             
             #line 16 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Index.tt"
  foreach (var item in Model) { 

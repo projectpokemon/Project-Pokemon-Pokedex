@@ -168,7 +168,7 @@
 </div>
 <div>
 <h3>Moves (Level Up)</h3>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>
         <th>Level</th>
         <th>Move</th>
@@ -188,7 +188,7 @@
 </div>
 <div>
 <h3>Moves (TM)</h3>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>
         <th>Move</th>
     </tr>
@@ -204,7 +204,7 @@
 </div>
 <div>
 <h3>Moves (Egg)</h3>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>            
         <th>Move</th>
     </tr>

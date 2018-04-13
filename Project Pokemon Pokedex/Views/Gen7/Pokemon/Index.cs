@@ -28,9 +28,10 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<h2>Pokémon</h2>\r\n\r\n<table class=\"table\">\r\n    <tr>\r\n        <th width=\"10%\">\r\n  " +
-                    "          ID\r\n        </th>\r\n\t\t<th></th>\r\n        <th width=\"60%\">\r\n            " +
-                    "Name\r\n        </th>\r\n    </tr>\r\n\r\n    ");
+            this.Write("<h2>Pokémon</h2>\r\n\r\n<table class=\"table table-striped table-bordered table-conden" +
+                    "sed\">\r\n    <tr>\r\n        <th width=\"10%\">\r\n            ID\r\n        </th>\r\n\t\t<th>" +
+                    "</th>\r\n        <th width=\"60%\">\r\n            Name\r\n        </th>\r\n    </tr>\r\n\r\n " +
+                    "   ");
             
             #line 20 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Index.tt"
  foreach (var item in Model) {

@@ -165,8 +165,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t</div>\r\n\r\n\t<div class=\"col-md-6\">\r\n\t\t<h2>Pokédex</h2>\r\n\t\t<table class=\"table\">\r\n" +
-                    "\t\t\t<tr>\r\n\t\t\t\t<td style=\"width: 50%;\">\r\n\t\t\t\t\tName\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t");
+            this.Write("\t</div>\r\n\r\n\t<div class=\"col-md-6\">\r\n\t\t<h2>Pokédex</h2>\r\n\t\t<table class=\"table tab" +
+                    "le-striped table-bordered table-condensed\">\r\n\t\t\t<tr>\r\n\t\t\t\t<td style=\"width: 50%;" +
+                    "\">\r\n\t\t\t\t\tName\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t");
             
             #line 42 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -556,9 +557,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t</table>\r\n\t\t<h2>Details</h2>\r\n\t\t<table class=\"table\">\t\t\t\r\n" +
-                    "\t\t\t<tr>\r\n\t\t\t\t<td style=\"width: 50%;\">\r\n\t\t\t\t\tCatch Rate\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t" +
-                    "\t\t");
+            this.Write("\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t</table>\r\n\t\t<h2>Details</h2>\r\n\t\t<table class=\"table table-" +
+                    "striped table-bordered table-condensed\">\t\t\t\r\n\t\t\t<tr>\r\n\t\t\t\t<td style=\"width: 50%;" +
+                    "\">\r\n\t\t\t\t\tCatch Rate\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t");
             
             #line 184 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.CatchRate));
@@ -770,8 +771,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             #line default
             #line hidden
             this.Write("\r\n\t</table>\r\n\t</div>\r\n\t<div class=\"col-md-3\">\r\n\t\t<h2>Stats</h2>\r\n\t\t<table class=\"" +
-                    "table\">\r\n\t\t\t<tr>\r\n\t\t\t\t<td></td>\r\n\t\t\t\t<td>Base</td>\r\n\t\t\t\t<td>EV Yield</td>\r\n\t\t\t</" +
-                    "tr>\r\n\t\t\t<tr>\r\n\t\t\t\t<td>HP</td>\r\n\t\t\t\t<td>");
+                    "table table-striped table-bordered table-condensed\">\r\n\t\t\t<tr>\r\n\t\t\t\t<td></td>\r\n\t\t" +
+                    "\t\t<td>Base</td>\r\n\t\t\t\t<td>EV Yield</td>\r\n\t\t\t</tr>\r\n\t\t\t<tr>\r\n\t\t\t\t<td>HP</td>\r\n\t\t\t\t" +
+                    "<td>");
             
             #line 343 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.BaseHP));
@@ -864,7 +866,8 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             #line default
             #line hidden
             this.Write("</b>\r\n\t\t\t\t</td>\r\n\t\t\t\t<td>\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\t\r\n\t\t</table>\r\n\t\t<h2>Type Effective" +
-                    "ness</h2>\r\n\t\t<table class=\"table\">\r\n\t\t\t");
+                    "ness</h2>\r\n\t\t<table class=\"table table-striped table-bordered table-condensed\">\r" +
+                    "\n\t\t\t");
             
             #line 384 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  foreach (var item in Model.TypeEffectiveness) { 
@@ -913,8 +916,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("<h2>Alternate Forms</h2>\r\n<table class=\"table\">\r\n\t<tr>\r\n\t\t<th style=\"width:60px;\"" +
-                    "></th>\r\n        <th>Form</th>\r\n    </tr>\r\n\t");
+            this.Write("<h2>Alternate Forms</h2>\r\n<table class=\"table table-striped table-bordered table-" +
+                    "condensed\">\r\n\t<tr>\r\n\t\t<th style=\"width:60px;\"></th>\r\n        <th>Form</th>\r\n    " +
+                    "</tr>\r\n\t");
             
             #line 401 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  foreach (var item in Model.GetNonMegaAltForms()) { 
@@ -977,8 +981,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("<h2>Evolution Chain</h2>\r\n<table class=\"table\">\r\n    <tr>\r\n\t\t<th style=\"width:60p" +
-                    "x;\"></th>\r\n        <th>Target</th>\r\n\t\t<th>Method</th>\r\n    </tr>\r\n    ");
+            this.Write("<h2>Evolution Chain</h2>\r\n<table class=\"table table-striped table-bordered table-" +
+                    "condensed\">\r\n    <tr>\r\n\t\t<th style=\"width:60px;\"></th>\r\n        <th>Target</th>\r" +
+                    "\n\t\t<th>Method</th>\r\n    </tr>\r\n    ");
             
             #line 423 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  foreach (var item in evolutionChain) { 
@@ -1062,8 +1067,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("<h2>Moves (Level Up)</h2>\r\n<table class=\"table\">\r\n    <tr>\r\n        <th>Level</th" +
-                    ">\r\n        <th>Move</th>\r\n    </tr>\r\n    ");
+            this.Write("<h2>Moves (Level Up)</h2>\r\n<table class=\"table table-striped table-bordered table" +
+                    "-condensed\">\r\n    <tr>\r\n        <th>Level</th>\r\n        <th>Move</th>\r\n    </tr>" +
+                    "\r\n    ");
             
             #line 466 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  foreach (var item in Model.MoveLevelUp)
@@ -1113,8 +1119,8 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("<h2>Moves (TM)</h2>\r\n<table class=\"table\">\r\n    <tr>\r\n        <th>Move</th>\r\n    " +
-                    "</tr>\r\n    ");
+            this.Write("<h2>Moves (TM)</h2>\r\n<table class=\"table table-striped table-bordered table-conde" +
+                    "nsed\">\r\n    <tr>\r\n        <th>Move</th>\r\n    </tr>\r\n    ");
             
             #line 486 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  foreach (var item in Model.MoveTMs)
@@ -1157,8 +1163,8 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("<h2>Moves (Tutor)</h2>\r\n<table class=\"table\">\r\n    <tr>\r\n        <th>Move</th>\r\n " +
-                    "   </tr>\r\n    ");
+            this.Write("<h2>Moves (Tutor)</h2>\r\n<table class=\"table table-striped table-bordered table-co" +
+                    "ndensed\">\r\n    <tr>\r\n        <th>Move</th>\r\n    </tr>\r\n    ");
             
             #line 503 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  foreach (var item in Model.MoveTutors)
@@ -1207,8 +1213,8 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Pokemon
             
             #line default
             #line hidden
-            this.Write("<h2>Moves (Egg)</h2>\r\n<table class=\"table\">\r\n    <tr>\r\n        <th>Move</th>\r\n\t\t<" +
-                    "th>Parents</th>\r\n    </tr>\r\n    ");
+            this.Write("<h2>Moves (Egg)</h2>\r\n<table class=\"table table-striped table-bordered table-cond" +
+                    "ensed\">\r\n    <tr>\r\n        <th>Move</th>\r\n\t\t<th>Parents</th>\r\n    </tr>\r\n    ");
             
             #line 522 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Pokemon\Details.tt"
  foreach (var item in eggMoves)

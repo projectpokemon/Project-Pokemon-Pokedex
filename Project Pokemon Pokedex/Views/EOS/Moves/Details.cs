@@ -113,7 +113,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Moves
 </div>
 <div>
     <h3>Pokemon through Level Up</h3>
-    <table Class=""table"">
+    <table Class=""table table-striped table-bordered table-condensed"">
         <tr>
             <th width=""10%"">
                 ID (Decimal)
@@ -193,7 +193,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Moves
 </div>
 <div>
     <h3>Pokemon through TM</h3>
-    <table Class=""table"">
+    <table Class=""table table-striped table-bordered table-condensed"">
         <tr>
             <th width=""10%"">
                 ID (Decimal)
@@ -263,7 +263,7 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Moves
 </div>
 <div>
     <h3>Pokemon through Eggs</h3>
-    <table Class=""table"">
+    <table Class=""table table-striped table-bordered table-condensed"">
         <tr>
             <th width=""10%"">
                 ID (Decimal)

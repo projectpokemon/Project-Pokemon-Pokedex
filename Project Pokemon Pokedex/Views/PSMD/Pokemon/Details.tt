@@ -142,7 +142,7 @@
 </div>
 <div>
     <h3>Moves (Level Up)</h3>
-    <table class="table">
+    <table class="table table-striped table-bordered table-condensed">
         <tr>
             <th>Level</th>
             <th>Move</th>
@@ -162,7 +162,7 @@
 </div>
 <div>
     <h3>Stats</h3>
-    <table class="table">
+    <table class="table table-striped table-bordered table-condensed">
         <tr>
             <th>Level</th>
             <th>Experience</th>

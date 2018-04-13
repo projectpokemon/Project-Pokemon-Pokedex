@@ -7,7 +7,7 @@
 
 <h2>Pokémon in Just This Egg Group</h2>
 <# if (Model.SingleEggGroupPokemon.Any()) { #>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
 	<tr>
 		<th style="width:60px;">Dex ID</th>
 		<th style="width:60px;">Icon</th>
@@ -40,7 +40,7 @@
 
 <h2>Pokémon in This and Another Egg Group</h2>
 <# if (Model.MultiEggGroupPokemon.Any()) { #>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
 	<tr>
 		<th style="width:60px;">Dex ID</th>
 		<th style="width:60px;">Icon</th>

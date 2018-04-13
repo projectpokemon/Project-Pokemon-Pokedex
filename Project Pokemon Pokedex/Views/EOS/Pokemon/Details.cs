@@ -240,8 +240,9 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             
             #line default
             #line hidden
-            this.Write("</div>\r\n<div>\r\n<h3>Moves (Level Up)</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n      " +
-                    "  <th>Level</th>\r\n        <th>Move</th>\r\n    </tr>\r\n    ");
+            this.Write("</div>\r\n<div>\r\n<h3>Moves (Level Up)</h3>\r\n<table class=\"table table-striped table" +
+                    "-bordered table-condensed\">\r\n    <tr>\r\n        <th>Level</th>\r\n        <th>Move<" +
+                    "/th>\r\n    </tr>\r\n    ");
             
             #line 176 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  foreach (var item in Model.LevelupMoves)
@@ -277,8 +278,9 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             
             #line default
             #line hidden
-            this.Write("</table>\r\n</div>\r\n<div>\r\n<h3>Moves (TM)</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n  " +
-                    "      <th>Move</th>\r\n    </tr>\r\n    ");
+            this.Write("</table>\r\n</div>\r\n<div>\r\n<h3>Moves (TM)</h3>\r\n<table class=\"table table-striped t" +
+                    "able-bordered table-condensed\">\r\n    <tr>\r\n        <th>Move</th>\r\n    </tr>\r\n   " +
+                    " ");
             
             #line 195 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  foreach (var item in Model.TMMoves)
@@ -307,8 +309,9 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             
             #line default
             #line hidden
-            this.Write("</table>\r\n</div>\r\n<div>\r\n<h3>Moves (Egg)</h3>\r\n<table class=\"table\">\r\n    <tr>   " +
-                    "         \r\n        <th>Move</th>\r\n    </tr>\r\n    ");
+            this.Write("</table>\r\n</div>\r\n<div>\r\n<h3>Moves (Egg)</h3>\r\n<table class=\"table table-striped " +
+                    "table-bordered table-condensed\">\r\n    <tr>            \r\n        <th>Move</th>\r\n " +
+                    "   </tr>\r\n    ");
             
             #line 211 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
  foreach (var item in Model.EggMoves)

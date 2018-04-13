@@ -30,7 +30,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
         {
             this.Write(@"<h2>Pokémon</h2>
 
-<table class=""table"">
+<table class=""table table-striped table-bordered table-condensed"">
     <tr>
         <th width=""10%"">
             ID (Decimal)
