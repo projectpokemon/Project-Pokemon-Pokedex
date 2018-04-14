@@ -66,7 +66,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             this.Write(" Portrait\" />\r\n\t\t\t</p>\t\t\t\r\n\t\t</div>\r\n\t</div>\r\n\t<a href=\"{albumLink=\"");
             
             #line 19 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ID.ToString().PadLeft(3, '0')));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.DexNumber.ToString().PadLeft(3, '0')));
             
             #line default
             #line hidden
@@ -240,8 +240,8 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
             #line default
             #line hidden
             this.Write("\r\n        </dd>\r\n\r\n    </dl>\r\n</div>\r\n<div>\r\n    <h3>Moves (Level Up)</h3>\r\n    <" +
-                    "table class=\"table\">\r\n        <tr>\r\n            <th>Level</th>\r\n            <th>" +
-                    "Move</th>\r\n        </tr>\r\n        ");
+                    "table class=\"table table-striped table-bordered table-condensed\">\r\n        <tr>\r" +
+                    "\n            <th>Level</th>\r\n            <th>Move</th>\r\n        </tr>\r\n        ");
             
             #line 150 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\PSMD\Pokemon\Details.tt"
  foreach (var item in Model.MovesLevelUp)
@@ -281,7 +281,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Pokemon
 </div>
 <div>
     <h3>Stats</h3>
-    <table class=""table"">
+    <table class=""table table-striped table-bordered table-condensed"">
         <tr>
             <th>Level</th>
             <th>Experience</th>

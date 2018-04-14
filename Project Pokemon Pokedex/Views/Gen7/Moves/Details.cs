@@ -253,9 +253,16 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             
             #line default
             #line hidden
-            this.Write("<h3>Pokémon Through Level-Up</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n\t\t<th style=\"" +
-                    "width:60px;\">Dex ID</th>\r\n\t\t<th style=\"width:60px;\">Icon</th>\r\n        <th>Name<" +
-                    "/th>\r\n\t\t<th>Type</th>\r\n        <th>Level(s)</th>\r\n    </tr>\r\n    ");
+            this.Write(@"<h3>Pokémon Through Level-Up</h3>
+<table class=""table table-striped table-bordered table-condensed"">
+    <tr>
+		<th style=""width:60px;"">Dex ID</th>
+		<th style=""width:60px;"">Icon</th>
+        <th>Name</th>
+		<th>Type</th>
+        <th>Level(s)</th>
+    </tr>
+    ");
             
             #line 238 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
  foreach (var item in Model.PokemonThroughLevelUp)
@@ -385,9 +392,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             
             #line default
             #line hidden
-            this.Write("<h3>Pokémon Through TM</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n\t\t<th style=\"width:" +
-                    "60px;\">Dex ID</th>\r\n\t\t<th style=\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r\n" +
-                    "\t\t<th>Type</th>\r\n    </tr>\r\n    ");
+            this.Write("<h3>Pokémon Through TM</h3>\r\n<table class=\"table table-striped table-bordered tab" +
+                    "le-condensed\">\r\n    <tr>\r\n\t\t<th style=\"width:60px;\">Dex ID</th>\r\n\t\t<th style=\"wi" +
+                    "dth:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th>Type</th>\r\n    </tr>\r\n    ");
             
             #line 273 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
  foreach (var item in Model.PokemonThroughTM)
@@ -510,9 +517,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             
             #line default
             #line hidden
-            this.Write("<h3>Pokémon Through Egg</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n\t\t<th style=\"width" +
-                    ":60px;\">Dex ID</th>\r\n\t\t<th style=\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r" +
-                    "\n\t\t<th>Type</th>\r\n    </tr>\r\n    ");
+            this.Write("<h3>Pokémon Through Egg</h3>\r\n<table class=\"table table-striped table-bordered ta" +
+                    "ble-condensed\">\r\n    <tr>\r\n\t\t<th style=\"width:60px;\">Dex ID</th>\r\n\t\t<th style=\"w" +
+                    "idth:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th>Type</th>\r\n    </tr>\r\n    ");
             
             #line 305 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
  foreach (var item in Model.PokemonThroughEgg)
@@ -636,9 +643,10 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Moves
             
             #line default
             #line hidden
-            this.Write("<h3>Pokémon Through Tutor</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n\t\t<th style=\"wid" +
-                    "th:60px;\">Dex ID</th>\r\n\t\t<th style=\"width:60px;\">Icon</th>\r\n        <th>Name</th" +
-                    ">\r\n\t\t<th>Type</th>\r\n    </tr>\r\n    ");
+            this.Write("<h3>Pokémon Through Tutor</h3>\r\n<table class=\"table table-striped table-bordered " +
+                    "table-condensed\">\r\n    <tr>\r\n\t\t<th style=\"width:60px;\">Dex ID</th>\r\n\t\t<th style=" +
+                    "\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th>Type</th>\r\n    </tr>\r\n    " +
+                    "");
             
             #line 337 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Moves\Details.tt"
  foreach (var item in Model.PokemonThroughTutor)

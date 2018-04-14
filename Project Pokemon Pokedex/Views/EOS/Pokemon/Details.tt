@@ -16,7 +16,7 @@
 			</p>			
 		</div>
 	</div>
-	<a href="{albumLink="<#=Model.ID.ToString().PadLeft(3, '0') #> <#=Model.Name #>"}">See more images</a>
+	<a href="{albumLink="<#=Model.DexNumber.ToString().PadLeft(3, '0') #> <#=Model.Name #>"}">See more images</a>
     <dl class="dl-horizontal">
         <dt>
             ID (Decimal)
@@ -168,7 +168,7 @@
 </div>
 <div>
 <h3>Moves (Level Up)</h3>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>
         <th>Level</th>
         <th>Move</th>
@@ -188,7 +188,7 @@
 </div>
 <div>
 <h3>Moves (TM)</h3>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>
         <th>Move</th>
     </tr>
@@ -204,7 +204,7 @@
 </div>
 <div>
 <h3>Moves (Egg)</h3>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>            
         <th>Move</th>
     </tr>

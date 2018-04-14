@@ -28,9 +28,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Types
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<h3>Pokemon</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n        <th style=\"width:60px;" +
-                    "\">Dex ID</th>\r\n\t\t<th style=\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th" +
-                    ">Type</th>\r\n    </tr>\r\n\r\n    ");
+            this.Write("<h3>Pokemon</h3>\r\n<table class=\"table table-striped table-bordered table-condense" +
+                    "d\">\r\n    <tr>\r\n        <th style=\"width:60px;\">Dex ID</th>\r\n\t\t<th style=\"width:6" +
+                    "0px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th>Type</th>\r\n    </tr>\r\n\r\n    ");
             
             #line 16 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
  foreach (var item in Model.Pokemon) { 
@@ -139,9 +139,10 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.Types
             
             #line default
             #line hidden
-            this.Write("\r\n</table>\r\n\r\n<h3>Moves</h3>\r\n<table class=\"table\">\r\n    <tr>\r\n        <th width=" +
-                    "\"10%\">\r\n            ID\r\n        </th>\r\n        <th width=\"60%\">\r\n            Nam" +
-                    "e\r\n        </th>\r\n    </tr>\r\n\r\n    ");
+            this.Write("\r\n</table>\r\n\r\n<h3>Moves</h3>\r\n<table class=\"table table-striped table-bordered ta" +
+                    "ble-condensed\">\r\n    <tr>\r\n        <th width=\"10%\">\r\n            ID\r\n        </t" +
+                    "h>\r\n        <th width=\"60%\">\r\n            Name\r\n        </th>\r\n    </tr>\r\n\r\n    " +
+                    "");
             
             #line 49 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\Types\Details.tt"
  foreach (var item in Model.Moves) {

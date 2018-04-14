@@ -57,7 +57,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Types
 </div>
 <div>
     <h3>Pokemon with Type</h3>
-    <table class=""table"">
+    <table class=""table table-striped table-bordered table-condensed"">
         <tr>
             <th width=""10%"">
                 ID (Decimal)
@@ -126,7 +126,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Types
 </div>    
 <div>
     <h4>Moves with Type</h4>
-    <table class=""table"">
+    <table class=""table table-striped table-bordered table-condensed"">
         <tr>
             <th width=""10%"">
                 ID (Decimal)

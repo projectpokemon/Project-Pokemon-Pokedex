@@ -227,7 +227,7 @@
 
 <# if (Model.PokemonThroughLevelUp.Any()) { #>
 <h3>Pokémon Through Level-Up</h3>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>
 		<th style="width:60px;">Dex ID</th>
 		<th style="width:60px;">Icon</th>
@@ -263,7 +263,7 @@
 
 <# if (Model.PokemonThroughTM.Any()) { #>
 <h3>Pokémon Through TM</h3>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>
 		<th style="width:60px;">Dex ID</th>
 		<th style="width:60px;">Icon</th>
@@ -295,7 +295,7 @@
 
 <# if (Model.PokemonThroughEgg.Any()) { #>
 <h3>Pokémon Through Egg</h3>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>
 		<th style="width:60px;">Dex ID</th>
 		<th style="width:60px;">Icon</th>
@@ -327,7 +327,7 @@
 
 <# if (Model.PokemonThroughTutor.Any()) { #>
 <h3>Pokémon Through Tutor</h3>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>
 		<th style="width:60px;">Dex ID</th>
 		<th style="width:60px;">Icon</th>

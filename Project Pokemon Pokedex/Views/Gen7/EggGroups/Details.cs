@@ -35,8 +35,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
             
             #line default
             #line hidden
-            this.Write("<table class=\"table\">\r\n\t<tr>\r\n\t\t<th style=\"width:60px;\">Dex ID</th>\r\n\t\t<th style=" +
-                    "\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th>Type</th>\r\n    </tr>\r\n\t");
+            this.Write("<table class=\"table table-striped table-bordered table-condensed\">\r\n\t<tr>\r\n\t\t<th " +
+                    "style=\"width:60px;\">Dex ID</th>\r\n\t\t<th style=\"width:60px;\">Icon</th>\r\n        <t" +
+                    "h>Name</th>\r\n\t\t<th>Type</th>\r\n    </tr>\r\n\t");
             
             #line 17 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  foreach (var item in Model.SingleEggGroupPokemon) { 
@@ -165,9 +166,9 @@ namespace ProjectPokemon.Pokedex.Views.Gen7.EggGroups
             
             #line default
             #line hidden
-            this.Write("<table class=\"table\">\r\n\t<tr>\r\n\t\t<th style=\"width:60px;\">Dex ID</th>\r\n\t\t<th style=" +
-                    "\"width:60px;\">Icon</th>\r\n        <th>Name</th>\r\n\t\t<th>Type</th>\r\n\t\t<th>Other Egg" +
-                    " Group</th>\r\n    </tr>\r\n\t");
+            this.Write("<table class=\"table table-striped table-bordered table-condensed\">\r\n\t<tr>\r\n\t\t<th " +
+                    "style=\"width:60px;\">Dex ID</th>\r\n\t\t<th style=\"width:60px;\">Icon</th>\r\n        <t" +
+                    "h>Name</th>\r\n\t\t<th>Type</th>\r\n\t\t<th>Other Egg Group</th>\r\n    </tr>\r\n\t");
             
             #line 51 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\Gen7\EggGroups\Details.tt"
  foreach (var item in Model.MultiEggGroupPokemon) { 

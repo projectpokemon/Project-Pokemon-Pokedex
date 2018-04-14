@@ -263,7 +263,7 @@ namespace ProjectPokemon.Pokedex.Views.PSMD.Moves
             #line hidden
             this.Write(@"<div>
     <h3>Pokemon through Level Up</h3>
-    <Table Class=""table"">
+    <Table Class=""table table-striped table-bordered table-condensed"">
         <tr>
             <th width=""10%"">
                 ID (Decimal)
