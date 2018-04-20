@@ -32,5 +32,25 @@ namespace ProjectPokemon.Pokedex.Models.EOS
         public int EnemyIQ { get; set; }
 
         public List<DungeonSpawnPokemonReference> Pokemon { get; set; }
+
+        /// <summary>
+        /// Determines whether the current instance of <see cref="DungeonFloorDetails"/> is equivalent to <paramref name="other"/>. Start and end floors are ignored.
+        /// </summary>
+        public bool IsEquivalentTo(DungeonFloorDetails other)
+        {
+            return this.FloorStructure == other.FloorStructure &&
+                this.Music == other.Music &&
+                this.InitialPokemonDensity == other.InitialPokemonDensity &&
+                this.KeckleonShopPercentage == other.KeckleonShopPercentage &&
+                this.MonsterHousePercentage == other.MonsterHousePercentage &&
+                this.ItemDensity == other.ItemDensity &&
+                this.TrapDensity == other.TrapDensity &&
+                this.BuriedItemDensity == other.BuriedItemDensity &&
+                this.WaterDensity == other.WaterDensity &&
+                this.DarknessLevel == other.DarknessLevel &&
+                this.CoinMax == other.CoinMax &&
+                this.EnemyIQ == other.EnemyIQ &&
+                this.Pokemon.SequenceEqual(other.Pokemon);
+        }
     }
 }

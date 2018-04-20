@@ -33,9 +33,8 @@ namespace ProjectPokemon.Pokedex
                     var floorRaw = dungeonRaw.Floors[floorIndex];
                     var floor = new DungeonFloorDetails();
 
-                    // Todo: analyze floors so we don't have a bunch of duplicates
-                    floor.StartFloor = floorIndex;
-                    floor.EndFloor = floorIndex;
+                    floor.StartFloor = floorIndex + 1;
+                    floor.EndFloor = floorIndex + 1;
 
                     floor.FloorStructure = floorRaw.Attributes.Layout.ToString();
                     floor.Music = "Music track ID " + floorRaw.Attributes.MusicIndex;
@@ -58,7 +57,14 @@ namespace ProjectPokemon.Pokedex
                         floor.Pokemon.Add(pkmReference);
                     }
 
-                    dungeon.Floors.Add(floor);
+                    if (dungeon.Floors.Any() && dungeon.Floors.Last().IsEquivalentTo(floor))
+                    {
+                        dungeon.Floors.Last().EndFloor += 1;
+                    }
+                    else
+                    {
+                        dungeon.Floors.Add(floor);
+                    }
                 }
 
                 dungeons.Add(dungeon);

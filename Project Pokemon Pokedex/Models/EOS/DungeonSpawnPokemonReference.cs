@@ -20,5 +20,22 @@ namespace ProjectPokemon.Pokedex.Models.EOS
         public int Probability1 { get; set; }
         public int Probability2 { get; set; }
         public int Unknown { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is DungeonSpawnPokemonReference other)
+            {
+                return this.ID == other.ID &&
+                    this.Name == other.Name &&
+                    this.Level == other.Level &&
+                    this.Probability1 == other.Probability1 &&
+                    this.Probability2 == other.Probability2 &&
+                    this.Unknown == other.Unknown;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
