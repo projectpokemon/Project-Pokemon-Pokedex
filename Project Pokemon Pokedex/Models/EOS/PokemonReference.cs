@@ -8,14 +8,16 @@ namespace ProjectPokemon.Pokedex.Models.EOS
 {
     public class PokemonReference
     {
-        public PokemonReference(int id, string name)
+        public PokemonReference(int id, string name, EosDataCollection data)
         {
             ID = id;
             Name = name;
+            DataCollection = data;
         }
 
         public int ID { get; set; }
         public string Name { get; set; }
+        public EosDataCollection DataCollection { get; set; }
 
         public string IDHexBigEndian
         {

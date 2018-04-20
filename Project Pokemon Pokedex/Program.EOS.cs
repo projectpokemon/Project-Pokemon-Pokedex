@@ -15,6 +15,58 @@ namespace ProjectPokemon.Pokedex
 {
     partial class Program
     {
+        private static List<Dungeon> LoadDungeons(mappa mappa, LanguageString languageFile, EosDataCollection data)
+        {
+            var dungeonNames = File.ReadAllLines("Resources/EoS/mappaNames.txt");
+            var dungeons = new List<Dungeon>();
+
+            for (int dungeonIndex = 0; dungeonIndex < mappa.Dungeons.Count; dungeonIndex++)
+            {
+                var dungeonRaw = mappa.Dungeons[dungeonIndex];
+                var dungeon = new Dungeon();
+                dungeon.ID = dungeonIndex;
+                dungeon.Name = dungeonNames[dungeonIndex];
+                dungeon.Floors = new List<DungeonFloorDetails>();
+
+                for (int floorIndex = 0; floorIndex < dungeonRaw.Floors.Count; floorIndex++)
+                {
+                    var floorRaw = dungeonRaw.Floors[floorIndex];
+                    var floor = new DungeonFloorDetails();
+
+                    // Todo: analyze floors so we don't have a bunch of duplicates
+                    floor.StartFloor = floorIndex;
+                    floor.EndFloor = floorIndex;
+
+                    floor.FloorStructure = floorRaw.Attributes.Layout.ToString();
+                    floor.Music = "Music track ID " + floorRaw.Attributes.MusicIndex;
+                    floor.InitialPokemonDensity = floorRaw.Attributes.InitialPokemonDensity;
+                    floor.KeckleonShopPercentage = floorRaw.Attributes.KeckleonShopPercentage;
+                    floor.MonsterHousePercentage = floorRaw.Attributes.MonsterHousePercentage;
+                    floor.ItemDensity = floorRaw.Attributes.ItemDensity;
+                    floor.TrapDensity = floorRaw.Attributes.TrapDensity;
+                    floor.BuriedItemDensity = floorRaw.Attributes.BuriedItemDensity;
+                    floor.WaterDensity = floorRaw.Attributes.WaterDensity;
+                    floor.DarknessLevel = floorRaw.Attributes.DarknessLevel;
+                    floor.CoinMax = floorRaw.Attributes.CoinMax;
+                    floor.EnemyIQ = floorRaw.Attributes.EnemyIQ;
+
+                    floor.Pokemon = new List<DungeonSpawnPokemonReference>();
+
+                    foreach (var p in floorRaw.PokemonSpawns)
+                    {
+                        var pkmReference = new DungeonSpawnPokemonReference(p.PokemonID, languageFile.GetPokemonName(p.PokemonID % 600), p.LevelX2 / 2, p.Probability1, p.Probability2, p.Unknown, data);
+                        floor.Pokemon.Add(pkmReference);
+                    }
+
+                    dungeon.Floors.Add(floor);
+                }
+
+                dungeons.Add(dungeon);
+            }
+
+            return dungeons;
+        }
+
         public static async Task<EosDataCollection> LoadEosData(IIOProvider rom)
         {
             var data = new EosDataCollection();
@@ -164,7 +216,7 @@ namespace ProjectPokemon.Pokedex
                             var levelUp = moves[item.Item2].PokemonLevelUp.FirstOrDefault(x => x.ID == entry.ID);
                             if (levelUp == null)
                             {
-                                moves[item.Item2].PokemonLevelUp.Add(new LevelPokemonReference(entry.ID, entry.Name, new List<string> { item.Item1.ToString() }));
+                                moves[item.Item2].PokemonLevelUp.Add(new LevelPokemonReference(entry.ID, entry.Name, new List<string> { item.Item1.ToString() }, data));
                             }
                             else
                             {
@@ -184,7 +236,7 @@ namespace ProjectPokemon.Pokedex
                             tmMoves.Add(new Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
 
                             // Add Pokemon to move
-                            moves[item].PokemonTM.Add(new PokemonReference(entry.ID, entry.Name));
+                            moves[item].PokemonTM.Add(new PokemonReference(entry.ID, entry.Name, data));
                         }
                     }
                     entry.TMMoves = tmMoves;
@@ -198,7 +250,7 @@ namespace ProjectPokemon.Pokedex
                             eggMoves.Add(new Move { ID = item, Name = languageFile.GetMoveName(item), RawData = moveFile.Moves[item] });
 
                             // Add Pokemon to move
-                            moves[item].PokemonEgg.Add(new PokemonReference(entry.ID, entry.Name));
+                            moves[item].PokemonEgg.Add(new PokemonReference(entry.ID, entry.Name, data));
                         }
 
                     }
@@ -214,13 +266,26 @@ namespace ProjectPokemon.Pokedex
                 pkms.Add(entry);
 
                 // Add to types
-                types[maleEntry.MainType].Pokemon.Add(new PokemonReference(entry.ID, entry.Name));
+                types[maleEntry.MainType].Pokemon.Add(new PokemonReference(entry.ID, entry.Name, data));
                 if (maleEntry.MainType != maleEntry.AltType)
                 {
-                    types[maleEntry.AltType].Pokemon.Add(new PokemonReference(entry.ID, entry.Name));
+                    types[maleEntry.AltType].Pokemon.Add(new PokemonReference(entry.ID, entry.Name, data));
                 }
             }
             data.Pokemon = pkms;
+
+            // Dungeons
+            var mappa_s = new mappa();
+            var mappa_t = new mappa();
+            var mappa_y = new mappa();
+
+            await mappa_s.OpenFile("/data/BALANCE/mappa_s.bin", rom);
+            await mappa_t.OpenFile("/data/BALANCE/mappa_t.bin", rom);
+            await mappa_y.OpenFile("/data/BALANCE/mappa_y.bin", rom);
+
+            data.DungeonsSky = LoadDungeons(mappa_s, languageFile, data);
+            data.DungeonsTime = LoadDungeons(mappa_t, languageFile, data);
+            data.DungeonsDarkness = LoadDungeons(mappa_y, languageFile, data);
 
             return data;
         }
@@ -294,6 +359,29 @@ namespace ProjectPokemon.Pokedex
                 InternalName = $"eos-type-index"
             });
             output.Add(catTypes);
+
+
+            // Dungeons
+            var catDungeons = new Category();
+            catDungeons.Name = "Eos-Dungeons";
+            catDungeons.Records = new List<Record>();
+            foreach (var item in data.Types)
+            {
+                catDungeons.Records.Add(new Record
+                {
+                    Title = item.Name,
+                    Content = BuildAndReturnTemplate<Views.EOS.Dungeons.Details>(item),
+                    InternalName = $"eos-dungeon-" + item.ID,
+                    Tags = new[] { item.Name }
+                });
+            }
+            catDungeons.Records.Add(new Record
+            {
+                Title = "Index",
+                Content = BuildAndReturnTemplate<Views.EOS.Dungeons.Index>(data.Types),
+                InternalName = $"eos-dungeon-index"
+            });
+            output.Add(catDungeons);
 
             File.WriteAllText(outputFilename, JsonConvert.SerializeObject(output));
         }

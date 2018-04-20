@@ -8,7 +8,7 @@ namespace ProjectPokemon.Pokedex.Models.EOS
 {
     public class LevelPokemonReference : PokemonReference
     {
-        public LevelPokemonReference(int id, string name, List<string> levels) : base(id, name)
+        public LevelPokemonReference(int id, string name, List<string> levels, EosDataCollection data) : base(id, name, data)
         {
             Levels = levels;
         }

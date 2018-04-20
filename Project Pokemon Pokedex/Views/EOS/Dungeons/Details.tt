@@ -1,0 +1,155 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter type="ProjectPokemon.Pokedex.Models.EOS.Dungeon" name="Model" #>
+<h1><#= Model.Name #></h1>
+<# foreach (var item in Model.Floors) { #>
+
+<h2>
+<# if (item.StartFloor != item.EndFloor) { #>
+Floors <#= item.StartFloor #> to <#= item.EndFloor #>
+<# } else { #>
+Floor <#= item.StartFloor #>
+<# } #>
+</h2>
+
+<h3>Stats</h3>
+<table class="table table-striped table-bordered table-condensed">
+	<tr>
+		<td style="width: 50%;">
+			Floor Structure
+		</td>
+		<td>
+			<#= item.FloorStructure #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			Music
+		</td>
+		<td>
+			<#= item.Music #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			InitialPokemonDensity
+		</td>
+		<td>
+			<#= item.InitialPokemonDensity #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			KeckleonShopPercentage
+		</td>
+		<td>
+			<#= item.KeckleonShopPercentage #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			MonsterHousePercentage
+		</td>
+		<td>
+			<#= item.MonsterHousePercentage #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			ItemDensity
+		</td>
+		<td>
+			<#= item.ItemDensity #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			TrapDensity
+		</td>
+		<td>
+			<#= item.TrapDensity #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			BuriedItemDensity
+		</td>
+		<td>
+			<#= item.BuriedItemDensity #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			WaterDensity
+		</td>
+		<td>
+			<#= item.WaterDensity #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			DarknessLevel
+		</td>
+		<td>
+			<#= item.DarknessLevel #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			CoinMax
+		</td>
+		<td>
+			<#= item.CoinMax #>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 50%;">
+			EnemyIQ
+		</td>
+		<td>
+			<#= item.EnemyIQ #>
+		</td>
+	</tr>
+</table>
+
+<h3>Pokémon</h3>
+
+<table class="table table-striped table-bordered table-condensed">
+<tr>
+    <th width="10%">ID</th>
+    <th>Pokémon</th>
+	<th>Level</th>
+	<th>Probability 1</th>
+	<th>Probability 2</th>
+	<th>Unknown</th>
+</tr>
+<# foreach (var pkm in item.Pokemon) { #>
+
+	<tr>
+        <td>
+            <#= pkm.ID #>
+        </td>
+        <td>
+            <a href='{page="eos-pkm-<#=pkm.ID #>"}'><#=pkm.Name #></a>
+        </td>
+		<td>
+            <#= pkm.Level #>
+        </td>
+		<td>
+            <#= pkm.Probability1 #>
+        </td>
+		<td>
+            <#= pkm.Probability2 #>
+        </td>
+		<td>
+            <#= pkm.Unknown #>
+        </td>
+    </tr>
+
+<# } #>
+</table>
+
+<# } #>

@@ -1,0 +1,100 @@
+﻿Test Dungeon
+Beach Cave
+Drenched Bluff
+Mt. Bristle
+Waterfall Cave
+Apple Woods
+Craggy Coast
+Side Path
+Mt. Horn
+Rock Path
+Foggy Forest
+Forest Path
+Steam Cave
+Amp Plains
+Northern Desert
+Quicksand Cave
+Crystal Cave
+Crystal Crossing
+Chasm Cave
+Dark Hill
+Sealed Ruin
+Dusk Forest
+Deep Dusk Forest
+Treeshroud Forest
+Brine Cave
+Hidden Land
+Temporal Tower
+Mystifying Forest
+Midnight Forest
+Lake Afar
+Mt. Mistral
+Shimmer Hill
+Bottomless Sea
+Surrounded Sea
+Miracle Sea
+Concealed Ruins
+Lost Wilderness
+Mystery Jungle
+Happy Outlook
+Serenity River
+Landslide Cave
+Blizzard Island
+Shimmer Desert
+Crevice Cave
+Mt. Avalanche
+Giant Volcano
+World Abyss
+Lush Prairie
+Tiny Meadow
+Oran Forest
+Sky Stairway
+Aegis Cave
+Labyrinth Cave
+Dojos
+Dark Crater
+Marine Resort
+Mt. Travail
+The Nightmare
+Spacial Rift
+Zero Isle North
+Zero Isle West
+Zero Isle East
+Zero Isle South
+??? ( 1 floor dungeon? )
+Zero Isle Center
+Destiny Tower
+Dummy
+Dummy
+Oblivion Forest
+Treacherous Waters
+Southeastern Islands
+Inferno Cave
+Sky peak/station passes
+Star Cave(SE1)
+Murky Forest(SE2)
+Eastern Cave(SE2)
+Fortune Ravine(SE2)
+Barren Valley(SE5)
+Dark Wasteland(SE5)
+Temporal Tower(SE5)
+Dusk Forest(SE5)
+Spacial Cliffs(SE5)
+Dark Ice Mountain(SE5)
+Icicle Forest(SE5)
+Vast Ice Mountain(SE5)
+Southern Jungle(SE4)
+Boulder Quarry(SE4)
+Right Cave Path(SE4)
+Left Cave Path(SE4)
+Limestone Cavern(SE4)
+Spring Cave(SE3)
+???
+Little Plains(demo)
+Mt. Clear(demo)
+Challenge River(demo)
+Trial Forest(demo)
+Guiding Sea(demo)
+Hidden Shopkeeper Village(demo)
+???
+???

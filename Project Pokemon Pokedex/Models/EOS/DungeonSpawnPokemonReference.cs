@@ -8,13 +8,13 @@ namespace ProjectPokemon.Pokedex.Models.EOS
 {
     public class DungeonSpawnPokemonReference : PokemonReference
     {
-        public DungeonSpawnPokemonReference(int id, string name, int level, int probability1, int probability2, int unknown) : base(id, name)
+        public DungeonSpawnPokemonReference(int id, string name, int level, int probability1, int probability2, int unknown, EosDataCollection data) : base(id, name, data)
         {
             Level = level;
             Probability1 = probability1;
             Probability2 = probability2;
             Unknown = unknown;
-        }
+        }        
 
         public int Level { get; set; }
         public int Probability1 { get; set; }
