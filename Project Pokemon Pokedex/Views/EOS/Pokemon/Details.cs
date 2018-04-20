@@ -340,7 +340,66 @@ namespace ProjectPokemon.Pokedex.Views.EOS.Pokemon
             
             #line default
             #line hidden
-            this.Write("</table>\r\n</div>");
+            this.Write("</table>\r\n</div>\r\n");
+            
+            #line 221 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+ var dungeons = Model.GetEoSSpawnableDungeons(); 
+            
+            #line default
+            #line hidden
+            
+            #line 222 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+ if (dungeons.Any()) { 
+            
+            #line default
+            #line hidden
+            this.Write("<h2>Dungeons</h2>\r\n\r\n<table class=\"table table-striped table-bordered table-conde" +
+                    "nsed\">\r\n    <tr>\r\n        <th width=\"10%\">\r\n            ID\r\n        </th>\r\n     " +
+                    "   <th>\r\n            Name\r\n        </th>\r\n    </tr>\r\n\r\n    ");
+            
+            #line 235 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+ foreach (var item in dungeons)
+    {
+        var hex = item.ID.ToString("X").PadLeft(4, '0'); 
+            
+            #line default
+            #line hidden
+            this.Write("        <tr>\r\n            <td>\r\n                ");
+            
+            #line 240 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            </td>\r\n            <td>\r\n                <a href=\'{page=\"eos-dungeo" +
+                    "n-");
+            
+            #line 243 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.ID));
+            
+            #line default
+            #line hidden
+            this.Write("\"}\'>");
+            
+            #line 243 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n            </td>\r\n        </tr>\r\n    ");
+            
+            #line 246 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n</table>\r\n");
+            
+            #line 249 "C:\Users\evanl\Git\Project-Pokemon-Pokedex\Project Pokemon Pokedex\Views\EOS\Pokemon\Details.tt"
+ } 
+            
+            #line default
+            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         

@@ -107,5 +107,10 @@ namespace ProjectPokemon.Pokedex.Models.EOS
 
             return html.ToString();
         }
+
+        public List<Dungeon> GetEoSSpawnableDungeons()
+        {
+            return Data.DungeonsSky.Where(x => x.Floors.Any(f => f.Pokemon.Any(p => p.ID == this.ID))).ToList();
+        }
     }
 }

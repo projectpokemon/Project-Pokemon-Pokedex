@@ -218,3 +218,32 @@
     <# } #>
 </table>
 </div>
+<# var dungeons = Model.GetEoSSpawnableDungeons(); #>
+<# if (dungeons.Any()) { #>
+<h2>Dungeons</h2>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th width="10%">
+            ID
+        </th>
+        <th>
+            Name
+        </th>
+    </tr>
+
+    <# foreach (var item in dungeons)
+    {
+        var hex = item.ID.ToString("X").PadLeft(4, '0'); #>
+        <tr>
+            <td>
+                <#= item.ID #>
+            </td>
+            <td>
+                <a href='{page="eos-dungeon-<#=item.ID #>"}'><#=item.Name #></a>
+            </td>
+        </tr>
+    <# } #>
+
+</table>
+<# } #>
