@@ -365,7 +365,7 @@ namespace ProjectPokemon.Pokedex
             var catDungeons = new Category();
             catDungeons.Name = "Eos-Dungeons";
             catDungeons.Records = new List<Record>();
-            foreach (var item in data.Types)
+            foreach (var item in data.DungeonsSky)
             {
                 catDungeons.Records.Add(new Record
                 {
@@ -378,7 +378,7 @@ namespace ProjectPokemon.Pokedex
             catDungeons.Records.Add(new Record
             {
                 Title = "Index",
-                Content = BuildAndReturnTemplate<Views.EOS.Dungeons.Index>(data.Types),
+                Content = BuildAndReturnTemplate<Views.EOS.Dungeons.Index>(data.DungeonsSky),
                 InternalName = $"eos-dungeon-index"
             });
             output.Add(catDungeons);
