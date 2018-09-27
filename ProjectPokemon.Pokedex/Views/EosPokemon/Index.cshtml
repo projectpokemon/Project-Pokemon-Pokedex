@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ProjectPokemon.Pokedex.Models.Games.Eos.EosPokemonReference>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Pokémon</h2>
+
+<p>List of Pokémon found in Pokémon Mystery Dungeon: Explorers of Sky</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th width="10%">
+                ID (Decimal)
+            </th>
+            <th width="10%">
+                ID (Hex, Big Endian)
+            </th>
+            <th width="10%">
+                ID (Hex, Little Endian)
+            </th>
+            <th width="60%">
+                Name
+            </th>
+            <th width="10%">
+                Dex Number
+            </th>
+        </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDHexBigEndian)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDHexLittleEndian)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GetPokemon().DexNumber)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

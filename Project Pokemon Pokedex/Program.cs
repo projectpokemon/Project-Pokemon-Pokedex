@@ -104,6 +104,10 @@ namespace ProjectPokemon.Pokedex
 
         static void Main(string[] args)
         {
+            var eos = new NdsRom();
+            eos.OpenFile(@"D:\ROMs\eosu.nds", new PhysicalIOProvider()).Wait();
+            var data2 = LoadEosData(eos);
+
             var eosPath = args[0];
             var psmdPath = args[1];
             var smPath = args[2];
@@ -113,7 +117,7 @@ namespace ProjectPokemon.Pokedex
             {
                 Console.WriteLine("Usage: ProjectPokemonPokedex.exe <eosPath> <psmdPath> <smPath> <ultraSmPath> <OutputFilename>");
                 return;
-            }
+            }            
 
             Console.WriteLine("Building data");
             var data = BuildAllData(eosPath, psmdPath, smPath, ultraSmPath).Result;
