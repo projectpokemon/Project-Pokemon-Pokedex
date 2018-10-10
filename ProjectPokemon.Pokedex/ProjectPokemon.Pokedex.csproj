@@ -5,10 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetNdsToolkit" Version="2.0.0-CI111" />
+    <PackageReference Include="DotNet3dsToolkit" Version="2.0.1" />
+    <PackageReference Include="DotNetNdsToolkit" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
-    <PackageReference Include="SkyEditor.Core" Version="4.2.0" />
+    <PackageReference Include="SkyEditor.Core" Version="4.2.4" />
     <PackageReference Include="SkyEditor.ROMEditor" Version="4.1.0-CI154" />
   </ItemGroup>
 

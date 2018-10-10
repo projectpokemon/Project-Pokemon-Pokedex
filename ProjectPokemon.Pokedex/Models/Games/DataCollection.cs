@@ -1,4 +1,5 @@
 ﻿using ProjectPokemon.Pokedex.Models.Games.Eos;
+using ProjectPokemon.Pokedex.Models.Games.Psmd;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ProjectPokemon.Pokedex.Models.Games
     public class DataCollection
     {
         public EosDataCollection EosData { get; set; }
-        //public PsmdDataCollection PsmdData { get; set; }
+        public PsmdDataCollection PsmdData { get; set; }
         //public SMDataCollection SMData { get; set; }
         //public SMDataCollection UltraSMData { get; set; }
     }

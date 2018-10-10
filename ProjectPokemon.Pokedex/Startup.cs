@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNet3dsToolkit;
 using DotNetNdsToolkit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectPokemon.Pokedex.Models.Games.Eos;
+using ProjectPokemon.Pokedex.Models.Games.Psmd;
 using SkyEditor.Core.IO;
 
 namespace ProjectPokemon.Pokedex
@@ -69,6 +71,14 @@ namespace ProjectPokemon.Pokedex
             await rom.OpenFile(Path.Combine(Environment.CurrentDirectory, Configuration.GetValue<string>("EosRom")), new PhysicalIOProvider());
 
             return await EosDataCollection.LoadEosData(rom);
+        }
+
+        private async Task<PsmdDataCollection> LoadPsmdDataCollection()
+        {
+            var rom = new ThreeDsRom();
+            await rom.OpenFile(Path.Combine(Environment.CurrentDirectory, Configuration.GetValue<string>("PsmdRom")), new PhysicalIOProvider());
+
+            return await PsmdDataCollection.LoadPsmdData(rom);
         }
     }
 }
