@@ -156,16 +156,16 @@ namespace ProjectPokemon.Pokedex
 
             // Load Pokemon
             // - Load Level-up GARC
-            var levelupGarcFiles = config.getGARCData("levelup").Files;
+            var levelupGarcFiles = config.GetGARCData("levelup").Files;
             string[] pokemonEntryNames = GetPokemonEntryNames(config, speciesNames);
             data.AltFormStrings = altForms;
 
             // - Load Egg move GARC
-            var eggmoveGarcFiles = config.getGARCData("eggmove").Files;
+            var eggmoveGarcFiles = config.GetGARCData("eggmove").Files;
 
 
             // - Load Mega Evolution GARC
-            var megaEvoGarcFiles = config.getGARCData("megaevo").Files;
+            var megaEvoGarcFiles = config.GetGARCData("megaevo").Files;
 
             // - Consolidate data
             var pkms = new List<Pokemon>();
@@ -280,7 +280,7 @@ namespace ProjectPokemon.Pokedex
                 // Moves
                 // - Level-up
                 var pkmLevelup = new List<LevelupMoveReference>();
-                var currentLevelup = new Learnset7(levelupGarcFiles[pkm.ID]);
+                var currentLevelup = new Learnset6(levelupGarcFiles[pkm.ID]);
                 for (int i = 0; i < currentLevelup.Count; i++)
                 {
                     var levelupReference = new LevelupMoveReference(
@@ -335,7 +335,7 @@ namespace ProjectPokemon.Pokedex
         private static void LoadPokemonEvolutions(SMDataCollection data, Pokemon pkm, GameConfig config, string[] speciesNames, string[] moveNames, string[] itemNames, string[] typeNames)
         {
             // - Load Evolution GARC
-            var evolutionGarcFiles = config.getGARCData("evolution").Files;
+            var evolutionGarcFiles = config.GetGARCData("evolution").Files;
             string[] evolutionMethods =
             {
                 "", // No param
@@ -495,7 +495,7 @@ namespace ProjectPokemon.Pokedex
         {
             if (_megaGarcFiles == null)
             {
-                _megaGarcFiles = config.getGARCData("megaevo").Files;
+                _megaGarcFiles = config.GetGARCData("megaevo").Files;
             }
 
             if (_megaGarcFiles.Length <= pkm.ID)
@@ -628,33 +628,32 @@ namespace ProjectPokemon.Pokedex
                 }
 
                 move.InflictChance = item.InflictPercent;
-                move.UnknownB = item._0xB; // 0xB ~ Something to deal with skipImmunity
                 move.TurnMin = item.TurnMin;
                 move.TurnMax = item.TurnMax;
                 move.CritStage = item.CritStage;
                 move.Flinch = item.Flinch;
-                move.Effect = item.Effect;
+                move.Effect = item.EffectSequence;
                 move.Recoil = item.Recoil;
-                if (item.Healing.Full)
+                if (item.Healing == Heal.Full)
                 {
                     move.Heal = "Full";
                 }
-                else if (item.Healing.Half)
+                else if (item.Healing == Heal.Half)
                 {
                     move.Heal = "Half";
                 }
-                else if (item.Healing.Quarter)
+                else if (item.Healing == Heal.Quarter)
                 {
                     move.Heal = "Quarter";
                 }
                 else
                 {
-                    move.Heal = $"{item.Healing.Val} HP";
+                    move.Heal = $"{(byte)item.Healing} HP";
                 }
 
-                if (TargetingTypes.Length > item.Targeting)
+                if (TargetingTypes.Length > (byte)item.Target)
                 {
-                    move.Targeting = TargetingTypes[item.Targeting];
+                    move.Targeting = TargetingTypes[(byte)item.Target];
                 }
                 else
                 {
@@ -694,10 +693,6 @@ namespace ProjectPokemon.Pokedex
                 move.Stat1Percent = item.Stat1Percent;
                 move.Stat2Percent = item.Stat2Percent;
                 move.Stat3Percent = item.Stat3Percent;
-
-                // Unknown (Bitflag Related for stuff like Contact and Extra Move Effects)
-                move.Unknown20 = item._0x20; // 0x20
-                move.Unknown21 = item._0x21; // 0x21
 
                 // Pokemon references
                 move.PokemonThroughLevelUp = new List<LevelupPokemonReference>();
