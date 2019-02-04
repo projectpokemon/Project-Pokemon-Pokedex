@@ -795,7 +795,7 @@ namespace ProjectPokemon.Pokedex
             var speciesNames = config.getText(TextName.SpeciesNames);
             var speciesClassifications = config.getText(TextName.SpeciesClassifications);
             var pokedexEntries1 = config.getText(TextName.PokedexEntry1);
-            var pokedexEntries2 = config.getText(TextName.PokedexEntry1);
+            var pokedexEntries2 = config.getText(TextName.PokedexEntry2);
             var abilities = config.getText(TextName.AbilityNames);
             var forms = config.getText(TextName.Forms);
             var typeNames = config.getText(TextName.Types);
