@@ -67,7 +67,7 @@
       <HintPath>..\packages\pk3DS.Core.1.0.394\lib\net40\pk3DS.Core.dll</HintPath>
     </Reference>
     <Reference Include="PKHeX.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PKHeX.Core.19.1.15\lib\net46\PKHeX.Core.dll</HintPath>
+      <HintPath>..\packages\PKHeX.Core.19.2.7\lib\net46\PKHeX.Core.dll</HintPath>
     </Reference>
     <Reference Include="Portable.Text.Encoding, Version=0.8.3.0, Culture=neutral, PublicKeyToken=96f7b8f9dde885b2, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.Text.Encoding.0.8.3.0\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Text.Encoding.dll</HintPath>
