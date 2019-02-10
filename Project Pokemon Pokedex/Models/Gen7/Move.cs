@@ -28,11 +28,6 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         /// </summary>
         public int InflictChance { get; set; }
 
-        /// <summary>
-        /// Unknown. PK3DS says "Something to deal with skipImmunity"
-        /// </summary>
-        public int UnknownB { get; set; }
-
         public int TurnMin { get; set; }
         public int TurnMax { get; set; }
         public int CritStage { get; set; }
@@ -51,16 +46,6 @@ namespace ProjectPokemon.Pokedex.Models.Gen7
         public int Stat1Percent { get; set; }
         public int Stat2Percent { get; set; }
         public int Stat3Percent { get; set; }
-
-        /// <summary>
-        /// Unknown (Bitflag Related for stuff like Contact and Extra Move Effects)
-        /// </summary>
-        public int Unknown20 { get; set; }
-
-        /// <summary>
-        /// Unknown (Bitflag Related for stuff like Contact and Extra Move Effects)
-        /// </summary>
-        public int Unknown21 { get; set; }
 
         public List<LevelupPokemonReference> PokemonThroughLevelUp { get; set; }
         public List<PokemonReference> PokemonThroughTM { get; set; }
