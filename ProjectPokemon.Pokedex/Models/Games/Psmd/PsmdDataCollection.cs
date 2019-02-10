@@ -17,6 +17,8 @@ namespace ProjectPokemon.Pokedex.Models.Games.Psmd
         public List<PsmdPokemonLevelUp> PokemonLevelUp { get; set; }
         public List<PsmdExperienceLevel> Experience { get; set; }
 
+        public DataCollection ParentCollection { get; set; }
+
         public static async Task<PsmdDataCollection> LoadPsmdData(IIOProvider rom)
         {
             var data = new PsmdDataCollection();

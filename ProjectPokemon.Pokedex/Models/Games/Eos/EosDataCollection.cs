@@ -9,9 +9,12 @@ namespace ProjectPokemon.Pokedex.Models.Games.Eos
 {
     public class EosDataCollection
     {
+
         public List<EosPokemon> Pokemon { get; set; }
         public List<EosMove> Moves { get; set; }
         public List<EosPkmType> Types { get; set; }
+
+        public DataCollection ParentCollection { get; set; }
 
         /// <summary>
         /// Loads the EOS data from the given ROM

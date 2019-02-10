@@ -41,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.IDHexLittleEndian)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.ActionLink(item.Name, "Details", new { id = item.ID })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.GetPokemon().DexNumber)

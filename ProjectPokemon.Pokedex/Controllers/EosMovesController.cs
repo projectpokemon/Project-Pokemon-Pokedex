@@ -1,31 +1,30 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using ProjectPokemon.Pokedex.Models.Games;
+using ProjectPokemon.Pokedex.Models.Games.Eos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ProjectPokemon.Pokedex.Models.Games;
-using ProjectPokemon.Pokedex.Models.Games.Eos;
 
 namespace ProjectPokemon.Pokedex.Controllers
 {
-    [Route("eos/pokemon")]
-    public class EosPokemonController : Controller
+    [Route("eos/moves")]
+    public class EosMovesController : Controller
     {
-        public EosPokemonController(DataCollection data)
+        public EosMovesController(DataCollection data)
         {
             _data = data?.EosData ?? throw new ArgumentNullException();
         }
 
         private EosDataCollection _data;
 
-        // GET: eos/pokemon
+        // GET: eos/moves
         public ActionResult Index()
         {
-            return View(_data.Pokemon.Select(p => new EosPokemonReference(_data, p)));
+            return View(_data.Moves.Select(m => new EosMoveReference(_data, m)));
         }
 
-        // GET: eos/pokemon/5
+        // GET: eos/moves/5
         [Route("{id}")]
         public ActionResult Details(int? id)
         {
@@ -34,7 +33,7 @@ namespace ProjectPokemon.Pokedex.Controllers
                 return BadRequest();
             }
 
-            return View(_data.Pokemon[id.Value]);
+            return View(_data.Moves[id.Value]);
         }
     }
 }

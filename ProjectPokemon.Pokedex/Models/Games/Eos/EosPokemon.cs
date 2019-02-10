@@ -70,43 +70,55 @@ namespace ProjectPokemon.Pokedex.Models.Games.Eos
             return string.Format("{0} {1}", hex.Substring(2, 2), hex.Substring(0, 2));
         }
 
-        //public string GetCrossReferenceHtml()
-        //{
-        //    var html = new StringBuilder();
+        public string GetCrossReferenceHtml()
+        {
+            var html = new StringBuilder();
 
-        //    var ultrasm = Data.ParentCollection.SMData.Pokemon.Where(p => p.ID == DexNumber).FirstOrDefault();
-        //    if (ultrasm != null)
-        //    {
-        //        html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-" + ultrasm.ID.ToString() + "\"}\">Ultra Sun and Ultra Moon</a>");
-        //    }
+            var ultrasm = Data.ParentCollection.SMData.Pokemon.Where(p => p.ID == DexNumber).FirstOrDefault();
+            if (ultrasm != null)
+            {
+                html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-" + ultrasm.ID.ToString() + "\"}\">Ultra Sun and Ultra Moon</a>");
+            }
 
-        //    var sm = Data.ParentCollection.UltraSMData.Pokemon.Where(p => p.ID == DexNumber).FirstOrDefault();
-        //    if (sm != null)
-        //    {
-        //        if (html.Length > 0)
-        //        {
-        //            html.AppendLine(" | ");
-        //        }
-        //        html.AppendLine("<a href=\"{page=\"sm/sm-pkm-" + sm.ID.ToString() + "\"}\">Sun and Moon</a>");
-        //    }
+            var sm = Data.ParentCollection.UltraSMData.Pokemon.Where(p => p.ID == DexNumber).FirstOrDefault();
+            if (sm != null)
+            {
+                if (html.Length > 0)
+                {
+                    html.AppendLine(" | ");
+                }
+                html.AppendLine("<a href=\"{page=\"sm/sm-pkm-" + sm.ID.ToString() + "\"}\">Sun and Moon</a>");
+            }
 
-        //    var psmd = Data.ParentCollection.PsmdData.Pokemon.Where(p => p.DexNumber == DexNumber).FirstOrDefault();
-        //    if (psmd != null)
-        //    {
-        //        if (html.Length > 0)
-        //        {
-        //            html.AppendLine(" | ");
-        //        }
-        //        html.AppendLine("<a href=\"{page=\"psmd/psmd-pkm-" + psmd.ID.ToString() + "\"}\">Super Mystery Dungeon</a>");
-        //    }
+            var psmd = Data.ParentCollection.PsmdData.Pokemon.Where(p => p.DexNumber == DexNumber).FirstOrDefault();
+            if (psmd != null)
+            {
+                if (html.Length > 0)
+                {
+                    html.AppendLine(" | ");
+                }
+                html.AppendLine("<a href=\"{page=\"psmd/psmd-pkm-" + psmd.ID.ToString() + "\"}\">Super Mystery Dungeon</a>");
+            }
 
-        //    if (html.Length > 0)
-        //    {
-        //        html.AppendLine(" | ");
-        //    }
-        //    html.AppendLine("<b>Explorers of Sky</b>");
+            if (html.Length > 0)
+            {
+                html.AppendLine(" | ");
+            }
+            html.AppendLine("<b>Explorers of Sky</b>");
 
-        //    return html.ToString();
-        //}
+            return html.ToString();
+        }
+
+        public string GetGalleryImageUrl()
+        {
+            // Not Implemented
+            return "#";
+        }
+
+        public string GetGalleryAlbumUrl()
+        {
+            // Not Implemented
+            return "#";
+        }
     }
 }

@@ -57,7 +57,9 @@ namespace ProjectPokemon.Pokedex
             }
 
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            app.UseCookiePolicy(new CookiePolicyOptions {
+                CheckConsentNeeded = _ => false
+            });
 
             app.UseMvc(routes =>
             {
@@ -74,13 +76,20 @@ namespace ProjectPokemon.Pokedex
             var gen7Task = LoadGen7DataCollection();
             var ultraGen7Task = LoadUltraGen7DataCollection();
 
-            return new DataCollection
+            var data = new DataCollection
             {
                 EosData = await eosTask,
                 PsmdData = await psmdTask,
                 SMData = await gen7Task,
                 UltraSMData = await ultraGen7Task
             };
+
+            data.EosData.ParentCollection = data;
+            data.PsmdData.ParentCollection = data;
+            data.SMData.ParentCollection = data;
+            data.UltraSMData.ParentCollection = data;
+
+            return data;
         }
 
         private async Task<EosDataCollection> LoadEosDataCollection()
