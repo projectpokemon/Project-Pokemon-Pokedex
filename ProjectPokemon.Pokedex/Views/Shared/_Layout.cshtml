@@ -15,6 +15,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <link rel="stylesheet" href="~/css/pokesprite.min.css" />    
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -42,7 +43,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - ProjectPokemon.Pokedex</p>
+            <p>&copy; 2018 - Project Pokémon</p>
         </footer>
     </div>
 
@@ -66,6 +67,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+    <script src="~/js/pokesprite.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

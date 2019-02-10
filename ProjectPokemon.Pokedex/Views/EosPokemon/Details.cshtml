@@ -180,7 +180,7 @@
                     @item.Item1.ToString()
                 </td>
                 <td>
-                    <a href='{page="eos-move-<#=item.Item2.ID #>"}'>@item.Item2.Name</a>
+                    @Html.ActionLink(item.Item2.Name, "Details", "EosMoves", new { id = item.Item2.ID })
                 </td>
             </tr>
         }
@@ -196,7 +196,7 @@
         {
             <tr>
                 <td>
-                    <a href='{page="eos-move-<#=item.ID #>"}'>@item.Name</a>
+                    @Html.ActionLink(item.Name, "Details", "EosDetails", new { id = item.ID })
                 </td>
             </tr>
         }
@@ -212,7 +212,7 @@
         {
             <tr>
                 <td>
-                    <a href='{page="eos-move-<#=item.ID #>"}'>@item.Name</a>
+                    @Html.ActionLink(item.Name, "Details", "EosDetails", new { id = item.ID })
                 </td>
             </tr>
         }

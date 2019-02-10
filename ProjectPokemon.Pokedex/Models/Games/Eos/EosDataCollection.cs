@@ -59,7 +59,7 @@ namespace ProjectPokemon.Pokedex.Models.Games.Eos
                 moves.Add(m);
 
                 // Add to types
-                types[m.TypeID].Moves.Add(new EosMoveReference { ID = m.ID, Name = m.Name });
+                types[m.TypeID].Moves.Add(new EosMoveReference(data, m.ID, m.Name));
             }
             data.Moves = moves;
 
