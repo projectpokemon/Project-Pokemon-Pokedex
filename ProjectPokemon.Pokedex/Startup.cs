@@ -11,7 +11,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProjectPokemon.Pokedex.Models.Games;
 using ProjectPokemon.Pokedex.Models.Games.Eos;
+using ProjectPokemon.Pokedex.Models.Games.Gen7;
 using ProjectPokemon.Pokedex.Models.Games.Psmd;
 using SkyEditor.Core.IO;
 
@@ -37,7 +39,7 @@ namespace ProjectPokemon.Pokedex
             });
 
             services
-                .AddSingleton<EosDataCollection>(LoadEosDataCollection().GetAwaiter().GetResult());
+                .AddSingleton<DataCollection>(LoadCombinedDataCollection().GetAwaiter().GetResult());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -65,6 +67,22 @@ namespace ProjectPokemon.Pokedex
             });
         }
 
+        private async Task<DataCollection> LoadCombinedDataCollection()
+        {
+            var eosTask = LoadEosDataCollection();
+            var psmdTask = LoadPsmdDataCollection();
+            var gen7Task = LoadGen7DataCollection();
+            var ultraGen7Task = LoadUltraGen7DataCollection();
+
+            return new DataCollection
+            {
+                EosData = await eosTask,
+                PsmdData = await psmdTask,
+                SMData = await gen7Task,
+                UltraSMData = await ultraGen7Task
+            };
+        }
+
         private async Task<EosDataCollection> LoadEosDataCollection()
         {
             var rom = new NdsRom();
@@ -79,6 +97,18 @@ namespace ProjectPokemon.Pokedex
             await rom.OpenFile(Path.Combine(Environment.CurrentDirectory, Configuration.GetValue<string>("PsmdRom")), new PhysicalIOProvider());
 
             return await PsmdDataCollection.LoadPsmdData(rom);
+        }
+
+        private async Task<Gen7DataCollection> LoadGen7DataCollection()
+        {
+            var path = Path.Combine(Environment.CurrentDirectory, Configuration.GetValue<string>("MoonRom"));
+            return await Gen7DataCollection.LoadGen7Data(path, false);
+        }
+
+        private async Task<Gen7DataCollection> LoadUltraGen7DataCollection()
+        {
+            var path = Path.Combine(Environment.CurrentDirectory, Configuration.GetValue<string>("UltraMoonRom"));
+            return await Gen7DataCollection.LoadGen7Data(path, true);
         }
     }
 }

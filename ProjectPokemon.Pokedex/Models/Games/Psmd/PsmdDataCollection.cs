@@ -23,7 +23,7 @@ namespace ProjectPokemon.Pokedex.Models.Games.Psmd
 
             // Load abilities
             var abilities = new List<PsmdAbility>();
-            var abilityNames = File.ReadAllLines("Resources/PSMD/alist.txt");
+            var abilityNames = File.ReadAllLines("App_Data/PSMD/alist.txt");
             for (int i = 0; i < abilityNames.Length; i++)
             {
                 abilities.Add(new PsmdAbility
@@ -36,7 +36,7 @@ namespace ProjectPokemon.Pokedex.Models.Games.Psmd
 
             // Load types
             var types = new List<PsmdPkmType>();
-            var typeNames = File.ReadAllLines("Resources/PSMD/tlist.txt");
+            var typeNames = File.ReadAllLines("App_Data/PSMD/tlist.txt");
             for (int i = 0; i < typeNames.Length; i++)
             {
                 types.Add(new PsmdPkmType
@@ -59,7 +59,7 @@ namespace ProjectPokemon.Pokedex.Models.Games.Psmd
             await actHitFile.OpenFile("/RomFS/dungeon/act_hit_count_table_data_info.bin", rom);
 
             var moves = new List<PsmdMove>();
-            var moveNames = File.ReadAllLines("Resources/PSMD/mlist.txt");
+            var moveNames = File.ReadAllLines("App_Data/PSMD/mlist.txt");
             for (int i = 0; i < moveNames.Length; i++)
             {
                 var m = new PsmdMove();
@@ -130,7 +130,7 @@ namespace ProjectPokemon.Pokedex.Models.Games.Psmd
             await pokemonFile.OpenFile("/RomFS/pokemon/pokemon_data_info.bin", rom);
 
             var pkms = new List<PsmdPokemon>();
-            var pkmNames = File.ReadAllLines("Resources/PSMD/plist.txt");
+            var pkmNames = File.ReadAllLines("App_Data/PSMD/plist.txt");
             for (int i = 0; i < pkmNames.Length; i++)
             {
                 var pkm = new PsmdPokemon

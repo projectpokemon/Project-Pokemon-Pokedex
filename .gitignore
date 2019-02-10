@@ -253,3 +253,6 @@ paket-files/
 
 *.nds
 *.3ds
+*.loadcomplete
+/ProjectPokemon.Pokedex/App_Data/moon
+/ProjectPokemon.Pokedex/App_Data/ultramoon

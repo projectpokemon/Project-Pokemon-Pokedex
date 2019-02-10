@@ -4,15 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProjectPokemon.Pokedex.Models.Games;
 using ProjectPokemon.Pokedex.Models.Games.Eos;
 
 namespace ProjectPokemon.Pokedex.Controllers
 {
     public class EosPokemonController : Controller
     {
-        public EosPokemonController(EosDataCollection data)
+        public EosPokemonController(DataCollection data)
         {
-            _data = data ?? throw new ArgumentNullException();
+            _data = data?.EosData ?? throw new ArgumentNullException();
         }
 
         private EosDataCollection _data;

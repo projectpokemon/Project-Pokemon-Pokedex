@@ -5,12 +5,43 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNet3dsToolkit" Version="2.0.1" />
+    <None Remove="App_Data\eosu.nds" />
+    <None Remove="App_Data\moon.3ds" />
+    <None Remove="App_Data\psmdu.3ds" />
+    <None Remove="App_Data\ultramoon.3ds" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="App_Data\eosu.nds" />
+    <Content Include="App_Data\moon.3ds" />
+    <Content Include="App_Data\psmdu.3ds" />
+    <Content Include="App_Data\ultramoon.3ds" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNet3dsToolkit" Version="2.0.7" />
     <PackageReference Include="DotNetNdsToolkit" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="pk3DS.Core" Version="1.0.394" />
+    <PackageReference Include="PKHeX.Core" Version="19.2.7" />
     <PackageReference Include="SkyEditor.Core" Version="4.2.6" />
-    <PackageReference Include="SkyEditor.ROMEditor" Version="4.1.0-CI154" />
+    <PackageReference Include="SkyEditor.ROMEditor" Version="4.0.20" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App_Data\PSMD\alist.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\PSMD\mlist.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\PSMD\plist.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\PSMD\tlist.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
