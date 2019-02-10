@@ -91,35 +91,37 @@
 				</td>
 			</tr>
 			<# } #>
-			<# if (!string.IsNullOrEmpty(Model.PokedexTextSun) && Model.PokedexTextSun == Model.PokedexTextMoon) { #>
-				<tr>
-					<td>
-						Description
-					</td>
-					<td>
-						<#= Model.PokedexTextSun.Replace("\\n", "<br />") #>
-					</td>
-				</tr>
-			<# } else { #>
-				<# if (!string.IsNullOrEmpty(Model.PokedexTextSun)) { #>
+			<# if (!Model.GetIsMega()) { #>
+				<# if (!string.IsNullOrEmpty(Model.PokedexTextSun) && Model.PokedexTextSun == Model.PokedexTextMoon) { #>
 					<tr>
 						<td>
-							Description (Sun)
+							Description
 						</td>
 						<td>
 							<#= Model.PokedexTextSun.Replace("\\n", "<br />") #>
 						</td>
 					</tr>
-				<# } #>
-				<# if (!string.IsNullOrEmpty(Model.PokedexTextMoon)) { #>
-					<tr>
-						<td>
-							Description (Moon)
-						</td>
-						<td>
-							<#= Model.PokedexTextMoon.Replace("\\n", "<br />") #>
-						</td>
-					</tr>
+				<# } else { #>
+					<# if (!string.IsNullOrEmpty(Model.PokedexTextSun)) { #>
+						<tr>
+							<td>
+								Description (Sun)
+							</td>
+							<td>
+								<#= Model.PokedexTextSun.Replace("\\n", "<br />") #>
+							</td>
+						</tr>
+					<# } #>
+					<# if (!string.IsNullOrEmpty(Model.PokedexTextMoon)) { #>
+						<tr>
+							<td>
+								Description (Moon)
+							</td>
+							<td>
+								<#= Model.PokedexTextMoon.Replace("\\n", "<br />") #>
+							</td>
+						</tr>
+					<# } #>
 				<# } #>
 			<# } #>			
 			<tr>
