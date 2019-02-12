@@ -89,10 +89,10 @@ namespace ProjectPokemon.Pokedex
             data.PsmdData = await LoadPsmdData(psmdFilename);
 
             Console.WriteLine("Building SM data");
-            data.SMData = LoadSunMoonData(moonFilename, false);
+            data.SMData = await LoadSunMoonData(moonFilename, false);
 
             Console.WriteLine("Building Ultra SM data");
-            data.UltraSMData = LoadSunMoonData(ultraMoonFilename, true);
+            data.UltraSMData = await LoadSunMoonData(ultraMoonFilename, true);
 
             data.EosData.ParentCollection = data;
             data.PsmdData.ParentCollection = data;

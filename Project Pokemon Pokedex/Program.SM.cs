@@ -1,4 +1,5 @@
-﻿using IPS_Pages_Publisher.Interfaces;
+﻿using DotNet3dsToolkit;
+using IPS_Pages_Publisher.Interfaces;
 using Newtonsoft.Json;
 using pk3DS.Core;
 using pk3DS.Core.Structures;
@@ -26,7 +27,7 @@ namespace ProjectPokemon.Pokedex
                 throw new Exception($"Couldn't find code.bin in path '{ExeFSPath}'");
             }
             byte[] data = File.ReadAllBytes(exeFsFile);
-            int dataoffset = Util.IndexOfBytes(data, SignatureSM, 0x400000, 0) + SignatureSM.Length;
+            int dataoffset = pk3DS.Core.Util.IndexOfBytes(data, SignatureSM, 0x400000, 0) + SignatureSM.Length;
 
             if (isUltra)
             {
@@ -126,7 +127,7 @@ namespace ProjectPokemon.Pokedex
 
         private static void LoadTypeEffectiveness(SMDataCollection data, byte[] exefs)
         {
-            var typeEffectivenessOffset = Util.IndexOfBytes(exefs, ExefsSignature, 0x400000, 0) + ExefsSignature.Length;
+            var typeEffectivenessOffset = pk3DS.Core.Util.IndexOfBytes(exefs, ExefsSignature, 0x400000, 0) + ExefsSignature.Length;
             var chart = new byte[18 * 18];
             Array.Copy(exefs, typeEffectivenessOffset, chart, 0, chart.Length);
             data.TypeEffectiveness = new TypeEffectivenessChart(chart);
@@ -742,25 +743,35 @@ namespace ProjectPokemon.Pokedex
             data.Moves = moves;
         }
 
-        public static SMDataCollection LoadSunMoonData(string rawFilesDir, bool isUltra)
+        public static async Task<SMDataCollection> LoadSunMoonData(string inputPath, bool isUltra)
         {
-            // Extract ROM if needed
-            var tempDir = "smROM";
-            if (!Directory.Exists(rawFilesDir))
+            // We need a directory. If we have a file, then extract it
+            string rawFilesDir;
+            if (File.Exists(inputPath))
             {
-                // It's needed
-                if (!Directory.Exists(tempDir))
+                rawFilesDir = Path.Combine(Directory.GetCurrentDirectory(), Path.GetFileNameWithoutExtension(inputPath));
+                if (!Directory.Exists(rawFilesDir))
                 {
-                    Directory.CreateDirectory(tempDir);
+                    Directory.CreateDirectory(rawFilesDir);
                 }
-                RunProgram("3dstool.exe", $"-xtf 3ds \"{rawFilesDir}\" -0 Partition0.bin");
-                RunProgram("3dstool.exe", $"-xtf cxi Partition0.bin --romfs RomFS.bin --exefs ExeFS.bin");
-                RunProgram("3dstool.exe", $"-xtf romfs RomFS.bin --romfs-dir \"{tempDir}/RomFS\"");
-                RunProgram("3dstool.exe", $"-xutf exefs ExeFS.bin --exefs-dir \"{tempDir}/ExeFS\"");
-                File.Delete("Partition0.bin");
-                File.Delete("RomFS.bin");
-                File.Delete("ExeFS.bin");
-                rawFilesDir = tempDir;
+                if (!File.Exists(rawFilesDir + ".loadcomplete")) // To avoid large loading times after the first, let's not extract the ROMs again if we can help it
+                {
+                    using (var rom = new ThreeDsRom())
+                    {
+                        var provider = new PhysicalIOProvider();
+                        await rom.OpenFile(inputPath, provider);
+                        await rom.ExtractFiles(rawFilesDir, provider);
+                        File.WriteAllText(rawFilesDir + ".loadcomplete", "");
+                    }
+                }
+            }
+            else if (Directory.Exists(inputPath))
+            {
+                rawFilesDir = inputPath;
+            }
+            else
+            {
+                throw new DirectoryNotFoundException("Could find neither a file nor a directory at the given path: " + inputPath);
             }
 
             var data = new SMDataCollection();
@@ -809,12 +820,6 @@ namespace ProjectPokemon.Pokedex
             LoadTypes(data, typeNames);
             LoadPokemon(data, config, rawFilesDir, speciesNames, typeNames, items, abilities, moveNames, EXPGroups, eggGroups, colors, speciesClassifications, pokedexEntries1, pokedexEntries2, altForms);
             LoadMoves(data, config, moveNames, moveflavor, typeNames);
-
-            // Cleanup
-            if (Directory.Exists(tempDir))
-            {
-                Directory.Delete(tempDir, true);
-            }
 
             return data;
         }

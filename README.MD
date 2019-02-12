@@ -9,8 +9,7 @@ A work-in-progress Pokédex for various games.
 
 ## Dependencies
 
-* 3dstool.exe
-* DotNet3dsToolkit
+* DotNet3dsToolkit 2
 * IPS-Pages-Publisher.Interfaces
 * Newtonsoft.Json
 * pk3DS
@@ -38,7 +37,7 @@ https://www.myget.org/F/skyeditor/api/v3/index.json
 Current usage is as follows:
 
 ```
-ProjectPokemonPokedex.exe <eos|psmd|moon> <RomFilename> <OutputFilename>
+ProjectPokemonPokedex.exe <eosPath> <psmdPath> <smPath> <ultraSmPath> <OutputFilename>
 ```
 
 The output of this program is a JSON text file that will be used by a closed-source program to publish to Project Pokémon.
