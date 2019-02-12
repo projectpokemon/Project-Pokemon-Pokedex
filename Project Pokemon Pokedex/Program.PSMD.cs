@@ -16,10 +16,8 @@ namespace ProjectPokemon.Pokedex
     {
         public static async Task<PsmdDataCollection> LoadPsmdData(string romFile)
         {
-            using (var rom = new ThreeDsRom())
+            using (var rom = await ThreeDsRom.Load(romFile))
             {
-                await rom.OpenFile(romFile);
-
                 var data = new PsmdDataCollection();
 
                 // Load abilities
