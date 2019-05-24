@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectPokemon.Pokedex.ViewModels.Psmd
@@ -34,6 +35,8 @@ namespace ProjectPokemon.Pokedex.ViewModels.Psmd
 
         public PsmdPokemonDetailsViewModel(PsmdPokemon Pkm, PsmdDataCollection context)
         {
+            Data = context;
+
             Model = Pkm;
             ID = Pkm.ID;
             var hex = Pkm.ID.ToString("X").PadLeft(4, '0');
@@ -110,6 +113,8 @@ namespace ProjectPokemon.Pokedex.ViewModels.Psmd
             }
         }
 
+        private PsmdDataCollection Data { get; }
+
 
         public int ID { get; set; }
 
@@ -146,9 +151,56 @@ namespace ProjectPokemon.Pokedex.ViewModels.Psmd
 
         private PsmdPokemon Model { get; set; }
 
-        //public string GetCrossReferenceHtml()
-        //{
-        //    return Model.GetCrossReferenceHtml();
-        //}
+        public string GetCrossReferenceHtml()
+        {
+            var html = new StringBuilder();
+
+            var ultrasm = Data.ParentCollection.SMData.Pokemon.Where(p => p.ID == DexNumber).FirstOrDefault();
+            if (ultrasm != null)
+            {
+                html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-" + ultrasm.ID.ToString() + "\"}\">Ultra Sun and Ultra Moon</a>");
+            }
+
+            var sm = Data.ParentCollection.UltraSMData.Pokemon.Where(p => p.ID == DexNumber).FirstOrDefault();
+            if (sm != null)
+            {
+                if (html.Length > 0)
+                {
+                    html.AppendLine(" | ");
+                }
+                html.AppendLine("<a href=\"{page=\"sm/sm-pkm-" + sm.ID.ToString() + "\"}\">Sun and Moon</a>");
+            }
+
+            if (html.Length > 0)
+            {
+                html.AppendLine(" | ");
+            }
+            html.AppendLine("<b>Super Mystery Dungeon</b>");
+
+            var eos = Data.ParentCollection.EosData.Pokemon.Where(p => p.DexNumber == DexNumber).FirstOrDefault();
+            if (eos != null)
+            {
+                if (html.Length > 0)
+                {
+                    html.AppendLine(" | ");
+                }
+                html.AppendLine("<a href=\"{page=\"eos/eos-pkm-" + eos.ID.ToString() + "\"}\">Explorers of Sky</a>");
+            }
+
+            return html.ToString();
+        }
+
+        public string GetGalleryImageUrl()
+        {
+            // Not Implemented
+            return "#";
+        }
+
+        public string GetGalleryAlbumUrl()
+        {
+            // Not Implemented
+            return "#";
+        }
+
     }
 }

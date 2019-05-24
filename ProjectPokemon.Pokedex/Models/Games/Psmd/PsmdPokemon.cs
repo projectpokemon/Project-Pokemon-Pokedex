@@ -29,45 +29,6 @@ namespace ProjectPokemon.Pokedex.Models.Games.Psmd
         public int Type2 { get; set; }
         public byte IsMegaEvolution { get; set; }
         public byte MinEvolveLevel { get; set; }
-        public PsmdDataCollection Data { get; set; }
-
-        //public string GetCrossReferenceHtml()
-        //{
-        //    var html = new StringBuilder();
-
-        //    var ultrasm = Data.ParentCollection.SMData.Pokemon.Where(p => p.ID == DexNumber).FirstOrDefault();
-        //    if (ultrasm != null)
-        //    {
-        //        html.AppendLine("<a href=\"{page=\"ultrasm/usum-pkm-" + ultrasm.ID.ToString() + "\"}\">Ultra Sun and Ultra Moon</a>");
-        //    }
-
-        //    var sm = Data.ParentCollection.UltraSMData.Pokemon.Where(p => p.ID == DexNumber).FirstOrDefault();
-        //    if (sm != null)
-        //    {
-        //        if (html.Length > 0)
-        //        {
-        //            html.AppendLine(" | ");
-        //        }
-        //        html.AppendLine("<a href=\"{page=\"sm/sm-pkm-" + sm.ID.ToString() + "\"}\">Sun and Moon</a>");
-        //    }
-
-        //    if (html.Length > 0)
-        //    {
-        //        html.AppendLine(" | ");
-        //    }
-        //    html.AppendLine("<b>Super Mystery Dungeon</b>");
-
-        //    var eos = Data.ParentCollection.EosData.Pokemon.Where(p => p.DexNumber == DexNumber).FirstOrDefault();
-        //    if (eos != null)
-        //    {
-        //        if (html.Length > 0)
-        //        {
-        //            html.AppendLine(" | ");
-        //        }
-        //        html.AppendLine("<a href=\"{page=\"eos/eos-pkm-" + eos.ID.ToString() + "\"}\">Explorers of Sky</a>");
-        //    }
-
-        //    return html.ToString();
-        //}
+        public PsmdDataCollection Data { get; set; }        
     }
 }

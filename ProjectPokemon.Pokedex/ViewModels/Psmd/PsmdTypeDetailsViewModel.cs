@@ -18,14 +18,14 @@ namespace ProjectPokemon.Pokedex.ViewModels.Psmd
             PokemonWithType = new List<PsmdPokemonListItem>();
             PokemonWithType.AddRange(data.Pokemon.Where(x => x.Type1 == ID || x.Type2 == ID).Select(x => new PsmdPokemonListItem(x.ID, x.Name)));
 
-            MovesWithType = new List<PsmdPokemonListItem>();
-            MovesWithType.AddRange(data.Moves.Where(x => x.TypeID == ID).Select(x => new PsmdPokemonListItem(x.ID, x.Name)));
+            MovesWithType = new List<PsmdMoveListItem>();
+            MovesWithType.AddRange(data.Moves.Where(x => x.TypeID == ID).Select(x => new PsmdMoveListItem(x.ID, x.Name)));
         }
 
         public int ID { get; set; }
         public string IDHex { get; set; }
         public string Name { get; set; }
         public List<PsmdPokemonListItem> PokemonWithType { get; set; }
-        public List<PsmdPokemonListItem> MovesWithType { get; set; }
+        public List<PsmdMoveListItem> MovesWithType { get; set; }
     }
 }

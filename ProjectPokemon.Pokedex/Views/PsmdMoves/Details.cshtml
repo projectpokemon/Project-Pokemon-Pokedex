@@ -1,0 +1,213 @@
+﻿@model ProjectPokemon.Pokedex.ViewModels.Psmd.PsmdMoveDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@Model.Name</h2>
+
+<div>
+    <h3>Details</h3>
+    <dl class="dl-horizontal">
+        <dt>
+            ID (Decimal)
+        </dt>
+        <dd>
+            @Model.ID
+        </dd>
+
+        <dt>
+            ID (Hex, Big Endian)
+        </dt>
+        <dd>
+            @Model.IDHexBigEndian
+        </dd>
+
+        <dt>
+            ID (Hex, Little Endian)
+        </dt>
+        <dd>
+            @Model.IDHexLittleEndian
+        </dd>
+
+        <dt>
+            Type
+        </dt>
+        <dd>
+            @Model.TypeName
+        </dd>
+
+        <dt>
+            Range (Tiles)
+        </dt>
+        <dd>
+            @Model.TilesCount
+        </dd>
+
+        <dt>
+            Cuts Corners
+        </dt>
+        <dd>
+            @Model.CutsCorners
+        </dd>
+
+        <dt>
+            Base Damage
+        </dt>
+        <dd>
+            @Model.BaseDamage
+        </dd>
+
+        <dt>
+            Max Damage
+        </dt>
+        <dd>
+            @Model.MaxDamage
+        </dd>
+
+        <dt>
+            Base PP
+        </dt>
+        <dd>
+            @Model.BasePP
+        </dd>
+
+        <dt>
+            Max PP
+        </dt>
+        <dd>
+            @Model.MaxPP
+        </dd>
+
+        <dt>
+            Base Accuracy
+        </dt>
+        <dd>
+            @Model.BaseAccuracy
+        </dd>
+
+        <dt>
+            Max Accuracy
+        </dt>
+        <dd>
+            @Model.MaxAccuracy
+        </dd>
+
+
+    </dl>
+</div>
+<br />
+<br />
+@if (Model.MultiHitData.HitCountMinimum > 1)
+{
+    <div>
+        <h3>Multi-Hit Details</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                Repeat Until First Miss
+            </dt>
+
+            <dd>
+                @Model.MultiHitData.RepeatUntilMiss
+            </dd>
+
+            <dt>
+                Minimum Hits
+            </dt>
+
+            <dd>
+                @Model.MultiHitData.HitCountMinimum
+            </dd>
+
+            <dt>
+                Maximum Hits
+            </dt>
+
+            <dd>
+                @Model.MultiHitData.HitCountMaximum
+            </dd>
+
+            @if (Model.MultiHitData.HitChance2 > 0) {
+                <dt>
+                    2nd Hit Chance
+                </dt>
+                <dd>
+                    @(Model.MultiHitData.HitChance2)%
+                </dd>
+            }
+
+            @if (Model.MultiHitData.HitChance3 > 0)
+            {
+                <dt>
+                    3rd Hit Chance
+                </dt>
+                <dd>
+                    @(Model.MultiHitData.HitChance3)%
+                </dd>
+            }
+
+            @if (Model.MultiHitData.HitChance4 > 0)
+            {
+                <dt>
+                    4th Hit Chance
+                </dt>
+                <dd>
+                    @Model.MultiHitData.HitChance4)%
+                </dd>
+            }
+
+            @if (Model.MultiHitData.HitChance5 > 0)
+            {
+                <dt>
+                    5th Hit Chance
+                </dt>
+                <dd>
+                    @Model.MultiHitData.HitChance5)%
+                </dd>
+            }
+        </dl>
+    </div>
+}
+<div>
+    <h3>Pokemon through Level Up</h3>
+    <Table Class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th width="10%">
+                ID (Decimal)
+            </th>
+            <th width="10%">
+                ID (Hex, Big Endian)
+            </th>
+            <th width="10%">
+                ID (Hex, Little Endian)
+            </th>
+            <th>
+                Pokémon
+            </th>
+            <th>
+                Level(s)
+            </th>
+        </tr>
+        @foreach (var item in Model.PokemonLevelUp)
+        {
+            <tr>
+                <td>
+                    @item.ID
+                </td>
+                <td>
+                    @item.IDHexBigEndian
+                </td>
+                <td>
+                    @item.IDHexLittleEndian
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", "PsmdPokemon", new { id = item.ID })">@item.Name</a>
+                </td>
+                <td>
+                    @string.Join(", ", item.Levels)
+                </td>
+            </tr>
+        }
+    </Table>
+
+</div>
