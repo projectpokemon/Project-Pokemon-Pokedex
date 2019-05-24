@@ -22,7 +22,7 @@
     <PackageReference Include="DotNet3dsToolkit" Version="2.0.7" />
     <PackageReference Include="DotNetNdsToolkit" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
     <PackageReference Include="pk3DS.Core" Version="1.0.394" />
     <PackageReference Include="PKHeX.Core" Version="19.2.7" />
     <PackageReference Include="SkyEditor.Core" Version="4.2.6" />

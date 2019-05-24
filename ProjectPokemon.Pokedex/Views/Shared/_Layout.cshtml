@@ -43,7 +43,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - Project Pokémon</p>
+            <p>&copy; 2018-2019 - Project Pokémon</p>
         </footer>
     </div>
 
@@ -68,7 +68,9 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
     <script src="~/js/pokesprite.min.js"></script>
-
+    <script type="text/javascript">
+        PkSpr.process_dom();
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

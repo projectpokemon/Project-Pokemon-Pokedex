@@ -1,0 +1,595 @@
+﻿@using ProjectPokemon.Pokedex.Models.Games.Gen7
+
+@model ProjectPokemon.Pokedex.Models.Games.Gen7.Gen7Pokemon
+
+<p>
+    @Html.Raw(Model.GetCrossReferenceHtml())
+</p>
+<div class="row">
+    <div class="col-md-3">
+        <div class="pkm-image-inner" style="text-align:center;">
+            <div data-role='commentContent' class='ipsType_normal ipsType_richText ipsContained' data-controller='core.front.core.lightboxedImages'>
+                <p>
+                    @if (Model.GetIsAltForm())
+                    {
+                        var originalForm = Model.Data.Pokemon[Model.GetOriginalFormId().Value];
+                        <img class="ipsImage" src="@originalForm.GetGalleryImageUrl()" alt="@Model.Name Sugimori Artwork" />
+                    }
+                    else
+                    {
+                        <img class="ipsImage" src="@Model.GetGalleryImageUrl()" alt="@Model.Name Sugimori Artwork" />
+                    }
+                </p>
+            </div>
+        </div>
+        @if (Model.GetIsAltForm())
+        {
+            var originalForm = Model.Data.Pokemon[Model.GetOriginalFormId().Value];
+            <a href="@originalForm.GetGalleryAlbumUrl()">See more images</a>
+        }
+        else
+        {
+            <a href="@Model.GetGalleryAlbumUrl()">See more images</a>
+        }
+    </div>
+
+    <div class="col-md-6">
+        <h2>Pokédex</h2>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <td style="width: 50%;">
+                    Name
+                </td>
+                <td>
+                    @Model.Name
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Category
+                </td>
+                <td>
+                    @Model.Classification
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID)
+                    {
+                        @Html.Raw("Types")
+                    }
+                    else
+                    {
+                        @Html.Raw("Type")
+                    }
+                </td>
+                <td>
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Types", new { id = Model.Type1.ID}))"><img alt="@Model.Type1.Name" src="https://projectpokemon.org/images/gen7-types/@(Model.Type1.Name).png" /></a>
+                    @if (Model.Type2.ID > 0 && Model.Type1.ID != Model.Type2.ID)
+                    {
+                        <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Types", new { id = Model.Type2.ID}))"><img alt="@Model.Type2.Name" src="https://projectpokemon.org/images/gen7-types/@(Model.Type2.Name).png" /></a>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @if (Model.Ability1.ID == Model.Ability2.ID)
+                    {
+                        @Html.Raw("Ability")
+                    }
+                    else
+                    {
+                        @Html.Raw("Abilities")
+                    }
+                </td>
+                <td>
+                    <span>@Model.Ability1.Name</span>
+
+                    @if (Model.Ability1.ID != Model.Ability2.ID)
+                    {
+                        <span>@Model.Ability2.Name</span>
+                    }
+                </td>
+            </tr>
+            @if (Model.AbilityHidden.ID != Model.Ability1.ID && Model.AbilityHidden.ID != Model.Ability2.ID)
+            {
+                <tr>
+                    <td>
+                        Hidden Ability
+                    </td>
+                    <td>
+                        <span>@Model.AbilityHidden.Name</span>
+                    </td>
+                </tr>
+            }
+            @if (!Model.GetIsMega())
+            {
+                @if (!string.IsNullOrEmpty(Model.PokedexTextSun) && Model.PokedexTextSun == Model.PokedexTextMoon)
+                {
+                    <tr>
+                        <td>
+                            Description
+                        </td>
+                        <td>
+                            @Model.PokedexTextSun
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @if (!string.IsNullOrEmpty(Model.PokedexTextSun))
+                    {
+                        <tr>
+                            <td>
+                                Description (Sun)
+                            </td>
+                            <td>
+                                @Model.PokedexTextSun
+                            </td>
+                        </tr>
+                    }
+                    if (!string.IsNullOrEmpty(Model.PokedexTextMoon))
+                    {
+                        <tr>
+                            <td>
+                                Description (Moon)
+                            </td>
+                            <td>
+                                @Model.PokedexTextMoon
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+            <tr>
+                <td>
+                    Height
+                </td>
+                <td>
+                    @{
+                        var feet = Model.Height * (decimal)3.2808399;
+                    }
+                    @(Model.Height)m (@Math.Floor(feet)' @(((feet - Math.Floor(feet)) * 12).ToString("0")) #>")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Weight
+                </td>
+                <td>
+                    @Model.Weight kg (@((Model.Weight * (decimal)2.20462262).ToString("0.0")) lbs.)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Gender
+                </td>
+                <td>
+                    @if (Model.Gender == 0)
+                    {
+                        @Html.Raw("All Male")
+                    }
+                    else if (Model.Gender == 254)
+                    {
+                        @Html.Raw("All Female")
+                    }
+                    else if (Model.Gender == 255)
+                    {
+                        @Html.Raw("Genderless")
+                    }
+                    else
+                    {
+                        @((1 - ((Model.Gender - 1) / (decimal)252)).ToString("P")) <span style="color: blue;">&#9794;</span>
+                        @(((Model.Gender - 1) / (decimal)252).ToString("P")) <span style="color: magenta;">&#9792;</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @if (Model.EggGroup1 != Model.EggGroup2)
+                    {
+                        @Html.Raw("Egg Groups")
+                    }
+                    else
+                    {
+                        @Html.Raw("Egg Group")
+                    }
+                </td>
+                <td>
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "EggGroups", new { id = Model.EggGroup1}))">@Model.EggGroup1</a>
+                    @if (Model.EggGroup1 != Model.EggGroup2)
+                    {
+                        <br />
+                        <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "EggGroups", new { id = Model.EggGroup2}))">@Model.EggGroup2</a>
+                    }
+                </td>
+            </tr>
+        </table>
+        <h2>Details</h2>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <td style="width: 50%;">
+                    Catch Rate
+                </td>
+                <td>
+                    @Model.CatchRate
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Evo Stage
+                </td>
+                <td>
+                    @Model.EvoStage
+                </td>
+            </tr>
+            @if (Model.HeldItem1.ID > 0)
+            {
+                <tr>
+                    <td>
+                        Held Item 1
+                    </td>
+                    <td>
+                        <span>@Model.HeldItem1.Name</span> (50%)
+                    </td>
+                </tr>
+            }
+            @if (Model.HeldItem2.ID > 0)
+            {
+                <tr>
+                    <td>
+                        Held Item 2
+                    </td>
+                    <td>
+                        <span>@Model.HeldItem2.Name</span> (5%)
+                    </td>
+                </tr>
+            }
+            @if (Model.HeldItem3.ID > 0)
+            {
+                <tr>
+                    <td>
+                        Held Item 3
+                    </td>
+                    <td>
+                        <span>@Model.HeldItem3.Name</span> (1%)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    Hatch Cycles
+                </td>
+                <td>
+                    @Model.HatchCycles
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Base Friendship
+                </td>
+                <td>
+                    @Model.BaseFriendship
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Exp Growth
+                </td>
+                <td>
+                    @Model.ExpGrowth
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Forme Count
+                </td>
+                <td>
+                    @Model.FormeCount
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Forme Sprite
+                </td>
+                <td>
+                    @Model.FormeSprite
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Color
+                </td>
+                <td>
+                    @Model.Color
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Base Exp
+                </td>
+                <td>
+                    @Model.BaseExp
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Escape Rate
+                </td>
+                <td>
+                    @Model.EscapeRate
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Local Variant
+                </td>
+                <td>
+                    @Model.LocalVariant
+                </td>
+            </tr>
+            @if (Model.ZItem != null && Model.ZItem.ID > 0)
+            {
+                <tr>
+                    <td>
+                        Z Item
+                    </td>
+                    <td>
+                        <span>@Model.ZItem.Name</span>
+                    </td>
+                </tr>
+            }
+            @if (Model.ZBaseMove != null && Model.ZBaseMove.ID > 0)
+            {
+                <tr>
+                    <td>
+                        Z Base Move
+                    </td>
+                    <td>
+                        <span>@Model.ZBaseMove.Name</span>
+                    </td>
+                </tr>
+            }
+            @if (Model.ZMove != null && Model.ZMove.ID > 0)
+            {
+                <tr>
+                    <td>
+                        Z Move
+                    </td>
+                    <td>
+                        <span>@Model.ZMove.Name</span>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-3">
+        <h2>Stats</h2>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <td></td>
+                <td>Base</td>
+                <td>EV Yield</td>
+            </tr>
+            <tr>
+                <td>HP</td>
+                <td>@Model.BaseHP</td>
+                <td>@Model.HPEVYield</td>
+            </tr>
+            <tr>
+                <td>Attack</td>
+                <td>@Model.BaseAttack</td>
+                <td>@Model.AttackEVYield</td>
+            </tr>
+            <tr>
+                <td>Defense</td>
+                <td>@Model.BaseDefense</td>
+                <td>@Model.DefenseEVYield</td>
+            </tr>
+            <tr>
+                <td>Sp. Attack</td>
+                <td>@Model.BaseSpAttack</td>
+                <td>@Model.SpAttackEVYield</td>
+            </tr>
+            <tr>
+                <td>Sp. Defense</td>
+                <td>@Model.BaseSpDefense</td>
+                <td>@Model.SpDefenseEVYield</td>
+            </tr>
+            <tr>
+                <td>Speed</td>
+                <td>@Model.BaseSpeed</td>
+                <td>@Model.SpeedEVYield</td>
+            </tr>
+            <tr>
+                <td>
+                    <b>BST</b>
+                </td>
+                <td>
+                    <b>@Model.BST</b>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+        <h2>Type Effectiveness</h2>
+        <table class="table table-striped table-bordered table-condensed">
+            @foreach (var item in Model.TypeEffectiveness)
+            {
+            <tr>
+                <td>
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Types", new { id = item.Type.ID}))">
+                        <img alt="@item.Type.Name" src="https://projectpokemon.org/images/gen7-types/@(item.Type.Name).png" />
+                    </a>
+                </td>
+                <td>
+                    x@(item.Multiplier)
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@if (Model.GetNonMegaAltForms().Any())
+{
+    <h2>Alternate Forms</h2>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th style="width:60px;"></th>
+            <th>Form</th>
+        </tr>
+        @foreach (var item in Model.GetNonMegaAltForms())
+        {
+            <tr style="height:60px;vertical-align: middle;">
+                <td>
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Pokemon", new { id = item.ID}))">@Html.Raw(item.PokespriteHtml)</a>
+                </td>
+                <td>
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Pokemon", new { id = item.ID}))">@item.Name</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@{var evolutionChain = Model.GetEvolutionChain(); }
+@if (evolutionChain.Count > 0)
+{
+    <h2>Evolution Chain</h2>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th style="width:60px;"></th>
+            <th>Target</th>
+            <th>Method</th>
+        </tr>
+        @foreach (var item in evolutionChain)
+        {
+    <tr style="height:60px;vertical-align: middle;">
+        <td>
+            <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Pokemon", new { id = item.TargetPokemon.ID}))">@Html.Raw(item.TargetPokemon.PokespriteHtml)</a>
+        </td>
+        <td>
+            <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Pokemon", new { id = item.TargetPokemon.ID}))">@item.TargetPokemon.Name</a>
+        </td>
+        <td>
+            @{
+                string methodString;
+                if (item.ParameterReference is Gen7PokemonReference)
+                {
+                    methodString = string.Format(item.Method, "<a href=\"" + Url.Action("Details", (string)ViewBag.ControllerPrefix + "Pokemon", new { id = item.ParameterReference.ID}) + "\">" + item.ParameterReference.Name + "</a>");
+                }
+                else if (item.ParameterReference is Gen7MoveReference)
+                {
+                    methodString = string.Format(item.Method, "<a href=\"" + Url.Action("Details", (string)ViewBag.ControllerPrefix + "Moves", new { id = item.ParameterReference.ID}) + "\">" + item.ParameterReference.Name + "</a>");
+                }
+                else if (item.ParameterReference is Gen7ItemReference)
+                {
+                    methodString = string.Format(item.Method, "<span>" + item.ParameterReference.Name + "</span>");
+                }
+                else if (item.ParameterReference is Gen7TypeReference)
+                {
+                    methodString = string.Format(item.Method, "<a href=\"" + Url.Action("Details", (string)ViewBag.ControllerPrefix + "Types", new { id = item.ParameterReference.ID}) + "\">" + item.ParameterReference.Name + "</a>");
+                }
+                else if (!string.IsNullOrEmpty(item.ParameterString))
+                {
+                    methodString = string.Format(item.Method, item.ParameterString);
+                }
+                else
+                {
+                    methodString = item.Method;
+                }
+            }
+            @Html.Raw(methodString)
+        </td>
+    </tr>
+        }
+    </table>
+}
+
+@if (Model.MoveLevelUp.Count > 0)
+{
+    <h2>Moves (Level Up)</h2>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>Level</th>
+            <th>Move</th>
+        </tr>
+        @foreach (var item in Model.MoveLevelUp)
+        {
+            <tr>
+                <td>
+                    @(item.Level == 0 ? "With Evolution" : item.Level.ToString())
+                </td>
+                <td>
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Moves", new { id = item.ID}))">@item.Name</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (Model.MoveTMs.Count > 0)
+{
+    <h2>Moves (TM)</h2>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>Move</th>
+        </tr>
+        @foreach (var item in Model.MoveTMs)
+        {
+            <tr>
+                <td>
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Moves", new { id = item.ID}))">@item.Name</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (Model.MoveTutors.Count > 0)
+{
+    <h2>Moves (Tutor)</h2>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>Move</th>
+        </tr>
+        @foreach (var item in Model.MoveTutors)
+        {
+            <tr>
+                <td>
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Moves", new { id = item.ID}))">@item.Name</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@{var eggMoves = Model.GetEggMoves(); }
+@if (eggMoves.Count > 0)
+{
+    <h2>Moves (Egg)</h2>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>Move</th>
+            <th>Parents</th>
+        </tr>
+        @foreach (var item in eggMoves)
+        {
+            <tr>
+                <td>
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Moves", new { id = item.ID}))">@item.Name</a>
+                    @if (item.RequiresChainBreeding(Model))
+                    {
+                        @Html.Raw("(Requires chain breeding)")
+                    }
+                </td>
+                <td>
+                    @foreach (var parent in item.GetEggMoveSources(Model))
+                    {
+                        <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Pokemon", new { id = parent.ID}))">@Html.Raw(parent.PokespriteHtml)</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}

@@ -33,6 +33,8 @@ namespace ProjectPokemon.Pokedex.Controllers
                 return BadRequest();
             }
 
+            ViewBag.ControllerPrefix = "SM";
+
             return View(_data.Pokemon[id.Value]);
         }
     }

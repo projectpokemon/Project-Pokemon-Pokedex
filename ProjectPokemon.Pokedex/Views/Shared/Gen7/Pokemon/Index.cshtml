@@ -21,10 +21,10 @@
                 @item.ID
             </td>
             <td>
-                <a href="@Url.RouteUrl("Details",new {id=item.ID })">@Html.Raw(item.PokespriteHtml)</a>
+                <a href="@Url.Action("Details", new {id = item.ID })">@Html.Raw(item.PokespriteHtml)</a>
             </td>
             <td>
-                @Html.RouteLink(item.Name, "Details", new { id = item.ID })
+                @Html.ActionLink(item.Name, "Details", new { id = item.ID })
             </td>
         </tr>
     }

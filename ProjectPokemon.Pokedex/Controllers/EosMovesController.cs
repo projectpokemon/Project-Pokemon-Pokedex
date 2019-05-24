@@ -21,7 +21,7 @@ namespace ProjectPokemon.Pokedex.Controllers
         // GET: eos/moves
         public ActionResult Index()
         {
-            return View(_data.Moves.Select(m => new EosMoveReference(_data, m)));
+            return View(_data.Moves);
         }
 
         // GET: eos/moves/5

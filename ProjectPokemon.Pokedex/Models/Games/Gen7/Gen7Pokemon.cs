@@ -294,6 +294,18 @@ namespace ProjectPokemon.Pokedex.Models.Games.Gen7
             return html.ToString();
         }
 
+        public string GetGalleryImageUrl()
+        {
+            // Not Implemented
+            return "#";
+        }
+
+        public string GetGalleryAlbumUrl()
+        {
+            // Not Implemented
+            return "#";
+        }
+
         public override string ToString()
         {
             return Name ?? base.ToString();
