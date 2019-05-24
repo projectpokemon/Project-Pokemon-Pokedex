@@ -1,0 +1,88 @@
+﻿@model ProjectPokemon.Pokedex.Models.Games.Gen7.Gen7EggGroup
+
+<h2>Pokémon in Just This Egg Group</h2>
+@if (Model.SingleEggGroupPokemon.Any())
+{
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th style="width:60px;">Dex ID</th>
+            <th style="width:60px;">Icon</th>
+            <th>Name</th>
+            <th>Type</th>
+        </tr>
+        @foreach (var item in Model.SingleEggGroupPokemon)
+        {
+            <tr style="height:60px;">
+                <td style="vertical-align: middle;">
+                    @item.ID
+                </td>
+                <td style="vertical-align: middle;">
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Pokemon", new { id = item.ID}))">@Html.Raw(item.PokespriteHtml)</a>
+                </td>
+                <td style="vertical-align: middle;">
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Pokemon", new { id = item.ID}))">@item.Name</a>
+                </td>
+                <td style="vertical-align: middle;">
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Types", new { id = item.Type1.ID}))"><img alt="@item.Type1.Name" src="https://projectpokemon.org/images/gen7-types/@(item.Type1.Name).png" /></a>
+                    @if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID)
+                    {
+                        <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Types", new { id = item.Type2.ID}))" }"><img alt="@item.Type2.Name" src="https://projectpokemon.org/images/gen7-types/@(item.Type2.Name).png" /></a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>There are no Pokémon that are in just this one egg group.</p>
+}
+
+<h2>Pokémon in This and Another Egg Group</h2>
+@if (Model.MultiEggGroupPokemon.Any())
+{
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th style="width:60px;">Dex ID</th>
+            <th style="width:60px;">Icon</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Other Egg Group</th>
+        </tr>
+        @foreach (var item in Model.MultiEggGroupPokemon)
+        {
+            <tr style="height:60px;">
+                <td style="vertical-align: middle;">
+                    @item.ID
+                </td>
+                <td style="vertical-align: middle;">
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Pokemon", new { id = item.ID}))">@Html.Raw(item.PokespriteHtml)</a>
+                </td>
+                <td style="vertical-align: middle;">
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Pokemon", new { id = item.ID}))">@item.Name</a>
+                </td>
+                <td style="vertical-align: middle;">
+                    <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Types", new { id = item.Type1.ID }))"><img alt="@item.Type1.Name" src="https://projectpokemon.org/images/gen7-types/@(item.Type1.Name).png" /></a>
+                    @if (item.Type2.ID > 0 && item.Type1.ID != item.Type2.ID)
+                    {
+                        <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "Types", new { id = item.Type2.ID }))" }"><img alt="@item.Type2.Name" src="https://projectpokemon.org/images/gen7-types/@(item.Type2.Name).png" /></a>
+                    }
+                </td>
+                <td style="vertical-align: middle;">
+                    @if (item.EggGroup1 != Model.Name)
+                    {
+                        <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "EggGroups", new { id = item.EggGroup1 }))">@item.EggGroup1</a>
+                    }
+                    @if (item.EggGroup2 != Model.Name)
+                    {
+                        <a href="@(Url.Action("Details", (string)ViewBag.ControllerPrefix + "EggGroups", new { id = item.EggGroup1 }))">@item.EggGroup1</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>There are no Pokémon that are in this and any other egg group.</p>
+}
