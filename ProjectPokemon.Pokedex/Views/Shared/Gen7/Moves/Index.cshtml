@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ProjectPokemon.Pokedex.Models.Games.Gen7.Gen7Move>
+
+<h2>Moves</h2>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th width="10%">
+            ID
+        </th>
+        <th width="60%">
+            Name
+        </th>
+    </tr>
+
+    @foreach (var item in Model) {
+       var hex=item.ID.ToString("X").PadLeft(4, '0' );
+        <tr>
+            <td>
+                @item.ID
+            </td>
+            <td>
+                <a href="@Url.Action("Details", new { id = item.ID })">@item.Name</a>
+            </td>
+        </tr>
+        } 
+
+</table>
