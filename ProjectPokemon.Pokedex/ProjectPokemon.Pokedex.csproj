@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,14 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNet3dsToolkit" Version="2.0.7" />
-    <PackageReference Include="DotNetNdsToolkit" Version="2.0.1" />
+    <PackageReference Include="DotNet3dsToolkit" Version="2.0.20" />
+    <PackageReference Include="DotNetNdsToolkit" Version="2.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
-    <PackageReference Include="pk3DS.Core" Version="1.0.394" />
-    <PackageReference Include="PKHeX.Core" Version="19.2.7" />
-    <PackageReference Include="SkyEditor.Core" Version="4.2.6" />
-    <PackageReference Include="SkyEditor.ROMEditor" Version="4.0.20" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="pk3DS.Core" Version="1.0.399" />
+    <PackageReference Include="PKHeX.Core" Version="19.5.16" />
+    <PackageReference Include="SkyEditor.Core" Version="4.2.10" />
+    <PackageReference Include="SkyEditor.ROMEditor" Version="4.2.9" />
   </ItemGroup>
 
   <ItemGroup>

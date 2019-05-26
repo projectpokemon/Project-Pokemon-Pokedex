@@ -3,6 +3,7 @@ using pk3DS.Core;
 using pk3DS.Core.Structures;
 using pk3DS.Core.Structures.PersonalInfo;
 using SkyEditor.Core.IO;
+using SkyEditor.IO.FileSystem;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,10 +31,12 @@ namespace ProjectPokemon.Pokedex.Models.Games.Gen7
             var groups = new List<Gen7EggGroup>();
             foreach (var item in groupNames)
             {
-                var group = new Gen7EggGroup();
-                group.Name = item;
-                group.SingleEggGroupPokemon = Pokemon.Where(x => x.EggGroup1 == item || x.EggGroup2 == item).Where(x => x.EggGroup1 == x.EggGroup2).Distinct().ToList();
-                group.MultiEggGroupPokemon = Pokemon.Where(x => x.EggGroup1 == item || x.EggGroup2 == item).Where(x => x.EggGroup1 != x.EggGroup2).Distinct().ToList();
+                var group = new Gen7EggGroup
+                {
+                    Name = item,
+                    SingleEggGroupPokemon = Pokemon.Where(x => x.EggGroup1 == item || x.EggGroup2 == item).Where(x => x.EggGroup1 == x.EggGroup2).Distinct().ToList(),
+                    MultiEggGroupPokemon = Pokemon.Where(x => x.EggGroup1 == item || x.EggGroup2 == item).Where(x => x.EggGroup1 != x.EggGroup2).Distinct().ToList()
+                };
                 groups.Add(group);
             }
             return groups;
@@ -54,7 +57,7 @@ namespace ProjectPokemon.Pokedex.Models.Games.Gen7
                 {
                     using (var rom = new ThreeDsRom())
                     {
-                        var provider = new PhysicalIOProvider();
+                        var provider = new PhysicalFileSystem();
                         await rom.OpenFile(inputPath, provider);
                         await rom.ExtractFiles(rawFilesDir, provider);
                         File.WriteAllText(rawFilesDir + ".loadcomplete", "");

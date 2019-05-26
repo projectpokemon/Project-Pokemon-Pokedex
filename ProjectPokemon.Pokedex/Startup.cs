@@ -16,6 +16,7 @@ using ProjectPokemon.Pokedex.Models.Games.Eos;
 using ProjectPokemon.Pokedex.Models.Games.Gen7;
 using ProjectPokemon.Pokedex.Models.Games.Psmd;
 using SkyEditor.Core.IO;
+using SkyEditor.IO.FileSystem;
 
 namespace ProjectPokemon.Pokedex
 {
@@ -95,7 +96,7 @@ namespace ProjectPokemon.Pokedex
         private async Task<EosDataCollection> LoadEosDataCollection()
         {
             var rom = new NdsRom();
-            await rom.OpenFile(Path.Combine(Environment.CurrentDirectory, Configuration.GetValue<string>("EosRom")), new PhysicalIOProvider());
+            await rom.OpenFile(Path.Combine(Environment.CurrentDirectory, Configuration.GetValue<string>("EosRom")), new PhysicalFileSystem());
 
             return await EosDataCollection.LoadEosData(rom);
         }
@@ -103,7 +104,7 @@ namespace ProjectPokemon.Pokedex
         private async Task<PsmdDataCollection> LoadPsmdDataCollection()
         {
             var rom = new ThreeDsRom();
-            await rom.OpenFile(Path.Combine(Environment.CurrentDirectory, Configuration.GetValue<string>("PsmdRom")), new PhysicalIOProvider());
+            await rom.OpenFile(Path.Combine(Environment.CurrentDirectory, Configuration.GetValue<string>("PsmdRom")), new PhysicalFileSystem());
 
             return await PsmdDataCollection.LoadPsmdData(rom);
         }

@@ -1,4 +1,5 @@
 ﻿using SkyEditor.Core.IO;
+using SkyEditor.IO.FileSystem;
 using SkyEditor.ROMEditor.MysteryDungeon.Explorers;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace ProjectPokemon.Pokedex.Models.Games.Eos
         /// <summary>
         /// Loads the EOS data from the given ROM
         /// </summary>
-        public static async Task<EosDataCollection> LoadEosData(IIOProvider rom)
+        public static async Task<EosDataCollection> LoadEosData(IFileSystem rom)
         {
             var data = new EosDataCollection();
 

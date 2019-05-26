@@ -1,4 +1,5 @@
 ﻿using SkyEditor.Core.IO;
+using SkyEditor.IO.FileSystem;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +20,7 @@ namespace ProjectPokemon.Pokedex.Models.Games.Psmd
 
         public DataCollection ParentCollection { get; set; }
 
-        public static async Task<PsmdDataCollection> LoadPsmdData(IIOProvider rom)
+        public static async Task<PsmdDataCollection> LoadPsmdData(IFileSystem rom)
         {
             var data = new PsmdDataCollection();
 
